@@ -1,0 +1,61 @@
+<html>
+<head>
+<meta charset='utf-8'>
+<style>
+  #mld .relation { font-variant: small-caps; font-weight: bold }
+  #mld .primary { text-decoration: underline }
+  #mld .foreign { font-style: oblique }
+  #mld .normal { }
+</style>
+</head>
+<body>
+<div id='mld'>
+<div>
+  <span class='relation'>USER</span> (
+    <span class='primary'>username</span>,
+    <span class='normal'>email</span>,
+    <span class='normal'>password</span>,
+    <span class='normal'>birthday</span>,
+    <span class='normal'>avatar</span>,
+    <span class='normal'>role</span>,
+    <span class='normal'>created_at</span>,
+    <span class='normal'>updated_at</span>
+  )
+</div>
+<div>
+  <span class='relation'>ANNONCE</span> (
+    <span class='primary'>type</span>,
+    <span class='normal'>title</span>,
+    <span class='normal'>description</span>,
+    <span class='normal'>picture</span>,
+    <span class='normal'>location</span>,
+    <span class='normal'>created_at</span>,
+    <span class='normal'>updated_at</span>,
+    <span class='foreign'>username</span>
+  )
+</div>
+<div>
+  <span class='relation'>have</span> (
+    <span class='foreign primary'>name</span>,
+    <span class='foreign primary'>type</span>
+  )
+</div>
+<div>
+  <span class='relation'>COMMENT</span> (
+    <span class='primary'>content</span>,
+    <span class='normal'>created_at</span>,
+    <span class='normal'>updated_at</span>,
+    <span class='foreign'>type</span>,
+    <span class='foreign'>username</span>
+  )
+</div>
+<div>
+  <span class='relation'>CATEGORY</span> (
+    <span class='primary'>name</span>,
+    <span class='normal'>created_at</span>,
+    <span class='normal'>updated_at</span>
+  )
+</div>
+</div>
+</body>
+</html>

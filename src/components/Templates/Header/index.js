@@ -14,7 +14,14 @@ const Header = () => {
         <ul>
             <li><a href="#">connexion</a></li>
             <li><a href="#">inscription</a></li>
-        </ul>      
+        </ul>
+        <select>
+          <option value="compte">Mon compte</option>          
+          <option value="annonces">Mes Annonces</option>
+          <option value="favoris">Mes Favoris</option>
+          <option value="parametres">Paramètres</option>
+          <option value="deconnexion">Déconnexion</option>
+        </select>   
     </header>
   );
 };

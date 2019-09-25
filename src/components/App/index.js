@@ -11,10 +11,22 @@ import PropTypes from 'prop-types';
 import { updateInputValue } from 'src/store/reducer';
 
 // Composants enfants éventuels
-import Header from 'src/components/Header';
-import HomeContainer from 'src/components/HomePage/HomeApp'
-import Footer from 'src/components/Footer';
-
+import Header from 'src/components/Templates/Header';
+import HomeContainer from 'src/components/GeneralPages/HomePage/HomeApp';
+import About from 'src/components/GeneralPages/About';
+import Contact from 'src/components/GeneralPages/Contact';
+import Legal from 'src/components/GeneralPages/Legal';
+import TermsOfUse from 'src/components/GeneralPages/TermsOfUse';
+import Account from 'src/components/UserPages/Account';
+import Ad from 'src/components/SearchPages/Ad';
+import AdsList from 'src/components/UserPages/AdsList';
+import Connection from 'src/components/UserPages/Connection';
+import Inscription from 'src/components/UserPages/Inscription';
+import Favorites from 'src/components/UserPages/Favorites';
+import NewAdForm from 'src/components/UserPages/NewAdForm';
+import Settings from 'src/components/UserPages/Settings';
+import ResultContainer from 'src/components/SearchPages/Results/ResultApp';
+import Footer from 'src/components/Templates/Footer';
 
 // Styles et assets
 import './app.sass';
@@ -22,7 +34,24 @@ import './app.sass';
 const App = () => (
   <div id="app">
     <Header />
+
     <HomeContainer />
+    {/*
+    <About />
+    <Contact />
+    <Legal />
+    <TermsOfUse/>
+
+    <Account />
+    <Ad />
+    <AdsList />
+    <Connection /> 
+    <Inscription />
+    <Favorites />
+    <NewAdForm />
+    <Settings />
+    */}
+    
     <Footer />
   </div>
 );

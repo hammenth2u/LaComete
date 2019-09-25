@@ -2,17 +2,18 @@
 
 namespace App\Controller;
 
+use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
 {
     /**
-     * @Route("/connexion", name="connexion")
+     * @Route("/connexion", name="app_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -29,7 +30,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/deconnexion", name="deconnexion")
+     * @Route("/deconnexion", name="app_logout")
      */
     public function logout()
     {
@@ -37,44 +38,60 @@ class UserController extends AbstractController
     }
 
     /**
-    * @Route("/inscription", name="inscription")
+    * @Route("/inscription", name="app_register")
     */
-    public function signUp(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        $user = new User;
+        // On ajoute une vérification qui redirige l'utilisateur vers une autre page si il est connecté
+        if($this->getUser() != null) {
+            return $this->redirectToRoute('app_profile');
+        }
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class);
 
         $form->handleRequest($request);
 
+        // dump($request);exit;    
+
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $em = $this->getDoctrine()->getEntityManager();
+            $user = $form->getData();
+            $user->setRoles(['ROLE_USER']);
 
-            $passwordEncoded = $passwordEncoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($passwordEncoded);
+            $plainPassword = $user->getPassword();
+            $encodedPassword = $encoder->encodePassword($user, $plainPassword);
+            $user->setPassword($encodedPassword);
 
+            $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash('message', 'Inscription terminée');
-
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('app_login');
         }
 
-        return $this->render('all/signUpForm.html.twig', ['signUpForm' => $form->createView()]);
+        return $this->render('security/register.html.twig', [
+            'registerForm' => $form->createView()
+        ]);
     }
     
     /**
-    * @Route("/profil", name="profil")
-    */
-    public function myProfile()
+     * @Route("/mon-compte", name="app_profile")
+     */
+    public function profile(Request $request)
     {
+        // On a besoin d'afficher un formulaire différent de l'inscription
+        // Grâce au UserType, avec l'Event, on devrait y arriver sans faire de manipulation dans le contrôleur
+
+        // On crée l'objet Form avec l'objet de l'utilsateur
         $user = $this->getUser();
+        $form = $this->createForm(UserType::class, $user);
 
+        // C'est par ici qu'on ajouterait le code pour traiter les informations reçues par le formulaire. On n'a pas développé cette fonctionnalité pour le moment.
 
-        return $this->render('author/profile.html.twig', [
-            'author' => $user,
+        // Le formulaire est déja relié à l'utilisateur, on l'envoie à la vue
+        return $this->render('security/profile.html.twig', [
+            'profileForm' => $form->createView(),
+            'user' => $user
         ]);
     }
 

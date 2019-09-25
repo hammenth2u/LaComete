@@ -6,6 +6,11 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        <nav>
+            <a class="btn btn-outline-primary my-2 my-sm-0"  href="{{ path('app_login')}} ">Connexion</a> 
+            <a class="btn btn-outline-primary my-2 my-sm-0"  href="{{ path('app_register')}} ">Inscription</a> 
+            <a class="btn btn-outline-primary my-2 my-sm-0"  href="{{ path('app_logout')}} ">Déconnexion</a> 
+        </nav>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

@@ -81,12 +81,17 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+        // cette partie du code permet de rediriger vers la page que l'utilisateur souhaitait initialement afficher
+        // cela arrive si par exemple il n'est pas connecté et qu'il souhaite accéder à /admin
+        // il est d'abord redirigé sur /login
+        // puis une fois connecté, il est redirigé vers /admin
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
 
-        // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        // en revanche, si l'utilisateur accède directement à la page /login
+        // on le redirige vers la page d'accueil une fois connecté
+        return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 
     protected function getLoginUrl()

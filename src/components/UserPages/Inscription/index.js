@@ -4,23 +4,51 @@ import PropTypes from 'prop-types';
 
 //import './styles.sass';
 
-const Inscription = () => {
+class SignUp extends React.Component {
 
-  return (
-    <div className="connection">
-      <h1>Inscription</h1>
-      <form>
-        <input value="Nom" />
-        <input value="Prénom" />
-        <input value="Nom d'utilisateur" />
-        <input value="Date de naissance" />
-        <input value="E-mail" />
-        <input value="Mot de passe" />
-        <input type="submit" value="décollage" />
-      </form>
-    </div>
-  );
-};
+  state = {
+    firstname: '',
+    lastname: '',
+    username: '',
+    birthdate: '18.02.1980',
+    email: '',
+    password: ''
+  }
+
+  handleChange = (evt) => {
+      console.log("change : ", evt.target.value);  
+      this.setState({
+        [evt.target.id]: evt.target.value
+      })
+  }
+
+  handleSubmit = (evt) => {
+      
+      evt.preventDefault();
+      console.log("submit : ", this.state);
+  }
+
+  render() {
+    return (
+      <div className="signup">
+        <h1>Connexion</h1>
+
+        <form onSubmit={this.handleSubmit} >
+          
+          <input type="text" id="firstname" onChange={this.handleChange} />
+          <input type="text" id="lastname" onChange={this.handleChange} />
+          <input type="text" id="username" onChange={this.handleChange} />
+          
+          <input type="email" id="email" onChange={this.handleChange} />
+          <input type="password" id="password" onChange={this.handleChange} />
+          
+          <input type="submit" value="commencer à rêver" />
+
+        </form>
+      </div>
+    );
+  };
+}
 
 /*
 Header.propTypes = {
@@ -32,4 +60,5 @@ Header.propTypes = {
   ).isRequired
 };
 */
-export default Inscription;
+
+export default SignUp;

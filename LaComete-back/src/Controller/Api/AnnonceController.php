@@ -27,7 +27,7 @@ class AnnonceController extends AbstractController
         $formatted = [];
         foreach ($annonces as $annonce) 
         {
-            $formatted = [
+            $formatted [] = [
                'id' => $annonce->getId(),
                'title' => $annonce->getTitle(),
                'description' => $annonce->getDescription(),

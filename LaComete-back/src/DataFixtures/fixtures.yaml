@@ -1,0 +1,33 @@
+App\Entity\User: 
+  user{1..10} :
+    username : ' <name()> '
+    email : ' <email()> '
+    password : ' <password()> '
+    roles : [" ROLE_USER "]
+
+App\Entity\Category:
+    category_{1..10}:
+        name: '<word()>'
+        createdAt: '<date_create()>'
+
+App\Entity\Annonce:
+    annonce_{1..18}:
+        title: '<text(55)>'
+        description: '<text(140)>'
+        createdAt: '<date_create()>'
+        categories: '3x @category_*'
+        comments: '4x @comment_*'
+        
+
+App\Entity\Favorite:
+    favorite_{1..5}:
+        title: '<text(7)>'
+        user: '@user_*'
+        annonce: '@annonce_*' 
+
+App\Entity\Comment:
+    comment_{1..25}:
+        content: '<text(40)>'
+        createdAt: '<date_create()>'
+        user: '@user_*'
+        annonce: '@annonce_*'

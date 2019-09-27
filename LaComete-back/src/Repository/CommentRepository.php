@@ -19,6 +19,24 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
+    /**
+     * 
+     * @param Annonce $annonce
+     * @return Comment[]
+     */
+    public function findCommentsByAnnonce($annonce)
+    {
+        $query = $this->getEntityManager()->createQuery('
+            SELECT c, a 
+            FROM App\Entity\Comment c
+            JOIN c.annonce a
+            WHERE c.annonce = :annonce
+            ORDER BY c.createdAt ASC
+        ')
+        ->setParameter('annonce', $annonce);
+        return $query->getResult(); 
+    }
+
     // /**
     //  * @return Comment[] Returns an array of Comment objects
     //  */

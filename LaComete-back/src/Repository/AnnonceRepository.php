@@ -19,32 +19,38 @@ class AnnonceRepository extends ServiceEntityRepository
         parent::__construct($registry, Annonce::class);
     }
 
-    // /**
-    //  * @return Annonce[] Returns an array of Annonce objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Méthode pour retourner les annonces par recherche de catégories
+     * 
+     * @param Category $category
+     * @return Annonce[]
+     */
+    public function findAnnoncesByCategory($category)
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $query = $this->getEntityManager()->createQuery('
+            SELECT a, c 
+            FROM App\Entity\Annonce a
+            JOIN a.category c
+            WHERE c.category = :category
+            ORDER BY a.createdAt ASC
+        ')
+        ->setParameter('category', $category);
+        return $query->getResult(); 
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Annonce
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
+
+    /**
+     * Méthode qui retourne toute les annonces triées par ordre de createdAt
+     * 
+    * @return Annonce[] Returns an array of Annonce objects
     */
+    
+      public function findAllOrderedByCreatedAt()
+      {
+          $query = $this->createQueryBuilder('a')
+                        ->orderBy('a.createdAt', 'DESC');
+                
+          return $query->getQuery()->getResult();
+      }
+
 }

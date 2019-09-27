@@ -68,6 +68,11 @@ class Annonce
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $view;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -248,6 +253,18 @@ class Annonce
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getView(): ?int
+    {
+        return $this->view;
+    }
+
+    public function setView(?int $view): self
+    {
+        $this->view = $view;
 
         return $this;
     }

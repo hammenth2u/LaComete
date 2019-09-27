@@ -22,7 +22,7 @@ class AnnonceController extends AbstractController
      */
     public function annoncesList()
     {
-        $annonces = $this->getDoctrine()->getRepository(Annonce::class)->findAll();
+        $annonces = $this->getDoctrine()->getRepository(Annonce::class)->findAllOrderedByCreatedAt();
         
         $formatted = [];
         foreach ($annonces as $annonce) 

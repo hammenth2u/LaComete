@@ -20,6 +20,7 @@ class CommentRepository extends ServiceEntityRepository
     }
 
     /**
+     * Méthode qui retourne les commentaire pour une annonce donnée
      * 
      * @param Annonce $annonce
      * @return Comment[]
@@ -37,32 +38,4 @@ class CommentRepository extends ServiceEntityRepository
         return $query->getResult(); 
     }
 
-    // /**
-    //  * @return Comment[] Returns an array of Comment objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Comment
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

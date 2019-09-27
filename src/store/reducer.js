@@ -24,11 +24,6 @@ const reducer = (state = initialState, action = defaultAction) => {
       }
     }
     
-    case MATCH_EXISTING_USER: {
-      return 
-        console.log("cet utilisateur existe");
-    }
-
     default: {
       return { ...state };
     }

@@ -19,12 +19,12 @@ import Legal from 'src/components/GeneralPages/Legal';
 import TermsOfUse from 'src/components/GeneralPages/TermsOfUse';
 import Account from 'src/components/UserPages/Account';
 import Ad from 'src/components/SearchPages/Ad';
-import AdsList from 'src/components/UserPages/AdsList';
+import AdsList from 'src/components/UserPages/Account/AdsList';
 import Connection from 'src/components/UserPages/Connection';
 import Inscription from 'src/components/UserPages/Inscription';
-import Favorites from 'src/components/UserPages/Favorites';
-import NewAdForm from 'src/components/UserPages/NewAdForm';
-import Settings from 'src/components/UserPages/Settings';
+import Favorites from 'src/components/UserPages/Account/Favorites';
+import NewAdForm from 'src/components/UserPages/Account/NewAdForm';
+import Settings from 'src/components/UserPages/Account/Settings';
 import ResultContainer from 'src/components/SearchPages/Results/ResultApp';
 import Footer from 'src/components/Templates/Footer';
 

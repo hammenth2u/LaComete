@@ -20,7 +20,7 @@ const reducer = (state = initialState, action = defaultAction) => {
       return {
         ...state, 
         email: action.email,
-        password: action.password         
+        password: action.password    
       }
     }
     

@@ -4,19 +4,13 @@ import PropTypes from 'prop-types';
 
 //import './styles.sass';
 
-import AdTeaser from 'src/components/SearchPages/AdTeaser';
-
-const ResultList = () => {
+const AdTeaser = () => {
 
   return (
-    <div className="adslist">
-      
-        <AdTeaser /> 
-        <AdTeaser /> 
-        <AdTeaser /> 
-        <AdTeaser /> 
-        <AdTeaser /> 
+    <div className="ad">
 
+      <h1>Titre/Nom</h1>
+      
     </div>
   );
 };
@@ -31,4 +25,4 @@ Header.propTypes = {
   ).isRequired
 };
 */
-export default ResultList;
+export default AdTeaser;

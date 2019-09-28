@@ -7,8 +7,8 @@ import PropTypes from 'prop-types';
 const Header = () => {
 
   return (
-    <header className="blog-header content--centered">
-        <h1>La Comète</h1>
+    <div className="blog-header content--centered">
+        
 
         {/*TODO : système de vues user connected ou non */}
         <ul>
@@ -22,7 +22,7 @@ const Header = () => {
           <option value="parametres">Paramètres</option>
           <option value="deconnexion">Déconnexion</option>
         </select>   
-    </header>
+    </div>
   );
 };
 

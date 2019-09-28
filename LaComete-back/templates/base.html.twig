@@ -3,15 +3,41 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            
+        {% endblock %}
     </head>
     <body>
-        <nav>
-            <a class="btn btn-outline-primary my-2 my-sm-0"  href="{{ path('app_login')}} ">Connexion</a> 
-            <a class="btn btn-outline-primary my-2 my-sm-0"  href="{{ path('app_register')}} ">Inscription</a> 
-            <a class="btn btn-outline-primary my-2 my-sm-0"  href="{{ path('app_logout')}} ">Déconnexion</a> 
-        </nav>
+        <header >
+            <h1>La Comète</h1>
+            <nav id="nav">
+                    {% if app.user  %}
+                        <select>
+                            <option value="compte">Mon compte</option>          
+                            <option value="annonces">Mes Annonces</option>
+                            <option value="favoris">Mes Favoris</option>
+                            <option value="parametres">Paramètres</option>
+                            <option value="deconnexion">Déconnexion</option>
+                        </select>  
+                       
+                    {% else %}
+                        <ul>
+                            <li><a href="{{ path('app_login') }}">connexion</a></li>
+                            <li><a href="{{ path('app_register') }}">inscription</a></li>
+                        </ul>                         
+                    {% endif %}
+
+        
+        
+            </nav>
+        </header>
+
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}                
+
+            <script type="text/javascript" src="{{ asset('assets/app.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('assets/vendors.js') }}"></script>
+
+        {% endblock %}
     </body>
 </html>

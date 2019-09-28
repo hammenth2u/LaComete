@@ -33,25 +33,25 @@ import './app.sass';
 
 const App = () => (
   <div id="app">
-    <Header />
-
-     {/*<HomeContainer />
     
-    {/*<About />
+
+    <HomeContainer />
+    {/*}
+    <About />
     <Contact />
     <Legal />
     <TermsOfUse/>
 
     <Account />
     <Ad />
-    <AdsList />*/}
+    <AdsList />
     <Connection /> 
-    {/*<Inscription />
+    <Inscription />
     <Favorites />
     <NewAdForm />
     <Settings />
-    */}
     
+    */}
     <Footer />
   </div>
 );

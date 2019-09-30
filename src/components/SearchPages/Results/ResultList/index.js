@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 //import './styles.sass';
 
-import AdTeaser from 'src/components/SearchPages/AdTeaser';
+import AdTeaser from 'src/components/AdPages/AdTeaser';
 
 const ResultList = () => {
 

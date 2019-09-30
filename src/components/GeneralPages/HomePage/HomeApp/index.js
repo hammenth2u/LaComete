@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 /**
  * Local import
  */
-import { updateInputValue } from 'src/store/reducer';
 
 // Composants enfants éventuels
 import SearchBars from 'src/components/GeneralPages/HomePage/SearchBars';
@@ -19,6 +18,7 @@ import Carousel from 'src/components/GeneralPages/HomePage/Carousel';
 //import './app.sass';
 
 const HomeApp = () => (
+  
   <div id="app">    
     <SearchBars />
     <Intro />
@@ -39,19 +39,14 @@ const connectionStrategies = connect(
   // 1er argument : stratégie de lecture (dans le state privé global)
   (state, ownProps) => {
     return {
-      title: ownProps.title,
-      greeting: state.greetingMessage
     };
   },
 
   // 2d argument : stratégie d'écriture (dans le state privé global)
   (dispatch, ownProps) => {
     return {
-      handleChange: (event) => {
-        dispatch(updateInputValue(event.target.value));
       }
-    };
-  },
+    }
 );
 
 // Étape 2 : on applique ces stratégies à un composant spécifique.

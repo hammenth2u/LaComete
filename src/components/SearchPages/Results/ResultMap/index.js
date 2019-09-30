@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 //import './styles.sass';
 
-import Ad from 'src/components/SearchPages/Ad';
+import Ad from 'src/components/AdPages/Ad';
 
 const ResultMap = () => {
 

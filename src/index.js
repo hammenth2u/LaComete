@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import AppContainer from 'src/components/App';
 import cometStore from 'src/store';
 import { sideEffect } from 'src/store/reducer';
+import GeneralContainer from './components/GeneralPages/GeneralApp';
 
 /**
  * Code

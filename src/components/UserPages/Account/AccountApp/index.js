@@ -20,47 +20,26 @@ import NewAdForm from '../NewAdForm';
 /**
  * IMPORTS DE DATA
  */
-import data from 'src/data/users.js';
-import test from 'LaComete-back/src/Controller/Api/TestController.php';
-
+//import data from 'src/data/users.js';
 //import './styles.sass';
 
-<<<<<<< HEAD
 class AccountApp extends React.Component {
 
     state = {
 
-        username: '',
-        firstname: '',
-        lastname: '',
-        birthdate: '',
-        email: '',        
+        user: [],      
     }
 
-   /*  getUserData = (evt) => {
-
-        evt.preventDefault();
-        //console.log('recherche lancée');
-        const promise = axios.get('https://api.github.com/search/repositories?per_page=200&q=' + this.state.search );
-        promise.then(response => {
-          this.setState({ data: response.data.items, nb: response.data.total_count });
-        });
-      } */
-
+   
       componentDidMount(){
-          axios.post('http://127.0.0.1:8001/api/user/account', {
-            username: '', 
-            firstname: '', 
-            lastname: '', 
-            username: '', 
-            email: '', 
-            birthdate: ''
-          })
-          .then(response => {
+          axios.get('http://127.0.0.1:8001/api/user/account')
+            
+        .then(response => {
+
             console.log('TEST API : ', response);
           });          
       }
-
+      
     render () {
         return (
             <div className="accountpages">
@@ -73,8 +52,7 @@ class AccountApp extends React.Component {
 
             <main>
                 {/*
-                <AccMenu username={this.state.username} firstname={this.state.firstname} lastname={this.state.lastname} email={this.state.email} birthdate={this.state.birthday} />
-
+                <AccMenu username={this.state.username} firstname={this.state.firstname} lastname={this.state.lastname} email={this.state.email} birthdate={this.state.birthday}  />
                 
                 <AdsList />
                 <Favorites />
@@ -86,29 +64,6 @@ class AccountApp extends React.Component {
     }
     
     };
-=======
-const AccountApp = () => (
-
-    <div className="accountpages">
-      <aside>
-        <a>Mes Annonces</a>
-        <a>Mes Favoris</a>
-        <a>Paramètres</a>
-      </aside>
-
-      <main>
-      
-        <AccMenu test={} username={data.username} firstname={data.firstname} lastname={data.lastname} email={data.email} birthdate={data.birthdate} />
-
-        {/*
-        <AdsList />
-        <Favorites />
-        <Settings />
-        <NewAdForm /> */}
-      </main>
-    </div>
-);
->>>>>>> dc2cfa0dc749c1a9f65712cae57422c13b3c2ea8
 
 AccountApp.propTypes = {
     /** Titre de l'application React */

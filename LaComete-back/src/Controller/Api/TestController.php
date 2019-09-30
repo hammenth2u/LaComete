@@ -23,6 +23,9 @@ class TestController extends AbstractFOSRestController
         //$response = new JsonResponse(['data' => 123]);
 
         // if you don't know the data to send when creating the response
+        header('Access-Control-Allow-Origin: *'); 
+        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
+        header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
         $response = new JsonResponse();
         // ...
         $response->setData(['data' => 123]);

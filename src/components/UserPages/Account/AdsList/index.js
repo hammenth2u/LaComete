@@ -15,13 +15,12 @@ const MyAds = () => {
       {/* système de vue si favoris > 0 */}
       <section className="dreams">
         <h2>Mes rêves en cours</h2>
-        <Ad />
-        <Ad />
+
       </section>
 
       <section className="people">
         <h2>Mon profil</h2>
-        <Ad /> 
+        
       </section>
       
     </div>

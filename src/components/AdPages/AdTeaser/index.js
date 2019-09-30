@@ -4,12 +4,19 @@ import PropTypes from 'prop-types';
 
 //import './styles.sass';
 
-const AdTeaser = () => {
+const AdTeaser = ({ adlist }) => {
+
+  const ads = adlist.map(ad => 
+    <article key={ad.id}>     
+      <h3>Title : { ad.title }</h3>
+      
+    </article> 
+    );
 
   return (
     <div className="ad">
 
-      <h1>Titre/Nom</h1>
+      {ads}
       
     </div>
   );

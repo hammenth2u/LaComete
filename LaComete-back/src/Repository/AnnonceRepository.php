@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Annonce;
+use App\Entity\Category;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -31,6 +33,24 @@ class AnnonceRepository extends ServiceEntityRepository
         ->join('a.category', 'c')
         ->where('a.category = :myCategory')
         ->setParameter('myCategory', $category)
+        ;
+    
+        //cast retour de requete
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * 
+     * @param User $user
+     * @return Annonce[]
+     */
+    public function findByUser($user)
+    {
+        $qb = $this->createQueryBuilder('a')
+        ->addSelect('u')
+        ->join('a.user', 'u')
+        ->where('a.user = :myUser')
+        ->setParameter('myUser', $user)
         ;
     
         //cast retour de requete

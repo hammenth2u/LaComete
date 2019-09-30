@@ -28,13 +28,15 @@ const App = () => (
   <div id="app">
     
     <Header />
-    
     <AccountContainer />
     
+    
     {/*
+    
     <GeneralContainer />
     <HomeContainer />
     <AdContainer />
+    
 
     <Connection /> 
     <Inscription />

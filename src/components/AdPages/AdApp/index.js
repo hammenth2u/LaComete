@@ -4,7 +4,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 //import { NavLink } from 'react-router-dom';
+
 
 /**
  * IMPORTS DE COMPONENTS
@@ -19,16 +21,32 @@ import data from 'src/data/users.js';
 
 //import './styles.sass';
 
-const AdApp = () => (
+class AdApp extends React.Component {
 
-    <div className="adpages">
-      
-        <Ad ads={data.ads} author={data.username} />
-        {console.log('TEST AD : ', data.ads)}
-        <AdTeaser title={data.ads.title} />
-      
-    </div>
-);
+    state = { 
+        data: [],
+    }
+
+    componentDidMount(){
+        axios.get('http://127.0.0.1:8001/api/annonces/list')
+          
+      .then(response => {
+
+            const adlist = response.data;
+            this.setState({ data: response.data });
+        });         
+    }
+    render () {
+        
+        return (
+        <div className="adpages">
+            <Ad adlist={this.state.data}/>           
+            <AdTeaser adlist={this.state.data} />
+        
+        </div>
+        )
+    }
+};
 
 AdApp.propTypes = {
     /** Titre de l'application React */

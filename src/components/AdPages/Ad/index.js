@@ -4,19 +4,28 @@ import PropTypes from 'prop-types';
 
 //import './styles.sass';
 
-const Ad = ({ ads, author }) => {
+const Ad = ({ adlist }) => {
 
-  return (
-    <div className="ad">
-        {/*
-        <h1>{ ads.title }</h1>
-        <p>un rêve de { author }</p>
-        <p>Lieu : { ad.location }</p>
-        <p>{ ad.description }</p>
-  
+  //console.log('ADLIST : ', adlist);
+
+    const ads = adlist.map(ad => 
+    <article key={ad.id}>     
+      <h3>Title : { ad.title }</h3>
+      <p>Category : { ad.type }</p>
+      <p>Lieu : { ad.city }</p>
+      <p>description : { ad.description }</p>
+    </article> 
+    );
+
+      return (
+        <div className="ad">
+      
+        <section>
+          {ads}
+        </section>
         <section className="comments">
           <p>ici un commentaire</p>
-        </section>*/}
+        </section>
   
         </div>
   )

@@ -33,18 +33,48 @@ class UserController extends AbstractController
     /**
      * @Route("/account", name="account")
      */
-    public function account(Request $request)
+    public function account()
     {
 
-        $user = $this->getUser();
-        //$form = $this->createForm(UserType::class, $user);
+        if($this->getUser() != null) {
+            
+            $user = $this->getUser();
+            //$form = $this->createForm(UserType::class, $user);
+            header('Access-Control-Allow-Origin: *'); 
+            header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
+            header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
+
+            $formatted = [];
+            
+                $formatted [] = [
+                'id' => $user->getId(),
+                'username' => $user->getUsername(),
+                'email' => $user->getEmail(),
+                'firstname' => $user->getFirstname(),
+                'lastname' => $user->getLastname(),
+                ];
+            
+
+            //dump($formatted);exit;
+            return new JsonResponse($formatted);
+        }
+        else {
+            header('Access-Control-Allow-Origin: *'); 
+            header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
+            header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+            return null;
+        }
+
+        /*
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $metadataAwareNameConverter = new MetadataAwareNameConverter($classMetadataFactory);
         $normalizer = new ObjectNormalizer($classMetadataFactory, $metadataAwareNameConverter);
         $serializer = new Serializer([$normalizer]);
         $data = $serializer->normalize($user, null, ['groups' => 'user']);
+
         //dump($data);exit;
         return $this->json($data);
+        */
     }
 }

@@ -29,7 +29,7 @@ const AccMenu = ({ username, firstname, lastname, email, birthdate }) => {
         )
 }
 
-
+/*
 AccMenu.propTypes = {
   
     username: PropTypes.string.isRequired,
@@ -38,7 +38,7 @@ AccMenu.propTypes = {
     email: PropTypes.string.isRequired,
     birthdate: PropTypes.string.isRequired,
   
-};
+}; */
 
 
 export default AccMenu;

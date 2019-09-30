@@ -21,9 +21,11 @@ import NewAdForm from '../NewAdForm';
  * IMPORTS DE DATA
  */
 import data from 'src/data/users.js';
+import test from 'LaComete-back/src/Controller/Api/TestController.php';
 
 //import './styles.sass';
 
+<<<<<<< HEAD
 class AccountApp extends React.Component {
 
     state = {
@@ -84,6 +86,29 @@ class AccountApp extends React.Component {
     }
     
     };
+=======
+const AccountApp = () => (
+
+    <div className="accountpages">
+      <aside>
+        <a>Mes Annonces</a>
+        <a>Mes Favoris</a>
+        <a>Paramètres</a>
+      </aside>
+
+      <main>
+      
+        <AccMenu test={} username={data.username} firstname={data.firstname} lastname={data.lastname} email={data.email} birthdate={data.birthdate} />
+
+        {/*
+        <AdsList />
+        <Favorites />
+        <Settings />
+        <NewAdForm /> */}
+      </main>
+    </div>
+);
+>>>>>>> dc2cfa0dc749c1a9f65712cae57422c13b3c2ea8
 
 AccountApp.propTypes = {
     /** Titre de l'application React */

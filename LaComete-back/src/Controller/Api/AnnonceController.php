@@ -31,6 +31,8 @@ class AnnonceController extends AbstractController
                'id' => $annonce->getId(),
                'title' => $annonce->getTitle(),
                'description' => $annonce->getDescription(),
+               'city' => $annonce->getCity(),
+               'type' => $annonce->getType(),
             ];
         }
 

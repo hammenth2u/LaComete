@@ -19,6 +19,7 @@ import NewAdForm from '../NewAdForm';
  * IMPORTS DE DATA
  */
 import data from 'src/data/users.js';
+import test from 'LaComete-back/src/Controller/Api/TestController.php';
 
 //import './styles.sass';
 
@@ -33,7 +34,7 @@ const AccountApp = () => (
 
       <main>
       
-        <AccMenu username={data.username} firstname={data.firstname} lastname={data.lastname} email={data.email} birthdate={data.birthdate} />
+        <AccMenu test={} username={data.username} firstname={data.firstname} lastname={data.lastname} email={data.email} birthdate={data.birthdate} />
 
         {/*
         <AdsList />

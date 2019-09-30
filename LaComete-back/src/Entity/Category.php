@@ -34,7 +34,7 @@ class Category
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Annonce", mappedBy="categories")
+     * @ORM\OneToMany(targetEntity="App\Entity\Annonce", mappedBy="category")
      */
     private $annonces;
 
@@ -42,6 +42,7 @@ class Category
     {
         $this->annonces = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -96,7 +97,7 @@ class Category
     {
         if (!$this->annonces->contains($annonce)) {
             $this->annonces[] = $annonce;
-            $annonce->addCategory($this);
+            $annonce->setCategory($this);
         }
 
         return $this;
@@ -106,9 +107,13 @@ class Category
     {
         if ($this->annonces->contains($annonce)) {
             $this->annonces->removeElement($annonce);
-            $annonce->removeCategory($this);
+            // set the owning side to null (unless already changed)
+            if ($annonce->getCategory() === $this) {
+                $annonce->setCategory(null);
+            }
         }
 
         return $this;
     }
+
 }

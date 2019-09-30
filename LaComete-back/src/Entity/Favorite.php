@@ -26,10 +26,6 @@ class Favorite
      */
     private $updatedAt;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $title;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="favorites")
@@ -66,18 +62,6 @@ class Favorite
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(?string $title): self
-    {
-        $this->title = $title;
 
         return $this;
     }

@@ -43,10 +43,6 @@ class Annonce
      */
     private $user;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="annonces")
-     */
-    private $categories;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="annonce")
@@ -73,9 +69,28 @@ class Annonce
      */
     private $view;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $status;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateRenew;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="annonces")
+     */
+    private $category;
+
+    /**
+     * @ORM\Column(type="string", length=150)
+     */
+    private $city;
+
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->favorites = new ArrayCollection();
     }
@@ -141,32 +156,6 @@ class Annonce
     public function setUser(?User $user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Category[]
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(Category $category): self
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Category $category): self
-    {
-        if ($this->categories->contains($category)) {
-            $this->categories->removeElement($category);
-        }
 
         return $this;
     }
@@ -265,6 +254,54 @@ class Annonce
     public function setView(?int $view): self
     {
         $this->view = $view;
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getDateRenew(): ?\DateTimeInterface
+    {
+        return $this->dateRenew;
+    }
+
+    public function setDateRenew(?\DateTimeInterface $dateRenew): self
+    {
+        $this->dateRenew = $dateRenew;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

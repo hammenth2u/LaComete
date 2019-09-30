@@ -20,22 +20,21 @@ class AnnonceRepository extends ServiceEntityRepository
     }
 
     /**
-     * Méthode pour retourner les annonces par recherche de catégories
      * 
      * @param Category $category
      * @return Annonce[]
      */
-    public function findAnnoncesByCategory($category)
+    public function findByCategory($category)
     {
-        $query = $this->getEntityManager()->createQuery('
-            SELECT a, c 
-            FROM App\Entity\Annonce a
-            JOIN a.category c
-            WHERE c.category = :category
-            ORDER BY a.createdAt ASC
-        ')
-        ->setParameter('category', $category);
-        return $query->getResult(); 
+        $qb = $this->createQueryBuilder('a')
+        ->addSelect('c')
+        ->join('a.category', 'c')
+        ->where('a.category = :myCategory')
+        ->setParameter('myCategory', $category)
+        ;
+    
+        //cast retour de requete
+        return $qb->getQuery()->getResult();
     }
 
 

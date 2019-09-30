@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -16,78 +18,93 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("user")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups("user")
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups("user")
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups("user")
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("user")
      */
     private $username;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("user")
      */
     private $birthday;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("user")
      */
     private $avatar;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Annonce", mappedBy="user")
+     * @Groups("user")
      */
     private $annonces;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user")
+     * @Groups("user")
      */
     private $comments;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="user")
+     * @Groups("user")
      */
     private $favorites;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups("user")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups("user")
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups("user")
      */
     private $status;
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
+     * @Groups("user")
      */
     private $phone;
 
 
     public function __construct()
     {
+        $this->createdAt = new \DateTime();
         $this->annonces = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->favorites = new ArrayCollection();

@@ -8,6 +8,7 @@ App\Entity\Annonce:
         status: 1
         createdAt: '<date_create()>'
         user: '@user*'
+        category: '@category*'
 
 
 App\Entity\Category:

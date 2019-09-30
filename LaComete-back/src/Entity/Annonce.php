@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AnnonceRepository")
@@ -15,47 +17,56 @@ class Annonce
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("api")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("api")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups("api")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("api")
      */
     private $picture;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("api")
      */
     private $type;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="annonces")
+     * @Groups("api")
      */
     private $user;
 
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="annonce")
+     * @Groups("api")
      */
     private $comments;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="annonce")
+     * @Groups("api")
      */
     private $favorites;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("api")
      */
     private $createdAt;
 
@@ -66,21 +77,25 @@ class Annonce
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("api")
      */
     private $view;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups("api")
      */
     private $status;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups("api")
      */
     private $dateRenew;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="annonces")
+     * @Groups("api")
      */
     private $category;
 
@@ -91,6 +106,7 @@ class Annonce
 
     public function __construct()
     {
+        $this->createdAt = new \DateTime();
         $this->comments = new ArrayCollection();
         $this->favorites = new ArrayCollection();
     }

@@ -36,7 +36,10 @@ class AccountApp extends React.Component {
             
         .then(response => {
 
-            console.log('TEST API : ', response);
+            const currentUserInfo = response.data
+            this.setState({ user: currentUserInfo });
+            //console.log('TEST API : ', currentUserInfo);
+            //console.log('STATE : ', this.state);
           });          
       }
       
@@ -51,9 +54,9 @@ class AccountApp extends React.Component {
             </aside>
 
             <main>
-                {/*
-                <AccMenu username={this.state.username} firstname={this.state.firstname} lastname={this.state.lastname} email={this.state.email} birthdate={this.state.birthday}  />
                 
+                <AccMenu userInfo ={this.state.user}/>
+                {/*
                 <AdsList />
                 <Favorites />
                 <Settings />

@@ -6,23 +6,21 @@ import users from 'src/data/users';
 console.log(users);
 
 const initialState = {
-  users: {
-    email: '',
-    password: ''
-  }
+
+  connectedUser : '',
 };
 
 const defaultAction = {};
 
 const reducer = (state = initialState, action = defaultAction) => {
   switch (action.type) {
-    case UPDATE_INPUT_VALUE: {
+    /*case SOMETHING: {
       return {
         ...state, 
-        email: action.email,
-        password: action.password    
+        //email: action.email,
+        //password: action.password    
       }
-    }
+    }*/
     
     default: {
       return { ...state };

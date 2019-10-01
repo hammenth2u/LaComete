@@ -10,18 +10,21 @@ import PropTypes from 'prop-types';
 //import './styles.sass';
 
 //class AccMenu extends React.Component {
-const AccMenu = ({ username, firstname, lastname, email, birthdate }) => {
-    //render () {
+const AccMenu = ({ userInfo }) => {
+        
+    const info = userInfo.map(info =>
+        <div key={info.id}>
+            <h1>Bienvenue { info.username }</h1>
+            <p>E-mail : { info.email }</p>
+            <p>Nom : { info.lastname }</p>
+            <p>Prénom : { info.firstname }</p>
+        </div>
+        )
     return (   
         
             <div className="accMenu">
             
-            <h1>Bienvenue { username }</h1>
-            
-            <p>E-mail : { email }</p>
-            <p>Nom : { lastname }</p>
-            <p>Prénom : { firstname }</p>
-              <p>Date de naissance : { birthdate }</p>
+                { info }
 
             <button>x Modifier mes informations</button>
             <button>x Retour à la réalité</button>

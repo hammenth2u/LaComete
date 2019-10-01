@@ -40,7 +40,7 @@ class UserController extends AbstractController
     /**
     * @Route("/inscription", name="app_register")
     */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function register(Request $request, UserPasswordEncoderInterface $encoder)
     {
         // On ajoute une vérification qui redirige l'utilisateur vers une autre page si il est connecté
         if($this->getUser() != null) {
@@ -56,7 +56,8 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $user = $form->getData();
-            $user->setRoles(['ROLE_USER']);
+            $user->setRoles(["ROLE_USER"]);
+            $user->setStatus(true);
 
             $plainPassword = $user->getPassword();
             $encodedPassword = $encoder->encodePassword($user, $plainPassword);

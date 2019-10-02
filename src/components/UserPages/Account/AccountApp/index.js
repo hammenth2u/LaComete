@@ -39,8 +39,8 @@ class AccountApp extends React.Component {
 
             const currentUserInfo = response.data
             this.setState({ user: currentUserInfo });
-            //console.log('TEST API : ', currentUserInfo);
-            //console.log('STATE : ', this.state);
+            console.log('TEST API : ', currentUserInfo);
+            console.log('STATE : ', this.state);
           });          
       }
       

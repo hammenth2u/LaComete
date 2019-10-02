@@ -31,7 +31,26 @@ class UserController extends AbstractController
 {
 
     /**
-     * @Route("/account", name="account")
+     * @Route("/account", name="isconnected")
+     */
+    public function userConnect()
+    {
+        if($this->getUser() != null) {
+            header('Access-Control-Allow-Origin: *'); 
+            header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
+            header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+            return true;
+        }
+        else {
+            header('Access-Control-Allow-Origin: *'); 
+            header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
+            header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+            return false;
+        }
+    }
+
+    /**
+     * @Route("/isconnected", name="")
      */
     public function account()
     {
@@ -65,16 +84,5 @@ class UserController extends AbstractController
             header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
             return null;
         }
-
-        /*
-        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-        $metadataAwareNameConverter = new MetadataAwareNameConverter($classMetadataFactory);
-        $normalizer = new ObjectNormalizer($classMetadataFactory, $metadataAwareNameConverter);
-        $serializer = new Serializer([$normalizer]);
-        $data = $serializer->normalize($user, null, ['groups' => 'user']);
-
-        //dump($data);exit;
-        return $this->json($data);
-        */
     }
 }

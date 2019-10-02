@@ -4,22 +4,25 @@ import PropTypes from 'prop-types';
 
 //import './styles.sass';
 
-const Settings = () => {
+const Settings = ({ userInfo }) => {
 
-  return (
-    <div className="settings">
-      <h1>Modifier mes informations personnelles</h1>
-      <form>
-        <input value="Nom" />
-        <input value="Prénom" />
-        <input value="Nom d'utilisateur" />
-        <input value="Date de naissance" />
-        <input value="E-mail" />
-        <input value="Mot de passe" />
-        <input type="submit" value="Houston, vous recevez?" />
-      </form>
+  const info = userInfo.map(info =>
+    <div key={ info.id }>
+        <h1>Bienvenue { info.username }</h1>
+        <p>E-mail : { info.email }</p>
+        <p>Nom : { info.lastname }</p>
+        <p>Prénom : { info.firstname }</p>
     </div>
-  );
+    )
+  return (   
+    
+    <div className="accMenu">
+        
+      { info }
+
+      <button>Envoyer</button>
+    </div>
+    )
 };
 
 /*

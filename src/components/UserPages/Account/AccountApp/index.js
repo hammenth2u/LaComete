@@ -5,6 +5,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { Route, Switch } from 'react-router-dom';
 //import { NavLink } from 'react-router-dom';
 
 /**
@@ -27,7 +28,7 @@ class AccountApp extends React.Component {
 
     state = {
 
-        user: [],      
+        connectedUser: [],      
     }
 
    
@@ -48,19 +49,23 @@ class AccountApp extends React.Component {
             <div className="accountpages">
              
             <aside>
-                <a>Mes Annonces</a>
-                <a>Mes Favoris</a>
-                <a>Paramètres</a>
+                <a href="/mon-compte">Mon Compte</a>
+                <a href="/mon-compte/mes-annonces">Mes Annonces</a>
+                <a href="/mon-compte/mes-favoris">Mes Favoris</a>
+                <a href="/mon-compte/nouvelle-annonce">Créer une annonce</a>
+                <a href="/mon-compte/parametres">Paramètres</a>
             </aside>
 
             <main>
-                
-                <AccMenu userInfo ={this.state.user}/>
-                {/*
-                <AdsList />
-                <Favorites />
-                <Settings />
-                <NewAdForm /> */}
+                <Switch>
+
+                    <Route exact path="/mon-compte" render={(routeProps) => ( <AccMenu {...routeProps} userInfo={ this.state.connectedUser } />)}/>
+                    <Route exact path="/mon-compte/parametres" component={ Settings } />
+                    <Route exact path="/mon-compte/mes-annonces" component={ AdsList } />
+                    <Route exact path="/mon-compte/mes-favoris" component={ Favorites } />
+                    <Route exact path="/mon-compte/nouvelle-annonce" component={ NewAdForm } />
+                    
+                </Switch>
             </main>
         </div>
         )

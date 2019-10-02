@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //import { NavLink } from 'react-router-dom';
 
-//import './styles.sass';
+import './header.css';
 
 const Header = () => {
 
@@ -11,17 +11,23 @@ const Header = () => {
         
 
         {/*TODO : système de vues user connected ou non */}
-        <ul>
-            <li><a href="#">connexion</a></li>
-            <li><a href="#">inscription</a></li>
-        </ul>
-        <select>
-          <option value="compte">Mon compte</option>          
-          <option value="annonces">Mes Annonces</option>
-          <option value="favoris">Mes Favoris</option>
-          <option value="parametres">Paramètres</option>
-          <option value="deconnexion">Déconnexion</option>
-        </select>   
+        
+        <div className="navbar">
+          <a href="/">La Comète</a> 
+          <a href="#">connexion</a> 
+          <a href="#">inscription</a>
+        <div className="dropdown">
+          <button className="dropbtn">Mon compte</button>
+        <div className="dropdown-content">
+
+          <a href="/mon-compte">Mon compte</a>          
+          <a href="/mon-compte/mes-annonces">Mes Annonces</a>
+          <a href="/mon-compte/mes-favoris">Mes Favoris</a>
+          <a href="/moncompte/parametres">Paramètres</a>
+          <a href="/">Déconnexion</a>
+        </div>
+  </div> 
+</div>
     </div>
   );
 };

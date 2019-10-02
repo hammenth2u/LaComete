@@ -5,6 +5,7 @@ import '@babel/polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 /**
  * Local import
@@ -18,7 +19,9 @@ import { sideEffect } from 'src/store/reducer';
  */
 
 const reactRootElement = <Provider store={cometStore}>
-  <AppContainer />
+  <Router>
+    <AppContainer />
+  </Router>
 </Provider>;
 
 const renderingArea = document.querySelector('#root');

@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 const AccMenu = ({ userInfo }) => {
         
     const info = userInfo.map(info =>
-        <div key={info.id}>
+        <div key={ info.id }>
             <h1>Bienvenue { info.username }</h1>
             <p>E-mail : { info.email }</p>
             <p>Nom : { info.lastname }</p>

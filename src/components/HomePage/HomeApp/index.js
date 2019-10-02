@@ -10,9 +10,9 @@ import PropTypes from 'prop-types';
  */
 
 // Composants enfants éventuels
-import SearchBars from 'src/components/GeneralPages/HomePage/SearchBars';
-import Intro from 'src/components/GeneralPages/HomePage/Intro';
-import Carousel from 'src/components/GeneralPages/HomePage/Carousel';
+import SearchBars from 'src/components/HomePage/SearchBars';
+import Intro from 'src/components/HomePage/Intro';
+import Carousel from 'src/components/HomePage/Carousel';
 
 // Styles et assets
 //import './app.sass';

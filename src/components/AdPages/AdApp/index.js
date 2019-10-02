@@ -28,7 +28,7 @@ class AdApp extends React.Component {
     }
 
     componentDidMount(){
-        axios.get('http://127.0.0.1:8001/api/annonces/list')
+        axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/annonces/list')
           
       .then(response => {
 

@@ -14,8 +14,8 @@ const Header = () => {
         
         <div className="navbar">
           <a href="/">La Comète</a> 
-          <a href="#">connexion</a> 
-          <a href="#">inscription</a>
+          <a href="/connexion">connexion</a> 
+          <a href="/inscription">inscription</a>
         <div className="dropdown">
           <button className="dropbtn">Mon compte</button>
         <div className="dropdown-content">

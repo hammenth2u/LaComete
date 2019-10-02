@@ -31,7 +31,7 @@ class UserController extends AbstractController
 {
 
     /**
-     * @Route("/account", name="isconnected")
+     * @Route("/isConnected", name="isconnected")
      */
     public function userConnect()
     {
@@ -50,7 +50,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/isconnected", name="")
+     * @Route("/account", name="")
      */
     public function account()
     {

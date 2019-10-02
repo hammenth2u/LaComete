@@ -33,14 +33,14 @@ class AccountApp extends React.Component {
 
    
       componentDidMount(){
-          axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account')
+          axios.get('http://127.0.0.1:8001/api/user/account')
             
         .then(response => {
 
             const currentUserInfo = response.data
-            this.setState({ user: currentUserInfo });
-            //console.log('TEST API : ', currentUserInfo);
-            //console.log('STATE : ', this.state);
+            this.setState({ connectedUser: currentUserInfo });
+            console.log('TEST API : ', currentUserInfo);
+            console.log('STATE : ', this.state);
           });          
       }
       
@@ -57,6 +57,7 @@ class AccountApp extends React.Component {
             </aside>
 
             <main>
+                
                 <Switch>
 
                     <Route exact path="/mon-compte" render={(routeProps) => ( <AccMenu {...routeProps} userInfo={ this.state.connectedUser } />)}/>

@@ -6,7 +6,7 @@
 }
 
 /* Links inside the footer */
-.website-footer a, p {
+.website-footer a, .website-footer p {
     float: center;
     font-size: 16px;
     color: white;

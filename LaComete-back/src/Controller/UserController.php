@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+
+use App\Entity\User;
 use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,23 +46,47 @@ class UserController extends AbstractController
     {
         // On ajoute une vérification qui redirige l'utilisateur vers une autre page si il est connecté
         if($this->getUser() != null) {
-            return $this->redirectToRoute('app_profile');
+            return $this->redirectToRoute('home'); 
         }
 
         $form = $this->createForm(UserType::class);
-
         $form->handleRequest($request);
-
         // dump($request);exit;    
-
         if ($form->isSubmitted() && $form->isValid()) {
-
             $user = $form->getData();
             $user->setRoles(["ROLE_USER"]);
             $user->setStatus(true);
-
             $plainPassword = $user->getPassword();
             $encodedPassword = $encoder->encodePassword($user, $plainPassword);
+            $user->setPassword($encodedPassword);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute('app_login');
+        }
+        return $this->render('security/register.html.twig', [
+            'registerForm' => $form->createView()
+        ]);
+   
+
+    /*
+    if ($request->request->get('password') != '') {
+
+            //$user = $form->getData();
+
+            $user = new User();
+            $user->setRoles(["ROLE_USER"]);
+            $user->setStatus(true);
+
+            $username = $request->request->get('username');
+            $email = $request->request->get('email');
+            $plainPassword = $request->request->get('password');
+
+            //$plainPassword = $user->getPassword();
+            $encodedPassword = $encoder->encodePassword($user, $plainPassword);
+
+            $user->setUsername($username);
+            $user->setEmail($email);
             $user->setPassword($encodedPassword);
 
             $em = $this->getDoctrine()->getManager();
@@ -68,11 +94,10 @@ class UserController extends AbstractController
             $em->flush();
 
             return $this->redirectToRoute('app_login');
-        }
+       }
 
-        return $this->render('security/register.html.twig', [
-            'registerForm' => $form->createView()
-        ]);
+        return $this->render('security/register.html.twig');
+        */
     }
     
     /**

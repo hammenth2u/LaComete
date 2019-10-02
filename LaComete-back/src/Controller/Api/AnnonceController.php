@@ -29,7 +29,7 @@ class AnnonceController extends AbstractController
 
     /**
      * 
-     * @Route("/annonces/list", name="list")
+     * @Route("annonces/list", name="list")
      */
     public function annoncesList()
     {

@@ -4,6 +4,10 @@
 
 {% block body %}
     <h1>Inscription</h1>
+
+    {{ form(registerForm) }}
+
+{#
 </br>
 <form method="post">
     <label for="inputEmail">Email:</label>
@@ -27,6 +31,7 @@
         Inscription
     </button>
 </form>
+#}
     {# Lien de connexion #}
     {# <a href="{{ path('app_login') }}">Se connecter</a> #}
 {% endblock %}

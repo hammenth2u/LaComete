@@ -48,12 +48,27 @@ class UserController extends AbstractController
             return $this->redirectToRoute('home'); 
         }
 
-        //$form = $this->createForm(UserType::class);
+        $form = $this->createForm(UserType::class);
+        $form->handleRequest($request);
+        // dump($request);exit;    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+            $user->setRoles(["ROLE_USER"]);
+            $user->setStatus(true);
+            $plainPassword = $user->getPassword();
+            $encodedPassword = $encoder->encodePassword($user, $plainPassword);
+            $user->setPassword($encodedPassword);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute('app_login');
+        }
+        return $this->render('security/register.html.twig', [
+            'registerForm' => $form->createView()
+        ]);
+   
 
-        //$form->handleRequest($request);
-
-         //dump($request);exit;    
-
+    /*
     if ($request->request->get('password') != '') {
 
             //$user = $form->getData();
@@ -81,6 +96,7 @@ class UserController extends AbstractController
        }
 
         return $this->render('security/register.html.twig');
+        */
     }
     
     /**

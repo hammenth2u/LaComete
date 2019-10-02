@@ -37,9 +37,9 @@ const App = () => (
         <Route exact path="/mentions-legales" component={ Legal } />
         <Route exact path="/cdu" component={ TermsOfUse } />
         <Route exact path="/contact" component={ Contact } />
-        <Route exact path="/mon-compte" component={ AccountContainer } />
-        <Route exact path="/annonces" component={ AdContainer } />
-        <Route exact path="/recherche" component={ ResultContainer } />
+        <Route path="/mon-compte" component={ AccountContainer } />
+        <Route path="/annonces" component={ AdContainer } />
+        <Route path="/recherche" component={ ResultContainer } />
               
       </Switch>
     <Footer />

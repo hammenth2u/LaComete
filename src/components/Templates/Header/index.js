@@ -23,7 +23,7 @@ const Header = () => {
           <a href="/mon-compte">Mon compte</a>          
           <a href="/mon-compte/mes-annonces">Mes Annonces</a>
           <a href="/mon-compte/mes-favoris">Mes Favoris</a>
-          <a href="/moncompte/parametres">Paramètres</a>
+          <a href="/mon-compte/parametres">Paramètres</a>
           <a href="/">Déconnexion</a>
         </div>
   </div> 

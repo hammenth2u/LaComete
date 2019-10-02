@@ -11,7 +11,7 @@ const Footer = () => {
         <li><a href="/contact">Contact</a></li>
         <li><a href="/a-propos">A Propos</a></li>
         <li><a href="/cdu">Conditions Générales d'Utilisation</a></li>
-        <li><a href="/mentions-legales">Mention Légales</a></li>        
+        <li><a href="/mentions-legales">Mentions Légales</a></li>        
     </ul>
     <br />
     <p>La Comète - O'Clock © {year}</p>

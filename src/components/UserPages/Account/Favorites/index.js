@@ -15,13 +15,12 @@ const Favorites = () => {
       {/* système de vue si favoris > 0 */}
       <section className="dreams">
         <h2>Mes rêves préférés</h2>
-        <Ad />
-        <Ad />
+        
       </section>
 
       <section className="people">
-        <h2>Mes coéquipiers</h2>
-        <Ad /> 
+        <h2>Mes coéquipiers de rêve</h2>
+         
       </section>
 
     </div>

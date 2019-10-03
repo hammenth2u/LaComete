@@ -5,11 +5,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
+import axios from 'axios';
 
 /**
  * Local import
  */
-import { updateInputValue } from 'src/store/reducer';
+//import { updateInputValue } from 'src/store/reducer';
 
 // Composants enfants éventuels
 import Header from 'src/components/Templates/Header';
@@ -26,28 +27,56 @@ import Footer from 'src/components/Templates/Footer';
 // Styles et assets
 import './app.sass';
 
-const App = () => (
-  <div id="app">
-    
-    <Header />
+class App extends React.Component {
 
-      <Switch>
-        <Route exact path="/" component={ HomeContainer } />
-        <Route exact path="/a-propos" component={ About } />
-        <Route exact path="/mentions-legales" component={ Legal } />
-        <Route exact path="/cdu" component={ TermsOfUse } />
-        <Route exact path="/contact" component={ Contact } />
-        <Route path="/mon-compte" component={ AccountContainer } />
-        <Route path="/annonces" component={ AdContainer } />
-        <Route path="/recherche" component={ ResultContainer } />
-              
-      </Switch>
-    <Footer />
-  </div>
-);
+  state = {
+    userStatus: {}
+  }
+
+  componentDidMount(){
+    
+    axios.get('http://127.0.0.1:8001/api/user/isConnected')
+      //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account')
+        
+        .then(response => {
+
+          this.setState({ userStatus: response.data[0] });
+          console.log('TEST CONNECTED : ', response.data[0]);
+          console.log('STATE : ', this.state);
+        })
+
+        .catch(error => {
+
+          console.log('ERROR : ', error);
+        }); 
+        
+      }
+
+  render () {
+    return (
+      <div id="app">
+        
+        <Header userStatus={ this.state.userStatus } />
+
+          <Switch>
+            <Route exact path="/" component={ HomeContainer } />
+            <Route exact path="/a-propos" component={ About } />
+            <Route exact path="/mentions-legales" component={ Legal } />
+            <Route exact path="/cdu" component={ TermsOfUse } />
+            <Route exact path="/contact" render={(routeProps) => ( <Contact {...routeProps} userStatus={ this.state.userStatus } />)} />
+            <Route path="/mon-compte" component={ AccountContainer }  />
+            <Route path="/annonces" component={ AdContainer } />
+            <Route path="/recherche" component={ ResultContainer } />
+                  
+          </Switch>
+        <Footer />
+      </div>
+    )
+  }
+};
 
 App.propTypes = {
-  /** Titre de l'application React */
+
 };
 
 /**
@@ -59,7 +88,7 @@ const connectionStrategies = connect(
   // 1er argument : stratégie de lecture (dans le state privé global)
   (state, ownProps) => {
     return {
-      title: ownProps.title,
+      
     };
   },
 
@@ -68,7 +97,7 @@ const connectionStrategies = connect(
     return {
       handleChange: (event) => {
         dispatch(updateInputValue(event.target.value));
-      }
+      },
     };
   },
 );

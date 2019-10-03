@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 //import './styles.sass';
 
-const NewAdForm = () => {
+const NewAdForm = ({ handleChange, onSubmit }) => {
 
   return (
     <div className="newadform">
@@ -13,21 +13,41 @@ const NewAdForm = () => {
         <p>Je veux créer un :</p>
 
         <div>
-            <input type="checkbox" id="dream" name="dream" value="Rêve" />
+            <label>Rêve</label>
+            <input type="radio" id="dream" name="adtype" />
+        
+            <label>Profil</label>
+            <input type="radio" id="profile" name="adtype" />
         </div>
       
         <div>
-            <input type="checkbox" id="profile" name="profile" value="Profil" />
-        </div>
-      
-        {/* TODO : système de vues en fonction de la case cochée */}
-        <input value="Titre" />"
-        <textarea value="Description" />
+          <label>Titre : </label>
+          <input
+          type="text"
+          id="title"
+          onChange={handleChange}
+          />
+        </div>      
 
-        <input value="Nom" />"
-        <textarea value="Description" />
+        <div>
+          <label>Description : </label>
+          <textarea
+          type="text"
+          id="description"
+          onChange={handleChange}
+          />
+        </div> 
+       
+        <div>
+          <label>Je recherche : </label>
+          <textarea
+          type="text"
+          id="needs"
+          onChange={handleChange}
+          />
+        </div> 
         
-        <input type="submit" value="décollage" />
+        <input type="submit" value="décollage" onClick={onSubmit} />
       </form>
     </div>
   );

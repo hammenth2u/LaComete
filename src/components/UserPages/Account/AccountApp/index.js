@@ -17,59 +17,109 @@ import Favorites from '../Favorites';
 import Settings from '../Settings';
 import NewAdForm from '../NewAdForm';
 
-
-/**
- * IMPORTS DE DATA
- */
-//import data from 'src/data/users.js';
 //import './styles.sass';
 
 class AccountApp extends React.Component {
 
     state = {
 
-        connectedUser: [],      
+        userStatus: {},
+        currentUser: [],
+        userAds: []      
     }
 
-   
-      componentDidMount(){
-          //axios.get('http://127.0.0.1:8001/api/user/account')
-          axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account')
-            
+    
+    componentDidMount(){
+    axios.get('http://127.0.0.1:8001/api/user/isConnected')
+    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account')
+    
         .then(response => {
 
-            const currentUserInfo = response.data
-            this.setState({ connectedUser: currentUserInfo });
-            console.log('TEST API : ', currentUserInfo);
-            console.log('STATE : ', this.state);
-          });          
-      }
+            this.setState({ userStatus: response.data[0] });
+            console.log('TEST CONNECTED ACC: ', response.data[0]);
+            console.log('STATE ACC: ', this.state.userStatus);
+        })
+
+        .catch(error => {
+
+            console.log('STATUS ERROR : ', error);
+        }); 
+
+    axios.get('http://127.0.0.1:8001/api/user/account')
+    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account')
+    
+        .then(response => {
+
+            this.setState({ currentUser: response.data });
+            console.log('TEST USER INFO : ', response.data);
+            console.log('STATE USER INFO: ', this.state.currentUser);
+        })
+        
+        .catch(error => {
+
+            console.log('DATA ERROR : ', error);
+        }); 
+
+        //TODO : corriger API call
+    axios.get('http://127.0.0.1:8001/api/annonces/list')
+    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/annonces/list')
+        
+        .then(response => {
+
+            this.setState({ userAds: response.data });
+            console.log('TEST USER ADS : ', currentUserInfo);
+            console.log('STATE USER ADS: ', this.state.userAds);
+        })
+
+        .catch(error => {
+    
+            console.log('ADS ERROR : ', error);
+        });
+    
+        // TODO : API call for favorites    
+    
+    }
       
     render () {
         return (
-            <div className="accountpages">
-             
-            <aside>
-                <a href="/mon-compte">Mon Compte</a>
-                <a href="/mon-compte/mes-annonces">Mes Annonces</a>
-                <a href="/mon-compte/mes-favoris">Mes Favoris</a>
-                <a href="/mon-compte/nouvelle-annonce">Créer une annonce</a>
-                <a href="/mon-compte/parametres">Paramètres</a>
-            </aside>
-
-            <main>
+            <div>
+            {this.state.userStatus == "<" ? (
+                <div>
+                    <h1>Vous n'avez pas encore rejoint le pays des rêves</h1>
+                    <h2>Veuillez prendre place sur la comète en suivant l'un des liens ci-dessous</h2>
                 
-                <Switch>
+                    <div>
+                    <a href="/connexion">Connexion</a>          
+                    <a href="/inscription">Inscription</a>                        
+                    </div>
+                </div>
+                ) : (                                
+                  <div className="accountpages">
+             
+                    <aside>
+                        <a href="/mon-compte">Mon Compte</a>
+                        <a href="/mon-compte/mes-annonces">Mes Annonces</a>
+                        <a href="/mon-compte/mes-favoris">Mes Favoris</a>
+                        <a href="/mon-compte/nouvelle-annonce">Créer une annonce</a>
+                        <a href="/mon-compte/parametres">Paramètres</a>
+                    </aside>
 
-                    <Route exact path="/mon-compte" render={(routeProps) => ( <AccMenu {...routeProps} userInfo={ this.state.connectedUser } />)}/>
-                    <Route exact path="/mon-compte/parametres" component={ Settings } />
-                    <Route exact path="/mon-compte/mes-annonces" component={ AdsList } />
-                    <Route exact path="/mon-compte/mes-favoris" component={ Favorites } />
-                    <Route exact path="/mon-compte/nouvelle-annonce" component={ NewAdForm } />
-                    
-                </Switch>
-            </main>
-        </div>
+                    <main>
+                        
+                        <Switch>
+
+                            <Route exact path="/mon-compte" render={(routeProps) => ( <AccMenu {...routeProps} userInfo={ this.state.currentUser } />)}/>
+                            <Route exact path="/mon-compte/parametres" render={(routeProps) => ( <Settings {...routeProps} userInfo={ this.state.currentUser } />)} />
+                            <Route exact path="/mon-compte/mes-annonces" render={(routeProps) => ( <AdsList {...routeProps} userAds={ this.state.userAds } />)}/>
+                            <Route exact path="/mon-compte/mes-favoris" render={(routeProps) => ( <Favorites {...routeProps} userAds={ this.state.userAds } />)}/>/>
+                            <Route exact path="/mon-compte/nouvelle-annonce" component={ NewAdForm } />
+                            
+                        </Switch>
+                    </main>
+                </div>
+                )
+            } 
+            </div>             
         )
     }
     

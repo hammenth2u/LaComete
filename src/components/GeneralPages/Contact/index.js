@@ -4,16 +4,18 @@ import PropTypes from 'prop-types';
 
 //import './styles.sass';
 
-const Contact = () => {
+const Contact = ({ userStatus }) => {
 
   return (
     <div className="contact">
 
       <h1>Contactez-nous</h1>
-      
+        
       <h2>Formulaire de contact</h2>
+
       <form>
-        <input value="Nom"/>
+        {userStatus == "<" ? <input value="Email" /> : ''}  
+        <input value="Sujet" />
         <textarea value="Mon message" />
         <input type="submit" value="envoyer" />
       </form>

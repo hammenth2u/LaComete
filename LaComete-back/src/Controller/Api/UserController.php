@@ -39,14 +39,24 @@ class UserController extends AbstractController
             header('Access-Control-Allow-Origin: *'); 
             header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
             header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-            return true;
+            $formatted = [];
+            
+            $formatted [] = [
+            'userConnected' => true,
+            ];
         }
         else {
             header('Access-Control-Allow-Origin: *'); 
             header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
             header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-            return false;
+            $formatted = [];
+            
+            $formatted [] = [
+            'userConnected' => false,
+            ];
         }
+        
+        return new JsonResponse($formatted);
     }
 
     /**

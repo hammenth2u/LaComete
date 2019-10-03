@@ -4,42 +4,39 @@ import PropTypes from 'prop-types';
 
 import './header.css';
 
-const Header = () => {
+const Header = ({ userStatus }) => {
 
   return (
-    <div className="blog-header content--centered">
-        
+    <div className="blog-header content--centered navbar">
+      <a href="/">La Comète</a> 
 
-        {/*TODO : système de vues user connected ou non */}
-        
-        <div className="navbar">
-          <a href="/">La Comète</a> 
+      {userStatus == "<" ? (
+        <div className="UnregisteredUserNav">
           <a href="/connexion">connexion</a> 
           <a href="/inscription">inscription</a>
-        <div className="dropdown">
-          <button className="dropbtn">Mon compte</button>
-        <div className="dropdown-content">
-
-          <a href="/mon-compte">Mon compte</a>          
-          <a href="/mon-compte/mes-annonces">Mes Annonces</a>
-          <a href="/mon-compte/mes-favoris">Mes Favoris</a>
-          <a href="/mon-compte/parametres">Paramètres</a>
-          <a href="/">Déconnexion</a>
         </div>
-  </div> 
-</div>
+        ) : (              
+          <div className="dropdown">
+            <button className="dropbtn">Mon compte</button>
+          
+            <div className="dropdown-content">
+              <a href="/mon-compte">Mon compte</a>          
+              <a href="/mon-compte/mes-annonces">Mes Annonces</a>
+              <a href="/mon-compte/mes-favoris">Mes Favoris</a>
+              <a href="/mon-compte/parametres">Paramètres</a>
+              <a href="/deconnexion">Déconnexion</a>
+            </div>
+          </div>
+        )
+      }  
     </div>
   );
 };
 
 /*
 Header.propTypes = {
-  categories: PropTypes.arrayOf(
-    PropTypes.shape({
-      route: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired
-};
-*/
+  
+      userStatus: PropTypes.string.isRequired
+};*/
+
 export default Header;

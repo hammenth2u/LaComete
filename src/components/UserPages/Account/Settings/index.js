@@ -4,14 +4,70 @@ import PropTypes from 'prop-types';
 
 //import './styles.sass';
 
-const Settings = ({ userInfo }) => {
+const Settings = ({ userInfo, handleChange, onSubmit }) => {
 
   const info = userInfo.map(info =>
     <div key={ info.id }>
-        <h1>Bienvenue { info.username }</h1>
-        <p>E-mail : { info.email }</p>
-        <p>Nom : { info.lastname }</p>
-        <p>Prénom : { info.firstname }</p>
+        <div>
+          <label>Mon nom d'utilisateur : </label>
+          <input
+          type="text"
+          id="username"
+          placeholder={ info.username }
+          onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Mon nom : </label>
+          <input
+          type="text"
+          id="lastname"
+          placeholder={ info.lastname }
+          onChange={handleChange}
+          />
+        </div>
+          <div>
+          <label>Mon prénom : </label>
+          <input
+          type="text"
+          id="firstname"
+          placeholder={ info.firstname }
+          onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Mon e-mail : </label>
+          <input
+          type="text"
+          id="email"
+          placeholder={ info.email }
+          onChange={handleChange}
+          />
+        </div>        
+        <div>
+          <label>Nouveau mot de passe : </label>
+          <input
+          type="text"
+          id="password"
+          onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Confirmation du nouveau mot de passe : </label>
+          <input
+          type="text"
+          id="password"
+          onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Mot de passe actuel : </label>
+          <input
+          type="text"
+          id="password"
+          onChange={handleChange}
+          />
+        </div>
     </div>
     )
   return (   
@@ -20,7 +76,7 @@ const Settings = ({ userInfo }) => {
         
       { info }
 
-      <button>Envoyer</button>
+      <input type="submit" value="Modifier" onClick={onSubmit} />
     </div>
     )
 };

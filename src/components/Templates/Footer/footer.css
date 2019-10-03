@@ -3,6 +3,8 @@
     overflow: hidden;
     background-color: #1c2e5e;
     font-family: Arial;
+    margin-top: 3em;
+    padding: .5em;
 }
 
 /* Links inside the footer */

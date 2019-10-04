@@ -30,7 +30,11 @@ import './app.sass';
 class App extends React.Component {
 
   state = {
-    userStatus: {}
+    userStatus: {},
+    userMail: '',
+    email: '',
+    object: '',
+    message: '',
   }
 
   componentDidMount(){
@@ -41,16 +45,35 @@ class App extends React.Component {
         .then(response => {
 
           this.setState({ userStatus: response.data[0] });
-          console.log('TEST CONNECTED : ', response.data[0]);
-          console.log('STATE : ', this.state);
+          console.log('STATE : ', this.state.userStatus);
+
+          if (response.data[0] != "<") {
+            axios.get('http://127.0.0.1:8001/api/user/account')
+            //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account')
+        
+              .then(response => {
+                const userdata = response.data[0]
+                const usermail = userdata.email                
+                this.setState({ userMail: usermail });
+                console.log('STATE USER INFO: ', this.state.userMail);
+              })
+              
+              .catch(error => {
+        
+                  console.log('DATA ERROR : ', error);
+              }); 
+
+          }
         })
 
         .catch(error => {
 
           console.log('ERROR : ', error);
-        }); 
-        
-      }
+        });         
+      
+    
+    
+  }
 
   render () {
     return (
@@ -63,7 +86,7 @@ class App extends React.Component {
             <Route exact path="/a-propos" component={ About } />
             <Route exact path="/mentions-legales" component={ Legal } />
             <Route exact path="/cdu" component={ TermsOfUse } />
-            <Route exact path="/contact" render={(routeProps) => ( <Contact {...routeProps} userStatus={ this.state.userStatus } />)} />
+            <Route exact path="/contact" render={(routeProps) => ( <Contact {...routeProps} userStatus={this.state.userStatus} userMail={this.state.userMail} />)}/>
             <Route path="/mon-compte" component={ AccountContainer }  />
             <Route path="/annonces" component={ AdContainer } />
             <Route path="/recherche" component={ ResultContainer } />

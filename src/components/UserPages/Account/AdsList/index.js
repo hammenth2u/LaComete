@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import Ad from 'src/components/AdPages/Ad';
 
-const MyAds = () => {
+const MyAds = ({ userAds }) => {
 
   return (
     <div className="Account">
@@ -15,7 +15,7 @@ const MyAds = () => {
       {/* système de vue si favoris > 0 */}
       <section className="dreams">
         <h2>Mes rêves en cours</h2>
-
+        <Ad />
       </section>
 
       <section className="people">

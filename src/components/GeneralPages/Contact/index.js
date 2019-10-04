@@ -1,35 +1,90 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import { withFormik } from 'formik';
+import * as Yup from 'yup';
 //import { NavLink } from 'react-router-dom';
 
 //import './styles.sass';
 
-const Contact = ({ userStatus }) => {
+const Contact = (props) => {
+  const {
+    values,
+    touched,
+    errors,
+    isSubmitting,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    userStatus,
+    userMail
+  } = props;
 
-  return (
-    <div className="contact">
+  const autoFill = userMail;
+  console.log('TESTMAIL : ', autoFill);
 
-      <h1>Contactez-nous</h1>
-        
-      <h2>Formulaire de contact</h2>
+  return(
+    <div>
+    <form className="p-5" onSubmit={handleSubmit}>
+      <h1>Formulaire de contact</h1>
+      
+      {userStatus == "<" ? (
+      <div className="form-group">
+        <label>Email</label>
+        <input name="email" type="text" 
+          className={`form-control ${errors.email && touched.email && 'is-invalid'}`}
+          value={values.email} 
+          onChange={handleChange}
+          onBlur={handleBlur} />
+        {errors.email && touched.email && <div className="invalid-feedback">{errors.email}</div>}
+      </div> 
+      ) : (
 
-      <form>
-        {userStatus == "<" ? <input value="Email" /> : ''}  
-        <input value="Sujet" />
-        <textarea value="Mon message" />
-        <input type="submit" value="envoyer" />
-      </form>
+        <div className="form-group">
+        <label>Email</label>
+        <input name="email" type="text" 
+          className={`form-control ${errors.email && touched.email && 'is-invalid'}`}
+          value= {autoFill}
+          disabled
+          onChange={handleChange}
+          onBlur={handleBlur} />
+        {errors.email && touched.email && <div className="invalid-feedback">{errors.email}</div>}
+      </div> 
+      )
+    }
+      <div className="form-group">
+        <label>Sujet</label>
+        <input name="object" type="text" 
+          className={`form-control ${errors.object && touched.object && 'is-invalid'}`}
+          value={values.object} 
+          onChange={handleChange}
+          onBlur={handleBlur} />
+        {errors.object && touched.object && <div className="invalid-feedback">{errors.object}</div>}
+      </div>
+      <div className="form-group">
+        <label>Message</label>
+        <textarea name="message" type="text" 
+          className={`form-control ${errors.message && touched.message && 'is-invalid'}`}
+          value={values.message} 
+          onChange={handleChange}
+          onBlur={handleBlur} />
+        {errors.message && touched.message && <div className="invalid-feedback">{errors.message}</div>}
+      </div>
 
-      <h2>Coordonnées</h2>
-      <ul>
-        <li>0102030405</li>
-        <li>lacomete@oclock.io</li>
-        <li>La Comète - 2ème étoile à droite puis tout droit jusqu'au matin</li>
-      </ul>
+      <button type="submit" className="btn btn-outline-primary" disabled={isSubmitting}>
+        {isSubmitting ? 'patienter' : 'envoyer'}
+      </button>
+    </form>
 
+    <h2>Coordonnées</h2>
+        <ul>
+          <li>0102030405</li>
+          <li>lacomete@oclock.io</li>
+          <li>La Comète - 2ème étoile à droite puis tout droit jusqu'au matin</li>
+        </ul>
     </div>
   );
-};
+}
 
 /*
 Header.propTypes = {
@@ -41,4 +96,46 @@ Header.propTypes = {
   ).isRequired
 };
 */
-export default Contact;
+
+export default withFormik({
+  mapPropsToValues: (props) => { 
+    return {
+    email: '',
+    object: '',
+    message: '',
+    }
+  },
+
+  validationSchema: Yup.object().shape({
+    
+    email: Yup.string().email('Invalid email address').required('Veuillez rentrer une adresse mail'),
+    object: Yup.string().required('Veuillez compléter ce champ'),
+    message: Yup.string().required('Veuillez compléter ce champ'),
+  }),
+
+  handleSubmit: (values, { setSubmitting, resetForm }) => {
+    setTimeout(() => {
+      // submit them do the server. do whatever you like!
+      /*alert(JSON.stringify(values, null, 2));
+      setSubmitting(false);*/
+      axios.post('/api/contact/post', {
+        email: values.email,
+        object: values.object,
+        message: values.message
+      })
+      .then(function (response) {
+        alert("Message Envoyé");
+        console.log('TEST POST : ', response);
+        console.log(values.email);
+        console.log(values.object);
+        console.log(values.message);
+      })
+      .catch(function (error) {
+        alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux, veuillez recommencer ou choisir un autre moyen de contact");
+        console.log('ERROR POST : ', error);
+      });
+      setSubmitting(false);
+      resetForm();
+    }, 1000);
+  },
+})(Contact);

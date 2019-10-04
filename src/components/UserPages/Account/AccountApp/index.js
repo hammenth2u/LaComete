@@ -25,7 +25,8 @@ class AccountApp extends React.Component {
 
         userStatus: {},
         currentUser: [],
-        userAds: []      
+        userAds: [] 
+             
     }
 
     
@@ -60,14 +61,13 @@ class AccountApp extends React.Component {
             console.log('DATA ERROR : ', error);
         }); 
 
-        //TODO : corriger API call
-    axios.get('http://127.0.0.1:8001/api/annonces/list')
-    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/annonces/list')
-        
+    axios.get('http://127.0.0.1:8001/api/annonces/user/list')
+    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/annonces/user/list')
+    
         .then(response => {
 
             this.setState({ userAds: response.data });
-            console.log('TEST USER ADS : ', currentUserInfo);
+            console.log('TEST USER ADS : ', response.data[0]);
             console.log('STATE USER ADS: ', this.state.userAds);
         })
 

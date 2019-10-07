@@ -19,32 +19,17 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
-    // /**
-    //  * @return Category[] Returns an array of Category objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
+    /**
+     * Méthode qui retourne toutes les catégories triées par nom croissant
+     * 
+    * @return Category[] Returns an array of Annonce objects
     */
-
-    /*
-    public function findOneBySomeField($value): ?Category
+    
+    public function findAllOrderByName()
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $query = $this->createQueryBuilder('c')
+                      ->orderBy('c.name', 'ASC');
+              
+        return $query->getQuery()->getResult();
     }
-    */
 }

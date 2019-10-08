@@ -25,13 +25,13 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
 /**
- * @Route("/api/user", name="api_user_")
+ * @Route("/api", name="api_user_")
  */
 class UserController extends AbstractController
 {
 
     /**
-     * @Route("/isConnected", name="isconnected")
+     * @Route("/user/isConnected", name="isconnected")
      */
     public function userConnect()
     {
@@ -60,7 +60,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/account", name="")
+     * @Route("/user/account", name="")
      */
     public function account(UserPasswordEncoderInterface $encoder)
     {
@@ -104,50 +104,97 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/edit/account", name="edit")
+     * @Route("/user/edit/account", name="edit")
      */
     public function editProfile(Request $request, UserPasswordEncoderInterface $encoder) 
     {
         $user = $this->getUser();
 
-        if($request->request->get('firstname') !== null)
+        if($request->request->get('firstname') !== '')
         {
             $firstname = $request->request->get('firstname');
             $user->setFirstname($firstname);
         }
 
-        if($request->request->get('lastname') !== null)
+        if($request->request->get('lastname') !== '')
         {
             $lastname = $request->request->get('lastname');
             $user->setLastname($lastname);
         }
 
-        if($request->request->get('username') !== null)
+        if($request->request->get('username') !== '')
         {
             $username = $request->request->get('username');
             $user->setUsername($username);
         }
 
-        if($request->request->get('email') !== null)
+        if($request->request->get('email') !== '')
         {
             $email = $request->request->get('email');
             $user->setEmail($email);
         }
 
-        if($request->request->get('newpassword') !== null)
+        if($request->request->get('newpassword') !== '')
         {
             $newpassword = $request->request->get('newpassword');
             $encodedPassword = $encoder->encodePassword($user, $newpassword);
             $user->setPassword($encodedPassword);
         }
 
-        //$firstname = "Clara";
-        //$user->setFirstname($firstname);
 
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
+
+        $response = new Response('success');
+        return $response;
+    }
+
+    /**
+     * @Route("/password/new", name="password_new")
+     */
+    public function passwordNew(Request $request, UserPasswordEncoderInterface $encoder) 
+    {
+
+        header('Access-Control-Allow-Origin: *'); 
+        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
+        header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+
+        $email = $request->request->get('email');
+        //$email = "clara.hammenthienne@gmail.com";
+        //dump($email);exit;
+
+        $user = $this->getDoctrine()->getRepository(User::class)->findUserByEmail($email);
+
+        //dump($user);exit;
+
+
+        $newPassword = "";
+       
+        $str = "abcdefghjkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ023456789+@!$%?&";
+        $lg_str= strlen($str);
+       
+        for($i = 1; $i <= 12 ; $i++)
+        {
+            $place_rand = mt_rand(0,($lg_str -1));
+            $newPassword .= $str[$place_rand];
+        }
+
+        $encodedPassword = $encoder->encodePassword($user, $newPassword);
+        $user->setPassword($encodedPassword);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+
+        $to = $email;
+        $obj = "La Comète - Mot de passe oublié";
+        $msg = "Voilà votre nouveau mot de passe temporaire qu'il faudra changer dans vos paramètres par la suite:";
+        $msg2= "\r\n"."Nouveau mot de passe : ".$newPassword;
+        
+        mail($to, $obj, $msg.$msg2);
 
         $response = new Response('success');
         return $response;

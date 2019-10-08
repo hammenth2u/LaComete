@@ -67,12 +67,12 @@ export default withFormik({
   handleSubmit: (values, { setSubmitting, resetForm }) => {
     setTimeout(() => {
       
-      axios.post('/api/contact/post', {
+      axios.post('/api/password/new', {
         email: values.email,
       })
       .then(function (response) {
-        alert("Message Envoyé");
-        console.log('TEST FORGOOTTEN : ', response);
+        alert("Vous devriez recevoir un email rapidement");
+        console.log('TEST FORGOTTEN : ', response);
         console.log(values.email);
       })
       .catch(function (error) {

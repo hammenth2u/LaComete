@@ -4,49 +4,40 @@ import PropTypes from 'prop-types';
 
 //import './styles.sass';
 
-const Ad = ({ adlist }) => {
+/**
+ * import local
+ */
+import { CommentInput } from 'src/components/AdPages/CommentInput';
 
-  //console.log('ADLIST : ', adlist);
+const Ad = ({ adlist }) => {
 
     const ads = adlist.map(ad => 
     <article key={ad.id}>     
-      <h3>Title : { ad.title }</h3>
-      <p>Category : { ad.type }</p>
+      <h3>Titre : { ad.title }</h3>
+      <p>Categorie : { ad.category }</p>
       <p>Lieu : { ad.city }</p>
-      <p>description : { ad.description }</p>
+      <p>Description : { ad.description }</p>
+      <p>Recherche : { ad.need }</p>
     </article> 
     );
 
       return (
         <div className="ad">
       
-        <section>
-          {ads}
-        </section>
-        <section className="comments">
-          <p>ici un commentaire</p>
-        </section>
-  
+          <section>
+            {ads}
+          </section>
+
+          <section className="comments">
+            <CommentInput />
+            
+            <div>
+              <h3>Commentaires : </h3>
+            </div>
+          </section>
+
         </div>
   )
-  /*
-  const list = ads.map(function(ad) {
-
-    return (
-      <div className="ad">
-  
-        <h1>{ ad.title }</h1>
-        <p>un rêve de { author }</p>
-        <p>Lieu : { ad.location }</p>
-        <p>{ ad.description }</p>
-  
-        <section className="comments">
-          <p>ici un commentaire</p>
-        </section>
-  
-      </div>
-    );
-  })  */
 };
 
 /*

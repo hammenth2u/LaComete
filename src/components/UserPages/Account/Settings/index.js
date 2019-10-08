@@ -180,14 +180,16 @@ export default withFormik({
     email: Yup.string()
       .email("Veuillez entrer une adresse email valide"),                      
     newpassword: Yup.string()
-      /*.test('currentpassword', 'Le nouveau mot de passe doit être différent de l\'actuel', value => value !== currentpassword)*/
       .min(8, "Votre mot de passe doit faire au minimum 8 caractères")
       .max(25, "Votre mot de passe doit faire au maximum 25 caractères"),  
-    passwordconfirm: Yup.string()
-      .oneOf([Yup.ref('newpassword'), null], 'La confirmation et le mot de passe sont différents')
-      .required('Vous devez confirmer votre nouveau mot de passe'),    
+    passwordconfirm: Yup.string()            
+      /*
+        .oneOf([Yup.ref('newpassword'), null], 'La confirmation et le mot de passe sont différents') :
+      schema.oneOf([Yup.ref('newpassword'), null], 'La confirmation et le mot de passe sont différents') 
+    }),*/,
     currentpassword: Yup.string()
-    .required("Vous devez entrer votre mot de passe actuel").notOneOf([Yup.ref('newpassword'), null], 'Votre nouveau mot de passe doit être différent de l\'ancien'), 
+    .required("Vous devez entrer votre mot de passe actuel")
+    .notOneOf([Yup.ref('newpassword'), null], 'Votre nouveau mot de passe doit être différent de l\'ancien'), 
   }),
 
 

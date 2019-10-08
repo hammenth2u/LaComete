@@ -1,40 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-//import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 //import './styles.sass';
 
-import Ad from 'src/components/AdPages/Ad';
+const Favorites = ({ userFavs }) => {
 
-const Favorites = () => {
+  const userFavList = userFavs.map(userFav => 
+    <article key={userFav.id}>     
+      <h3>Title : { userFav.title }</h3>
+      <p>Lieu : { userFav.city }</p>
+      <Link to={`/annonces/${userFav.id}`}>>>></Link>     
+    </article> 
+  )
 
   return (
     <div className="Account">
-      <h1>Mes favoris</h1>
+      <h1>Mes annonces</h1>
+            
+      <section className="ads">      
+        { userFavList }
+      </section>
       
-      {/* système de vue si favoris > 0 */}
-      <section className="dreams">
-        <h2>Mes rêves préférés</h2>
-        
-      </section>
-
-      <section className="people">
-        <h2>Mes coéquipiers de rêve</h2>
-         
-      </section>
-
     </div>
   );
 };
 
-/*
-Header.propTypes = {
-  categories: PropTypes.arrayOf(
-    PropTypes.shape({
-      route: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired
-};
-*/
 export default Favorites;

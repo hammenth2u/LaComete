@@ -36,7 +36,6 @@ class AccountApp extends React.Component {
         .then(response => {
 
             this.setState({ userStatus: response.data[0] });
-            console.log('TEST CONNECTED ACC: ', response.data[0]);
             console.log('STATE ACC: ', this.state.userStatus);
         })
 
@@ -51,7 +50,6 @@ class AccountApp extends React.Component {
         .then(response => {
 
             this.setState({ currentUser: response.data });
-            console.log('TEST USER INFO : ', response.data);
             console.log('STATE USER INFO: ', this.state.currentUser);
         })
         
@@ -66,7 +64,6 @@ class AccountApp extends React.Component {
         .then(response => {
 
             this.setState({ userAds: response.data });
-            console.log('TEST USER ADS : ', response.data[0]);
             console.log('STATE USER ADS: ', this.state.userAds);
         })
 

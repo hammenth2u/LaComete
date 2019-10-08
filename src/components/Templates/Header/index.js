@@ -20,7 +20,7 @@ const Header = ({ userStatus }) => {
             <button className="dropbtn">Mon compte</button>
           
             <div className="dropdown-content">
-              <a href="/mon-compte">Mon compte</a>          
+              <a href="/mon-compte">Menu</a>          
               <a href="/mon-compte/mes-annonces">Mes Annonces</a>
               <a href="/mon-compte/mes-favoris">Mes Favoris</a>
               <a href="/mon-compte/parametres">Paramètres</a>

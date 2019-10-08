@@ -1,40 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-//import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 //import './styles.sass';
 
-import Ad from 'src/components/AdPages/Ad';
-
 const MyAds = ({ userAds }) => {
+
+  const userAdList = userAds.map(userAd => 
+    <article key={userAd.id}>     
+      <h3>Title : { userAd.title }</h3>
+      <p>Lieu : { userAd.city }</p>
+      <Link to={`/annonces/${userAd.id}`}>>>></Link>     
+    </article> 
+  )
 
   return (
     <div className="Account">
       <h1>Mes annonces</h1>
-      
-      {/* système de vue si favoris > 0 */}
-      <section className="dreams">
-        <h2>Mes rêves en cours</h2>
-        <Ad />
-      </section>
-
-      <section className="people">
-        <h2>Mon profil</h2>
-        
+            
+      <section className="ads">      
+        { userAdList }
       </section>
       
     </div>
   );
 };
 
-/*
-Header.propTypes = {
-  categories: PropTypes.arrayOf(
-    PropTypes.shape({
-      route: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired
-};
-*/
 export default MyAds;

@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
@@ -21,8 +20,8 @@ import Legal from 'src/components/GeneralPages/Legal';
 import TermsOfUse from 'src/components/GeneralPages/TermsOfUse';
 import Forgotten from 'src/components/GeneralPages/ForgottenPassword';
 import AccountContainer from 'src/components/UserPages/Account/AccountApp/';
-import AdContainer from 'src/components/AdPages/AdApp';
 import ResultContainer from 'src/components/SearchPages/Results/ResultApp';
+import Ad from 'src/components/AdPages/Ad';
 import Footer from 'src/components/Templates/Footer';
 
 // Styles et assets
@@ -33,6 +32,7 @@ class App extends React.Component {
   state = {
     userStatus: {},
     userMail: '',
+    allAds: []
   }
 
   componentDidMount(){
@@ -40,35 +40,50 @@ class App extends React.Component {
     axios.get('http://127.0.0.1:8001/api/user/isConnected')
       //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account')
         
+      .then(response => {
+
+        this.setState({ userStatus: response.data[0] });
+        console.log('STATE : ', this.state.userStatus);
+
+        if (response.data[0] != "<") {
+          axios.get('http://127.0.0.1:8001/api/user/account')
+          //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account')
+      
+            .then(response => {
+              const userdata = response.data[0]
+              const usermail = userdata.email                
+              this.setState({ userMail: usermail });
+              console.log('STATE USER INFO: ', this.state.userMail);
+            })
+            
+            .catch(error => {
+      
+                console.log('DATA ERROR : ', error);
+            }); 
+
+        }
+      })
+
+      .catch(error => {
+
+        console.log('ERROR : ', error);
+      });         
+
+    // TODO : REQUETE ALL ADS
+    /*axios.get('')
+    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/')
+    
         .then(response => {
 
-          this.setState({ userStatus: response.data[0] });
-          console.log('STATE : ', this.state.userStatus);
-
-          if (response.data[0] != "<") {
-            axios.get('http://127.0.0.1:8001/api/user/account')
-            //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account')
-        
-              .then(response => {
-                const userdata = response.data[0]
-                const usermail = userdata.email                
-                this.setState({ userMail: usermail });
-                console.log('STATE USER INFO: ', this.state.userMail);
-              })
-              
-              .catch(error => {
-        
-                  console.log('DATA ERROR : ', error);
-              }); 
-
-          }
+            this.setState({ allAds: response.data });
+            console.log('STATE ALL ADS: ', this.state.allAds);
         })
 
         .catch(error => {
-
-          console.log('ERROR : ', error);
-        });         
-
+    
+            console.log('ADS ERROR : ', error);
+        });*/
+        
   }
 
   render () {
@@ -83,9 +98,8 @@ class App extends React.Component {
             <Route exact path="/mentions-legales" component={ Legal } />
             <Route exact path="/cdu" component={ TermsOfUse } />
             <Route exact path="/contact" render={(routeProps) => ( <Contact {...routeProps} userStatus={this.state.userStatus} userMail={this.state.userMail} />)}/>
-            <Route exact path="/motdepasse-oublie" render={(routeProps) => ( <Forgotten {...routeProps} userMail={this.state.userMail} />)}/>
+            <Route exact path="/motdepasseoublie" render={(routeProps) => ( <Forgotten {...routeProps} userMail={this.state.userMail} />)}/>
             <Route path="/mon-compte" component={ AccountContainer }  />
-            <Route path="/annonces" component={ AdContainer } />
             <Route path="/recherche" component={ ResultContainer } />
                   
           </Switch>
@@ -93,10 +107,6 @@ class App extends React.Component {
       </div>
     )
   }
-};
-
-App.propTypes = {
-
 };
 
 /**

@@ -21,7 +21,6 @@ const Contact = (props) => {
   } = props;
 
   const autoFill = userMail;
-  console.log('TESTMAIL : ', autoFill);
 
   return(
     <div>
@@ -45,7 +44,6 @@ const Contact = (props) => {
         <input name="email" type="text" 
           className={`form-control ${errors.email && touched.email && 'is-invalid'}`}
           value= {autoFill}
-          disabled
           onChange={handleChange}
           onBlur={handleBlur} />
         {errors.email && touched.email && <div className="invalid-feedback">{errors.email}</div>}
@@ -108,16 +106,14 @@ export default withFormik({
 
   validationSchema: Yup.object().shape({
     
-    email: Yup.string().email('Invalid email address').required('Veuillez rentrer une adresse mail'),
+    email: Yup.string().email('Veuillez rentrer une adresse email valide').required('Veuillez compléter ce champ'),
     object: Yup.string().required('Veuillez compléter ce champ'),
     message: Yup.string().required('Veuillez compléter ce champ'),
   }),
 
   handleSubmit: (values, { setSubmitting, resetForm }) => {
     setTimeout(() => {
-      // submit them do the server. do whatever you like!
-      /*alert(JSON.stringify(values, null, 2));
-      setSubmitting(false);*/
+      
       axios.post('/api/contact/post', {
         email: values.email,
         object: values.object,

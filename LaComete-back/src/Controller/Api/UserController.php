@@ -62,7 +62,7 @@ class UserController extends AbstractController
     /**
      * @Route("/account", name="")
      */
-    public function account()
+    public function account(UserPasswordEncoderInterface $encoder)
     {
 
         if($this->getUser() != null) {
@@ -75,6 +75,12 @@ class UserController extends AbstractController
 
 
             $formatted = [];
+
+            $passwordEncode = $user->getPassword();
+            
+            //$encodedPassword = $encoder->encodePassword($user, $plainPassword);
+            
+
             
                 $formatted [] = [
                 'id' => $user->getId(),
@@ -82,6 +88,7 @@ class UserController extends AbstractController
                 'email' => $user->getEmail(),
                 'firstname' => $user->getFirstname(),
                 'lastname' => $user->getLastname(),
+                'password' => $passwordEncode,
                 ];
             
 
@@ -94,5 +101,55 @@ class UserController extends AbstractController
             header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
             return null;
         }
+    }
+
+    /**
+     * @Route("/edit/account", name="edit")
+     */
+    public function editProfile(Request $request, UserPasswordEncoderInterface $encoder) 
+    {
+        $user = $this->getUser();
+
+        if($request->request->get('firstname') !== null)
+        {
+            $firstname = $request->request->get('firstname');
+            $user->setFirstname($firstname);
+        }
+
+        if($request->request->get('lastname') !== null)
+        {
+            $lastname = $request->request->get('lastname');
+            $user->setLastname($lastname);
+        }
+
+        if($request->request->get('username') !== null)
+        {
+            $username = $request->request->get('username');
+            $user->setUsername($username);
+        }
+
+        if($request->request->get('email') !== null)
+        {
+            $email = $request->request->get('email');
+            $user->setEmail($email);
+        }
+
+        if($request->request->get('newpassword') !== null)
+        {
+            $newpassword = $request->request->get('newpassword');
+            $encodedPassword = $encoder->encodePassword($user, $newpassword);
+            $user->setPassword($encodedPassword);
+        }
+
+        //$firstname = "Clara";
+        //$user->setFirstname($firstname);
+
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        $response = new Response('success');
+        return $response;
     }
 }

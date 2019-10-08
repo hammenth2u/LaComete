@@ -25,8 +25,7 @@ class AccountApp extends React.Component {
 
         userStatus: {},
         currentUser: [],
-        userAds: [] 
-             
+        userAds: [], 
     }
 
     
@@ -111,8 +110,8 @@ class AccountApp extends React.Component {
                             <Route exact path="/mon-compte" render={(routeProps) => ( <AccMenu {...routeProps} userInfo={ this.state.currentUser } />)}/>
                             <Route exact path="/mon-compte/parametres" render={(routeProps) => ( <Settings {...routeProps} userInfo={ this.state.currentUser } />)} />
                             <Route exact path="/mon-compte/mes-annonces" render={(routeProps) => ( <AdsList {...routeProps} userAds={ this.state.userAds } />)}/>
-                            <Route exact path="/mon-compte/mes-favoris" render={(routeProps) => ( <Favorites {...routeProps} userAds={ this.state.userAds } />)}/>/>
-                            <Route exact path="/mon-compte/nouvelle-annonce" component={ NewAdForm } />
+                            <Route exact path="/mon-compte/mes-favoris" render={(routeProps) => ( <Favorites {...routeProps} userAds={ this.state.userAds } />)}/>
+                            <Route exact path="/mon-compte/nouvelle-annonce" component={ NewAdForm }/>
                             
                         </Switch>
                     </main>

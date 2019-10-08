@@ -19,32 +19,21 @@ class FavoriteRepository extends ServiceEntityRepository
         parent::__construct($registry, Favorite::class);
     }
 
-    // /**
-    //  * @return Favorite[] Returns an array of Favorite objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * 
+     * @param User $user
+     * @return Favorite[]
+     */
+    public function findByUser($user)
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $qb = $this->createQueryBuilder('f')
+        ->addSelect('u')
+        ->join('f.user', 'u')
+        ->where('f.user = :myUser')
+        ->setParameter('myUser', $user)
         ;
+    
+        //cast retour de requete
+        return $qb->getQuery()->getResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Favorite
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

@@ -34,7 +34,7 @@ class Annonce
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable = true)
      * @Groups("api")
      */
     private $picture;
@@ -103,6 +103,11 @@ class Annonce
      * @ORM\Column(type="string", length=150)
      */
     private $city;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $need;
 
     public function __construct()
     {
@@ -318,6 +323,18 @@ class Annonce
     public function setCity(string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getNeed(): ?string
+    {
+        return $this->need;
+    }
+
+    public function setNeed(?string $need): self
+    {
+        $this->need = $need;
 
         return $this;
     }

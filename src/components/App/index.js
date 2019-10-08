@@ -19,6 +19,7 @@ import About from 'src/components/GeneralPages/About';
 import Contact from 'src/components/GeneralPages/Contact';
 import Legal from 'src/components/GeneralPages/Legal';
 import TermsOfUse from 'src/components/GeneralPages/TermsOfUse';
+import Forgotten from 'src/components/GeneralPages/ForgottenPassword';
 import AccountContainer from 'src/components/UserPages/Account/AccountApp/';
 import AdContainer from 'src/components/AdPages/AdApp';
 import ResultContainer from 'src/components/SearchPages/Results/ResultApp';
@@ -32,9 +33,6 @@ class App extends React.Component {
   state = {
     userStatus: {},
     userMail: '',
-    email: '',
-    object: '',
-    message: '',
   }
 
   componentDidMount(){
@@ -70,9 +68,7 @@ class App extends React.Component {
 
           console.log('ERROR : ', error);
         });         
-      
-    
-    
+
   }
 
   render () {
@@ -87,6 +83,7 @@ class App extends React.Component {
             <Route exact path="/mentions-legales" component={ Legal } />
             <Route exact path="/cdu" component={ TermsOfUse } />
             <Route exact path="/contact" render={(routeProps) => ( <Contact {...routeProps} userStatus={this.state.userStatus} userMail={this.state.userMail} />)}/>
+            <Route exact path="/motdepasse-oublie" render={(routeProps) => ( <Forgotten {...routeProps} userMail={this.state.userMail} />)}/>
             <Route path="/mon-compte" component={ AccountContainer }  />
             <Route path="/annonces" component={ AdContainer } />
             <Route path="/recherche" component={ ResultContainer } />

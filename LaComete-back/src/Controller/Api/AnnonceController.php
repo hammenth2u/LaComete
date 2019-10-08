@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -169,6 +170,59 @@ class AnnonceController extends AbstractController
         $data = $serializer->normalize($annonce, null, ['groups' => 'api']);
         return $this->json($data);
         */
+    }
+
+    /**
+     * @Route("/annonce/new", name="new_annonce")
+     * 
+     */
+    public function newAnnonce(Request $request)
+    {
+        header('Access-Control-Allow-Origin: *'); 
+        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
+        header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+        // $error = [
+        //     'success' => false,
+        //     'errors' => []
+        // ];
+
+        $annonce = new Annonce();
+        
+
+        $user = $this->getUser();
+
+        $title = $request->request->get('title');
+        $city = $request->request->get('city');
+        $description = $request->request->get('description');
+        $type = $request->request->get('type');
+        $cat = $request->request->get('category');
+        $need = $request->request->get('need');
+        $picture = "test.png";
+  
+
+        $category = $this->getDoctrine()->getRepository(Category::class)->find($cat);
+
+        $status = true;
+
+
+        $annonce->setUser($user);
+        $annonce->setTitle($title);
+        $annonce->setCity($city);
+        $annonce->setPicture($picture);
+        $annonce->setDescription($description);
+        $annonce->setType($type);
+        $annonce->setNeed($need);
+        $annonce->setCategory($category);
+        $annonce->setStatus($status);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($annonce);
+        $em->flush();
+
+        $response = new Response('success');
+        return $response;
+
+        //return $this->redirectToRoute('home');
     }
 
 

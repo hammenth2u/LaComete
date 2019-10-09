@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import axios from 'axios';
 
 /**
@@ -21,6 +21,7 @@ import TermsOfUse from 'src/components/GeneralPages/TermsOfUse';
 import Forgotten from 'src/components/GeneralPages/ForgottenPassword';
 import AccountContainer from 'src/components/UserPages/Account/AccountApp/';
 import ResultContainer from 'src/components/SearchPages/Results/ResultApp';
+import Ads from 'src/components/AdPages/Ads';
 import Ad from 'src/components/AdPages/Ad';
 import Footer from 'src/components/Templates/Footer';
 
@@ -70,24 +71,27 @@ class App extends React.Component {
       });         
 
     // TODO : REQUETE ALL ADS
-    /*axios.get('')
+    axios.get('http://127.0.0.1:8001/api/list/annonces')
     //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/')
-    
-        .then(response => {
 
-            this.setState({ allAds: response.data });
-            console.log('STATE ALL ADS: ', this.state.allAds);
-        })
+    .then(response => {
 
-        .catch(error => {
-    
-            console.log('ADS ERROR : ', error);
-        });*/
-        
-  }
+      const allAds = response.data;
+      console.log('ALL ADS : ', allAds);
 
-  render () {
+      this.setState({ allAds: response.data });
+      console.log('STATE ALL ADS: ', this.state.allAds);           
+    })
+
+    .catch(error => {
+
+        console.log('ADS ERROR : ', error);
+    });   
+  };
+ 
+  render () {    
     return (
+      
       <div id="app">
         
         <Header userStatus={ this.state.userStatus } />
@@ -100,10 +104,14 @@ class App extends React.Component {
             <Route exact path="/contact" render={(routeProps) => ( <Contact {...routeProps} userStatus={this.state.userStatus} userMail={this.state.userMail} />)}/>
             <Route exact path="/motdepasseoublie" render={(routeProps) => ( <Forgotten {...routeProps} userMail={this.state.userMail} />)}/>
             <Route path="/mon-compte" component={ AccountContainer }  />
-            <Route path="/recherche" component={ ResultContainer } />
-                  
+            <Route path="/recherche" component={ ResultContainer } /> 
+            <Route path="/annonces" render={(routeProps) => ( <Ads {...routeProps} allAds={this.state.allAds} />)} />            
+            <Route path="/annonces/:id" component={ Ad } />       
+        
           </Switch>
+
         <Footer />
+
       </div>
     )
   }

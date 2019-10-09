@@ -58,8 +58,8 @@ class AccountApp extends React.Component {
             console.log('DATA ERROR : ', error);
         }); 
 
-    axios.get('http://127.0.0.1:8001/api/annonces/user/list')
-    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/annonces/user/list')
+    axios.get('http://127.0.0.1:8001/api/user/list')
+    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/list/annonces')
     
         .then(response => {
 

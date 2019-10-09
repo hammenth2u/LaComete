@@ -215,6 +215,44 @@ class AnnonceController extends AbstractController
         //return $this->redirectToRoute('home');
     }
 
+    /**
+     * @Route("/single/annonce", name="single_ad")
+     */
+    public function singleAd(Request $request)
+    {
+
+        header('Access-Control-Allow-Origin: *'); 
+        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
+        header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+
+        $path = $request->request->get('currentUrl');
+
+        //$path ='/annonce/214';
+
+        $annonceId = substr($path, 10);
+
+        //dump($annonceId);exit;
+
+        $annonce = $this->getDoctrine()->getRepository(Annonce::class)->find($annonceId);
+
+        $formatted = [];
+            $formatted [] = [
+               'id' => $annonce->getId(),
+               'title' => $annonce->getTitle(),
+               'description' => $annonce->getDescription(),
+               'city' => $annonce->getCity(),
+               'type' => $annonce->getType(),
+               'need' => $annonce->getNeed(),
+               'createdAt' => $annonce->getCreatedAt(),
+               'user' => $annonce->getUser()->getUsername(),
+               'category' => $annonce->getCategory()->getName(),
+            ];
+        
+        
+        return new JsonResponse($formatted);
+
+    }
+
 
 
 

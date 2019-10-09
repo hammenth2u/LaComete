@@ -30,7 +30,7 @@ class AnnonceController extends AbstractController
 
     /**
      * 
-     * @Route("annonces/list", name="list")
+     * @Route("/list/annonces", name="list")
      */
     public function annoncesList()
     {
@@ -39,17 +39,6 @@ class AnnonceController extends AbstractController
         header('Access-Control-Allow-Origin: *'); 
         header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
         header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-
-        /*
-        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-        $metadataAwareNameConverter = new MetadataAwareNameConverter($classMetadataFactory);
-        $normalizer = new ObjectNormalizer($classMetadataFactory, $metadataAwareNameConverter);
-        $serializer = new Serializer([$normalizer]);
-        $data = $serializer->normalize($annonces, null, ['groups' => 'api']);
-        //dump($data);exit;
-        return $this->json($data);
-        */
-
         
         $formatted = [];
         foreach ($annonces as $annonce) 
@@ -60,6 +49,7 @@ class AnnonceController extends AbstractController
                'description' => $annonce->getDescription(),
                'city' => $annonce->getCity(),
                'type' => $annonce->getType(),
+               'need' => $annonce->getNeed(),
             ];
         }
         

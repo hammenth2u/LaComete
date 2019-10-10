@@ -24,68 +24,59 @@ import Ad from 'src/components/AdPages/Ad';
 import Footer from 'src/components/Templates/Footer';
 
 // Styles et assets
-import './app.sass';
 
 class App extends React.Component {
-
+  
   state = {
     userStatus: {},
     userMail: '',
     allAds: []
   }
+  
+  CancelToken = axios.CancelToken;
+  source = this.CancelToken.source();
 
-  componentDidMount(){
-    
-    axios.get('http://127.0.0.1:8001/api/user/isConnected')
+  abortController = new AbortController();
+
+
+    getUserStatus = () => {axios.get('http://127.0.0.1:8001/api/user/isConnected', {cancelToken: this.source.token})
       //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/isConnected')
-        
+      
       .then(response => {
-
+        
         this.setState({ userStatus: response.data[0] });
-        console.log('STATE : ', this.state.userStatus);
-
-        if (response.data[0] != "<") {
-          axios.get('http://127.0.0.1:8001/api/user/account')
-          //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account')
-      
-            .then(response => {
-              const userdata = response.data[0]
-              const usermail = userdata.email                
-              this.setState({ userMail: usermail });
-              console.log('STATE USER INFO: ', this.state.userMail);
-            })
-            
-            .catch(error => {
-      
-                console.log('DATA ERROR : ', error);
-            }); 
-
-        }
-      })
-
+        console.log('STATE : ', this.state.userStatus);              
+      })      
       .catch(error => {
 
         console.log('ERROR : ', error);
-      });         
+      }); 
+    };
+      
+    getUserInfo = () => {axios.get('http://127.0.0.1:8001/api/user/account', {cancelToken: this.source.token})
+      //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account')
+        
+        .then(response => {
+          const userdata = response.data[0];
+          const usermail = userdata.email;                
+          this.setState({ userMail: usermail });
+          console.log('STATE USER INFO: ', this.state.userMail);
+        })
+        
+        .catch(error => {
 
-    /*
-    axios.get('http://127.0.0.1:8001/api/list/annonces')
-    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/')
+          console.log('DATA ERROR : ', error);
+        });
+    };
 
-    .then(response => {
+    componentDidMount(){
+      this.getUserStatus();
+      this.getUserInfo();
+    }
 
-      const allAds = response.data;
-      console.log('ALL ADS : ', allAds);
-
-      this.setState({ allAds: response.data });
-      console.log('STATE ALL ADS: ', this.state.allAds);           
-    })
-
-    .catch(error => {
-
-        console.log('ADS ERROR : ', error);
-    }); */ 
-  };
+    componentWillUnmount() {
+      this.source.cancel("Operation canceled by the user.");
+    }
  
   render () {    
     return (

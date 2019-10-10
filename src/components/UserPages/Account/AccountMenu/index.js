@@ -1,16 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-//import { NavLink } from 'react-router-dom';
-
-
-// import de données
-//import UserData from 'src/data/users.js';
-
-//import './styles.sass';
+import { Redirect } from 'react-router'
 
 //class AccMenu extends React.Component {
-const AccMenu = ({ userInfo }) => {
+const AccMenu = ({ userInfo, handleClick }) => {
         
     const info = userInfo.map(info =>
         <div key={ info.id }>
@@ -20,14 +13,16 @@ const AccMenu = ({ userInfo }) => {
             <p>Prénom : { info.firstname }</p>
         </div>
         )
+    
     return (   
         
             <div className="accMenu">
             
                 { info }
 
-            <button>x Modifier mes informations</button>
-            <button>x Retour à la réalité</button>
+            <a className="btn" href="/deconnexion">x Retour à la réalité</a>  
+            <button onClick={handleClick} value="x Désactiver mon compte" />            
+            <small>Votre profil, vos annonces et vos commentaires ne seront plus visibles sur le site</small>         
         </div>
         )
 }

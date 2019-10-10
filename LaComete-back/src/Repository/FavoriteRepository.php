@@ -36,4 +36,47 @@ class FavoriteRepository extends ServiceEntityRepository
         //cast retour de requete
         return $qb->getQuery()->getResult();
     }
+
+    // /**
+    //  * 
+    //  * @param User $user
+    //  * @param Annonce $annonce
+    //  * @return Favorite[]
+    //  */
+    // public function findByUserAndAnnonce($user,$annonce)
+    // {
+    //     $qb = $this->createQueryBuilder('f')
+    //     ->addSelect('u','a')
+    //     ->join('f.user', 'u')
+    //     ->join('f.annonce','a')
+    //     ->where('f.user = :myUser')
+    //     ->where('f.annonce = :myAnnonce')
+    //     ->setParameter('myUser', $user)
+    //     ->setParameter('myAnnonce', $annonce)
+    //     ;
+    
+    //     //cast retour de requete
+    //     return $qb->getQuery()->getResult();
+    // }
+
+    /**
+     * 
+     * @param Annonce $annonce
+     * @param User $user 
+     * @return Favorite[]
+     */
+    public function findFavoriteByAnnonceAndUser($user, $annonce)
+    {
+        $query = $this->getEntityManager()->createQuery('
+
+            SELECT f
+            FROM App\Entity\Favorite f
+            WHERE f.user = :user
+            AND f.annonce = :annonce
+        ')
+        ->setParameter('annonce', $annonce)
+        ->setParameter('user', $user);
+        return $query->getResult(); 
+    }
+
 }

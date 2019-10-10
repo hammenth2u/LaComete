@@ -199,4 +199,22 @@ class UserController extends AbstractController
         $response = new Response('success');
         return $response;
     }
+
+    /**
+     * @Route("/user/delete", name="delete_account")
+     */
+    public function deleteAccount() 
+    {
+        header('Access-Control-Allow-Origin: *'); 
+        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
+        header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+        
+        $user = $this->getUser();
+        $user->setStatus(false);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        return new Response('Votre compte a été désactivé');
+    }
 }

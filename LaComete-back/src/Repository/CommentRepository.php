@@ -32,7 +32,7 @@ class CommentRepository extends ServiceEntityRepository
             FROM App\Entity\Comment c
             JOIN c.annonce a
             WHERE c.annonce = :annonce
-            ORDER BY c.createdAt ASC
+            ORDER BY c.createdAt DESC
         ')
         ->setParameter('annonce', $annonce);
         return $query->getResult(); 

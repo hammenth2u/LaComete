@@ -1,22 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//import { NavLink } from 'react-router-dom';
+
+import SearchBars from 'src/components/HomePage/SearchBars';
 
 //import './styles.sass';
-
-import AdTeaser from 'src/components/AdPages/AdTeaser';
 
 const ResultList = () => {
 
   return (
-    <div className="adslist">
-      
-        <AdTeaser /> 
-        <AdTeaser /> 
-        <AdTeaser /> 
-        <AdTeaser /> 
-        <AdTeaser /> 
-
+    <div className="adslist">      
+      <SearchBars />
+      <div></div>
     </div>
   );
 };

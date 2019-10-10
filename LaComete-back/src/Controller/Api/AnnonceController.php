@@ -41,8 +41,17 @@ class AnnonceController extends AbstractController
         header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
         
         $formatted = [];
+        $formatted2 = [];
         foreach ($annonces as $annonce) 
         {
+            foreach($annonce->getComments() as $comment){
+                $formatted2 [] =   
+                   [
+                       'commentId' => $comment->getId(),
+                       'commentContent' => $comment->getContent(),
+                       'commentUser' => $comment->getUser()->getUsername(),
+                   ];
+              }
             $formatted [] = [
                'id' => $annonce->getId(),
                'title' => $annonce->getTitle(),
@@ -50,6 +59,9 @@ class AnnonceController extends AbstractController
                'city' => $annonce->getCity(),
                'type' => $annonce->getType(),
                'need' => $annonce->getNeed(),
+               'user' => $annonce->getUser()->getUsername(),
+               'category' => $annonce->getCategory()->getName(),
+               'comments' => $formatted2,
             ];
         }
         
@@ -95,7 +107,7 @@ class AnnonceController extends AbstractController
 
         /**
      * 
-     * @Route("/annonces/user/list", name="list_user")
+     * @Route("/list/user/annonces", name="list_user")
      */
     public function annoncesListByUser()
     {
@@ -129,40 +141,8 @@ class AnnonceController extends AbstractController
         }
     }
 
-
     /**
-     * @Route("/annonces/{id}", name="single")
-     */
-    public function singleAnnonce(Annonce $annonce)
-    {
-
-        header('Access-Control-Allow-Origin: *'); 
-        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
-        header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-
-        $formatted = [];
-            $formatted [] = [
-               'id' => $annonce->getId(),
-               'title' => $annonce->getTitle(),
-               'description' => $annonce->getDescription(),
-               'city' => $annonce->getCity(),
-               'type' => $annonce->getType(),
-            ];
-        
-        
-        return new JsonResponse($formatted);
-
-        /*
-        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-        $metadataAwareNameConverter = new MetadataAwareNameConverter($classMetadataFactory);
-        $normalizer = new ObjectNormalizer($classMetadataFactory, $metadataAwareNameConverter);
-        $serializer = new Serializer([$normalizer]);
-        $data = $serializer->normalize($annonce, null, ['groups' => 'api']);
-        return $this->json($data);
-        */
-    }
-
-    /**
+     * Permet d'ajouter une nouvelle annonce dans la bdd
      * @Route("/annonce/new", name="new_annonce")
      * 
      */
@@ -171,10 +151,7 @@ class AnnonceController extends AbstractController
         header('Access-Control-Allow-Origin: *'); 
         header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
         header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-        // $error = [
-        //     'success' => false,
-        //     'errors' => []
-        // ];
+
 
         $annonce = new Annonce();
         
@@ -246,6 +223,53 @@ class AnnonceController extends AbstractController
                'createdAt' => $annonce->getCreatedAt(),
                'user' => $annonce->getUser()->getUsername(),
                'category' => $annonce->getCategory()->getName(),
+            ];
+        
+        
+        return new JsonResponse($formatted);
+
+    }
+
+    /**
+     * @Route("/results/annonces/search", name="result_search")
+     */
+    public function resultSearchAnnonce(Request $request)
+    {
+        $type = $request->request->get('type');
+        $localisation = $request->request->get('localisation');
+        $category = $request->request->get('category');
+
+        if($type != ""){
+            $req1 = "WHERE a.type = :".$type;
+        }else {
+            $req1 = "";
+        }
+
+        if($localisation != ""){
+            $req2 = "WHERE a.city = :".$localisation;
+        }else {
+            $req2 = "";
+        }
+        if($category != ""){
+            $req3 = "WHERE a.category = :".$category;
+        }else {
+            $req3 = "";
+        }
+
+        $annonces = $this->getDoctrine()->getRepository(Annonce::class)->findBySearch($req1, $req2, $req3);
+
+
+        header('Access-Control-Allow-Origin: *'); 
+        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
+        header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+
+        $formatted = [];
+            $formatted [] = [
+               'id' => $annonce->getId(),
+               'title' => $annonce->getTitle(),
+               'description' => $annonce->getDescription(),
+               'city' => $annonce->getCity(),
+               'type' => $annonce->getType(),
             ];
         
         

@@ -100,25 +100,25 @@ class UserController extends AbstractController
         */
     }
     
-    /**
-     * @Route("/mon-compte", name="app_profile")
-     */
-    public function profile(Request $request)
-    {
-        // On a besoin d'afficher un formulaire différent de l'inscription
-        // Grâce au UserType, avec l'Event, on devrait y arriver sans faire de manipulation dans le contrôleur
+    // /**
+    //  * @Route("/mon-compte", name="app_profile")
+    //  */
+    // public function profile(Request $request)
+    // {
+    //     // On a besoin d'afficher un formulaire différent de l'inscription
+    //     // Grâce au UserType, avec l'Event, on devrait y arriver sans faire de manipulation dans le contrôleur
 
-        // On crée l'objet Form avec l'objet de l'utilsateur
-        $user = $this->getUser();
-        $form = $this->createForm(UserType::class, $user);
+    //     // On crée l'objet Form avec l'objet de l'utilsateur
+    //     $user = $this->getUser();
+    //     $form = $this->createForm(UserType::class, $user);
 
-        // C'est par ici qu'on ajouterait le code pour traiter les informations reçues par le formulaire. On n'a pas développé cette fonctionnalité pour le moment.
+    //     // C'est par ici qu'on ajouterait le code pour traiter les informations reçues par le formulaire. On n'a pas développé cette fonctionnalité pour le moment.
 
-        // Le formulaire est déja relié à l'utilisateur, on l'envoie à la vue
-        return $this->render('security/profile.html.twig', [
-            'profileForm' => $form->createView(),
-            'user' => $user
-        ]);
-    }
+    //     // Le formulaire est déja relié à l'utilisateur, on l'envoie à la vue
+    //     return $this->render('security/profile.html.twig', [
+    //         'profileForm' => $form->createView(),
+    //         'user' => $user
+    //     ]);
+    // }
 
 }

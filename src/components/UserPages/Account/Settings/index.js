@@ -206,7 +206,7 @@ export default withFormik({
         newpassword: values.newpassword
       })
       .then(function (response) {
-        alert("Annonce postée");
+        alert("Modifications enregistrée");
         console.log('TEST POST : ', response);
       })
       .catch(function (error) {

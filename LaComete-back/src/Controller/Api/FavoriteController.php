@@ -38,8 +38,9 @@ class FavoriteController extends AbstractController
             foreach ($favorites as $favorite) 
             {
                 $formatted [] = [
-                'id' => $favorite->getId(),
-                'annonce' => $favorite->getAnnonce()->getTitle(),
+                'idFavorite' => $favorite->getId(),
+                'titleAnnonce' => $favorite->getAnnonce()->getTitle(),
+                'idAnnonce' => $favorite->getAnnonce()->getId(),
                 ];
             }
             
@@ -52,34 +53,107 @@ class FavoriteController extends AbstractController
 
     /**
      * Ajout d'un favori en BDD
+     * @Route("/isFavorite", name="favorite_yes_or_no")
+     */
+    public function isFavorite(Request $request)
+    {
+        header('Access-Control-Allow-Origin: *'); 
+        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
+        header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+        
+        $path = $request->request->get('currentAdPath');
+        $annonceId = substr($path, 10);
+
+
+        //dump($annonceId);exit;
+        
+
+        if($this->getUser() != null) {
+            $user = $this->getUser();
+            $userId = $user->getId();
+
+            $favorite = $this->getDoctrine()->getRepository(Favorite::class)->findFavoriteByAnnonceAndUser($userId, $annonceId);
+
+            //dump($favorite);exit;
+            if($favorite != null){
+                $isFavorite = true;
+            } else {
+                $isFavorite = false;
+            }
+            return new JsonResponse(['isFavorite' => $isFavorite]);
+        }
+    }
+
+
+    /**
+     * Ajout d'un favori en BDD
      * @Route("/favorite/new", name="new")
      */
-    public function favoriteNew(Annonce $annonce)
+    public function favoriteNew(Request $request)
     {
 
         header('Access-Control-Allow-Origin: *'); 
         header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
         header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
         
-        if($this->getUser() != null) {
-            $user = $this->getUser();
-            //dump($user->getId());exit;
-            //$userId = $user->getId();
-            //$annonceId = $annonce->getId();
-            
-            $favorite = new Favorite();
+        $annonceId = $request->request->get('currentAdId');
 
-            $favorite->setUser($user);
-            $favorite->setAnnonce($annonce);
+        //dump($annonceId);exit;
+    
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($favorite);
-            $entityManager->flush();
+        $annonce = $this->getDoctrine()->getRepository(Annonce::class)->find($annonceId);
 
-            return new Response("success");
+        if($request->request->get('isFavorite')){
+            $isFavorite = $request->request->get('isFavorite');
+        }else {
+            $isFavorite = '';
         }
-        else {
-            return new Response("utilisateur non connecté");
+
+        //$isFavorite = false;
+
+        //dump($isFavorite);exit;
+
+        if ($isFavorite == true || $isFavorite = ''){
+
+            if($this->getUser() != null) {
+                $user = $this->getUser();
+                
+                $favorite = new Favorite();
+    
+                $favorite->setUser($user);
+                $favorite->setAnnonce($annonce);
+    
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($favorite);
+                $entityManager->flush();
+    
+                return new Response('favorite add');
+            }
         }
+
+        if($isFavorite == false){
+
+            if($this->getUser() != null) {
+                
+                $user = $this->getUser();
+                $userId = $user->getId();
+                
+                $favorite = $this->getDoctrine()->getRepository(Favorite::class)->findFavoriteByAnnonceAndUser($userId,$annonceId);
+
+                $annonce = $favorite[0]->getAnnonce();
+                
+                $annonce->removeFavorite($favorite[0]);
+                $user->removeFavorite($favorite[0]);
+                
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($favorite[0]);
+                $entityManager->flush();
+
+                return new Response('favorite delete');
+            }
+        }
+
+
+   
     }
 }

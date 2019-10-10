@@ -32,7 +32,7 @@ const Forgotten = (props) => {
         {errors.email && touched.email && <div className="invalid-feedback">{errors.email}</div>}
       </div> 
       
-    <label>En cliquand ici, vous recevrez un mail contenant un mot de passe provisoire avec lequel vous connecter. Vous pourrez ensuite le modifier dans vos paramètres</label>
+    <label>En cliquant ici, vous recevrez un mail contenant un mot de passe provisoire avec lequel vous connecter. Vous pourrez ensuite le modifier dans vos paramètres</label>
       <button type="submit" className="btn btn-outline-primary" disabled={isSubmitting}>
         {isSubmitting ? 'patienter' : 'envoyer'}
       </button>

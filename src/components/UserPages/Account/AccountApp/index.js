@@ -23,7 +23,8 @@ class AccountApp extends React.Component {
 
         userStatus: {},
         currentUser: [],
-        userAds: [], 
+        userAds: [],
+        userFav: [] 
     }
 
     
@@ -56,7 +57,7 @@ class AccountApp extends React.Component {
             console.log('DATA ERROR : ', error);
         }); 
 
-    axios.get('http://127.0.0.1:8001/api/user/list')
+    axios.get('http://127.0.0.1:8001/api/list/user/annonces/')
     //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/list')
     
         .then(response => {
@@ -70,8 +71,33 @@ class AccountApp extends React.Component {
             console.log('ADS ERROR : ', error);
         });
     
-        // TODO : API call for favorites    
+    // TODO : API call for favorites    
+    axios.get('http://127.0.0.1:8001/api/list/favorites')
+    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/list')
     
+        .then(response => {
+
+            this.setState({ userFav: response.data });
+            console.log('STATE USER FAV: ', this.state.userFav);
+        })
+        .catch(error => {
+    
+            console.log('FAV ERROR : ', error);
+        });
+    }
+
+    deleteAccount = (evt) => {
+        evt.preventDefault();
+        axios.get('http://127.0.0.1:8001/api/user/delete')
+
+        .then(response => {
+
+            console.log('DELETE : ', response);
+        })
+        .catch(error => {
+    
+            console.log('DELETE ERROR : ', error);
+        });
     }
       
     render () {
@@ -102,10 +128,10 @@ class AccountApp extends React.Component {
                         
                         <Switch>
 
-                            <Route exact path="/mon-compte" render={(routeProps) => ( <AccMenu {...routeProps} userInfo={ this.state.currentUser } />)}/>
+                            <Route exact path="/mon-compte" render={(routeProps) => ( <AccMenu {...routeProps} userInfo={ this.state.currentUser } handleClick={this.deleteAccount} />)}/>
                             <Route exact path="/mon-compte/parametres" render={(routeProps) => ( <Settings {...routeProps} userInfo={ this.state.currentUser } />)} />
                             <Route exact path="/mon-compte/mes-annonces" render={(routeProps) => ( <AdsList {...routeProps} userAds={ this.state.userAds } />)}/>
-                            <Route exact path="/mon-compte/mes-favoris" render={(routeProps) => ( <Favorites {...routeProps} userAds={ this.state.userAds } />)}/>
+                            <Route exact path="/mon-compte/mes-favoris" render={(routeProps) => ( <Favorites {...routeProps} userFavs={ this.state.userFav } />)}/>
                             <Route exact path="/mon-compte/nouvelle-annonce" component={ NewAdForm }/>
                             
                         </Switch>

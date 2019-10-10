@@ -63,15 +63,16 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
-
+        
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
-
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('L\'adresse email n\'existe pas.');
+        } elseif ( $user->getStatus() == false) {
+            throw new CustomUserMessageAuthenticationException('Votre compte est désactivé ');
+        } else {
+            return $user;
         }
-
-        return $user;
     }
 
     public function checkCredentials($credentials, UserInterface $user)

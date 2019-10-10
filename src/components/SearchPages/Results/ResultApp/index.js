@@ -21,7 +21,7 @@ const ResultApp = () => (
   <div id="app">    
     {/* TODO : système de vue map ou liste */}
     <ResultList />
-    <ResultMap />
+    {/*<ResultMap />*/}
   </div>
 );
 

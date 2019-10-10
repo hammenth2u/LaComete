@@ -23,6 +23,14 @@ class MainController extends AbstractController
          return $this->render('main/index.html.twig');
      }
 
+     /** 
+      * @Route("/mon-compte/nouvelle-annonce", name="annonce_new_test")
+      */
+      public function annonceNew()
+      {
+          return $this->render('main/index.html.twig');
+      }
+
     // /**
     //  * @Route("/a-propos", name="about")
     //  */

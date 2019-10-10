@@ -67,6 +67,7 @@ class AnnonceRepository extends ServiceEntityRepository
       public function findAllOrderedByCreatedAt()
       {
           $query = $this->createQueryBuilder('a')
+                        ->where('a.status = 1')
                         ->orderBy('a.createdAt', 'DESC');
                 
           return $query->getQuery()->getResult();

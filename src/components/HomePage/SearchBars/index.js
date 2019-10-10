@@ -119,7 +119,7 @@ const SearchBars = (props) => {
         />        
       </div>
             
-      <button type="submit" className="home-search-btn" disabled={isSubmitting}>
+      <button type="submit" disabled={isSubmitting}>
         {isSubmitting ? '' : 'OK'}
       </button>
 

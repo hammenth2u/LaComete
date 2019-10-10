@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 const Favorites = ({ userFavs }) => {
 
   const userFavList = userFavs.map(userFav => 
-    <article key={userFav.id}>     
-      <h3>Title : { userFav.title }</h3>
+    <article key={userFav.idAnnonce}>     
+      <h3>Title : { userFav.titleAnnonce }</h3>
       <p>Lieu : { userFav.city }</p>
-      <Link to={`/annonces/${userFav.id}`}>>>></Link>     
+      <Link to={`/annonces/${userFav.idAnnonce}`}>>>></Link>     
     </article> 
   )
 

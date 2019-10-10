@@ -5,7 +5,7 @@ import axios from 'axios';
 
 //import './styles.sass';
 
-
+import CommentInput from 'src/components/AdPages/CommentInput';
 
 class Ad extends React.Component {
   state = {
@@ -14,12 +14,12 @@ class Ad extends React.Component {
 
   componentDidMount(){
     const currentUrl = window.location.pathname;
-    // TODO : REQUETE ONE AD
+
     axios.post('http://127.0.0.1:8001/api/single/annonce', {
       currentUrl
     }
     )
-    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/')
+    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/single/annonce')
 
     .then(response => {
 
@@ -54,9 +54,14 @@ class Ad extends React.Component {
         </section>
 
         <section className="comments">
-          
+          <div className="comment-input">
+            <CommentInput />            
+          </div>
           <div>
             <h3>Commentaires : </h3>
+            <ul>
+              <li></li>
+            </ul>
           </div>
         </section>
             
@@ -64,43 +69,5 @@ class Ad extends React.Component {
     )
   }
 }
-/*
-const Ad = ({ title, category, city, description, need }) => {    
-    
-      return (
-        <div className="ad">
-                
-          <section>
-            <p>Annonce : </p>            
 
-            <article>     
-              <h3>Title : { title }</h3>
-              <p>Lieu : { city }</p>
-              <p>Catégorie : { category }</p>
-              <p>Description : { description }</p>
-              <p>Recherche : { need }</p>
-            </article> 
-          </section>
-
-          <section className="comments">
-            
-            <div>
-              <h3>Commentaires : </h3>
-            </div>
-          </section>
-
-        </div>
-  )
-};
-
-/*
-Ad.propTypes = {
-  title: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
-  city:PropTypes.string.isRequired,
-  description:PropTypes.string.isRequired,
-  need:PropTypes.string.isRequired,
-};
-
-*/
 export default Ad;

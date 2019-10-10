@@ -3,10 +3,8 @@
  */
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Route, Switch } from 'react-router-dom';
-//import { NavLink } from 'react-router-dom';
 
 /**
  * IMPORTS DE COMPONENTS
@@ -31,7 +29,7 @@ class AccountApp extends React.Component {
     
     componentDidMount(){
     axios.get('http://127.0.0.1:8001/api/user/isConnected')
-    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account')
+    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/isConnected')
     
         .then(response => {
 
@@ -59,7 +57,7 @@ class AccountApp extends React.Component {
         }); 
 
     axios.get('http://127.0.0.1:8001/api/user/list')
-    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/list/annonces')
+    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/list')
     
         .then(response => {
 
@@ -119,12 +117,8 @@ class AccountApp extends React.Component {
         )
     }
     
-    };
-
-AccountApp.propTypes = {
-    /** Titre de l'application React */
-  };
-  
+};
+ 
   /**
    * Export
    */

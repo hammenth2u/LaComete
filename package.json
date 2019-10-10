@@ -9,6 +9,7 @@
     "@babel/plugin-proposal-object-rest-spread": "*",
     "@babel/preset-env": "*",
     "@babel/preset-react": "*",
+    "@fortawesome/fontawesome-free": "^5.11.2",
     "autoprefixer": "*",
     "babel-eslint": "*",
     "babel-loader": "*",

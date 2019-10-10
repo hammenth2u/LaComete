@@ -3,13 +3,12 @@
  */
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
 /**
  * Local import
  */
-//import { updateInputValue } from 'src/store/reducer';
 
 // Composants enfants éventuels
 import Header from 'src/components/Templates/Header';
@@ -38,7 +37,7 @@ class App extends React.Component {
   componentDidMount(){
     
     axios.get('http://127.0.0.1:8001/api/user/isConnected')
-      //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account')
+      //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/isConnected')
         
       .then(response => {
 
@@ -69,7 +68,7 @@ class App extends React.Component {
         console.log('ERROR : ', error);
       });         
 
-    // TODO : REQUETE ALL ADS
+    /*
     axios.get('http://127.0.0.1:8001/api/list/annonces')
     //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/')
 
@@ -85,7 +84,7 @@ class App extends React.Component {
     .catch(error => {
 
         console.log('ADS ERROR : ', error);
-    });   
+    }); */ 
   };
  
   render () {    

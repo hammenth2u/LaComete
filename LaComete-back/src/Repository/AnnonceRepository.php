@@ -72,4 +72,21 @@ class AnnonceRepository extends ServiceEntityRepository
           return $query->getQuery()->getResult();
       }
 
+    /**
+     * Méthode qui les annonces lié à la recherche 
+     * @return Annonce[] Returns an array of Annonce objects
+     */
+    public function findBySearch($req1, $req2, $req3)
+    {
+        $query = $this->getEntityManager()->createQuery('
+            SELECT * FROM 
+            FROM App\Entity\Annonce a
+            JOIN a.category c '
+            .$req1.'\n '.$req2.'\n '.$req3. '\n '.'
+            ORDER BY a.createdAt ASC
+        ')
+        ->setParameter('annonce', $annonce);
+        return $query->getResult(); 
+    }
+
 }

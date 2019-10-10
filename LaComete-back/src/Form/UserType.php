@@ -20,10 +20,12 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('firstname', TextType::class, array ('label'=>'Prénom :'))
+            ->add('lastname', TextType::class, array ('label'=>'Nom :'))
             ->add('email', EmailType::class, [
                 'constraints' => [new Assert\Email()]
-            ])
-            ->add('username', TextType::class)
+            ], array ('label'=>'E-mail :'))
+            ->add('username', TextType::class, array ('label'=>'Pseudo :'))
             ->add('password')
             ->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'addPasswordField'])
             ->add('submit', SubmitType::class, [
@@ -56,8 +58,8 @@ class UserType extends AbstractType
                 'invalid_message' => 'The password fields must match.',
                 // 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Retapez-le'],
+                'first_options'  => ['label' => 'Mot de passe :'],
+                'second_options' => ['label' => 'Retapez votre mot de passe :'],
                 'constraints' => [new Assert\NotBlank(['normalizer' => 'trim'])]
             ]);
         } else {

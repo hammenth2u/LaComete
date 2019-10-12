@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Entity\Annonce;
 use App\Entity\Category;
 use App\Entity\User;
+use App\Service\FileUploadManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -41,71 +42,27 @@ class AnnonceController extends AbstractController
         header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
         
         $formatted = [];
-        $formatted2 = [];
         foreach ($annonces as $annonce) 
         {
-            foreach($annonce->getComments() as $comment){
-                $formatted2 [] =   
-                   [
-                       'commentId' => $comment->getId(),
-                       'commentContent' => $comment->getContent(),
-                       'commentUser' => $comment->getUser()->getUsername(),
-                   ];
-              }
+
             $formatted [] = [
                'id' => $annonce->getId(),
                'title' => $annonce->getTitle(),
                'description' => $annonce->getDescription(),
-               'city' => $annonce->getCity(),
+               'city' => $annonce->getLocation(),
                'type' => $annonce->getType(),
                'need' => $annonce->getNeed(),
                'user' => $annonce->getUser()->getUsername(),
                'category' => $annonce->getCategory()->getName(),
-               'comments' => $formatted2,
+               'picture' => $annonce->getPicture(),
             ];
         }
         
         return new JsonResponse($formatted);
     }
+
 
     /**
-     * 
-     * @Route("/annonces/list/{category}", name="list_category")
-     */
-    public function annoncesListByCategory(Category $category)
-    {
-        $annonces = $this->getDoctrine()->getRepository(Annonce::class)->findByCategory($category);
-
-        header('Access-Control-Allow-Origin: *'); 
-        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
-        header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-
-        /*
-        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-        $metadataAwareNameConverter = new MetadataAwareNameConverter($classMetadataFactory);
-        $normalizer = new ObjectNormalizer($classMetadataFactory, $metadataAwareNameConverter);
-        $serializer = new Serializer([$normalizer]);
-        $data = $serializer->normalize($annonces, null, ['groups' => 'api']);
-        //dump($data);exit;
-        return $this->json($data);
-        */
-
-        $formatted = [];
-        foreach ($annonces as $annonce) 
-        {
-            $formatted [] = [
-               'id' => $annonce->getId(),
-               'title' => $annonce->getTitle(),
-               'description' => $annonce->getDescription(),
-               'city' => $annonce->getCity(),
-               'type' => $annonce->getType(),
-            ];
-        }
-        
-        return new JsonResponse($formatted);
-    }
-
-        /**
      * 
      * @Route("/list/user/annonces", name="list_user")
      */
@@ -129,8 +86,9 @@ class AnnonceController extends AbstractController
                 'id' => $annonce->getId(),
                 'title' => $annonce->getTitle(),
                 'description' => $annonce->getDescription(),
-                'city' => $annonce->getCity(),
+                'city' => $annonce->getLocation(),
                 'type' => $annonce->getType(),
+                'picture' => $annonce->getPicture(),
                 ];
             }
             
@@ -146,7 +104,7 @@ class AnnonceController extends AbstractController
      * @Route("/annonce/new", name="new_annonce")
      * 
      */
-    public function newAnnonce(Request $request)
+    public function newAnnonce(Request $request, FileUploadManager $fileUploadManager)
     {
         header('Access-Control-Allow-Origin: *'); 
         header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
@@ -159,37 +117,73 @@ class AnnonceController extends AbstractController
         $user = $this->getUser();
 
         $title = $request->request->get('title');
-        $city = $request->request->get('city');
+        $location = $request->request->get('location');
         $description = $request->request->get('description');
         $type = $request->request->get('type');
         $cat = $request->request->get('category');
         $need = $request->request->get('need');
-        $picture = "test.png";
-  
+        
+
+        // if($request->request->get('fileName')){
+        //     $picture = $request->request->get('fileName');
+        //     $annonce->setPicture($picture);
+        // }
+
+        if($request->request->get('email')){
+            $email = $request->request->get('email');
+            $annonce->setEmail($email);
+        }
+
+        if($request->request->get('phone')){
+            $phone = $request->request->get('phone');
+            $annonce->setPhone($phone);
+        }
+
+        if($request->request->get('website')){
+            $website = $request->request->get('website');
+            $annonce->setWebsite($website);
+        }
+
+        if($request->request->get('formData')){
+            $formData = $request->files->get('formData');
+        }
+        
+        // dump($request);exit;
+
+        // if (isset($_FILES['formData'])) {
+        //     $formData  = $_FILES['formData'];
+        
+        //     $tmpFilePath      = $formData['tmp_name'];
+        //     $fileType         = $formData['type'];
+        //     $fileOriginalName = $formData['name'];
+        
+        //     //	uploaded file is moved to upload directory
+        //     $imageContent = @file_get_contents($tmpFilePath);
+        // }
+
 
         $category = $this->getDoctrine()->getRepository(Category::class)->find($cat);
-
-        $status = true;
 
 
         $annonce->setUser($user);
         $annonce->setTitle($title);
-        $annonce->setCity($city);
-        $annonce->setPicture($picture);
+        $annonce->setLocation($location);
         $annonce->setDescription($description);
         $annonce->setType($type);
         $annonce->setNeed($need);
         $annonce->setCategory($category);
-        $annonce->setStatus($status);
+        $annonce->setStatus(true);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($annonce);
         $em->flush();
 
+        $imagePath = $fileUploadManager->upload($formData, $annonce->getId());
+        $annonce->setImage($imagePath);
+        $em->flush();
+
         $response = new Response('success');
         return $response;
-
-        //return $this->redirectToRoute('home');
     }
 
     /**
@@ -203,13 +197,7 @@ class AnnonceController extends AbstractController
         header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
         $path = $request->request->get('currentUrl');
-
-        //$path ='/annonce/214';
-
         $annonceId = substr($path, 10);
-
-        //dump($annonceId);exit;
-
         $annonce = $this->getDoctrine()->getRepository(Annonce::class)->find($annonceId);
 
         $formatted = [];
@@ -217,67 +205,93 @@ class AnnonceController extends AbstractController
                'id' => $annonce->getId(),
                'title' => $annonce->getTitle(),
                'description' => $annonce->getDescription(),
-               'city' => $annonce->getCity(),
+               'city' => $annonce->getLocation(),
                'type' => $annonce->getType(),
                'need' => $annonce->getNeed(),
                'createdAt' => $annonce->getCreatedAt(),
                'user' => $annonce->getUser()->getUsername(),
                'category' => $annonce->getCategory()->getName(),
+               'website' => $annonce->getWebsite(),
+               'email' => $annonce->getEmail(),
+               'phone' => $annonce->getPhone(),
+               'picture' => $annonce->getPicture(),
             ];
         
-        
         return new JsonResponse($formatted);
-
     }
 
+###############################################################################################################################
+####################################################  NE PAS TOUCHER ##########################################################
+###############################################################################################################################
     /**
      * @Route("/results/annonces/search", name="result_search")
      */
     public function resultSearchAnnonce(Request $request)
     {
-        $type = $request->request->get('type');
-        $localisation = $request->request->get('localisation');
-        $category = $request->request->get('category');
+        header('Access-Control-Allow-Origin: *'); 
+        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
+        header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+    
+        if($request->request->get('type') != ''){
+            $type = $request->request->get('type');
+        }else{
+            $type="";
+        }
+        if($request->request->get('location') != ''){
+            $location = $request->request->get('location');
+        }
+        else{
+            $location="";
+        }
+        if($request->request->get('category') != ''){
+            $category = $request->request->get('category');
+        }else{
+            $category ="";
+        }
 
-        if($type != ""){
-            $req1 = "WHERE a.type = :".$type;
+
+        if($type  != ''){
+            $req1 = "WHERE a.type = :myType";
         }else {
             $req1 = "";
         }
 
-        if($localisation != ""){
-            $req2 = "WHERE a.city = :".$localisation;
+        if($location != ''){
+            $req2 = " AND a.location = :myLocation";
         }else {
             $req2 = "";
         }
-        if($category != ""){
-            $req3 = "WHERE a.category = :".$category;
+        if($category != ''){
+            $req3 = " AND a.category = :myCategory";
         }else {
             $req3 = "";
         }
 
-        $annonces = $this->getDoctrine()->getRepository(Annonce::class)->findBySearch($req1, $req2, $req3);
+        $annonces = $this->getDoctrine()->getRepository(Annonce::class)->findBySearch($req1, $req2, $req3, $type, $location, $category);
 
+        if($annonces != null){
 
-        header('Access-Control-Allow-Origin: *'); 
-        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
-        header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+            $formatted = [];
 
-        $formatted = [];
-            $formatted [] = [
-               'id' => $annonce->getId(),
-               'title' => $annonce->getTitle(),
-               'description' => $annonce->getDescription(),
-               'city' => $annonce->getCity(),
-               'type' => $annonce->getType(),
-            ];
-        
-        
-        return new JsonResponse($formatted);
+            foreach($annonces as $annonce)
+            {
+            
+                $formatted [] = [
+                'id' => $annonce->getId(),
+                'title' => $annonce->getTitle(),
+                'description' => $annonce->getDescription(),
+                'location' => $annonce->getLocation(),
+                'type' => $annonce->getType(),
+                'category' => $annonce->getCategory()->getName(),
+                'picture' => $annonce->getPicture(),
+                ];
+            }
+            
+            return new JsonResponse($formatted);
 
+        }
+        else {
+            return new JsonResponse([]);
+        }
     }
-
-
-
-
 }

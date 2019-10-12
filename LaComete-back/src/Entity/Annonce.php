@@ -102,12 +102,27 @@ class Annonce
     /**
      * @ORM\Column(type="string", length=150)
      */
-    private $city;
+    private $location;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $need;
+
+    /**
+     * @ORM\Column(type="string", length=15, nullable=true)
+     */
+    private $phone;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $website;
 
     public function __construct()
     {
@@ -315,14 +330,14 @@ class Annonce
         return $this;
     }
 
-    public function getCity(): ?string
+    public function getLocation(): ?string
     {
-        return $this->city;
+        return $this->location;
     }
 
-    public function setCity(string $city): self
+    public function setLocation(string $location): self
     {
-        $this->city = $city;
+        $this->location = $location;
 
         return $this;
     }
@@ -335,6 +350,42 @@ class Annonce
     public function setNeed(?string $need): self
     {
         $this->need = $need;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getWebsite(): ?string
+    {
+        return $this->website;
+    }
+
+    public function setWebsite(?string $website): self
+    {
+        $this->website = $website;
 
         return $this;
     }

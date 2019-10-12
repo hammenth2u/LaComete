@@ -77,17 +77,97 @@ class AnnonceRepository extends ServiceEntityRepository
      * Méthode qui les annonces lié à la recherche 
      * @return Annonce[] Returns an array of Annonce objects
      */
-    public function findBySearch($req1, $req2, $req3)
+    public function findBySearch($req1, $req2, $req3, $type, $location, $category)
     {
-        $query = $this->getEntityManager()->createQuery('
-            SELECT * FROM 
-            FROM App\Entity\Annonce a
-            JOIN a.category c '
-            .$req1.'\n '.$req2.'\n '.$req3. '\n '.'
-            ORDER BY a.createdAt ASC
-        ')
-        ->setParameter('annonce', $annonce);
-        return $query->getResult(); 
+        if($req1 != '' && $req2 != '' && $req3 != ''){
+            $query = $this->getEntityManager()->createQuery('
+                SELECT a 
+                FROM App\Entity\Annonce a '
+                .$req1." ".$req2." ".$req3. " ".'
+                ORDER BY a.createdAt ASC
+            ')
+            ->setParameter('myLocation', $location)
+            ->setParameter('myCategory', $category)
+            ->setParameter('myType', $type);
+            return $query->getResult();
+        }
+
+        if($req1 != '' && $req2 != '' && $req3 ==''){
+            //$req2 = str_replace("AND","WHERE",$req2);
+            $query = $this->getEntityManager()->createQuery('
+                SELECT a 
+                FROM App\Entity\Annonce a '
+                .$req1." ".$req2.'
+                ORDER BY a.createdAt ASC
+            ')
+            ->setParameter('myType', $type)
+            ->setParameter('myLocation', $location);
+            return $query->getResult();
+        }
+
+        if($req1 != '' && $req3 != '' && $req2 ==''){
+            //$req2 = str_replace("AND","WHERE",$req2);
+            $query = $this->getEntityManager()->createQuery('
+                SELECT a 
+                FROM App\Entity\Annonce a '
+                .$req1." ".$req3.'
+                ORDER BY a.createdAt ASC
+            ')
+            ->setParameter('myType', $type)
+            ->setParameter('myCategory', $category);
+            return $query->getResult();
+        }
+
+        if($req2 != '' && $req3 != '' && $req1 ==''){
+            $req2 = str_replace("AND","WHERE",$req2);
+            $query = $this->getEntityManager()->createQuery('
+                SELECT a 
+                FROM App\Entity\Annonce a '
+                .$req2." ".$req3.'
+                ORDER BY a.createdAt ASC
+            ')
+            ->setParameter('myLocation', $location)
+            ->setParameter('myCategory', $category);
+            return $query->getResult();
+        }
+
+        if($req1 != '' && $req2 == '' && $req3 ==''){
+            $query = $this->getEntityManager()->createQuery('
+                SELECT a 
+                FROM App\Entity\Annonce a '
+                .$req1.'
+                ORDER BY a.createdAt ASC
+            ')
+            ->setParameter('myType', $type);
+            return $query->getResult();
+        }
+
+
+
+        if($req2 != '' && $req1 == '' && $req3 ==''){
+            $req2 = str_replace("AND","WHERE",$req2);
+            $query = $this->getEntityManager()->createQuery('
+                SELECT a 
+                FROM App\Entity\Annonce a '
+                .$req2.'
+                ORDER BY a.createdAt ASC
+            ')
+            ->setParameter('myLocation', $location);
+            return $query->getResult();
+        }
+
+        if($req3 != '' && $req1 == '' && $req2 ==''){
+            $req3 = str_replace("AND","WHERE",$req3);
+            $query = $this->getEntityManager()->createQuery('
+                SELECT a 
+                FROM App\Entity\Annonce a '
+                .$req3.'
+                ORDER BY a.createdAt ASC
+            ')
+            ->setParameter('myCategory', $category);
+            return $query->getResult();
+        }
+
     }
 
 }

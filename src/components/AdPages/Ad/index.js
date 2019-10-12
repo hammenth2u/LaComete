@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faEnvelope, faAt, faPhone } from '@fortawesome/free-solid-svg-icons';
+import Button from 'react-bootstrap/Button';
+import Collapse from 'react-bootstrap/Collapse';
+
 
 //import './styles.sass';
 
@@ -12,6 +15,11 @@ class Ad extends React.Component {
     isFavorite: '',
     comments: [],
     commentContent: '',
+    contactObject: '',
+    contactContent: '',
+    contactOpen: false,
+    phoneOpen: false,
+    atOpen: false,
   }
 
   componentDidMount(){    
@@ -69,10 +77,7 @@ class Ad extends React.Component {
       .catch(error => {
           console.log('ISFAV ERROR : ', error);
       });  
-      
-  
-    
-    
+            
     /* COMMENTAIRES DE L'ANNONCE */
     const currentPath = window.location.pathname;
     axios.post('http://127.0.0.1:8001/api/comments/show', {
@@ -132,6 +137,7 @@ class Ad extends React.Component {
     }
   }
 
+  /* FORMULAIRE COMMENTAIRE */
   handleChange = (evt) => {
     this.setState({ commentContent: evt.target.value})
   }
@@ -151,8 +157,67 @@ class Ad extends React.Component {
       .catch(error => {
           console.log('COMMENT ERROR : ', error);
       });   
+  };  
+
+  /* FORMULAIRE CONTACT */
+  // OBJECT
+  handleChangeContactObject = (evt) => {
+    this.setState({ contactObject: evt.target.value})
+  }
+
+  // MESSAGE
+  handleChangeContact = (evt) => {
+    this.setState({ contactContent: evt.target.value})
+  }
+
+  handleSend = (evt) => {
+    const email = this.state.singleAd.email;
+    console.log('AD USER MAIL : ', email)
+    evt.preventDefault();    
+    axios.post('http://127.0.0.1:8001/api/contact/another/user', {
+        contactObject: this.state.contactObject,
+        contactContent: this.state.contactContent,
+        email: email        
+      })
+      .then(function (response) {
+        alert('Votre message a été envoyé');
+        console.log('CONTACT TEST : ', response);
+      })
+
+      .catch(error => {
+          console.log('CONTACT ERROR : ', error);
+      });   
+  };  
+
+  /*  CONTACT COLLAPSE */
+
+  // MAIL
+  toggleContact = () => {
+    if(this.state.contactOpen == false){
+      this.setState({ contactOpen: true});
+    } else {
+      this.setState({ contactOpen: false});
+    }
+  }
+
+  // PHONE
+  togglePhone = () => {
+    if(this.state.phoneOpen == false){
+      this.setState({ phoneOpen: true});
+    } else {
+      this.setState({ phoneOpen: false});
+    }
   }
   
+  // WEBSITE
+  toggleAt = () => {
+    if(this.state.atOpen == false){
+      this.setState({ atOpen: true});
+    } else {
+      this.setState({ atOpen: false});
+    }
+  }
+
   render () {  
     const commentsList =  this.state.comments;
     const list = commentsList.map(function(comment){
@@ -162,7 +227,7 @@ class Ad extends React.Component {
           <small className="comment-author">{comment.userComment}</small>          
         </li>
       )
-    })
+    })    
 
     return (
       <div className="ad">
@@ -180,11 +245,77 @@ class Ad extends React.Component {
 
         {this.state.userStatus == "<" ? (
           '' ) : (
-          <section>  
-            <FontAwesomeIcon icon={faStar} onClick={ this.favoriteAd } />
-            
-            <form>
+          <div>
+            <section>  
               
+              <Button onClick={ this.favoriteAd } aria-controls="example-collapse-text" aria-expanded={this.state.contactOpen} >
+                <FontAwesomeIcon icon={faStar} />
+              </Button>              
+              
+              {this.state.singleAd.phone != null ? (
+              <div>
+              <Button onClick={this.togglePhone} aria-controls="example-collapse-text" aria-expanded={this.state.phoneOpen} >
+                <FontAwesomeIcon icon={faPhone} />
+              </Button>
+              <Collapse in={this.state.phoneOpen}>
+                <div id="contact-form">
+                  <p>{this.state.singleAd.phone}</p>
+                </div>
+              </Collapse> 
+              </div>             
+              ) : ('')}
+              
+              {this.state.singleAd.website != null ? (
+                <div>
+                <Button onClick={this.toggleAt} aria-controls="example-collapse-text" aria-expanded={this.state.atOpen} >
+                  <FontAwesomeIcon icon={faAt} />
+                </Button>       
+                <Collapse in={this.state.atOpen}>
+                  <div id="contact-form">
+                    <p>{this.state.singleAd.website}</p>
+                  </div>
+                </Collapse>
+                </div> 
+                ) : ('')}
+
+              {this.state.singleAd.email != null ? (
+              <div>
+              <Button onClick={this.toggleContact} aria-controls="example-collapse-text" aria-expanded={this.state.contactOpen} >
+                <FontAwesomeIcon icon={faEnvelope} />
+              </Button>
+              <Collapse in={this.state.contactOpen}>                
+                  
+                  <form className="contact-form"> 
+                    <div className="form-group">
+                      <input
+                        name="contactobject"
+                        type="text"
+                        className="contactinput"
+                        value={this.contactObject}
+                        onChange={this.handleChangeContactObject}
+                        //onBlur={handleBlur}
+                      />                  
+                    </div>             
+                    <div className="form-group">
+                      <input
+                        name="contact"
+                        type="text"
+                        className="contactinput"
+                        value={this.contactContent}
+                        onChange={this.handleChangeContact}
+                        //onBlur={handleBlur}
+                      />                  
+                    </div>          
+                  <button type="submit" className="btn btn-outline-primary" label='Envoyer' onClick={this.handleSend}/>    
+                  </form> 
+                  
+              </Collapse>
+              </div>
+              ) : ('')}
+              
+            </section> 
+
+            <form>              
               <div className="form-group">
                 <input
                   name="comment"
@@ -195,10 +326,9 @@ class Ad extends React.Component {
                   //onBlur={handleBlur}
                 />                  
               </div>          
-            <button type="submit" className="btn btn-outline-primary" label='Envoyer' onClick={this.handleSubmit}/>
-    
+            <button type="submit" className="btn btn-outline-primary" label='Envoyer' onClick={this.handleSubmit}/>    
             </form> 
-          </section>           
+        </div>          
         )}
         <section className="comments">          
           <div>

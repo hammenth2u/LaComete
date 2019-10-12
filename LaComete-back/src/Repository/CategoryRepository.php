@@ -32,4 +32,20 @@ class CategoryRepository extends ServiceEntityRepository
               
         return $query->getQuery()->getResult();
     }
+
+    /**
+     * Méthode qui retourne toutes les catégories triées par nom
+     * 
+    * @return Category[] Returns an array of Annonce objects
+    */
+
+    public function findByName($category)
+    {
+        $query = $this->createQueryBuilder('c')
+                      ->addSelect('c')
+                      ->where('c.name = :myCategory')
+                      ->setParameter('myCategory', $category);
+              
+        return $query->getQuery()->getResult();
+    }
 }

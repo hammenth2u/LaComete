@@ -3,12 +3,6 @@
  */
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-
-/**
- * Local import
- */
-import { updateInputValue } from 'src/store/reducer';
 
 // Composants enfants éventuels
 import ResultList from 'src/components/SearchPages/Results/ResultList';

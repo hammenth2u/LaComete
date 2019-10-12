@@ -13,7 +13,9 @@ import AccMenu from '../AccountMenu';
 import AdsList from '../AdsList';
 import Favorites from '../Favorites';
 import Settings from '../Settings';
-import NewAdForm from '../NewAdForm';
+//import NewAdForm from '../NewAdForm';
+
+import SubmitForm from '../NewAdForm';
 
 //import './styles.sass';
 
@@ -132,7 +134,7 @@ class AccountApp extends React.Component {
                             <Route exact path="/mon-compte/parametres" render={(routeProps) => ( <Settings {...routeProps} userInfo={ this.state.currentUser } />)} />
                             <Route exact path="/mon-compte/mes-annonces" render={(routeProps) => ( <AdsList {...routeProps} userAds={ this.state.userAds } />)}/>
                             <Route exact path="/mon-compte/mes-favoris" render={(routeProps) => ( <Favorites {...routeProps} userFavs={ this.state.userFav } />)}/>
-                            <Route exact path="/mon-compte/nouvelle-annonce" component={ NewAdForm }/>
+                            <Route exact path="/mon-compte/nouvelle-annonce" component={ SubmitForm }/>
                             
                         </Switch>
                     </main>

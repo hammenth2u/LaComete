@@ -130,6 +130,37 @@ class ContactController extends AbstractController
         return $response;
     }
 
+    /**
+     * @Route("/contact/another/user", name="post_another_user")
+     */
+    public function contactAnotherUser(Request $request)
+    {
+
+        
+        if($this->getUser() != null) {
+            $user = $this->getUser(); 
+            $email = $user->getEmail();
+            $object = $request->request->get('contactObject');
+            $message = $request->request->get('contactContent');
+            //$anotherUser = $request->request->get('author');
+            //$anUser = $this->getDoctrine()->getRepository(User::class)->findUserByUsername($anotherUser);
+            //$anUserEmail = $anUser->getEmail();
+            $anUserEmail = $request->request->get('email');
+        } 
+
+        $from = $email;
+        $to = $anUserEmail;
+        $obj = $object;
+        $msg = $message;
+        $msg2= "\r\n"."Message de : ".$from;
+        
+        mail($to, $obj, $msg.$msg2);
+
+        $response = new Response("success");
+
+        return $response;
+    }
+
 
 
 

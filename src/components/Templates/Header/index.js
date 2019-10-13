@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import Nav from 'react-bootstrap/Nav';
-import {Container, Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 
 import Navdrop from '../Dropdown'
 import './header.css';
@@ -17,7 +16,7 @@ const Header = ({ userStatus }) => {
     <Col sm={10}>
       <Navbar.Brand href="/">
         <img 
-        src="http://localhost/REACT/lacomete/projet-LaComete//src/brand.png"
+        src='src/images/brand.png'
         className="img-responsive"
         height="60"
         alt="Logo La Comète"

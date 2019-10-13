@@ -4,6 +4,8 @@ import { Formik } from "formik";
 import * as Yup from 'yup';
 import axios from 'axios';
 import Select from "react-select";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRocket, faHourglassHalf } from '@fortawesome/free-solid-svg-icons';
 
 
 class Thumb extends React.Component {
@@ -73,6 +75,7 @@ const options = [
         <div>
           <label>Catégorie</label>
           <Select
+            classNamePrefix="catsearch"
             options={options}
             onChange={this.handleChange}
             onBlur={this.handleBlur}
@@ -207,6 +210,7 @@ const options = [
       return (
         <div className="locselect">          
           <Select
+            classNamePrefix="locsearch"
             options={locationOptions}
             onChange={this.handleChange}
             onBlur={this.handleBlur}
@@ -314,11 +318,12 @@ class SubmitForm extends React.Component {
             handleSubmit
            }) => {
             return (
-              <form onSubmit={handleSubmit}>
+              <form className="ad-form" onSubmit={handleSubmit}>
 
-                <div className="form-group">
+                <div className="ad-radio-group">
                     <label>
                     <input
+                      className="option-input radio"
                       type="radio"
                       name="type"
                       value="rêve"
@@ -329,6 +334,7 @@ class SubmitForm extends React.Component {
                   </label>
                   <label>
                     <input
+                      className="option-input radio"
                       type="radio"
                       name="type"
                       value="profil"
@@ -356,6 +362,7 @@ class SubmitForm extends React.Component {
 
                 <div className="form-group">
                     <MySelect
+                    classNamePrefix="catsearch"
                     value={values.category}
                     onChange={setFieldValue}
                     onBlur={setFieldTouched}
@@ -366,6 +373,7 @@ class SubmitForm extends React.Component {
 
                 <div className="form-group">
                     <LocationSelect
+                    classNamePrefix="locsearch"
                     value={values.location}
                     onChange={setFieldValue}
                     onBlur={setFieldTouched}
@@ -467,7 +475,7 @@ class SubmitForm extends React.Component {
                 </div>
                 
                 <button type="submit" className="btn btn-outline-primary" disabled={isSubmitting}>
-                  {isSubmitting ? 'Patienter' : 'Décollage'}
+                  {isSubmitting ? <span className="btn-span"><FontAwesomeIcon icon={faHourglassHalf} /></span> :  <span className="btn-span"><FontAwesomeIcon icon={faRocket} /></span>}
                 </button>
 
               </form>

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRocket, faHourglassHalf } from '@fortawesome/free-solid-svg-icons';
 
 //import './styles.sass';
 
@@ -19,9 +21,9 @@ const Settings = (props) => {
   } = props;
 
   const updateUserForm = userInfo.map(info =>
-    
-    <form className="p-5" onSubmit={handleSubmit} key={info.id}>
-      <h1>Modifier vos informations</h1>
+        
+      <form className="settings-form" onSubmit={handleSubmit} key={info.id}>
+      <h2>Modifier vos informations</h2>
 
       <div className="form-group">
         <label>Prénom</label>
@@ -133,7 +135,7 @@ const Settings = (props) => {
       </div>
 
       <button type="submit" className="btn btn-outline-primary" disabled={isSubmitting}>
-        {isSubmitting ? 'Patienter' : 'Décollage'}
+        {isSubmitting ? <span className="btn-span"><FontAwesomeIcon icon={faHourglassHalf} /></span> :  <span className="btn-span"><FontAwesomeIcon icon={faRocket} /></span>}
       </button>
 
     </form>
@@ -182,14 +184,16 @@ export default withFormik({
     newpassword: Yup.string()
       .min(8, "Votre mot de passe doit faire au minimum 8 caractères")
       .max(25, "Votre mot de passe doit faire au maximum 25 caractères"),  
-    passwordconfirm: Yup.string()            
+    passwordconfirm: Yup.string()       
+      .min(8, "La confirmation et le mot de passe sont différents")
+      .max(25, "La confirmation et le mot de passe sont différents"),       
       /*
         .oneOf([Yup.ref('newpassword'), null], 'La confirmation et le mot de passe sont différents') :
       schema.oneOf([Yup.ref('newpassword'), null], 'La confirmation et le mot de passe sont différents') 
-    }),*/,
+    }),*/
     currentpassword: Yup.string()
     .required("Vous devez entrer votre mot de passe actuel")
-    .notOneOf([Yup.ref('newpassword'), null], 'Votre nouveau mot de passe doit être différent de l\'ancien'), 
+    /*.notOneOf([Yup.ref('newpassword'), null], 'Votre nouveau mot de passe doit être différent de l\'ancien')*/, 
   }),
 
 

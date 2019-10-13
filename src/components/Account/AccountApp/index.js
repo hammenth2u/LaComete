@@ -9,15 +9,13 @@ import { Route, Switch } from 'react-router-dom';
 /**
  * IMPORTS DE COMPONENTS
  */
-import AccMenu from '../AccountMenu';
+import AccMenu from '../AccountMenu'
 import AdsList from '../AdsList';
 import Favorites from '../Favorites';
 import Settings from '../Settings';
-//import NewAdForm from '../NewAdForm';
-
 import SubmitForm from '../NewAdForm';
 
-//import './styles.sass';
+import './style.css';
 
 class AccountApp extends React.Component {
 
@@ -103,8 +101,13 @@ class AccountApp extends React.Component {
     }
       
     render () {
+
+        const greeting = this.state.currentUser.map(info =>
+            <p className="active" key={ info.id }>Bienvenue { info.username }</p>                
+        )
+
         return (
-            <div>
+            <div className="account-base">
             {this.state.userStatus == "<" ? (
                 <div>
                     <h1>Vous n'avez pas encore rejoint le pays des rêves</h1>
@@ -118,26 +121,29 @@ class AccountApp extends React.Component {
                 ) : (                                
                   <div className="accountpages">
              
-                    <aside>
-                        <a href="/mon-compte">Mon Compte</a>
+                    <aside className="sidebar">
+                        { greeting }
                         <a href="/mon-compte/mes-annonces">Mes Annonces</a>
                         <a href="/mon-compte/mes-favoris">Mes Favoris</a>
                         <a href="/mon-compte/nouvelle-annonce">Créer une annonce</a>
                         <a href="/mon-compte/parametres">Paramètres</a>
                     </aside>
 
-                    <main>
-                        
+                    <section>
                         <Switch>
-
-                            <Route exact path="/mon-compte" render={(routeProps) => ( <AccMenu {...routeProps} userInfo={ this.state.currentUser } handleClick={this.deleteAccount} />)}/>
+                            <Route exact path="/mon-compte" component={AccMenu} />
                             <Route exact path="/mon-compte/parametres" render={(routeProps) => ( <Settings {...routeProps} userInfo={ this.state.currentUser } />)} />
                             <Route exact path="/mon-compte/mes-annonces" render={(routeProps) => ( <AdsList {...routeProps} userAds={ this.state.userAds } />)}/>
                             <Route exact path="/mon-compte/mes-favoris" render={(routeProps) => ( <Favorites {...routeProps} userFavs={ this.state.userFav } />)}/>
                             <Route exact path="/mon-compte/nouvelle-annonce" component={ SubmitForm }/>
                             
                         </Switch>
-                    </main>
+                        <section className="account-footer">
+                            <a className="btn" href="/deconnexion">x Retour à la réalité</a>  
+                            <button onClick={this.handleClick} value="x Désactiver mon compte" />            
+                            <small>Votre profil, vos annonces et vos commentaires ne seront plus visibles sur le site</small>
+                        </section>
+                    </section>
                 </div>
                 )
             } 

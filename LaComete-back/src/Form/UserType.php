@@ -20,20 +20,33 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname', TextType::class, array ('label'=>'Prénom :'))
-            ->add('lastname', TextType::class, array ('label'=>'Nom :'))
+            ->add('firstname', TextType::class, array ( 'attr'=> [
+                                                        'placeholder' => 'PRENOM']))
+
+            ->add('lastname', TextType::class, array ( 'attr'=> [
+                                                        'placeholder' => 'NOM']))
             ->add('email', EmailType::class, [
-                'constraints' => [new Assert\Email()]
-            ], array ('label'=>'E-mail :'))
-            ->add('username', TextType::class, array ('label'=>'Pseudo :'))
-            ->add('password')
-            ->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'addPasswordField'])
+                'constraints' => [new Assert\Email()],
+                'attr'=> [
+                    'placeholder' => 'E-MAIL']
+            ])
+            ->add('username', TextType::class, array ( 'attr'=> [
+                                                        'placeholder' => 'PSEUDO']))
+
+            ->add('password', PasswordType::class,[ 
+                'required' => true,
+                'constraints' => [new Assert\NotBlank(['normalizer' => 'trim'])],
+                'attr'=> [
+                    'placeholder' => 'MOT DE PASSE']
+            ])
+
+            //->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'addPasswordField'])
             ->add('submit', SubmitType::class, [
                 'label' => 'Inscription'
             ])
-         
         ;
     }
+
 
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -55,11 +68,15 @@ class UserType extends AbstractType
             // Alors nous avrons affaire à un user en création (/register), on ajoute un champ password avec la contrainte NotBlank
             $form->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'invalid_message' => 'The password fields must match.',
+                'invalid_message' => 'Les champs de mot de passe doivent correspondre.',
                 // 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Mot de passe :'],
-                'second_options' => ['label' => 'Retapez votre mot de passe :'],
+                'first_options'  => [ 'attr'=> [
+                    'class' => 'form-control input-register',
+                    'placeholder' => 'MOT DE PASSE']],
+                'second_options' => [ 'attr'=> [
+                    'class' => 'form-control input-register',
+                    'placeholder' => 'RETAPEZ VOTRE MOT DE PASSE']],
                 'constraints' => [new Assert\NotBlank(['normalizer' => 'trim'])]
             ]);
         } else {
@@ -67,7 +84,7 @@ class UserType extends AbstractType
             $form
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'invalid_message' => 'The password fields must match.',
+                'invalid_message' => 'Les champs de mot de passe doivent correspondre.',
                 // 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => false,
                 'first_options'  => [

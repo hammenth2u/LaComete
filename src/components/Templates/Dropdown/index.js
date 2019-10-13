@@ -39,10 +39,10 @@ export default class Navdrop extends React.Component {
           <span className="accounticon"><FontAwesomeIcon icon={faUserAstronaut} /> Mon Compte</span>
         </DropdownToggle>
     
-        <DropdownMenu className="dropmenu" >
-        <DropdownItem href="/mon-compte">Menu</DropdownItem>          
+        <DropdownMenu className="dropmenu" >         
         <DropdownItem href="/mon-compte/mes-annonces">Mes Annonces</DropdownItem>
         <DropdownItem href="/mon-compte/mes-favoris">Mes Favoris</DropdownItem>
+        <DropdownItem href="/mon-compte/nouvelle-annonce">Nouvelle Annonce</DropdownItem>
         <DropdownItem href="/mon-compte/parametres">Paramètres</DropdownItem>
         <DropdownItem divider />
         <DropdownItem href="/deconnexion">Déconnexion</DropdownItem>

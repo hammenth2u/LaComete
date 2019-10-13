@@ -4,11 +4,13 @@ App\Entity\Annonce:
         picture: '<imageUrl()>'
         title: '<sentence()>'
         type: '<text(10)>'
-        city: '<word()>'
+        location: '<word()>'
         status: 1
         createdAt: '<date_create()>'
         user: '@user*'
         category: '@category*'
+        need: '<text(150)>'
+        email: '<email()>'
 
 
 App\Entity\Category:

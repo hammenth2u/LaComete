@@ -30,7 +30,6 @@ class App extends React.Component {
   state = {
     userStatus: {},
     userMail: '',
-    allAds: []
   }
   
   CancelToken = axios.CancelToken;
@@ -71,14 +70,14 @@ class App extends React.Component {
 
     componentDidMount(){
       this.getUserStatus();
-      this.getUserInfo();
+      this.getUserInfo();     
     }
 
     componentWillUnmount() {
       this.source.cancel("Operation canceled by the user.");
     }
  
-  render () {    
+  render () {       
     return (
       
       <div id="app">

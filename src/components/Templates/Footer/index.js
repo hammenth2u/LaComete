@@ -12,7 +12,7 @@ const Footer = () => {
         <li><a href="/cdu">Conditions Générales d'Utilisation</a></li>
         <li><a href="/mentions-legales">Mentions Légales</a></li>        
     </ul>
-    <p>La Comète - O'Clock © {year}</p>
+    <p className="copyright">La Comète - O'Clock © {year}</p>
   </div>;
 };
 

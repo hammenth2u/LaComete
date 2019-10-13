@@ -8,14 +8,33 @@ const Intro = () => {
 
   return (
     <div className="introduction">
+    <div className="halfmoon"></div>
       <section className="introtext">
         <p>Vous avez un projet fou ou un savoir-faire à exploiter?</p>
         <p>Venez proposer votre rêve ou en chercher un auquel contribuer</p>
         <p>Et faites vos plans sur notre comète !</p>
       </section>
-
+      
       <section className="usermanual">
-        <p>Ici le mode d'emploi du site</p>
+      <div className="halfmoongreen"></div>
+      <div className="steps">
+        <article>
+          <p>J'ai une idée / un talent</p>
+          <img src="https://image.flaticon.com/icons/svg/181/181374.svg"/>
+        </article>
+        <article>
+        <p>Je poste mon annonce sur le site</p>
+          <img src="https://image.flaticon.com/icons/svg/1792/1792058.svg"/>          
+        </article>
+        <article>
+          <p>J'échange avec les autres rêveurs</p>
+          <img src="https://image.flaticon.com/icons/svg/942/942796.svg"/>
+        </article>
+        <article>
+          <p>Nous concrétisons notre projet commun</p>
+          <img src="https://image.flaticon.com/icons/svg/1283/1283342.svg"/>          
+        </article>
+      </div>
       </section>
     </div>
   );

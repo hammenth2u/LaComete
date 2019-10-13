@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import Select from "react-select";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faRocket } from '@fortawesome/free-solid-svg-icons';
 
 import ResultGrid from '../ResultGrid';
 import history from '../../History';
@@ -37,6 +37,7 @@ class MySelect extends React.Component {
     return (
       <div className="catsearch">
         <Select
+          classNamePrefix="catsearch"
           placeholder="Catégorie"
           options={options}
           onChange={this.handleChange}
@@ -156,6 +157,14 @@ const locationOptions = [
   { value:"La Réunion", label:"La Réunion" },
   { value:"Mayotte", label:"Mayotte" },
 ];
+
+const customStyles = {
+  control: (base, state) => ({
+    ...base,
+    boxShadow: "#adefd3"
+    // You can also use state.isFocused to conditionally style based on the focus state
+  })
+};
   
 class LocationSelect extends React.Component {
   handleChange = value => {
@@ -170,9 +179,10 @@ class LocationSelect extends React.Component {
 
   render() {
     return (
-      <div className="locselect">          
+      <div className="locsearch">          
         <Select
-        placeholder="Galaxie à explorer"
+          classNamePrefix="locsearch"
+          placeholder="Galaxie à explorer"
           options={locationOptions}
           onChange={this.handleChange}
           onBlur={this.handleBlur}
@@ -252,12 +262,13 @@ class ResultList extends React.Component {
            }) => {
 
           return(        
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="searchform">
              
-            <div className="form-group">
+            <div className="radio-group">
                 <label>
                 <input
                   type="radio"
+                  className="option-input radio"
                   name="type"
                   value="rêve"
                   checked={values.type === "rêve"}
@@ -268,6 +279,7 @@ class ResultList extends React.Component {
               <label>
                 <input
                   type="radio"
+                  className="option-input radio"
                   name="type"
                   value="profil"
                   checked={values.type === "profil"}
@@ -279,6 +291,7 @@ class ResultList extends React.Component {
 
             <div className="form-group">
                 <MySelect
+                classNamePrefix="catsearch"
                 value={values.category}
                 onChange={setFieldValue}
                 onBlur={setFieldTouched}
@@ -287,19 +300,20 @@ class ResultList extends React.Component {
                 />        
             </div>
 
-            <div className="inputbuttongroup">
-              <div className="form-group">
-                  <LocationSelect
-                  value={values.location}
-                  onChange={setFieldValue}
-                  onBlur={setFieldTouched}
-                  error={errors.location}
-                  touched={touched.location}
-                  />        
-              </div>            
-              
+            <div className="form-group">
+                <LocationSelect
+                classNamePrefix="locsearch"
+                value={values.location}
+                onChange={setFieldValue}
+                onBlur={setFieldTouched}
+                error={errors.location}
+                touched={touched.location}
+                />        
+            </div>            
+            
+            <div className="form-group">
               <button type="submit" className="btn" disabled={isSubmitting}>
-              {isSubmitting ? 'Patienter' : <FontAwesomeIcon icon={faSearch} />}
+              {isSubmitting ? 'Patienter' : <FontAwesomeIcon icon={faRocket} />}
               </button>
             </div>
             </form>

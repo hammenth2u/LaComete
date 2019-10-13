@@ -30,7 +30,13 @@
 }
 
 /* Make links on hover bold */
-.website-footer a:hover {
-    font-weight: bold;
+.website-footer a:hover {    
+    color: #d49f15;    
 }
-  
+
+.copyright {
+    font-family: 'Sue Ellen Francisco', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    color: #d49f15;    
+}

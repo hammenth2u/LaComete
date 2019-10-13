@@ -13,7 +13,6 @@ import './styles.css';
 //import SearchBars from 'src/components/HomePage/SearchBars';
 import ResultList from '../../Results/ResultList';
 import Intro from 'src/components/HomePage/Intro';
-import Carousel from 'src/components/HomePage/Carousel';
 
 // Styles et assets
 //import './app.sass';
@@ -22,10 +21,9 @@ const HomeApp = () => (
   
   <div id="homepage">
     <section className="homesearch">
-      <ResultList />
+      <ResultList />      
     </section>    
     <Intro />
-    <Carousel />
   </div>
 );
 

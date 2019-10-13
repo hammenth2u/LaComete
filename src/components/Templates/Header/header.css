@@ -1,54 +1,45 @@
 .blog-header {
-  background-color: rgba(0, 34, 72, 0.8);
+  background-color: rgba(0, 34, 72, 1);
+}
+
+.guestusernav {
+  margin-bottom: -1em;
 }
 
 .guestusernav a {
   color: white;
-  color: #cdcdcd;
   font-family: 'Sue Ellen Francisco', sans-serif;
   text-transform: uppercase;
   font-size: 1.7em;
   margin: .2em;
   align-self: baseline;
   margin-bottom: -3em;
+  text-decoration: none;
 }
 
 /* The dropdown container */
-.dropdown-list {
-  background-color: #002248;
+.accounticon {
+  color: white;
+  font-size: 2em;
+  font-family: 'Sue Ellen Francisco', sans-serif;
+  text-transform: uppercase;
+  font-size: 1.7em;
 }
-.dropdown a {
+
+.dropmenu {
+  background-color: #002248;
+  font-family: 'Sue Ellen Francisco', sans-serif;
+  text-transform: uppercase;
+  font-size: 1.2em;
+}
+.dropmenu a {
   overflow: hidden;
   color: white;
-  background-color: #002248;
-}
-
-/* Dropdown content (hidden by default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #002248;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  float: none;
-  color: white;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
 }
 
 /* Make dropdown links on hover bold */
-.dropdown-content a:hover {
-  font-weight: bold;
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
+.dropmenu a:hover {  
+  color:  #d49f15;
+  text-decoration: none;
+  background-color: #002248;
 }

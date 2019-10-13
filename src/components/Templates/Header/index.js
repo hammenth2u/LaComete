@@ -5,6 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Nav from 'react-bootstrap/Nav';
 import {Container, Row, Col } from 'react-bootstrap';
 
+import Navdrop from '../Dropdown'
 import './header.css';
 
 const Header = ({ userStatus }) => {
@@ -13,6 +14,7 @@ const Header = ({ userStatus }) => {
     
     <Navbar collapseOnSelect expand="lg" sticky="top" className="blog-header d-flex justify-content-sm-between">
       
+    <Col sm={10}>
       <Navbar.Brand href="/">
         <img 
         src="http://localhost/REACT/lacomete/projet-LaComete//src/brand.png"
@@ -21,7 +23,7 @@ const Header = ({ userStatus }) => {
         alt="Logo La Comète"
         />
       </Navbar.Brand> 
-      
+    </Col> 
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">    
       
@@ -32,17 +34,9 @@ const Header = ({ userStatus }) => {
             <a href="/inscription">inscription</a>
           </div>
         </Nav>        
-        ) : (                      
-          <div className="dropdown ml-auto p-2" id="collapsible-nav-dropdown">                      
-            <NavDropdown className="dropdown-list" title="Mon Compte" id="basic-nav-dropdown" >
-              <NavDropdown.Item href="/mon-compte">Menu</NavDropdown.Item>          
-              <NavDropdown.Item href="/mon-compte/mes-annonces">Mes Annonces</NavDropdown.Item>
-              <NavDropdown.Item href="/mon-compte/mes-favoris">Mes Favoris</NavDropdown.Item>
-              <NavDropdown.Item href="/mon-compte/parametres">Paramètres</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="/deconnexion">Déconnexion</NavDropdown.Item>
-            </NavDropdown>
-          </div>          
+        ) : (        
+
+          <Navdrop />     
         )        
       }
       

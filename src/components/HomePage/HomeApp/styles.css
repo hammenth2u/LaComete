@@ -1,3 +1,76 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC:400,700|Just+Another+Hand|Sue+Ellen+Francisco&display=swap');
+
+/*/* FONT FAMILIES 
+font-family: 'Amatic SC', cursive;
+font-family: 'Just Another Hand', cursive;
+font-family: 'Sue Ellen Francisco', cursive;
+*/
+
+
 .homesearch {
     background-image: url(https://cdn.pixabay.com/photo/2018/04/17/11/43/business-3327340_960_720.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: -12em;
+    padding: 15em 0 20em 0;
+}
+
+.homesearch .css-yk16xz-control {
+    height: 4.5em;
+    width: 70%;
+    margin: 2em auto;
+    border: none;
+    border-radius: .5em;
+}
+
+.homesearch .css-1hwfws3 {
+    border: .1em solid #d49f15;
+    border-radius: .5em;
+    margin: 0 0.5em;
+    height: 3.5em
+}
+
+.homesearch .css-1wa3eu0-placeholder {
+    color: #cdcdcd;
+    font-family: 'Sue Ellen Francisco', sans-serif;
+    text-transform: uppercase;
+    font-size: 2em;
+    margin-top: .2em;
+}
+
+.homesearch .css-1g48xl4-IndicatorsContainer {
+    display: none;
+}
+
+.homesearch .inputbuttongroup {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.homesearch .locselect .css-yk16xz-control {
+    width: 43em;
+    margin-right: 1em;
+    
+}
+
+.homesearch .btn {
+    background-color: white;
+    border: none;
+    border-radius: .5em;
+    height: 4.5em;
+    width: 4.5em;
+    margin-bottom: 1em;
+}
+
+.homesearch .btn svg {
+    border: .1em solid #d49f15;
+    border-radius: .5em;
+    height: 3.5em;
+    width: 3.5em;
+    padding: 0.2em;
+    color: #00837d;
+    margin-left: -0.25em;
+    margin-bottom: -0.25em;
 }

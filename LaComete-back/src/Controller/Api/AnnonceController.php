@@ -5,7 +5,6 @@ namespace App\Controller\Api;
 use App\Entity\Annonce;
 use App\Entity\Category;
 use App\Entity\User;
-use App\Service\FileUploadManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -104,7 +103,7 @@ class AnnonceController extends AbstractController
      * @Route("/annonce/new", name="new_annonce")
      * 
      */
-    public function newAnnonce(Request $request, FileUploadManager $fileUploadManager)
+    public function newAnnonce(Request $request)
     {
         header('Access-Control-Allow-Origin: *'); 
         header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
@@ -122,6 +121,7 @@ class AnnonceController extends AbstractController
         $type = $request->request->get('type');
         $cat = $request->request->get('category');
         $need = $request->request->get('need');
+
         
 
         // if($request->request->get('fileName')){
@@ -144,11 +144,10 @@ class AnnonceController extends AbstractController
             $annonce->setWebsite($website);
         }
 
-        if($request->request->get('formData')){
-            $formData = $request->files->get('formData');
-        }
-        
-        // dump($request);exit;
+        // if($request->request->get('formData')){
+        //     $formData = $request->request->get('formData');
+        // }
+
 
         // if (isset($_FILES['formData'])) {
         //     $formData  = $_FILES['formData'];
@@ -159,12 +158,55 @@ class AnnonceController extends AbstractController
         
         //     //	uploaded file is moved to upload directory
         //     $imageContent = @file_get_contents($tmpFilePath);
+
+        //     $filmenameToStore = $annonceId . '.' . $file->getClientOriginalExtension();
+        //     $movedFile = $file->move($this->targetFolderPath, $filmenameToStore);
+        //     // $movedFile est un objet de la classe File qui représente le nouveau fichier créé et déplacé après l'upload
+        //     // On utilise sa méthode ->getPathname() pour obtenir le chemin relatif du fichier et le retourner
+
         // }
+
+        // { name: "bricolage", label: "bricolage", value: "1"},
+        // { name: "education", label: "éducation", value: "2" },
+        // { name: "jardinage", label: "jardinage", value: "3" },
+        // { name: "musique", label: "musique", value: "4" },
+        // { name: "sport", label: "sport", value: "5" },
+        // { name: "technologie", label: "technologie",value: "6" },
+        // { name: "theatre", label: "cinéma/théatre", value: "7" },
+        // { name: "travaux", label: "travaux", value: "8" },
+        // { name: "divers", label: "divers", value: "9" }
 
 
         $category = $this->getDoctrine()->getRepository(Category::class)->find($cat);
 
+        $image = '';
 
+        if($category->getName() == 'bricolage'){
+            $image = 'https://cdn.pixabay.com/photo/2014/10/22/16/39/tools-498202_960_720.jpg';
+        }elseif($category->getName() == 'jardinage'){
+            $image = 'https://cdn.pixabay.com/photo/2017/03/27/16/18/garden-2179530_960_720.jpg';
+        }elseif($category->getName() == 'education'){
+            $image = 'https://cdn.pixabay.com/photo/2018/05/28/11/51/woman-3435842_960_720.jpg';
+        }elseif($category->getName() == 'musique'){
+            $image = 'https://cdn.pixabay.com/photo/2015/03/26/10/22/band-691224_960_720.jpg';
+        }elseif($category->getName() == 'sport'){
+            $image = 'https://cdn.pixabay.com/photo/2015/02/13/22/10/runners-635906_960_720.jpg';
+        }elseif($category->getName() == 'technologie'){
+            $image = 'https://cdn.pixabay.com/photo/2018/05/08/08/44/artificial-intelligence-3382507_960_720.jpg';
+        }elseif($category->getName() == 'theatre'){
+            $image = 'https://cdn.pixabay.com/photo/2016/09/16/00/16/movie-1673021_960_720.jpg';
+        }elseif($category->getName() == 'travaux'){
+            $image = 'https://cdn.pixabay.com/photo/2017/09/17/19/34/woman-2759487_960_720.jpg';
+        }elseif($category->getName() == 'art'){
+            $image = 'https://cdn.pixabay.com/photo/2016/06/25/12/55/art-1478831_960_720.jpg';
+        }elseif($category->getName() == 'voyage'){
+            $image = 'https://cdn.pixabay.com/photo/2017/06/05/11/01/airport-2373727_960_720.jpg';
+        }elseif($category->getName() == 'divers'){
+            $image = 'https://cdn.pixabay.com/photo/2017/01/31/13/31/animal-2024066_960_720.png';
+        }
+
+
+        $annonce->setPicture($image);
         $annonce->setUser($user);
         $annonce->setTitle($title);
         $annonce->setLocation($location);
@@ -178,9 +220,9 @@ class AnnonceController extends AbstractController
         $em->persist($annonce);
         $em->flush();
 
-        $imagePath = $fileUploadManager->upload($formData, $annonce->getId());
-        $annonce->setImage($imagePath);
-        $em->flush();
+        // $imagePath = $fileUploadManager->upload($formData, $annonce->getId());
+        // $annonce->setImage($imagePath);
+        // $em->flush();
 
         $response = new Response('success');
         return $response;

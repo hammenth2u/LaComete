@@ -18,9 +18,9 @@ import Contact from 'src/components/GeneralPages/Contact';
 import Legal from 'src/components/GeneralPages/Legal';
 import TermsOfUse from 'src/components/GeneralPages/TermsOfUse';
 import Forgotten from 'src/components/GeneralPages/ForgottenPassword';
-import AccountContainer from 'src/components/UserPages/Account/AccountApp/';
-import ResultContainer from 'src/components/SearchPages/Results/ResultApp';
-import Ad from 'src/components/AdPages/Ad';
+import AccountContainer from 'src/components/Account/AccountApp/';
+import ResultContainer from 'src/components/Results/ResultApp';
+import Ad from 'src/components/Ad';
 import Footer from 'src/components/Templates/Footer';
 
 // Styles et assets

@@ -5,8 +5,10 @@ import '@babel/polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import history from './components/History';
 
 /**
  * Local import
@@ -20,7 +22,7 @@ import { sideEffect } from 'src/store/reducer';
  */
 
 const reactRootElement = <Provider store={cometStore}>
-  <Router>
+  <Router history={history} >
     <AppContainer />
   </Router>
 </Provider>;

@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import './styles.css';
 /**
@@ -11,7 +10,8 @@ import './styles.css';
  */
 
 // Composants enfants éventuels
-import SearchBars from 'src/components/HomePage/SearchBars';
+//import SearchBars from 'src/components/HomePage/SearchBars';
+import ResultList from '../../Results/ResultList';
 import Intro from 'src/components/HomePage/Intro';
 import Carousel from 'src/components/HomePage/Carousel';
 
@@ -20,16 +20,15 @@ import Carousel from 'src/components/HomePage/Carousel';
 
 const HomeApp = () => (
   
-  <div id="app">    
-    <SearchBars />
+  <div id="homepage">
+    <section className="homesearch">
+      <ResultList />
+    </section>    
     <Intro />
     <Carousel />
   </div>
 );
 
-HomeApp.propTypes = {
-  /** Titre de l'application React */
-};
 
 /**
  * Export

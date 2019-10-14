@@ -40,8 +40,14 @@ class ContactController extends AbstractController
         $obj = 'Contact-'.$object;
         $msg = $message;
         $msg2= "\r\n"."Le message a été envoyé depuis l'adresse suivante : ".$from;
+
+        $headers = array(
+            'From' => 'lacometetitan@gmail.com',
+            'Reply-To' => 'lacometetitan@gmail.com',
+            'X-Mailer' => 'PHP/' . phpversion()
+        );
         
-        mail($to, $obj, $msg.$msg2);
+        mail($to, $obj, $msg.$msg2, $headers);
 
         return new Response('success');
     }

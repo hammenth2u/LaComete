@@ -15,8 +15,9 @@
     {% endif %}
 
     {% if app.user %}
-        <div class="mb-3">
-            Vous êtes connecté avec le compte: {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+        <div class="alert">
+            <p class="info-login">Vous êtes connecté avec le compte: {{ app.user.username }}</p>
+            <p class="info-login">Souhaitez-vous vous <a class="logout-style" href="{{ path('app_logout') }}">déconnecter</a> ?</p>
         </div>
     {% endif %}
     <h1 class="h3 mb-3 font-weight-normal connexion-title">Veuillez vous connecter</h1>
@@ -33,14 +34,11 @@
     <button class="btn btn-lg btn-color-login" type="submit">
         Se connecter
     </button>
-
-    
-
 </form>
 
 <a class="link-password" href="http://127.0.0.1:8001/motdepasseoublie">Mot de passe oublié</a>
 
-<a class="link-button" href="http://127.0.0.1:8001/inscription"><button class="btn btn-lg btn-color-link-signup">S'insrire</button></a>
+<a class="link-button" href="http://127.0.0.1:8001/inscription"><button class="btn btn-lg btn-color-link-signup">S'inscrire</button></a>
 
 <a class="link-button" href="http://127.0.0.1:8001"><button class="btn btn-lg btn-color-link-home">Retour à l'accueil</button></a>
 

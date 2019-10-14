@@ -32,7 +32,7 @@ body {
     position:relative;
     display: block;
     left:47%;
-    margin-left:0.6em;
+    margin-left:0.4em;
     margin-top:6em;
 }
 
@@ -90,6 +90,73 @@ body {
     text-align:center;
     margin-top: 1em;
     border-radius: 2em;
+}
+
+.info-login {
+    font-family: 'Sue Ellen Francisco', sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    font-size:1.5em;
+}
+
+.logout-style {
+    color:#00837d;
+}
+
+.logout-style:hover{
+    color: #adefd3;
+    text-decoration: none;
+}
+
+.input-register {
+    max-width: 25%;
+    display: inline-block;
+    text-align: center;
+    margin-top:0.8em;
+    margin-left: 2em;
+}
+
+.align-form {
+    position:relative;
+    display: block;
+    left:37%;
+    margin-left: 1.9em;
+}
+
+.btn-color-register {
+    background-color: #00837d;
+    font-family: 'Sue Ellen Francisco', sans-serif;
+    text-transform: uppercase;
+    position:relative;
+    left:47%;
+    margin-top: 1em;
+    color:black
+    
+}
+
+.btn-color-link-signin {
+    background-color: #00837d;
+    font-family: 'Sue Ellen Francisco', sans-serif;
+    text-transform: uppercase;
+    color: black;
+    position:relative;
+    display: block;
+    left:46%;
+    margin-left:0.7em;
+    margin-top:5em;
+}
+
+.btn-color-link-home-register {
+    margin-top:1em;
+    background-color: #00837d;
+    font-family: 'Sue Ellen Francisco', sans-serif;
+    text-transform: uppercase;
+    color: black;
+    position:relative;
+    display: block;
+    left:45%;
+    margin-left:0.6em;
+    
 }
 
 

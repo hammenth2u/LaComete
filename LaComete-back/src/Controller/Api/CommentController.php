@@ -22,23 +22,53 @@ class CommentController extends AbstractController
      */
     public function new(Request $request)
     {
+        // header('Access-Control-Allow-Origin: *'); 
+        // header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
+        // header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+
+        // $annonceId = $request->request->get('adId');
+        // $annonce = $this->getDoctrine()->getRepository(Annonce::class)->find($annonceId);
+
+
+        // $comment = new Comment();
+
+        // $content = $request->request->get('comment');
+
+        // $user = $this->getUser();
+        // //$userId = $user->getId();
+
+        // $comment->setContent($content);
+        // $comment->setUser($user);
+        // $comment->setAnnonce($annonce);
+        // $comment->setStatus(true);
+
+
+        // $entityManager = $this->getDoctrine()->getManager();
+        // $entityManager->persist($comment);
+        // $entityManager->flush();
+
+        // return new Response ('success');
+
+
         header('Access-Control-Allow-Origin: *'); 
         header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
         header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
         $annonceId = $request->request->get('adId');
-
-        //dump($annonceId);exit;
-
+        //$annonceId = 9;
         $annonce = $this->getDoctrine()->getRepository(Annonce::class)->find($annonceId);
-        //$annonceId = $annonce->getId();
+        $annonceUserEmail = $annonce->getUser()->getUsername();
+        //dump($annonceUserEmail);exit;
+        $annonceTitle = $annonce->getTitle();
+
+
         $comment = new Comment();
 
-        //On recupère la donnée 
         $content = $request->request->get('comment');
+        //$content = "test blablabla";
 
         $user = $this->getUser();
-        //$userId = $user->getId();
+        $commentUserUsername = $user->getUsername();
 
         $comment->setContent($content);
         $comment->setUser($user);
@@ -49,6 +79,22 @@ class CommentController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($comment);
         $entityManager->flush();
+
+        /*
+           Envoie de l'email et construction de l'email
+        */
+
+        $from = $commentUserUsername;
+        $to = $annonceUserEmail;
+        $obj = "Nouveau commentaire sur votre annonce";
+        $msg = "Vous avez reçu un nouveau commentaire de la part de ".$from."sur votre annonce : "."\r\n".$annonceTitle;
+
+        $header= 'From: "LaComete <lacomete@gmail.com>"';
+
+        $entete   = 'From: "LaComete <lacomete@gmail.com>"';
+        $entete  .= "Content-type: text/html; charset= utf8\n";
+        
+        mail($to, $obj, $msg, $header);
 
         return new Response ('success');
     }

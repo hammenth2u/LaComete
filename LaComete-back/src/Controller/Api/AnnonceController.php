@@ -122,12 +122,6 @@ class AnnonceController extends AbstractController
         $cat = $request->request->get('category');
         $need = $request->request->get('need');
 
-        
-
-        // if($request->request->get('fileName')){
-        //     $picture = $request->request->get('fileName');
-        //     $annonce->setPicture($picture);
-        // }
 
         if($request->request->get('email')){
             $email = $request->request->get('email');
@@ -203,6 +197,8 @@ class AnnonceController extends AbstractController
             $image = 'https://cdn.pixabay.com/photo/2017/06/05/11/01/airport-2373727_960_720.jpg';
         }elseif($category->getName() == 'divers'){
             $image = 'https://cdn.pixabay.com/photo/2017/01/31/13/31/animal-2024066_960_720.png';
+        }elseif($category->getName() == 'cinema'){
+            $image = 'https://cdn.pixabay.com/photo/2016/09/16/00/16/movie-1673021_960_720.jpg';
         }
 
 

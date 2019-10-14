@@ -5,6 +5,10 @@
     text-align: center;
 }
 
+form h2 {
+    margin-bottom: 2em;
+}
+
 
 /******************************************************| SIDEBAR |******************************************************/
 
@@ -111,7 +115,7 @@
     border-radius: .5em;
     height: 3em;
     width: 3em;
-    margin: 0 auto;
+    margin: 1em auto;
 }
 
 .settings-form button:hover {
@@ -184,8 +188,16 @@
 /******************************************************| NEW AD FORM |******************************************************/
 
 .ad-form .ad-radio-group {
+    margin-bottom: 1em;
 }
 
+.ad-form .contact-group input {
+    margin-bottom: 1em;
+}
+
+.ad-form .contact-head .form-text {
+    margin: -.5em 0 1em 0;
+}
 .ad-form .ad-radio-group label {
     margin-right: 2em;
     color: black;    
@@ -281,7 +293,7 @@
     width: 70%;
 }
 
-.ad-form .form-group .invalide-feedback {
+.ad-form .invalid-feedback {
     color: #d93641;
 }
 
@@ -303,13 +315,23 @@
     box-shadow: none;        
 }
 
+.ad-form textarea {
+    height: 20em;
+    border: none;
+    border-radius: .5em
+}
+.ad-form textarea:focus {
+    border: .1em solid #d49f15;
+    box-shadow: none;        
+}
+
 .ad-form button {
     background-color: white;
     border: none;
     border-radius: .5em;
     height: 3em;
     width: 3em;
-    margin: 0 auto;
+    margin: 1em auto;
 }
 
 .ad-form button:hover {
@@ -337,6 +359,11 @@
     border-radius: .5em;
     font-family: 'Nanum Gothic', sans-serif;
     text-transform: uppercase;
+}
+
+.ad-form .locsearch__menu-list:focus, .ad-form .catsearch__menu-list:focus {
+    border: .1em solid #d49f15;
+    box-shadow: none;        
 }
 
 .ad-form .catsearch, .ad-form .locsearch {

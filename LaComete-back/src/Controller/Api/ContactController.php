@@ -18,10 +18,12 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact/post", name="post")
      */
-    public function contactPostEmail(Request $request, \Swift_Mailer $mailer)
+    public function contactPostEmail(Request $request)
     {
+        header('Access-Control-Allow-Origin: *'); 
+        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
 
-        
+
         if($this->getUser() != null) {
             $user = $this->getUser(); 
             $email = $user->getEmail();
@@ -34,14 +36,14 @@ class ContactController extends AbstractController
         }
 
         $from = $email;
-        $to = 'clara.hammenthienne@gmail.com';
-        $obj = $object;
+        $to = 'lacometetitan@gmail.com';
+        $obj = 'Contact-'.$object;
         $msg = $message;
-        $msg2= "\r\n"."Message de : ".$from;
+        $msg2= "\r\n"."Le message a été envoyé depuis l'adresse suivante : ".$from;
         
         mail($to, $obj, $msg.$msg2);
 
-        return $this->redirectToRoute('contact');
+        return new Response('success');
     }
 
 

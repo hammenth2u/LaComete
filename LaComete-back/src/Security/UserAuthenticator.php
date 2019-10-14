@@ -92,7 +92,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator
 
         // en revanche, si l'utilisateur accède directement à la page /login
         // on le redirige vers la page d'accueil une fois connecté
-        return new RedirectResponse($this->urlGenerator->generate('home'));
+        return new RedirectResponse($this->urlGenerator->generate('app_login'));
     }
 
     protected function getLoginUrl()

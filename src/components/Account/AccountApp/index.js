@@ -58,7 +58,7 @@ class AccountApp extends React.Component {
         }); 
 
     //axios.get('http://127.0.0.1:8001/api/list/user/annonces/')
-    axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/annonces/')
+    axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/list/user/annonces/')
     
         .then(response => {
 

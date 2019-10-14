@@ -42,7 +42,7 @@ class ContactController extends AbstractController
         $msg2= "\r\n"."Le message a été envoyé depuis l'adresse suivante : ".$from;
 
         $headers = array(
-            'From' => 'lacometetitan@gmail.com',
+            'From' => 'Support LaComete',
             'Reply-To' => 'lacometetitan@gmail.com',
             'X-Mailer' => 'PHP/' . phpversion()
         );
@@ -129,6 +129,26 @@ class ContactController extends AbstractController
         $response = new Response("success");
 
         return $response;
+    }
+
+
+    /**
+     * @Route("/essaie/email", name="essaie_email")
+     */
+    public function testenvoiemail( \Swift_Mailer $mailer)
+    {
+        $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('send@example.com')
+            ->setTo('clara.hammenthienne@gmail.com')
+            ->setBody('Coucou')
+              
+            // you can remove the following code if you don't define a text version for your emails
+            ->addPart('coucou2')
+        ;
+    
+        $mailer->send($message);
+    
+        return new Response ('envoie email ok');
     }
 
 

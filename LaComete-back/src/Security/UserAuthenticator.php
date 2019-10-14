@@ -87,12 +87,12 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator
         // il est d'abord redirigé sur /login
         // puis une fois connecté, il est redirigé vers /admin
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse($targetPath);
+            return new RedirectResponse($this->urlGenerator->generate('home'));
         }
 
         // en revanche, si l'utilisateur accède directement à la page /login
         // on le redirige vers la page d'accueil une fois connecté
-        return new RedirectResponse($this->urlGenerator->generate('app_login'));
+        return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 
     protected function getLoginUrl()

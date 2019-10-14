@@ -67,7 +67,7 @@ export default withFormik({
   handleSubmit: (values, { setSubmitting, resetForm }) => {
     setTimeout(() => {
       
-      axios.post('/api/password/new', {
+      axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/password/new', {
         email: values.email,
       })
       .then(function (response) {

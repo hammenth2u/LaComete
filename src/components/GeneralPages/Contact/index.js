@@ -114,7 +114,7 @@ export default withFormik({
   handleSubmit: (values, { setSubmitting, resetForm }) => {
     setTimeout(() => {
       
-      axios.post('/api/contact/post', {
+      axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/contact/post', {
         email: values.email,
         object: values.object,
         message: values.message

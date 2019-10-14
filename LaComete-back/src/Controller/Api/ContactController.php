@@ -52,44 +52,6 @@ class ContactController extends AbstractController
         return new Response('success');
     }
 
-
-    /**
-     * @Route("/password/lost", name="password_lost")
-     */
-    public function passwordLost(Request $request, \Swift_Mailer $mailer)
-    {
-        /*
-        if($this->getUser() != null) {
-            $user = $this->getUser(); 
-            $email = $user->getEmail();
-            $object = $request->request->get('object');
-            $message = $request->request->get('message');
-        } else {
-            $email = $request->request->get('email');
-            $object = $request->request->get('object');
-            $message = $request->request->get('message');
-        }
-        */
-
-        $email = $request->request->get('email');
-        $object = 'Réinitialisation du mot de passe';
-        $message = "Bonjour, pour réinitialiser votre mot de passe veuillez cliquer sur le lien suivant : \n 
-        http://127.0.0.1:8001/nouveau/mot-de-passe?e=".$email;
-
-        $msg = (new \Swift_Message($object))
-        ->setFrom($email)
-        ->setTo('clara.hammenthienne@gmail.com')
-        ->setBody($message);
-
-        //dump($msg);exit;
-
-        $mailer->send($msg);
-
-        
-
-        return $this->redirectToRoute('contact');
-    }
-
     /**
      * @Route("/admin/contact/users/post", name="contact_all_users_post")
      */

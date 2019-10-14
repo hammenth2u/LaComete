@@ -220,8 +220,8 @@ class ResultList extends React.Component {
             const catValue = values.category.value
             console.log(' 3 : ',catValue)
 
-            //axios.post('/api/results/annonces/search', {  
-            axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/results/annonces/search' , {
+            axios.post('/api/results/annonces/search', {  
+            //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/results/annonces/search' , {
               type: typeValue,        
               location: locValue,        
               category: catValue

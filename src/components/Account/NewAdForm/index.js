@@ -258,8 +258,8 @@ class SubmitForm extends React.Component {
             for (var value of formData.values()) {
               console.log(value);
             }
-            //axios.post('/api/annonce/new', {
-            axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/annonce/new', {
+            axios.post('/api/annonce/new', {
+            //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/annonce/new', {
               type: values.type,
               title: values.title,
               location: values.location.value,

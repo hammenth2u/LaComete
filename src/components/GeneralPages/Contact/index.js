@@ -43,8 +43,7 @@ const Contact = (props) => {
         <label>Email</label>
         <input name="email" type="text" 
           className={`form-control ${errors.email && touched.email && 'is-invalid'}`}
-          //value= {autoFill}
-          value= 'clara.hammenthienne@gmail.com'
+          value= {autoFill}
           onChange={handleChange}
           onBlur={handleBlur} />
         {errors.email && touched.email && <div className="invalid-feedback">{errors.email}</div>}
@@ -107,7 +106,7 @@ export default withFormik({
 
   validationSchema: Yup.object().shape({
     
-    email: Yup.string().email('Veuillez rentrer une adresse email valide').required('Veuillez compléter ce champ'),
+    email: Yup.string().required('Veuillez compléter ce champ').email('Veuillez rentrer une adresse email valide'),
     object: Yup.string().required('Veuillez compléter ce champ'),
     message: Yup.string().required('Veuillez compléter ce champ'),
   }),

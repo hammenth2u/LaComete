@@ -26,8 +26,8 @@ class Ad extends React.Component {
     
     /* UNE SEULE ANNONCE EN FONCTION DE L'URL */
     const currentUrl = window.location.pathname;
-    axios.post('http://127.0.0.1:8001/api/single/annonce', {
-    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/single/annonce')
+    //axios.post('http://127.0.0.1:8001/api/single/annonce', {
+    axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/single/annonce', {
       currentUrl
     })
     

@@ -43,7 +43,8 @@ const Contact = (props) => {
         <label>Email</label>
         <input name="email" type="text" 
           className={`form-control ${errors.email && touched.email && 'is-invalid'}`}
-          value= {autoFill}
+          //value= {autoFill}
+          value= 'clara.hammenthienne@gmail.com'
           onChange={handleChange}
           onBlur={handleBlur} />
         {errors.email && touched.email && <div className="invalid-feedback">{errors.email}</div>}

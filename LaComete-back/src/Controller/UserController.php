@@ -59,6 +59,29 @@ class UserController extends AbstractController
             $plainPassword = $user->getPassword();
             $encodedPassword = $encoder->encodePassword($user, $plainPassword);
             $user->setPassword($encodedPassword);
+
+/*************************************Envoie email inscription***************************************/
+
+            $userFirstname = $user->getFirstname();
+
+
+            $to = $user->getEmail();
+            $obj = 'Confirmation Inscription LaComete';
+            $msg = "Bonjour $userFirstname,"."\r\n"."\r\n"."Nous vous informons que votre inscription a bien été prise en compte."."\r\n"."Pour vous connecter cliquez sur le lien suivant :"."\r\n". "http://ec2-3-84-230-242.compute-1.amazonaws.com/connexion"."\r\n"."\r\n"."Amicalement,"."\r\n"."L'équipe LaComete.";
+
+
+            $headers = array(
+                'From' => 'Support-LaComete',
+                'Reply-To' => 'lacometetitan@gmail.com',
+                'X-Mailer' => 'PHP/' . phpversion(),
+                'Content-type'=> 'text/html; charset= utf8',
+            );
+
+            mail($to, $obj, $msg, $headers);
+
+
+/***************************************************************************************************/
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();

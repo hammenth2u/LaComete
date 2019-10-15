@@ -29,7 +29,8 @@ class CommentController extends AbstractController
         $annonceId = $request->request->get('adId');
         //$annonceId = 9;
         $annonce = $this->getDoctrine()->getRepository(Annonce::class)->find($annonceId);
-        $annonceUserEmail = $annonce->getUser()->getUsername();
+        $annonceUserEmail = $annonce->getUser()->getEmail();
+        $annonceUserFirstname = $annonce->getUser()->getFirstname();
         //dump($annonceUserEmail);exit;
         $annonceTitle = $annonce->getTitle();
 
@@ -59,14 +60,19 @@ class CommentController extends AbstractController
         $from = $commentUserUsername;
         $to = $annonceUserEmail;
         $obj = "Nouveau commentaire sur votre annonce";
-        $msg = "Vous avez reçu un nouveau commentaire de la part de ".$from."sur votre annonce : "."\r\n".$annonceTitle;
+        $msg = "Bonjour ".$annonceUserFirstname.","."\r\n"."\r\n"."Vous venez de recevoir un nouveau commentaire de la part de ".$from." sur votre annonce. "."\r\n"."Intitulé de l'annonce : ".$annonceTitle.".\r\n"."\r\n"."Amicalement,\r\n"."L'équipe LaComete.";
 
-        $header= 'From: "LaComete <lacomete@gmail.com>"';
+        $headers = array(
+            'From' => 'Support-LaComete',
+            'Reply-To' => 'lacometetitan@gmail.com',
+            'X-Mailer' => 'PHP/' . phpversion(),
+            'Content-type'=> 'text/html; charset= utf8',
+        );
 
         $entete   = 'From: "LaComete <lacomete@gmail.com>"';
         $entete  .= "Content-type: text/html; charset= utf8\n";
         
-        mail($to, $obj, $msg, $header);
+        mail($to, $obj, $msg, $headers);
 
         return new Response ('success');
     }
@@ -89,10 +95,14 @@ class CommentController extends AbstractController
 
         foreach ($comments as $comment) 
         {
+            $createdAt= $comment->getCreatedAt()->getTimestamp();
+            $createdAt = date('d-M-Y à H:i',$createdAt);
+
             $formatted [] = [
                'idComment' => $comment->getId(),
                'contentComment' => $comment->getContent(),
                'userComment' => $comment->getUser()->getUsername(),
+               'dateComment' => $createdAt,
             ];
         }       
 

@@ -39,12 +39,13 @@ class ContactController extends AbstractController
         $to = 'lacometetitan@gmail.com';
         $obj = 'Contact-'.$object;
         $msg = $message;
-        $msg2= "\r\n"."Le message a été envoyé depuis l'adresse suivante : ".$from;
+        $msg2= "\r\n"."\r\n"."Le message a été envoyé depuis l'adresse suivante : ".$from;
 
         $headers = array(
-            'From' => 'Support LaComete',
+            'From' => 'Support-LaComete',
             'Reply-To' => 'lacometetitan@gmail.com',
-            'X-Mailer' => 'PHP/' . phpversion()
+            'X-Mailer' => 'PHP/' . phpversion(),
+            'Content-type'=> 'text/html; charset= utf8',
         );
         
         mail($to, $obj, $msg.$msg2, $headers);
@@ -55,7 +56,7 @@ class ContactController extends AbstractController
     /**
      * @Route("/admin/contact/users/post", name="contact_all_users_post")
      */
-    public function contactAllUsersPost(Request $request, \Swift_Mailer $mailer)
+    public function contactAllUsersPost(Request $request)
     {
 
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
@@ -82,19 +83,7 @@ class ContactController extends AbstractController
             
             mail($to, $obj, $msg);
 
-        }
-
-
-
-/*       $message = (new \Swift_Message('Hello Email'))
-        ->setFrom('send@example.com')
-        ->setTo('clara.hammenthienne@gmail.com')
-        ->setBody('You should see me from the profiler!')
-
-    ;
-
-    $mailer->send($message);
-*/      
+        }      
         $response = new Response("success");
 
         return $response;
@@ -121,37 +110,23 @@ class ContactController extends AbstractController
         $from = $email;
         $to = $anUserEmail;
         $obj = $object;
-        $msg = $message;
-        $msg2= "\r\n"."Message de : ".$from;
+
+        $msg1 = "Bonjour,"."\r\n"."\r\n". "Un utilisateur souhaite vous contacter par mail."."\r\n"."Voilà le message qu'il vous a envoyé : \r\n"."\r\n";
+        $msg2 = $message;
+        $msg3= "\r\n"."\r\n"."Vous pouvez lui répondre à cette adresse : ".$from;
+        $msg4 = "\r\n"."\r\n"."Amicalement,"."\r\n"."L'équipe LaComete";
+
+        $headers = array(
+            'From' => 'Support-LaComete',
+            'Reply-To' => 'lacometetitan@gmail.com',
+            'X-Mailer' => 'PHP/' . phpversion(),
+            'Content-type'=> 'text/html; charset= utf8',
+        );
         
-        mail($to, $obj, $msg.$msg2);
+        mail($to, $obj, $msg1.$msg2.$msg3.$msg4, $headers);
 
         $response = new Response("success");
 
         return $response;
     }
-
-
-    /**
-     * @Route("/essaie/email", name="essaie_email")
-     */
-    public function testenvoiemail( \Swift_Mailer $mailer)
-    {
-        $message = (new \Swift_Message('Hello Email'))
-            ->setFrom('send@example.com')
-            ->setTo('clara.hammenthienne@gmail.com')
-            ->setBody('Coucou')
-              
-            // you can remove the following code if you don't define a text version for your emails
-            ->addPart('coucou2')
-        ;
-    
-        $mailer->send($message);
-    
-        return new Response ('envoie email ok');
-    }
-
-
-
-
 }

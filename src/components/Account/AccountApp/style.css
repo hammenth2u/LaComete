@@ -5,12 +5,16 @@
     text-align: center;
 }
 
+form h2 {
+    margin-bottom: 2em;
+}
+
 
 /******************************************************| SIDEBAR |******************************************************/
 
 /* The side navigation menu */
 .sidebar {
-    margin: -3em 0;
+    margin: 0;
     padding: 0;
     width: 15em;
     background-color:rgba(0, 34, 72, 1);
@@ -70,6 +74,10 @@
 
 /******************************************************| SETTINGS |******************************************************/
 
+.settingsdiv {
+    padding: 1rem;
+}
+
 .settings-form {
     margin: 3em auto;
     border: 1px solid #cdcdcd;
@@ -83,7 +91,7 @@
     width: 50%;
 }
 
-.settings-form .form-group .invalide-feedback {
+.settings-form .form-group .invalid-feedback {
     color: #d93641;
 }
 
@@ -103,35 +111,6 @@
 .settings-form input:focus {
     border: .1em solid #d49f15;
     box-shadow: none;        
-}
-
-.settings-form button {
-    background-color: white;
-    border: none;
-    border-radius: .5em;
-    height: 3em;
-    width: 3em;
-    margin: 0 auto;
-}
-
-.settings-form button:hover {
-    background-color: white;   
-}
-
-.settings-form button .btn-span {
-    border: .1em solid #d49f15;
-    border-radius: .5em;
-    height: 2.5em;
-    width: 2.5em;
-    padding: 0.2em 0.4em;
-    color: #00837d;
-    margin-left: -0.4em;
-    margin-bottom: -0.25em;
-    font-size: 1.4em;
-}
-
-.settings-form button .btn-span:hover {
-    color: rgba(0, 34, 72, 1);
 }
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
@@ -182,10 +161,21 @@
   }*/
 
 /******************************************************| NEW AD FORM |******************************************************/
-
-.ad-form .ad-radio-group {
+.container {
+    padding: 1rem;
 }
 
+.ad-form .ad-radio-group {
+    margin-bottom: 1em;
+}
+
+.ad-form .contact-group input {
+    margin-bottom: 1em;
+}
+
+.ad-form .contact-head .form-text {
+    margin: -.5em 0 1em 0;
+}
 .ad-form .ad-radio-group label {
     margin-right: 2em;
     color: black;    
@@ -281,7 +271,7 @@
     width: 70%;
 }
 
-.ad-form .form-group .invalide-feedback {
+.ad-form .invalid-feedback {
     color: #d93641;
 }
 
@@ -303,33 +293,14 @@
     box-shadow: none;        
 }
 
-.ad-form button {
-    background-color: white;
+.ad-form textarea {
+    height: 20em;
     border: none;
-    border-radius: .5em;
-    height: 3em;
-    width: 3em;
-    margin: 0 auto;
+    border-radius: .5em
 }
-
-.ad-form button:hover {
-    background-color: white;   
-}
-
-.ad-form button .btn-span {
+.ad-form textarea:focus {
     border: .1em solid #d49f15;
-    border-radius: .5em;
-    height: 2.5em;
-    width: 2.5em;
-    padding: 0.2em 0.4em;
-    color: #00837d;
-    margin-left: -0.4em;
-    margin-bottom: -0.25em;
-    font-size: 1.4em;
-}
-
-.ad-form button .btn-span:hover {
-    color: rgba(0, 34, 72, 1);
+    box-shadow: none;        
 }
 
 .ad-form .locsearch__menu-list, .ad-form .catsearch__menu-list {
@@ -339,9 +310,9 @@
     text-transform: uppercase;
 }
 
-.ad-form .catsearch, .ad-form .locsearch {
-    width: 70%;
-    margin: 1em auto;
+.ad-form .locsearch__menu-list:focus, .ad-form .catsearch__menu-list:focus {
+    border: .1em solid #d49f15;
+    box-shadow: none;        
 }
 
 .ad-form .catsearch__control, .ad-form .locsearch__control {
@@ -357,4 +328,31 @@
 
 .ad-form .css-1g48xl4-IndicatorsContainer {
     display: none;
+}
+
+/*****************************************************| BUTTON |*****************************************************/
+
+.account-btn {
+    background-color: white;
+    border: none;
+    border-radius: .5em;
+    height: 3em;
+    width: 3em;
+    margin: 1em auto;
+}
+
+.account-btn .btn-span {
+    border: .1em solid #d49f15;
+    border-radius: .5em;
+    height: 2.5em;
+    width: 2.5em;
+    padding: 0.2em 0.4em;
+    color: #00837d;
+    margin-left: -0.11em;
+    margin-bottom: -0.25em;
+    font-size: 1.4em;
+}
+
+.account-btn .btn-span:hover {
+    color: rgba(0, 34, 72, 1);
 }

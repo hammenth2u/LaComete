@@ -4,26 +4,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import './styles.css';
 /**
  * Local import
  */
-
-// Composants enfants éventuels
-//import SearchBars from 'src/components/HomePage/SearchBars';
-import ResultList from '../../Results/ResultList';
+//import ResultList from '../../Results/ResultList';
+import HomeSearch from '../HomeSearch'
 import Intro from 'src/components/HomePage/Intro';
 
 // Styles et assets
-//import './app.sass';
+import './styles.css';
 
 const HomeApp = () => (
   
   <div id="homepage">
+
     <section className="homesearch">
-      <ResultList />      
+      <HomeSearch />      
     </section>    
+
     <Intro />
+    
   </div>
 );
 

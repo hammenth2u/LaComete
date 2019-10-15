@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800|Roboto:300,400,500,700,900&display=swap');
+
+.forgotten {
+    background-image: url(https://cdn.pixabay.com/photo/2018/04/17/11/43/business-3327340_960_720.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;    
+}
+
+.forgotten-psw {    
+    margin: 4em auto 12em auto;
+    border: 1px solid #cdcdcd;
+    border-radius: .5em;
+    padding: 2em;
+    text-align: left;
+    background-color: #ebebeb;
+    font-family: 'Nanum Gothic', sans-serif;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.forgotten-psw h1 {
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.forgotten-psw input {
+    height: 3em;
+    border: none;
+    border-radius: .5em
+}
+.forgotten-psw input:focus {
+    border: .1em solid #d49f15;
+    box-shadow: none;        
+}
+
+
+.btn-forgotten {
+    background-color: white;
+    color: black;
+    border: none;
+    box-shadow: none;
+    border-radius: .5em;
+    height: 3em;
+    width: 20%;
+    margin: auto;
+}
+
+.btn-forgotten:hover {
+    background-color: #00837d;
+    color: white;
+}

@@ -24,6 +24,7 @@ import Ad from 'src/components/Ad';
 import Footer from 'src/components/Templates/Footer';
 
 // Styles et assets
+import '../../styles/index.sass';
 
 class App extends React.Component {
   

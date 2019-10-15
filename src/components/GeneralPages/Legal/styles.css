@@ -1,0 +1,20 @@
+.legal {
+    margin: 3em auto;
+    border: 1px solid #cdcdcd;
+    border-radius: .5em;
+    padding: 2em;
+    text-align: left;
+    background-color: #ebebeb;
+    font-family: 'Nanum Gothic', sans-serif;    
+    width: 60%;
+}
+
+.legal a {
+    color: #00837d;
+    text-decoration: none;
+}
+
+.legal h1{
+    text-align: center;
+    margin-bottom: 1.5em;
+}

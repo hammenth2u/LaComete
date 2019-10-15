@@ -19,8 +19,6 @@ const Contact = (props) => {
     userMail
   } = props;
 
-  const autoFill = userMail;
-
   return(
     <div>
     <form className="contact-form" onSubmit={handleSubmit}>
@@ -37,12 +35,12 @@ const Contact = (props) => {
         {errors.email && touched.email && <div className="invalid-feedback">{errors.email}</div>}
       </div> 
       ) : (
-
+        
         <div className="form-group">
         <label>Email</label>
         <input name="email" type="text" 
           className={`form-control ${errors.email && touched.email && 'is-invalid'}`}
-          value= {autoFill}
+          value= {userMail}
           onChange={handleChange}
           onBlur={handleBlur} />
         {errors.email && touched.email && <div className="invalid-feedback">{errors.email}</div>}
@@ -87,17 +85,6 @@ const Contact = (props) => {
   );
 }
 
-/*
-Header.propTypes = {
-  categories: PropTypes.arrayOf(
-    PropTypes.shape({
-      route: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired
-};
-*/
-
 export default withFormik({
   mapPropsToValues: (props) => { 
     return {
@@ -109,14 +96,14 @@ export default withFormik({
 
   validationSchema: Yup.object().shape({
     
-    email: Yup.string().email('Veuillez rentrer une adresse email valide').required('Veuillez compléter ce champ'),
+    email: Yup.string().email('Veuillez rentrer une adresse email valide'),
     object: Yup.string().required('Veuillez compléter ce champ'),
     message: Yup.string().required('Veuillez compléter ce champ'),
   }),
 
   handleSubmit: (values, { setSubmitting, resetForm }) => {
     setTimeout(() => {
-      
+
       axios.post('/api/contact/post', {
         email: values.email,
         object: values.object,

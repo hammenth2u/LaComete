@@ -33,7 +33,9 @@ class ResultApp extends React.Component {
     const homeResultData = this.state.homeSearchRes.map(homeRes=>
     <li className="cards_item" key={ homeRes.id }>
       <div className="card">
-        <div className="card_image"><img src={homeRes.picture}/></div>
+        <div className="card_image">
+          <img src={homeRes.picture}/>
+        </div>
         <div className="card_content" >
         <h3 className="card_title">{ homeRes.title }</h3>
         <p className="card_text">{ homeRes.category }</p>
@@ -45,8 +47,8 @@ class ResultApp extends React.Component {
   )
 
     return (
-      <div id="app">    
-      <div className="container">
+      <div id="wrapper">    
+      <div className="searchpage">      
         <Formik 
           initialValues={{ type: '', location:'', category:'' }}
         
@@ -96,7 +98,7 @@ class ResultApp extends React.Component {
             handleSubmit
           }) => {
 
-          return(        
+          return(                    
             <form onSubmit={handleSubmit} className="searchform">
             
             <div className="radio-group">

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
+
 /**
  * Local import
  */
@@ -25,6 +26,7 @@ import Footer from 'src/components/Templates/Footer';
 
 // Styles et assets
 import '../../styles/index.sass';
+import './styles.css'
 
 class App extends React.Component {
   
@@ -82,7 +84,7 @@ class App extends React.Component {
     return (
       
       <div id="app">
-        
+        <div id="wrapper">
         <Header userStatus={ this.state.userStatus } />
 
           <Switch>
@@ -97,7 +99,7 @@ class App extends React.Component {
             <Route path="/annonces/:id" component={ Ad } />       
         
           </Switch>
-
+        </div>
         <Footer />
 
       </div>

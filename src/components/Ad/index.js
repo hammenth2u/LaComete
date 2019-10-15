@@ -6,7 +6,6 @@ import { faStar, faEnvelope, faAt, faPhone } from '@fortawesome/free-solid-svg-i
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 
-
 //import './styles.sass';
 
 class Ad extends React.Component {
@@ -17,6 +16,7 @@ class Ad extends React.Component {
     commentContent: '',
     contactObject: '',
     contactContent: '',
+    newComment: [],
     contactOpen: false,
     phoneOpen: false,
     atOpen: false,
@@ -46,8 +46,8 @@ class Ad extends React.Component {
     });   
 
     /* STATUS DE L'UTILISATEUR */
-    //axios.get('http://127.0.0.1:8001/api/user/isConnected')
-      axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/isConnected')
+    axios.get('http://127.0.0.1:8001/api/user/isConnected')
+    //  axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/isConnected')
       
       .then(response => {
         
@@ -147,19 +147,20 @@ class Ad extends React.Component {
   handleSubmit = (evt) => {
     const adId = this.state.singleAd.id;
     console.log('ADID : ', adId)
-    evt.preventDefault();    
+    evt.preventDefault();
     axios.post('http://127.0.0.1:8001/api/comment/new', {
     //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/comment/new', {
         comment: this.state.commentContent,
-        adId: adId        
+        adId: adId                
       })
-      .then(function (response) {
-        console.log('COMMENT TEST : ', response);
+      .then((response) => {
+        console.log('COMMENT SUCCESS : ', response);
+        this.setState({comments: response.data});
+        console.log('newstate : ', this.state.comments)
       })
-
       .catch(error => {
           console.log('COMMENT ERROR : ', error);
-      });   
+      }); 
   };  
 
   /* FORMULAIRE CONTACT */
@@ -223,16 +224,17 @@ class Ad extends React.Component {
     }
   }
 
-  render () {  
-    const commentsList =  this.state.comments;
-    const list = commentsList.map(function(comment){
-      return (
-        <li className="comment" key={comment.idComment}>
-          <span className="content">{comment.contentComment}</span>
-          <small className="comment-author">{comment.userComment}</small>          
-        </li>
-      )
-    })    
+  render () {     
+    
+    const commentsList = this.state.comments;
+      const list = commentsList.map(function(comment){
+        return (
+          <li className="comment" key={comment.idComment}>
+            <span className="content">{comment.contentComment}</span>
+            <small className="comment-author">{comment.userComment}</small>          
+          </li>
+        );
+      })
 
     return (
       <div className="ad">
@@ -339,7 +341,7 @@ class Ad extends React.Component {
         <section className="comments">          
           <div>
             <h3>Commentaires : </h3>
-            <ul>                          
+            <ul>                       
               {list}
             </ul>
           </div>

@@ -2,107 +2,168 @@
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC:400,700|Just+Another+Hand|Sue+Ellen+Francisco&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800|Roboto:300,400,500,700,900&display=swap');
 
+/********************************************************| SEARCHBAR |********************************************************/
 
-/* Design */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/********************** GLOBAL *************************/
+
+.searchpage form {
+  border-bottom: 1px solid #cdcdcd;  
+} 
+
+/********************** RADIOS *************************/
+
+.searchpage .radio-group {  
+  width: 50%;
+}
+
+.searchpage .radio-group label {
+  margin-right: 1em;
+  font-family: 'Sue Ellen Francisco', sans-serif;
+  color: white;    
+  text-transform: uppercase;
+  font-size: 1.2em;
 }
 
 
-.resultgrid-search {
-  color: #272727;
-  font-family: 'Nanum Gothic', sans-serif;
-  font-weight: 400;
-  width: 80%;
+@keyframes click-wave {
+  0% {
+    height: 1.5em;
+    width: 1.5em;
+    opacity: 0.35;
+    position: relative;
+  }
+  100% {
+    height: 3.5em;
+    width: 3.5em;
+    margin-left: -1em;
+    margin-top: -1em;
+    opacity: 0;
+  }
+}
+
+.searchpage .option-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  top: .3em;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1.5em;
+  width: 1.5em;
+  transition: all 0.15s ease-out 0s;
+  background: #fff;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 0.5rem;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+  border: 2px solid #d49f15;
+}
+.searchpage .option-input:hover {
+  background: #fff;
+  border: 2px solid #00837d;
+}
+
+.searchpage .option-input:checked::before {
+  height: 1.5em;
+  width: 1em;
+  position: absolute;
+  color: #00837d;
+  content: '✔';
+  display: inline-block;
+  font-size: 1.5em;
+  text-align: center;
+  line-height: 1em;
+}
+.searchpage .option-input:checked::after {
+  -webkit-animation: click-wave 0.65s;
+  -moz-animation: click-wave 0.65s;
+  animation: click-wave 0.65s;
+  background: #00837d;
+  content: '';
+  display: block;
+  position: relative;
+  z-index: 100;
+}
+.searchpage .option-input.radio {
+  border-radius: 50%;
+}
+.searchpage .option-input.radio::after {
+  border-radius: 50%;
+}
+
+/********************** SELECT *************************/
+
+.searchpage .locsearch__menu-list, .searchpage .catsearch__menu-list {
+  border: none;
+  border-radius: .5em;
+  font-family: 'Sue Ellen Francisco', sans-serif;
+  text-transform: uppercase;
+}
+
+.searchpage .catsearch, .searchpage .locsearch {
+  width: 50%;
   margin: auto;
 }
 
-img {
-  height: auto;
-  max-width: 100%;
-  vertical-align: middle;
+.searchpage .catsearch__control:hover, .searchpage .locsearch__control:hover {
+  border: .1em solid #00837d;
+  border-radius: .5em;   
 }
 
-.btn {
-  color: #ffffff;
-  padding: 0.8rem;
-  font-size: 14px;
-  text-transform: uppercase;
-  border-radius: 4px;
-  font-weight: 400;
-  display: block;
-  width: 100%;
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: transparent;
+.searchpage .catsearch__control, .searchpage .locsearch__control {
+  height: 2em;    
+  border: .1em solid #d49f15;
+  border-radius: .5em;   
 }
 
-.btn a {
-  color: white;
-  text-transform: none;
+.searchpage .catsearch__value-container, .searchpage .locsearch__value-container { 
+  margin: 0 0.5em;
+  height: 1.5em
 }
 
-.btn:hover {
-  background-color: rgba(255, 255, 255, 0.12);
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  width: 100%;
-  margin: 0 auto;  
-  padding-left: 0
-}
-
-.cards_item {
-  display: flex;
-  padding: 1rem;
-
-  width: 100%;
-}
-
-@media (min-width: 40rem) {
-  .cards_item {
-    width: 50%;
-  }
-}
-
-@media (min-width: 56rem) {
-  .cards_item {
-    width: 33.3333%;
-  }
-}
-
-.card {
-  background-color: white;
-  border-radius: 0.25rem;
-  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.card_content {
-  padding: 1rem;
-  background-color: #00837d;
-}
-
-.card_title {
-  color: #ffffff;
-  font-size: 1.2rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin: 0px;
+.searchpage .css-1wa3eu0-placeholder {
+  color: black;
   font-family: 'Sue Ellen Francisco', sans-serif;
+  text-transform: uppercase;
+  font-size: 1em;
+  margin-top: .2em;
 }
 
-.card_text {
-  color: #ffffff;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  margin-bottom: 1.25rem;    
-  font-weight: 400;
+.searchpage .css-1g48xl4-IndicatorsContainer {
+  display: none;
 }
+
+/********************** BUTTON *************************/
+
+.searchpage .btn {
+  background-color: white;
+  border: none;
+  border-radius: .5em;
+  height: 3em;
+  width: 3em;
+  margin: 0 auto;    
+}
+
+.searchpage .btn svg {
+  border: .15em solid #d49f15;
+  border-radius: .5em;
+  height: 2.5em;
+  width: 2.5em;
+  padding: 0.2em;
+  color: #00837d;
+  margin-left: -0.63em;
+  margin-top: -0.63em;
+}
+
+.searchpage .btn svg:hover {
+  border:none;
+}
+

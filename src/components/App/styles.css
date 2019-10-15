@@ -1,0 +1,116 @@
+#wrapper {
+    height: calc(100% - 8.5em);     
+}
+
+/* Footer container */
+.website-footer {
+    background-color: #002248;
+    font-family: Arial;
+    padding-top: 1em;
+    display: flex;
+    justify-content: space-around;
+    height: 8.5em;
+    position: absolute;    
+    right: 0;
+    left: 0;
+}
+
+.website-footer li {
+    float: center;
+    font-size: .9em;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.website-footer li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Links inside the footer */
+.website-footer p {
+    font-size: 1em;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Make links on hover bold */
+.website-footer a:hover {    
+    color: #d49f15;    
+}
+
+.copyright {
+    font-family: 'Sue Ellen Francisco', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    color: #d49f15;    
+}
+
+.middle {
+    text-align: center;
+}
+
+.social {
+    color: white;
+    font-size: 1.5em;
+    margin: 1em 0;
+}
+
+.social:hover {
+    color: #d49f15;
+}
+
+/******************************************************| SIDEBAR |******************************************************/
+
+/* The side navigation menu */
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 15em;
+    background-color:rgba(0, 34, 72, 1);
+    position: fixed;
+    height: 100%;
+    font-family: 'Sue Ellen Francisco', sans-serif;
+    text-transform: uppercase;
+  }
+
+  /* Sidebar header */
+  .sidebar p {
+    display: block;
+    color: white;
+    padding: 1em;
+    text-decoration: none;
+    font-size: 1.2em;
+    background-color: #00837d;
+  }
+  
+  /* Sidebar links */
+  .sidebar a {
+    display: block;
+    color: white;
+    padding: 1em;
+    text-decoration: none;
+    font-size: 1.2em;
+  }
+  
+  /* Active/current link */
+  .sidebar a.active {
+    color: white;
+  }
+  
+  /* Links on mouse-over */
+  .sidebar a:hover:not(.active) {
+    background-color: #adefd3;
+    color: black;
+  }
+  
+  /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+  div.content {
+    margin-left: 15em;
+    padding: .2em 1em;
+    height: 100%;
+  }
+  
+  

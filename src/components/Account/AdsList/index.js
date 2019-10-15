@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
-import './styles.css';
+import '../AccountApp/style.css';
 
 const MyAds = ({ userAds }) => {
 
@@ -23,7 +23,7 @@ const MyAds = ({ userAds }) => {
   )
 
   return (
-    <div className="accountads">      
+    <div className="accountgrid">      
       <div className="resultgrid">          
         <h1>Mes annonces</h1> 
         <ul className="cards">                          

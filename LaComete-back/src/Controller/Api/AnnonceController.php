@@ -44,6 +44,10 @@ class AnnonceController extends AbstractController
         foreach ($annonces as $annonce) 
         {
 
+            $createdAt= $annonce->getCreatedAt()->getTimestamp();
+
+            $createdAt = date('d-M-Y à H:i',$createdAt);
+
             $formatted [] = [
                'id' => $annonce->getId(),
                'title' => $annonce->getTitle(),
@@ -54,6 +58,7 @@ class AnnonceController extends AbstractController
                'user' => $annonce->getUser()->getUsername(),
                'category' => $annonce->getCategory()->getName(),
                'picture' => $annonce->getPicture(),
+               'createdAt' => $createdAt,
             ];
         }
         
@@ -81,6 +86,9 @@ class AnnonceController extends AbstractController
             $formatted = [];
             foreach ($annonces as $annonce) 
             {
+                $createdAt= $annonce->getCreatedAt()->getTimestamp();
+                $createdAt = date('d-M-Y à H:i',$createdAt);
+
                 $formatted [] = [
                 'id' => $annonce->getId(),
                 'title' => $annonce->getTitle(),
@@ -88,6 +96,7 @@ class AnnonceController extends AbstractController
                 'city' => $annonce->getLocation(),
                 'type' => $annonce->getType(),
                 'picture' => $annonce->getPicture(),
+                'createdAt' => $createdAt,
                 ];
             }
             
@@ -122,12 +131,6 @@ class AnnonceController extends AbstractController
         $cat = $request->request->get('category');
         $need = $request->request->get('need');
 
-        
-
-        // if($request->request->get('fileName')){
-        //     $picture = $request->request->get('fileName');
-        //     $annonce->setPicture($picture);
-        // }
 
         if($request->request->get('email')){
             $email = $request->request->get('email');
@@ -203,6 +206,8 @@ class AnnonceController extends AbstractController
             $image = 'https://cdn.pixabay.com/photo/2017/06/05/11/01/airport-2373727_960_720.jpg';
         }elseif($category->getName() == 'divers'){
             $image = 'https://cdn.pixabay.com/photo/2017/01/31/13/31/animal-2024066_960_720.png';
+        }elseif($category->getName() == 'cinema'){
+            $image = 'https://cdn.pixabay.com/photo/2016/09/16/00/16/movie-1673021_960_720.jpg';
         }
 
 
@@ -242,6 +247,9 @@ class AnnonceController extends AbstractController
         $annonceId = substr($path, 10);
         $annonce = $this->getDoctrine()->getRepository(Annonce::class)->find($annonceId);
 
+        $createdAt= $annonce->getCreatedAt()->getTimestamp();
+        $createdAt = date('d-M-Y à H:i',$createdAt);
+
         $formatted = [];
             $formatted [] = [
                'id' => $annonce->getId(),
@@ -250,13 +258,13 @@ class AnnonceController extends AbstractController
                'city' => $annonce->getLocation(),
                'type' => $annonce->getType(),
                'need' => $annonce->getNeed(),
-               'createdAt' => $annonce->getCreatedAt(),
                'user' => $annonce->getUser()->getUsername(),
                'category' => $annonce->getCategory()->getName(),
                'website' => $annonce->getWebsite(),
                'email' => $annonce->getEmail(),
                'phone' => $annonce->getPhone(),
                'picture' => $annonce->getPicture(),
+               'createdAt' => $createdAt,
             ];
         
         return new JsonResponse($formatted);
@@ -317,6 +325,8 @@ class AnnonceController extends AbstractController
 
             foreach($annonces as $annonce)
             {
+                $createdAt= $annonce->getCreatedAt()->getTimestamp();
+                $createdAt = date('d-M-Y à H:i',$createdAt);
             
                 $formatted [] = [
                 'id' => $annonce->getId(),
@@ -326,6 +336,7 @@ class AnnonceController extends AbstractController
                 'type' => $annonce->getType(),
                 'category' => $annonce->getCategory()->getName(),
                 'picture' => $annonce->getPicture(),
+                'createdAt' => $createdAt,
                 ];
             }
             

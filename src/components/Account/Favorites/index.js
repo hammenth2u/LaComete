@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { Col } from 'react-bootstrap'
 
-import './styles.css';
+import '../AccountApp/style.css';
 
 const Favorites = ({ userFavs }) => {
 
-  const userFavList = userFavs.map(userFav => 
-    
+  const userFavList = userFavs.map(userFav =>     
     <li className="cards_item" key={ userFav.idAnnonce }>
       <div className="card">
         <div className="card_image"><img src={ userFav.pictureAnnonce }/></div>
@@ -23,7 +23,7 @@ const Favorites = ({ userFavs }) => {
   )
 
   return (
-    <div className="accountfav">            
+    <div className="accountgrid">            
       <div className="resultgrid">  
         <h1>Mes favoris</h1>      
         <ul className="cards">     

@@ -167,7 +167,7 @@ class UserController extends AbstractController
 
         $user = $this->getDoctrine()->getRepository(User::class)->findUserByEmail($email);
 
-        //dump($user);exit;
+        $userFirstname = $user->getFirstname();
 
 
         $newPassword = "";
@@ -190,11 +190,18 @@ class UserController extends AbstractController
 
 
         $to = $email;
-        $obj = "La Comète - Mot de passe oublié";
-        $msg = "Voilà votre nouveau mot de passe temporaire qu'il faudra changer dans vos paramètres par la suite:";
-        $msg2= "\r\n"."Nouveau mot de passe : ".$newPassword;
+        $obj = "Mot de passe oublié";
+        $msg = "Bonjour $userFirstname,"."\r\n"."\r\n"."Voilà votre nouveau mot de passe temporaire qu'il faudra changer dans vos paramètres par la suite:";
+        $msg2= "\r\n"."Nouveau mot de passe : ".$newPassword."\r\n"."\r\n"."Amicalement,"."\r\n"."L'équipe LaComete";
+
+        $headers = array(
+            'From' => 'Support-LaComete',
+            'Reply-To' => 'lacometetitan@gmail.com',
+            'X-Mailer' => 'PHP/' . phpversion(),
+            'Content-type'=> 'text/html; charset= utf8',
+        );
         
-        mail($to, $obj, $msg.$msg2);
+        mail($to, $obj, $msg.$msg2, $headers);
 
         $response = new Response('success');
         return $response;

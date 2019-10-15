@@ -59,6 +59,29 @@ class UserController extends AbstractController
             $plainPassword = $user->getPassword();
             $encodedPassword = $encoder->encodePassword($user, $plainPassword);
             $user->setPassword($encodedPassword);
+
+/*************************************Envoie email inscription***************************************/
+
+            $userFirstname = $user->getFirstname();
+
+
+            $to = $user->getEmail();
+            $obj = 'Confirmation Inscription LaComete';
+            $msg = "Bonjour $userFirstname,"."\r\n"."\r\n"."Nous vous informons que votre inscription a bien été prise en compte."."\r\n"."Pour vous connecter cliquez sur le lien suivant :"."\r\n". "http://ec2-3-84-230-242.compute-1.amazonaws.com/connexion"."\r\n"."\r\n"."Amicalement,"."\r\n"."L'équipe LaComete.";
+
+
+            $headers = array(
+                'From' => 'Support-LaComete',
+                'Reply-To' => 'lacometetitan@gmail.com',
+                'X-Mailer' => 'PHP/' . phpversion(),
+                'Content-type'=> 'text/html; charset= utf8',
+            );
+
+            mail($to, $obj, $msg, $headers);
+
+
+/***************************************************************************************************/
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -68,57 +91,6 @@ class UserController extends AbstractController
             'registerForm' => $form->createView()
         ]);
    
-
-    /*
-    if ($request->request->get('password') != '') {
-
-            //$user = $form->getData();
-
-            $user = new User();
-            $user->setRoles(["ROLE_USER"]);
-            $user->setStatus(true);
-
-            $username = $request->request->get('username');
-            $email = $request->request->get('email');
-            $plainPassword = $request->request->get('password');
-
-            //$plainPassword = $user->getPassword();
-            $encodedPassword = $encoder->encodePassword($user, $plainPassword);
-
-            $user->setUsername($username);
-            $user->setEmail($email);
-            $user->setPassword($encodedPassword);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-
-            return $this->redirectToRoute('app_login');
-       }
-
-        return $this->render('security/register.html.twig');
-        */
     }
-    
-    // /**
-    //  * @Route("/mon-compte", name="app_profile")
-    //  */
-    // public function profile(Request $request)
-    // {
-    //     // On a besoin d'afficher un formulaire différent de l'inscription
-    //     // Grâce au UserType, avec l'Event, on devrait y arriver sans faire de manipulation dans le contrôleur
-
-    //     // On crée l'objet Form avec l'objet de l'utilsateur
-    //     $user = $this->getUser();
-    //     $form = $this->createForm(UserType::class, $user);
-
-    //     // C'est par ici qu'on ajouterait le code pour traiter les informations reçues par le formulaire. On n'a pas développé cette fonctionnalité pour le moment.
-
-    //     // Le formulaire est déja relié à l'utilisateur, on l'envoie à la vue
-    //     return $this->render('security/profile.html.twig', [
-    //         'profileForm' => $form->createView(),
-    //         'user' => $user
-    //     ]);
-    // }
 
 }

@@ -1,15 +1,20 @@
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800|Roboto:300,400,500,700,900&display=swap');
 
+
 .forgotten {
     background-image: url(https://cdn.pixabay.com/photo/2018/04/17/11/43/business-3327340_960_720.jpg);
     background-position: center;
+    background-attachment: fixed;
     background-size: cover;
-    background-repeat: no-repeat;    
+    background-repeat: no-repeat;  
+    height: 100%;
+    padding: 4em;  
+    margin-bottom: -3em;  
 }
 
 .forgotten-psw {    
     margin: 4em auto 12em auto;
-    border: 1px solid #cdcdcd;
+    border: 1px solid  #00837d;
     border-radius: .5em;
     padding: 2em;
     text-align: left;

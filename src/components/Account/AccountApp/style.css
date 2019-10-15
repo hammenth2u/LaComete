@@ -10,58 +10,6 @@ form h2 {
 }
 
 
-/******************************************************| SIDEBAR |******************************************************/
-
-/* The side navigation menu */
-.sidebar {
-    margin: 0;
-    padding: 0;
-    width: 15em;
-    background-color:rgba(0, 34, 72, 1);
-    position: fixed;
-    height: 100%;
-    font-family: 'Sue Ellen Francisco', sans-serif;
-    text-transform: uppercase;
-  }
-
-  /* Sidebar header */
-  .sidebar p {
-    display: block;
-    color: white;
-    padding: 1em;
-    text-decoration: none;
-    font-size: 1.2em;
-    background-color: #00837d;
-  }
-  
-  /* Sidebar links */
-  .sidebar a {
-    display: block;
-    color: white;
-    padding: 1em;
-    text-decoration: none;
-    font-size: 1.2em;
-  }
-  
-  /* Active/current link */
-  .sidebar a.active {
-    color: white;
-  }
-  
-  /* Links on mouse-over */
-  .sidebar a:hover:not(.active) {
-    background-color: #adefd3;
-    color: black;
-  }
-  
-  /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
-  div.content {
-    margin-left: 15em;
-    padding: .2em 1em;
-    height: 100%;
-  }
-  
-  
 
 /******************************************************| HOME - IN PROGRESS |******************************************************/
 
@@ -355,4 +303,109 @@ form h2 {
 
 .account-btn .btn-span:hover {
     color: rgba(0, 34, 72, 1);
+}
+
+/*****************************************************| GRIDS |*****************************************************/
+
+/* Font */
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800|Roboto:300,400,500,700,900&display=swap');
+
+/* Design */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.accountgrid {
+  font-family: 'Nanum Gothic', sans-serif;
+  font-style: normal;
+  padding: 1rem;
+  width: 80%
+}
+
+.accountgrid .resultgrid {
+  max-width: 80%;
+  position: relative;
+  left: 18em;
+}
+
+.accountgrid .resultgrid h1 {
+    font-size: 1.5em;
+    font-weight: 400;
+    text-align: center;
+}
+
+.accountgrid .resultgrid img {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.accountgrid .resultgrid .btn {
+  padding: 0.8rem;
+  font-size: 1em;
+  text-transform: uppercase;
+  border-radius: .5em;
+  font-weight: 400;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+}
+
+.accountgrid .resultgrid .btn a {
+    color: white;
+}
+
+.accountgrid .resultgrid .btn:hover {
+  background-color: rgba(255, 255, 255, 0.12);  
+}
+
+.accountgrid .resultgrid .btn a:hover {
+    color: white;
+}
+
+.accountgrid .resultgrid .cards {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.accountgrid .resultgrid .cards_item {
+  display: flex;
+  padding: 1rem;  
+}
+
+.accountgrid .resultgrid .card {
+  background-color: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.accountgrid .resultgrid .card_content {
+  padding: 1rem;
+  background-color: #00837d;
+}
+
+.accountgrid .resultgrid .card_title {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0px;
+}
+
+.accountgrid .resultgrid .card_text {
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;    
+  font-weight: 400;
 }

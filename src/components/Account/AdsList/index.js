@@ -15,7 +15,7 @@ const MyAds = ({ userAds }) => {
         <div className="card_content" >
         <h3 className="card_title">{ userAd.title }</h3>
         <p className="card_text">{ userAd.category }</p>
-        <p className="card_text"><FontAwesomeIcon icon={faMapMarkerAlt} /> { userAd.location }</p>
+        <p className="card_text"><FontAwesomeIcon icon={faMapMarkerAlt} /> { userAd.city }</p>
         <button className="btn card_btn"><Link to={`/annonces/${userAd.id}`}>Voir</Link></button>
         </div>
       </div>
@@ -35,3 +35,15 @@ const MyAds = ({ userAds }) => {
 };
 
 export default MyAds;
+
+<div class="card-grid">
+  <div class="card-wrap">
+    <div class="card">
+      <img src="http://placehold.it/500x500" class="card-img"/>
+      <div>
+        <h4>This is an example</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at efficitur nisl. </p>
+      </div>
+    </div>
+  </div>
+</div>

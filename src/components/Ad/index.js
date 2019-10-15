@@ -6,7 +6,7 @@ import { faStar, faEnvelope, faAt, faPhone } from '@fortawesome/free-solid-svg-i
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 
-//import './styles.sass';
+import './styles.css';
 
 class Ad extends React.Component {
   state = {
@@ -241,8 +241,85 @@ class Ad extends React.Component {
              
         <section>
           <article>  
-            <h3>Title : { this.state.singleAd.title }</h3>
+            <h3>{ this.state.singleAd.title }</h3>
+            <div class="first-section">
+            <div className="imgwrapper">
             <img src={ this.state.singleAd.picture } />
+            </div>
+
+            {this.state.userStatus == "<" ? (
+              '' ) : (
+              <div className="fav-contact">
+                <section>  
+                  
+                  <Button onClick={ this.favoriteAd } aria-controls="example-collapse-text" aria-expanded={this.state.contactOpen} >
+                    <FontAwesomeIcon icon={faStar} />
+                  </Button>              
+                  
+                  {this.state.singleAd.phone != null ? (
+                  <div>
+                    <Button onClick={this.togglePhone} aria-controls="example-collapse-text" aria-expanded={this.state.phoneOpen} >
+                      <FontAwesomeIcon icon={faPhone} />
+                    </Button>
+                    <Collapse in={this.state.phoneOpen}>
+                      <div className="contact-info">
+                        <p>{this.state.singleAd.phone}</p>
+                      </div>
+                    </Collapse> 
+                  </div>             
+                  ) : ('')}
+                  
+                  {this.state.singleAd.website != null ? (
+                    <div>
+                      <Button onClick={this.toggleAt} aria-controls="example-collapse-text" aria-expanded={this.state.atOpen} >
+                        <FontAwesomeIcon icon={faAt} />
+                      </Button>       
+                      <Collapse in={this.state.atOpen}>
+                        <div className="contact-info">
+                          <a>{this.state.singleAd.website}</a>
+                        </div>
+                      </Collapse>
+                    </div> 
+                    ) : ('')}
+    
+                  {this.state.singleAd.email != null ? (
+                    <div>
+                      <Button onClick={this.toggleContact} aria-controls="example-collapse-text" aria-expanded={this.state.contactOpen} >
+                        <FontAwesomeIcon icon={faEnvelope} />
+                      </Button>
+                      <Collapse in={this.state.contactOpen}>                
+                          
+                        <form className="contact-form"> 
+                          <div className="form-group">
+                            <input
+                              name="contactobject"
+                              type="text"
+                              className="contactinput"
+                              value={this.contactObject}
+                              onChange={this.handleChangeContactObject}
+                              //onBlur={handleBlur}
+                            />                  
+                          </div>             
+                          <div className="form-group">
+                            <input
+                              name="contact"
+                              type="text"
+                              className="contactinput"
+                              value={this.contactContent}
+                              onChange={this.handleChangeContact}
+                              //onBlur={handleBlur}
+                            />                  
+                          </div>          
+                        <button type="submit" className="btn btn-outline-primary" label='Envoyer' onClick={this.handleSend}/>    
+                        </form> 
+                          
+                      </Collapse>
+                    </div>
+                  ) : ('')}                  
+                </section>                     
+            </div>          
+            )}
+            </div>
             <h4>Auteur : { this.state.singleAd.user }</h4>
             <p>Lieu : { this.state.singleAd.city }</p>
             <p>Catégorie : { this.state.singleAd.category }</p>
@@ -250,94 +327,20 @@ class Ad extends React.Component {
             <p>Recherche : { this.state.singleAd.need }</p>
           </article> 
         </section>
-
-        {this.state.userStatus == "<" ? (
-          '' ) : (
-          <div>
-            <section>  
-              
-              <Button onClick={ this.favoriteAd } aria-controls="example-collapse-text" aria-expanded={this.state.contactOpen} >
-                <FontAwesomeIcon icon={faStar} />
-              </Button>              
-              
-              {this.state.singleAd.phone != null ? (
-              <div>
-              <Button onClick={this.togglePhone} aria-controls="example-collapse-text" aria-expanded={this.state.phoneOpen} >
-                <FontAwesomeIcon icon={faPhone} />
-              </Button>
-              <Collapse in={this.state.phoneOpen}>
-                <div id="contact-form">
-                  <p>{this.state.singleAd.phone}</p>
-                </div>
-              </Collapse> 
-              </div>             
-              ) : ('')}
-              
-              {this.state.singleAd.website != null ? (
-                <div>
-                <Button onClick={this.toggleAt} aria-controls="example-collapse-text" aria-expanded={this.state.atOpen} >
-                  <FontAwesomeIcon icon={faAt} />
-                </Button>       
-                <Collapse in={this.state.atOpen}>
-                  <div id="contact-form">
-                    <p>{this.state.singleAd.website}</p>
-                  </div>
-                </Collapse>
-                </div> 
-                ) : ('')}
-
-              {this.state.singleAd.email != null ? (
-              <div>
-              <Button onClick={this.toggleContact} aria-controls="example-collapse-text" aria-expanded={this.state.contactOpen} >
-                <FontAwesomeIcon icon={faEnvelope} />
-              </Button>
-              <Collapse in={this.state.contactOpen}>                
-                  
-                  <form className="contact-form"> 
-                    <div className="form-group">
-                      <input
-                        name="contactobject"
-                        type="text"
-                        className="contactinput"
-                        value={this.contactObject}
-                        onChange={this.handleChangeContactObject}
-                        //onBlur={handleBlur}
-                      />                  
-                    </div>             
-                    <div className="form-group">
-                      <input
-                        name="contact"
-                        type="text"
-                        className="contactinput"
-                        value={this.contactContent}
-                        onChange={this.handleChangeContact}
-                        //onBlur={handleBlur}
-                      />                  
-                    </div>          
-                  <button type="submit" className="btn btn-outline-primary" label='Envoyer' onClick={this.handleSend}/>    
-                  </form> 
-                  
-              </Collapse>
-              </div>
-              ) : ('')}
-              
-            </section> 
-
-            <form>              
-              <div className="form-group">
-                <input
-                  name="comment"
-                  type="text"
-                  className="commentinput"
-                  value={this.commentContent}
-                  onChange={this.handleChange}
-                  //onBlur={handleBlur}
-                />                  
-              </div>          
-            <button type="submit" className="btn btn-outline-primary" label='Envoyer' onClick={this.handleSubmit}/>    
-            </form> 
-        </div>          
-        )}
+          
+        <form>              
+          <div className="form-group">
+            <input
+              name="comment"
+              type="text"
+              className="commentinput"
+              value={this.commentContent}
+              onChange={this.handleChange}
+              //onBlur={handleBlur}
+            />                  
+          </div>          
+          <button type="submit" className="btn btn-outline-primary" label='Envoyer' onClick={this.handleSubmit}/>    
+        </form> 
         <section className="comments">          
           <div>
             <h3>Commentaires : </h3>
@@ -345,7 +348,8 @@ class Ad extends React.Component {
               {list}
             </ul>
           </div>
-        </section>
+      </section>
+        
             
       </div>
     )

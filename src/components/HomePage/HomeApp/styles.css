@@ -151,7 +151,7 @@ font-family: 'Nanum Gothic', sans-serif;
 
 /********************** BUTTON *************************/
 
-.homesearch .btn {
+.homesearch .homebtn {
     background-color: white;
     border: none;
     border-radius: .5em;
@@ -160,15 +160,15 @@ font-family: 'Nanum Gothic', sans-serif;
     margin: 0 auto;    
 }
 
-.homesearch .btn svg {
+.homesearch .homebtn svg {
     border: .15em solid #d49f15;
     border-radius: .5em;
     height: 3.5em;
     width: 3.5em;
     padding: 0.2em;
     color: #00837d;
-    margin-left: -0.45em;
-    margin-top: -0.45em;
+    margin-left: -0.15em;
+    margin-top: -0.1em;
 }
 
 

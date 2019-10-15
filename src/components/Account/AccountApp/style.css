@@ -9,7 +9,24 @@ form h2 {
     margin-bottom: 2em;
 }
 
+/******************************************************| FOOTER |******************************************************/
 
+
+.deactivatebtn {    
+    border-radius: .5em;
+    border:none;
+    height: 2em;    
+    color:white; 
+    font-size: .8em;
+    font-family: 'Nanum Gothic', sans-serif;
+    margin-top: 1em;
+    background-color: transparent;
+}
+
+.deactivatebtn:hover {    
+    background-color: #d49f15;
+    color:rgba(0, 34, 72, 1);
+}
 
 /******************************************************| HOME - IN PROGRESS |******************************************************/
 
@@ -308,7 +325,7 @@ form h2 {
 /*****************************************************| GRIDS |*****************************************************/
 
 /* Font */
-@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800|Roboto:300,400,500,700,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
 
 /* Design */
 *,
@@ -318,20 +335,21 @@ form h2 {
 }
 
 .accountgrid {
-  font-family: 'Nanum Gothic', sans-serif;
+  color: #272727;
+  font-family: 'Quicksand', serif;
   font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0;
   padding: 1rem;
-  width: 80%
 }
 
 .accountgrid .resultgrid {
-  max-width: 80%;
-  position: relative;
-  left: 18em;
+  max-width: 1200px;
+  margin: 0 2em 0 auto;
 }
 
 .accountgrid .resultgrid h1 {
-    font-size: 1.5em;
+    font-size: 24px;
     font-weight: 400;
     text-align: center;
 }
@@ -343,10 +361,11 @@ form h2 {
 }
 
 .accountgrid .resultgrid .btn {
+  color: #ffffff;
   padding: 0.8rem;
-  font-size: 1em;
+  font-size: 14px;
   text-transform: uppercase;
-  border-radius: .5em;
+  border-radius: 4px;
   font-weight: 400;
   display: block;
   width: 100%;
@@ -355,16 +374,8 @@ form h2 {
   background: transparent;
 }
 
-.accountgrid .resultgrid .btn a {
-    color: white;
-}
-
 .accountgrid .resultgrid .btn:hover {
-  background-color: rgba(255, 255, 255, 0.12);  
-}
-
-.accountgrid .resultgrid .btn a:hover {
-    color: white;
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
 .accountgrid .resultgrid .cards {
@@ -375,12 +386,24 @@ form h2 {
   padding: 0;
 }
 
-.accountgrid .resultgrid .cards_item {
+.accountgrid .cards_item {
   display: flex;
-  padding: 1rem;  
+  padding: 1rem;
 }
 
-.accountgrid .resultgrid .card {
+@media (min-width: 40rem) {
+  .cards_item {
+    width: 50%;
+  }
+}
+
+@media (min-width: 56rem) {
+  .cards_item {
+    width: 33.3333%;
+  }
+}
+
+.accountgrid .card {
   background-color: white;
   border-radius: 0.25rem;
   box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
@@ -389,20 +412,21 @@ form h2 {
   overflow: hidden;
 }
 
-.accountgrid .resultgrid .card_content {
+.accountgrid .card_content {
   padding: 1rem;
   background-color: #00837d;
 }
 
-.accountgrid .resultgrid .card_title {
-  color: white;
+.accountgrid .card_title {
+  color: #ffffff;
   font-size: 1.1rem;
   font-weight: 700;
-  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-transform: capitalize;
   margin: 0px;
 }
 
-.accountgrid .resultgrid .card_text {
+.accountgrid .card_text {
   color: #ffffff;
   font-size: 0.875rem;
   line-height: 1.5;

@@ -21,7 +21,7 @@ const Settings = (props) => {
   } = props;
 
   const updateUserForm = userInfo.map(info =>
-        
+      
       <form className="settings-form" onSubmit={handleSubmit} key={info.id}>
       <h2>Modifier vos informations</h2>
 
@@ -137,8 +137,8 @@ const Settings = (props) => {
       <button type="submit" className="account-btn" disabled={isSubmitting}>
         {isSubmitting ? <span className="btn-span"><FontAwesomeIcon icon={faHourglassHalf} /></span> : <span className="btn-span"><FontAwesomeIcon icon={faRocket} /></span>}
       </button>
-
-    </form>
+      
+    </form>    
   )
   /**
    * FORMULAIRE

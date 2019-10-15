@@ -127,7 +127,7 @@ class ResultList extends React.Component {
             </div>            
             
             <div className="form-group">
-              <button type="submit" className="btn" disabled={isSubmitting}>
+              <button type="submit" className="homebtn" disabled={isSubmitting}>
               {isSubmitting ? 'Patienter' : <FontAwesomeIcon icon={faRocket} />}
               </button>
             </div>

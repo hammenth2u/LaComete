@@ -13,7 +13,7 @@
 /********************** RADIOS *************************/
 
 .searchpage .radio-group {  
-  width: 50%;
+  width: 100%;
 }
 
 .searchpage .radio-group label {
@@ -109,7 +109,7 @@
 }
 
 .searchpage .catsearch, .searchpage .locsearch {
-  width: 50%;
+  width: 90%;
   margin: auto;
 }
 
@@ -167,3 +167,126 @@
   border:none;
 }
 
+/********************** GRID *************************/
+
+
+/* Font */
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
+
+/* Design */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+.resultgrid-search {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.btn {
+  padding: 0.8rem;
+  border-radius: 4px;
+  font-weight: 400;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+}
+
+.btn a {
+  color: #ffffff;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cards_item {
+  display: flex;
+  padding: 1rem;
+  width: 50%
+}
+
+@media screen and (min-width: 56rem) {
+  .cards_item {
+    width: 33.3333%;
+  }
+  .searchpage .radio-group {  
+    width: 50%;
+  }
+  .searchpage .catsearch, .searchpage .locsearch {
+    width: 50%;
+    margin: auto;
+  }
+  .resultgrid-search {
+    max-width: 900px;
+  }
+}
+
+@media screen and (min-width: 75rem) {
+  .cards_item {
+    width: 25%;
+  }
+  .resultgrid-search {
+    max-width: 1200px;
+  }
+  
+}
+
+.card {
+  background-color: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card_content {
+  padding: 1rem;
+  background-color: #00837d;
+}
+
+.card_title {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  margin: 0px;
+}
+
+.card_text {
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;    
+  font-weight: 400;
+}

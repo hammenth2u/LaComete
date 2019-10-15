@@ -5,6 +5,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Route, Switch } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 /**
  * IMPORTS DE COMPONENTS
@@ -127,22 +129,17 @@ class AccountApp extends React.Component {
                         <a href="/mon-compte/mes-favoris">Mes Favoris</a>
                         <a href="/mon-compte/nouvelle-annonce">Créer une annonce</a>
                         <a href="/mon-compte/parametres">Paramètres</a>
+                        <button className="deactivatebtn" onClick={this.handleClick}><FontAwesomeIcon icon={ faTimes } /> Désactiver mon compte</button>                                        
                     </aside>
 
-                    <section>
+                    <section className="account-container">
                         <Switch>
                             <Route exact path="/mon-compte" component={AccMenu} />
                             <Route exact path="/mon-compte/parametres" render={(routeProps) => ( <Settings {...routeProps} userInfo={ this.state.currentUser } />)} />
                             <Route exact path="/mon-compte/mes-annonces" render={(routeProps) => ( <AdsList {...routeProps} userAds={ this.state.userAds } />)}/>
                             <Route exact path="/mon-compte/mes-favoris" render={(routeProps) => ( <Favorites {...routeProps} userFavs={ this.state.userFav } />)}/>
-                            <Route exact path="/mon-compte/nouvelle-annonce" component={ SubmitForm }/>
-                            
+                            <Route exact path="/mon-compte/nouvelle-annonce" component={ SubmitForm }/>                            
                         </Switch>
-                        <section className="account-footer">
-                            <a className="btn" href="/deconnexion">x Retour à la réalité</a>  
-                            <button onClick={this.handleClick} value="x Désactiver mon compte" />            
-                            <small>Votre profil, vos annonces et vos commentaires ne seront plus visibles sur le site</small>
-                        </section>
                     </section>
                 </div>
                 )

@@ -13,9 +13,9 @@ const About = () => {
                 <p className="author"> - Deb o'Clock</p>
             </section>
             <p className="idea">La Comète est née le jour où je me suis dit "J'aimerais tellement construire une armure d'Iron Man en vrai!". Evidemment, j'y connais rien en métallurgie et en électronique et je n'ai pas de garage où construire tout ça.
-            Et puis, ça m'a fait pensé à toutes les fois où on a dit à ma pote Clem "Non mais Clem, ouvre un resto!", parce qu'elle cuisine vraiment très bien. Et toutes celles où on s'est dit "Venez on ouvre un bar, on tient un concept génial". Et on le fait jamais. Parce qu'on maîtrise jamais tous les aspects d'un plan. Surtout un plan sur la comète...
+            Et puis, ça m'a fait penser à toutes les fois où on a dit à ma pote Clem "Non mais Clem, ouvre un resto!", parce qu'elle cuisine vraiment très bien. Et toutes celles où on s'est dit "Venez on ouvre un bar, on tient un concept génial". Et on le fait jamais. Parce qu'on maîtrise jamais tous les aspects d'un plan. Surtout un plan sur la comète...
             Et voilà, l'idée était là.</p>
-            <p className="idea">Donc si tu rêve de reconstruire l'intégralité des planètes connues de Star Wars en Lego, tu as déjà les plans et une magnifique étoile de la mort mais tu vis dans un 14m² ? Tu as hérité du manoir de tante Gladys et tes potes t'ont convaincu d'en faire un escape game, mais à part avoir des idées, tu ne sais pas faire grand chose? Ou au contraire tu sais tailler des figurines pokemon de 3cm à la tronçonneuse dans du chêne commun mais c'est pas très utile... Ce site est fait pour toi!</p>
+            <p className="idea">Donc si tu rêves de reconstruire l'intégralité des planètes connues de Star Wars en Lego, tu as déjà les plans et une magnifique étoile de la mort mais tu vis dans un 14m² ? Tu as hérité du manoir de tante Gladys et tes potes t'ont convaincu d'en faire un escape game, mais à part avoir des idées, tu ne sais pas faire grand chose? Ou au contraire tu sais tailler des figurines pokemon de 3cm à la tronçonneuse dans du chêne commun mais c'est pas très utile... Ce site est fait pour toi!</p>
             <p className="idea-author">- Pauline</p>
         </section>
 

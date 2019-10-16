@@ -202,7 +202,8 @@ export default withFormik({
    */
   handleSubmit: (values, { setSubmitting, resetForm }) => {
     setTimeout(() => {
-      axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/edit/account', {
+      //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/edit/account', {
+        axios.post('/api/user/edit/account', {
         firstname: values.firstname,
         lastname: values.lastname,
         username: values.username,

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faEnvelope, faAt, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faEnvelope, faAt, faPhone, faUser, faMapMarkerAlt, faPencilRuler,  } from '@fortawesome/free-solid-svg-icons';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 
@@ -26,7 +26,7 @@ class Ad extends React.Component {
     
     /* UNE SEULE ANNONCE EN FONCTION DE L'URL */
     const currentUrl = window.location.pathname;
-    axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/single/annonce', {
+    axios.post('/api/single/annonce', {
     //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/single/annonce', {
       currentUrl
     })
@@ -46,7 +46,7 @@ class Ad extends React.Component {
     });   
 
     /* STATUS DE L'UTILISATEUR */
-    axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/isConnected')
+    axios.get('/api/user/isConnected')
     //  axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/isConnected')
       
       .then(response => {
@@ -62,7 +62,7 @@ class Ad extends React.Component {
     /* FAVORITE TRUE/FALSE SI USER CONNECTE*/          
     const currentAdPath = window.location.pathname;
     console.log('TEST ID : ', currentAdPath);
-    axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/isFavorite', {
+    axios.post('/api/isFavorite', {
     //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/isFavorite'), {
       currentAdPath: currentAdPath,
     })
@@ -80,7 +80,7 @@ class Ad extends React.Component {
             
     /* COMMENTAIRES DE L'ANNONCE */
     const currentPath = window.location.pathname;
-    axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/comments/show', {
+    axios.post('/api/comments/show', {
     //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/comments/show'), {
       currentPath: currentPath,
     })    
@@ -109,7 +109,7 @@ class Ad extends React.Component {
 
     if(this.state.isFavorite == false) {
     
-      axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/favorite/new', {
+      axios.post('/api/favorite/new', {
       //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/favorite/new', {
         currentAdId: currentAdId,
         isFavorite: true        
@@ -124,7 +124,7 @@ class Ad extends React.Component {
 
     } else {
       
-      axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/favorite/new', {
+      axios.post('/api/favorite/new', {
       //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/favorite/new', {
         currentAdId: currentAdId,
         isFavorite: false        
@@ -148,7 +148,7 @@ class Ad extends React.Component {
     const adId = this.state.singleAd.id;
     console.log('ADID : ', adId)
     evt.preventDefault();
-    axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/comment/new', {
+    axios.post('/api/comment/new', {
     //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/comment/new', {
         comment: this.state.commentContent,
         adId: adId                
@@ -178,7 +178,7 @@ class Ad extends React.Component {
     const email = this.state.singleAd.email;
     console.log('AD USER MAIL : ', email)
     evt.preventDefault();    
-    axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/contact/another/user', {
+    axios.post('/api/contact/another/user', {
     //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/contact/another/user', {
       
         contactObject: this.state.contactObject,
@@ -229,10 +229,13 @@ class Ad extends React.Component {
     const commentsList = this.state.comments;
       const list = commentsList.map(function(comment){
         return (
-          <li className="comment" key={comment.idComment}>
-            <span className="content">{comment.contentComment}</span>
-            <small className="comment-author">{comment.userComment}</small>          
-          </li>
+          <div className="comment" key={comment.idComment}>
+            <div className="commentmeta">
+              <small className="comment-author">{comment.userComment}, </small>
+              <small className="comment-datetime">le {comment.dateComment}</small> 
+            </div>   
+          <p className="comment-content">{comment.contentComment}</p>                    
+          </div>
         );
       })
 
@@ -241,12 +244,19 @@ class Ad extends React.Component {
              
         <section>
           <article>  
-            <h3>{ this.state.singleAd.title }</h3>
-            <div class="first-section">
+            <h3 className="soloadtitle">{ this.state.singleAd.title }</h3>
+            <div className="first-section">
+            <div className="spaceone">
             <div className="imgwrapper">
-            <img src={ this.state.singleAd.picture } />
+            <img className="adpic" src={ this.state.singleAd.picture } />
             </div>
 
+            <div className="basicinfo">
+            <p><FontAwesomeIcon icon={faUser} /> { this.state.singleAd.user }</p>
+            <p><FontAwesomeIcon icon={faMapMarkerAlt} /> { this.state.singleAd.city }</p>
+            <p><FontAwesomeIcon icon={faPencilRuler} /> { this.state.singleAd.category }</p>
+            </div>
+            </div>
             {this.state.userStatus == "<" ? (
               '' ) : (
               <div className="fav-contact">
@@ -289,11 +299,12 @@ class Ad extends React.Component {
                       </Button>
                       <Collapse in={this.state.contactOpen}>                
                           
-                        <form className="contact-form"> 
-                          <div className="form-group">
+                        <form className="ad-contact-form"> 
+                          <div className="ad-form-group">
                             <input
                               name="contactobject"
                               type="text"
+                              placeholder="Objet"
                               className="contactinput"
                               value={this.contactObject}
                               onChange={this.handleChangeContactObject}
@@ -301,16 +312,17 @@ class Ad extends React.Component {
                             />                  
                           </div>             
                           <div className="form-group">
-                            <input
+                            <textarea
                               name="contact"
-                              type="text"
-                              className="contactinput"
+                              rows="4"
+                              placeholder="Message"
+                              className="contactinput-msg"
                               value={this.contactContent}
                               onChange={this.handleChangeContact}
                               //onBlur={handleBlur}
                             />                  
                           </div>          
-                        <button type="submit" className="btn btn-outline-primary" label='Envoyer' onClick={this.handleSend}/>    
+                        <button type="submit" className="adcontact btn-outline-primary" onClick={this.handleSend}>envoyer</button>    
                         </form> 
                           
                       </Collapse>
@@ -318,35 +330,38 @@ class Ad extends React.Component {
                   ) : ('')}                  
                 </section>                     
             </div>          
-            )}
+            )}            
             </div>
-            <h4>Auteur : { this.state.singleAd.user }</h4>
-            <p>Lieu : { this.state.singleAd.city }</p>
-            <p>Catégorie : { this.state.singleAd.category }</p>
-            <p>Description : { this.state.singleAd.description }</p>
-            <p>Recherche : { this.state.singleAd.need }</p>
+            <h4>Description : </h4>
+            <p>{ this.state.singleAd.description }</p>
+            <h4>Recherche : </h4>
+            <p>{ this.state.singleAd.need }</p>
           </article> 
         </section>
           
         <form>              
-          <div className="form-group">
-            <input
+          <h4>Commentaires : </h4>
+          <div className="commentgroup">
+            <textarea
               name="comment"
+              placeholder="Commentaire..."
+              row="3"
               type="text"
               className="commentinput"
               value={this.commentContent}
               onChange={this.handleChange}
               //onBlur={handleBlur}
-            />                  
+            /> 
+            <button type="submit" className="comment-btn" onClick={this.handleSubmit}>envoyer</button>                   
           </div>          
-          <button type="submit" className="btn btn-outline-primary" label='Envoyer' onClick={this.handleSubmit}/>    
+          
         </form> 
         <section className="comments">          
           <div>
-            <h3>Commentaires : </h3>
-            <ul>                       
+            
+            <section className="comment-section">                       
               {list}
-            </ul>
+            </section>
           </div>
       </section>
         

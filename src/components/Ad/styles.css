@@ -1,20 +1,39 @@
 .ad {
-    width: 80%;    
-    border: .2em solid #00837d;
-    border-radius: .5em;
-    background-color: #eeeeee;
+    width: 75%;        
     margin: 1.5em auto;
     padding: 1.5em;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.soloadtitle {
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 1em;
 }
 
 .first-section {
     display: flex;
+    flex-wrap: wrap;
+    border: .05em solid #00837d;
+    border-radius: .5em;
+    padding: 1em;
 }
 
-.imgwrapper {
-    width: 50%;   
-    overflow: hidden;
+.spaceone {
+    width: 60%;
+}
 
+.adpic {
+    width: 80%;
+    margin-bottom: 1em;
+}
+
+.basicinfo {
+    margin-bottom: 2em;
+}
+
+.basicinfo p {
+    margin-bottom: .3em;
 }
 
 .fav-contact {
@@ -23,12 +42,12 @@
 }
 
 .fav-contact button {
-    color: #00837d;
+    background-color: #00837d;
     border: .1em solid rgba(0, 34, 72, 1);
     border-radius: .5em;
     box-shadow: none;
-    background-color: white;
     margin-bottom: 1em;
+    color:white;
 }
 
 .fav-contact button:hover {
@@ -54,4 +73,74 @@
 
 .fav-contact .contact-info a:hover {
     color: #00837d;
+}
+
+.ad-form-group {
+    width: 100%;
+    margin-top: .2em;
+}
+
+.contactinput {
+    border-radius: .5em;
+    width: 100%;
+    box-shadow: none;
+    border: 2px solid #ededed;
+    margin-bottom: .8em;
+}
+
+.contactinput-msg {
+    border-radius: .5em;
+    width: 100%;
+    box-shadow: none;
+    border: 2px solid #ededed;
+}
+
+h4 {
+    margin: 1em;
+}
+
+.commentgroup {
+    display: flex;
+}
+.commentinput {
+    border-radius: .5em;
+    box-shadow: none;
+    border: 2px solid #ededed;
+    width: 90%;
+    margin-right: .5em;
+}
+
+.commentinput:hover, .contactinput:hover, .contactinput-msg:hover {
+    border-radius: .5em;
+    border: 2px solid #00837d;
+}
+
+.comment-btn {
+    border:  2px solid #00837d;
+    border-radius: .5em;
+    background-color: #00837d;
+    color: white;   
+}
+
+.comment-btn:hover {
+    background-color: white;
+    color: #00837d;
+    border:  2px solid #00837d;
+}
+
+.comment-section {
+    margin-top: 1.5em;
+}
+
+.comment {
+    border: .05em solid #bdbdbd;
+    padding: .5em;
+    background-color: #f1f1f1;
+    border-radius: .5em;
+    margin: .5em 0;
+}
+
+.commentmeta {
+    color: #7e7e7e;
+    font-size: 1em;
 }

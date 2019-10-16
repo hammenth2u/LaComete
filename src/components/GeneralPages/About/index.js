@@ -22,25 +22,25 @@ const About = () => {
         <h2>L'équipe</h2>
         <section className="teamportraits">            
             <article className="solo">
-                <img src="https://i.ibb.co/dJ2ptd7/clara.jpg" />    
+                <img className="teampics" src="https://i.ibb.co/dJ2ptd7/clara.jpg" />    
                 <p className="role">Back-end (Symfony), intégration</p>
                 <p>Auparavant, Clara était factrice au sein de l'entreprise "La Poste". Récemment elle est entrée dans le champ du développement Web. Pour ce faire elle a suivi la formation proposée par l'école O'Clock et s'est spécialisée en Symfony (back-end). Elle s'oriente désormais vers du développement Fullstack.</p>
             </article>
 
             <article className="solo">
-                <img src="https://i.ibb.co/Cz7mnvr/jo.png" /> 
+                <img className="teampics" src="https://i.ibb.co/HtvgLxj/js-1.jpg" /> 
                 <p className="role">Back-end (Symfony)</p>
-                <p>Présentation de Jonathan</p>
+                <p>Après avoir passé de nombreuses années au service de la gestion de projets, Jonathan, 33 ans, a lors d'une transition professionnelle, saisi l'opportunité de renouer avec une de ses passions de jeunesse: Le développement. Il a décidé de suivre la formation professionnalisante de l'organisme O'Clock et ne nourrit qu'une ambition aujourd'hui, progresser autant que possible dans le monde fascinant de la programmation.</p>
             </article>
 
             <article className="solo">
-                <img src="https://i.ibb.co/TgcY72Z/posh.jpg" /> 
+                <img className="teampics" src="https://i.ibb.co/TgcY72Z/posh.jpg" /> 
                 <p className="role">Front-end (React), intégration</p>
                 <p>C'est après 4 années chez le grand M jaune qui fait des frites et plusieurs expériences dans la vente, que Pauline a décidé de se reconvertir. Passionnée d'arts et de design, curieuse de tout, créative dans l'âme et enfant de l'internet. C'est en dressant ce portrait qu'elle s'est dit "Et si je devenais développeuse?". Et elle l'a fait.</p>
             </article>
 
             <article className="solo">
-                <img src="https://i.ibb.co/QrLq92h/romain.jpg" />
+                <img className="teampics" src="https://i.ibb.co/QrLq92h/romain.jpg" />
                 <p className="role">Front-end (React)</p>
                 <p>Romain, 24 ans, développeur Web. Il vient de marseille et aime apprendre de nouvelles choses chaque jour. "Comme on le dit chez nous : A Marseille, on prend le temps de bien faire les choses."</p>
             </article>
@@ -49,14 +49,4 @@ const About = () => {
   );
 };
 
-/*
-Header.propTypes = {
-  categories: PropTypes.arrayOf(
-    PropTypes.shape({
-      route: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired
-};
-*/
 export default About;

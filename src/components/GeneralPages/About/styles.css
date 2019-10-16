@@ -68,7 +68,7 @@
 .about img {
     border-radius: 50%;
     border: 2px solid rgba(0, 34, 72, 1);
-    width: 20%;
-    margin-bottom: 1em;
+    width: 80%;
+    margin: 0 auto 1em auto;
 }
 

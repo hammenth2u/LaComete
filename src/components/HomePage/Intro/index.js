@@ -19,7 +19,7 @@ const Intro = () => {
       <div className="halfmoongreen"></div>
       <div className="steps">
         <article>
-          <p>J'ai un rêve / un talent</p>
+          <p>J'ai un rêve / un talent</p>          
           <img src="https://image.flaticon.com/icons/svg/181/181374.svg"/>
         </article>
         <article>

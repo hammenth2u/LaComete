@@ -18,7 +18,7 @@ const HomeApp = () => (
   
   <div id="homepage">
 
-    <section className="homesearch">
+    <section className="homesearch">      
       <HomeSearch />      
     </section>    
 

@@ -184,30 +184,44 @@ class AnnonceController extends AbstractController
 
         $image = '';
 
-        if($category->getName() == 'bricolage'){
-            $image = 'https://cdn.pixabay.com/photo/2014/10/22/16/39/tools-498202_960_720.jpg';
-        }elseif($category->getName() == 'jardinage'){
-            $image = 'https://cdn.pixabay.com/photo/2017/03/27/16/18/garden-2179530_960_720.jpg';
-        }elseif($category->getName() == 'education'){
-            $image = 'https://cdn.pixabay.com/photo/2018/05/28/11/51/woman-3435842_960_720.jpg';
-        }elseif($category->getName() == 'musique'){
-            $image = 'https://cdn.pixabay.com/photo/2015/03/26/10/22/band-691224_960_720.jpg';
-        }elseif($category->getName() == 'sport'){
-            $image = 'https://cdn.pixabay.com/photo/2015/02/13/22/10/runners-635906_960_720.jpg';
-        }elseif($category->getName() == 'technologie'){
-            $image = 'https://cdn.pixabay.com/photo/2018/05/08/08/44/artificial-intelligence-3382507_960_720.jpg';
-        }elseif($category->getName() == 'theatre'){
-            $image = 'https://cdn.pixabay.com/photo/2016/09/16/00/16/movie-1673021_960_720.jpg';
-        }elseif($category->getName() == 'travaux'){
-            $image = 'https://cdn.pixabay.com/photo/2017/09/17/19/34/woman-2759487_960_720.jpg';
-        }elseif($category->getName() == 'art'){
-            $image = 'https://cdn.pixabay.com/photo/2016/06/25/12/55/art-1478831_960_720.jpg';
-        }elseif($category->getName() == 'voyage'){
-            $image = 'https://cdn.pixabay.com/photo/2017/06/05/11/01/airport-2373727_960_720.jpg';
-        }elseif($category->getName() == 'divers'){
-            $image = 'https://cdn.pixabay.com/photo/2017/01/31/13/31/animal-2024066_960_720.png';
-        }elseif($category->getName() == 'cinema'){
-            $image = 'https://cdn.pixabay.com/photo/2016/09/16/00/16/movie-1673021_960_720.jpg';
+        if($category->getName() == 'Animaux'){
+            $image = 'https://i.ibb.co/5BmMVPj/animaux.jpg';
+        }elseif($category->getName() == 'Art'){
+            $image = 'https://i.ibb.co/QKrG4tC/art.jpg';
+        }elseif($category->getName() == 'Bricolage'){
+            $image = 'https://i.ibb.co/QK3k6sj/photo-1540103711724-ebf833bde8d1.jpg';
+        }elseif($category->getName() == 'Cinéma'){
+            $image = 'https://i.ibb.co/nbcGj2x/cinema.jpg';
+        }elseif($category->getName() == 'Communauté'){
+            $image = 'https://i.ibb.co/dWNbXXj/communaute.jpg';
+        }elseif($category->getName() == 'Humanitaire'){
+            $image = 'https://i.ibb.co/dc8L4Tp/humanitarian-aid-939723-960-720.jpg';
+        }elseif($category->getName() == 'Théâtre'){
+            $image = 'https://i.ibb.co/prTPYfZ/photo-1513106580091-1d82408b8cd6.jpg';
+        }elseif($category->getName() == 'Travaux'){
+            $image = 'https://i.ibb.co/2gR9R1P/travaux.jpg';
+        }elseif($category->getName() == 'Jardinage'){
+            $image = 'https://i.ibb.co/xgLgRMW/jardinage.jpg';
+        }elseif($category->getName() == 'Voyage'){
+            $image = 'https://i.ibb.co/Pzrg7sN/photo-1517842264405-72bb906a1936.jpg';
+        }elseif($category->getName() == 'Divers'){
+            $image = 'https://i.ibb.co/gDbFRjs/photo-1493612276216-ee3925520721.jpg';
+        }elseif($category->getName() == 'Technologie'){
+            $image = 'https://i.ibb.co/DV95WgZ/technologie.jpg';
+        }elseif($category->getName() == 'Mode'){
+            $image = 'https://i.ibb.co/C0XjQxC/mode.jpg';
+        }elseif($category->getName() == 'Musique'){
+            $image = 'https://i.ibb.co/5jtdwGj/photo-1477233534935-f5e6fe7c1159.jpg';
+        }elseif($category->getName() == 'Sport'){
+            $image = 'https://i.ibb.co/mXQB2zx/photo-1558365849-6ebd8b0454b2.jpg';
+        }elseif($category->getName() == 'Immbobilier'){
+            $image = 'https://i.ibb.co/0j7fBwZ/immobilier.jpg';
+        }elseif($category->getName() == 'Geek'){
+            $image = 'https://i.ibb.co/pvDHr0G/photo-1514302240736-b1fee5985889.jpg';
+        }elseif($category->getName() == 'Photographie'){
+            $image = 'https://i.ibb.co/Xxmh9HM/photographie.jpg';
+        }elseif($category->getName() == 'Éducation'){
+            $image = 'https://i.ibb.co/Pj1n74q/photo-1509062522246-3755977927d7.jpg';
         }
 
 

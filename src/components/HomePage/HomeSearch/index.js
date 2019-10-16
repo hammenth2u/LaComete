@@ -21,7 +21,7 @@ class ResultList extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container">      
         <Formik 
           initialValues={{ type: '', location:'', category:'' }}          
 
@@ -134,7 +134,9 @@ class ResultList extends React.Component {
             </form>
           )
         }} 
-      />
+      />      
+      <p className="subtitle">Parcours le site à la recherche du rêve que tu pourras aider à bâtir </p>
+      <p className="subtitledeux">ou des personnes qui pourront t'aider à réaliser le tien.</p>
     </div>
     )
   }

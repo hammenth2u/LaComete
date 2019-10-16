@@ -26,7 +26,7 @@ class Ad extends React.Component {
     
     /* UNE SEULE ANNONCE EN FONCTION DE L'URL */
     const currentUrl = window.location.pathname;
-    axios.post('http://127.0.0.1:8001/api/single/annonce', {
+    axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/single/annonce', {
     //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/single/annonce', {
       currentUrl
     })
@@ -46,7 +46,7 @@ class Ad extends React.Component {
     });   
 
     /* STATUS DE L'UTILISATEUR */
-    axios.get('http://127.0.0.1:8001/api/user/isConnected')
+    axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/isConnected')
     //  axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/isConnected')
       
       .then(response => {
@@ -62,7 +62,7 @@ class Ad extends React.Component {
     /* FAVORITE TRUE/FALSE SI USER CONNECTE*/          
     const currentAdPath = window.location.pathname;
     console.log('TEST ID : ', currentAdPath);
-    axios.post('http://127.0.0.1:8001/api/isFavorite', {
+    axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/isFavorite', {
     //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/isFavorite'), {
       currentAdPath: currentAdPath,
     })
@@ -80,7 +80,7 @@ class Ad extends React.Component {
             
     /* COMMENTAIRES DE L'ANNONCE */
     const currentPath = window.location.pathname;
-    axios.post('http://127.0.0.1:8001/api/comments/show', {
+    axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/comments/show', {
     //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/comments/show'), {
       currentPath: currentPath,
     })    
@@ -109,7 +109,7 @@ class Ad extends React.Component {
 
     if(this.state.isFavorite == false) {
     
-      axios.post('http://127.0.0.1:8001/api/favorite/new', {
+      axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/favorite/new', {
       //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/favorite/new', {
         currentAdId: currentAdId,
         isFavorite: true        
@@ -124,7 +124,7 @@ class Ad extends React.Component {
 
     } else {
       
-      axios.post('http://127.0.0.1:8001/api/favorite/new', {
+      axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/favorite/new', {
       //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/favorite/new', {
         currentAdId: currentAdId,
         isFavorite: false        
@@ -148,7 +148,7 @@ class Ad extends React.Component {
     const adId = this.state.singleAd.id;
     console.log('ADID : ', adId)
     evt.preventDefault();
-    axios.post('http://127.0.0.1:8001/api/comment/new', {
+    axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/comment/new', {
     //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/comment/new', {
         comment: this.state.commentContent,
         adId: adId                
@@ -178,7 +178,7 @@ class Ad extends React.Component {
     const email = this.state.singleAd.email;
     console.log('AD USER MAIL : ', email)
     evt.preventDefault();    
-    axios.post('http://127.0.0.1:8001/api/contact/another/user', {
+    axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/contact/another/user', {
     //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/contact/another/user', {
       
         contactObject: this.state.contactObject,

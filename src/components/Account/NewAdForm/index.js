@@ -81,7 +81,7 @@ class SubmitForm extends React.Component {
               console.log(value);
             }*/
 
-            axios.post('http://127.0.0.1:8001/api/annonce/new', {
+            axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/annonce/new', {
               type: values.type,
               title: values.title,
               location: values.location.value,

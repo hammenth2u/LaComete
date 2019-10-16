@@ -31,7 +31,7 @@ class AccountApp extends React.Component {
 
     
     componentDidMount(){
-    axios.get('http://127.0.0.1:8001/api/user/isConnected')
+    axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/isConnected')
     //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/isConnected')
     
         .then(response => {
@@ -45,7 +45,7 @@ class AccountApp extends React.Component {
             console.log('STATUS ERROR : ', error);
         }); 
 
-    axios.get('http://127.0.0.1:8001/api/user/account')
+    axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account')
     //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account')
     
         .then(response => {
@@ -59,7 +59,7 @@ class AccountApp extends React.Component {
             console.log('DATA ERROR : ', error);
         }); 
 
-    axios.get('http://127.0.0.1:8001/api/list/user/annonces/')
+    axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/list/user/annonces/')
     //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/annonces/')
     
         .then(response => {
@@ -73,7 +73,7 @@ class AccountApp extends React.Component {
             console.log('ADS ERROR : ', error);
         });
         
-    axios.get('http://127.0.0.1:8001/api/list/favorites')
+    axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/list/favorites')
     //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/list/favorites')
     
         .then(response => {
@@ -89,7 +89,7 @@ class AccountApp extends React.Component {
 
     deleteAccount = (evt) => {
         evt.preventDefault();
-        axios.get('http://127.0.0.1:8001/api/user/delete')
+        axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/delete')
         //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/delete')
 
         .then(response => {

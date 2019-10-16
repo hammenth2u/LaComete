@@ -2,8 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800|Roboto:300,400,500,700,900&display=swap');
 
 /*/* FONT FAMILIES 
-font-family: 'Amatic SC', cursive;
-font-family: 'Just Another Hand', cursive;
 font-family: 'Sue Ellen Francisco', cursive;
 font-family: 'Roboto', sans-serif;
 font-family: 'Nanum Gothic', sans-serif;
@@ -153,26 +151,26 @@ font-family: 'Nanum Gothic', sans-serif;
 
 /********************** BUTTON *************************/
 
-.homesearch .btn {
+.homesearch .homebtn {
     background-color: white;
     border: none;
     border-radius: .5em;
     height: 4.5em;
     width: 4.5em;
-    margin: 0 auto;
-    
+    margin: 0 auto;    
 }
 
-.homesearch .btn svg {
-    border: .1em solid #d49f15;
+.homesearch .homebtn svg {
+    border: .15em solid #d49f15;
     border-radius: .5em;
     height: 3.5em;
     width: 3.5em;
     padding: 0.2em;
     color: #00837d;
-    margin-left: -0.25em;
-    margin-bottom: -0.25em;
+    margin-left: -0.15em;
+    margin-top: -0.1em;
 }
+
 
 
 /*************** BREAKPOINTS ***************/
@@ -243,11 +241,10 @@ font-family: 'Nanum Gothic', sans-serif;
 .steps {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-flow: wrap;
     color: black;
-    font-family: 'Sue Ellen Francisco', sans-serif;
-    text-transform: uppercase;
+    font-family: 'Nanum Gothic', sans-serif;    
     font-size: 1.2em;
     padding-bottom: 5em;
     margin-bottom: -3em;

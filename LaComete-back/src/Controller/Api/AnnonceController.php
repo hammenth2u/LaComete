@@ -44,6 +44,10 @@ class AnnonceController extends AbstractController
         foreach ($annonces as $annonce) 
         {
 
+            $createdAt= $annonce->getCreatedAt()->getTimestamp();
+
+            $createdAt = date('d-M-Y à H:i',$createdAt);
+
             $formatted [] = [
                'id' => $annonce->getId(),
                'title' => $annonce->getTitle(),
@@ -54,6 +58,7 @@ class AnnonceController extends AbstractController
                'user' => $annonce->getUser()->getUsername(),
                'category' => $annonce->getCategory()->getName(),
                'picture' => $annonce->getPicture(),
+               'createdAt' => $createdAt,
             ];
         }
         
@@ -81,6 +86,9 @@ class AnnonceController extends AbstractController
             $formatted = [];
             foreach ($annonces as $annonce) 
             {
+                $createdAt= $annonce->getCreatedAt()->getTimestamp();
+                $createdAt = date('d-M-Y à H:i',$createdAt);
+
                 $formatted [] = [
                 'id' => $annonce->getId(),
                 'title' => $annonce->getTitle(),
@@ -88,6 +96,7 @@ class AnnonceController extends AbstractController
                 'city' => $annonce->getLocation(),
                 'type' => $annonce->getType(),
                 'picture' => $annonce->getPicture(),
+                'createdAt' => $createdAt,
                 ];
             }
             
@@ -238,6 +247,9 @@ class AnnonceController extends AbstractController
         $annonceId = substr($path, 10);
         $annonce = $this->getDoctrine()->getRepository(Annonce::class)->find($annonceId);
 
+        $createdAt= $annonce->getCreatedAt()->getTimestamp();
+        $createdAt = date('d-M-Y à H:i',$createdAt);
+
         $formatted = [];
             $formatted [] = [
                'id' => $annonce->getId(),
@@ -246,13 +258,13 @@ class AnnonceController extends AbstractController
                'city' => $annonce->getLocation(),
                'type' => $annonce->getType(),
                'need' => $annonce->getNeed(),
-               'createdAt' => $annonce->getCreatedAt(),
                'user' => $annonce->getUser()->getUsername(),
                'category' => $annonce->getCategory()->getName(),
                'website' => $annonce->getWebsite(),
                'email' => $annonce->getEmail(),
                'phone' => $annonce->getPhone(),
                'picture' => $annonce->getPicture(),
+               'createdAt' => $createdAt,
             ];
         
         return new JsonResponse($formatted);
@@ -313,6 +325,8 @@ class AnnonceController extends AbstractController
 
             foreach($annonces as $annonce)
             {
+                $createdAt= $annonce->getCreatedAt()->getTimestamp();
+                $createdAt = date('d-M-Y à H:i',$createdAt);
             
                 $formatted [] = [
                 'id' => $annonce->getId(),
@@ -322,6 +336,7 @@ class AnnonceController extends AbstractController
                 'type' => $annonce->getType(),
                 'category' => $annonce->getCategory()->getName(),
                 'picture' => $annonce->getPicture(),
+                'createdAt' => $createdAt,
                 ];
             }
             

@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
-//import { NavLink } from 'react-router-dom';
 
-//import './styles.sass';
+import './styles.css';
 
 const Contact = (props) => {
   const {
@@ -20,11 +19,9 @@ const Contact = (props) => {
     userMail
   } = props;
 
-  const autoFill = userMail;
-
   return(
     <div>
-    <form className="p-5" onSubmit={handleSubmit}>
+    <form className="contact-form" onSubmit={handleSubmit}>
       <h1>Formulaire de contact</h1>
       
       {userStatus == "<" ? (
@@ -38,12 +35,12 @@ const Contact = (props) => {
         {errors.email && touched.email && <div className="invalid-feedback">{errors.email}</div>}
       </div> 
       ) : (
-
+        
         <div className="form-group">
         <label>Email</label>
         <input name="email" type="text" 
           className={`form-control ${errors.email && touched.email && 'is-invalid'}`}
-          value= {autoFill}
+          value= {userMail}
           onChange={handleChange}
           onBlur={handleBlur} />
         {errors.email && touched.email && <div className="invalid-feedback">{errors.email}</div>}
@@ -69,31 +66,24 @@ const Contact = (props) => {
         {errors.message && touched.message && <div className="invalid-feedback">{errors.message}</div>}
       </div>
 
-      <button type="submit" className="btn btn-outline-primary" disabled={isSubmitting}>
+      <button type="submit" className="btn-contact" disabled={isSubmitting}>
         {isSubmitting ? 'patienter' : 'envoyer'}
       </button>
     </form>
 
-    <h2>Coordonnées</h2>
+      <div className="comet-contact">
+        <h2>Coordonnées</h2>
         <ul>
-          <li>0102030405</li>
+          <li>0836656565</li>
           <li>lacomete@oclock.io</li>
-          <li>La Comète - 2ème étoile à droite puis tout droit jusqu'au matin</li>
+          <li>La Comète</li>
+          <li>2ème étoile à droite </li>
+          <li>tout droit jusqu'au matin</li>
         </ul>
+      </div>
     </div>
   );
 }
-
-/*
-Header.propTypes = {
-  categories: PropTypes.arrayOf(
-    PropTypes.shape({
-      route: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired
-};
-*/
 
 export default withFormik({
   mapPropsToValues: (props) => { 
@@ -106,22 +96,22 @@ export default withFormik({
 
   validationSchema: Yup.object().shape({
     
-    email: Yup.string().required('Veuillez compléter ce champ').email('Veuillez rentrer une adresse email valide'),
+    email: Yup.string().email('Veuillez rentrer une adresse email valide'),
     object: Yup.string().required('Veuillez compléter ce champ'),
     message: Yup.string().required('Veuillez compléter ce champ'),
   }),
 
   handleSubmit: (values, { setSubmitting, resetForm }) => {
     setTimeout(() => {
-      
-      axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/contact/post', {
+
+      axios.post('/api/contact/post', {
         email: values.email,
         object: values.object,
         message: values.message
       })
       .then(function (response) {
         alert("Message Envoyé");
-        console.log('TEST POST : ', response);
+        console.log('MSG TEST : ', response);
         console.log(values.email);
         console.log(values.object);
         console.log(values.message);

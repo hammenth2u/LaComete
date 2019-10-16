@@ -16,9 +16,8 @@ const Header = ({ userStatus }) => {
     <Col sm={10}>
       <Navbar.Brand href="/">
         <img 
-        src='https://i.ibb.co/HgKcsTC/brand.png'
+        src='https://i.ibb.co/3rz5BVS/brand.png'
         className="img-responsive"
-        height="60"
         alt="Logo La Comète"
         />
       </Navbar.Brand> 

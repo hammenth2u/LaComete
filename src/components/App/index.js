@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
+
 /**
  * Local import
  */
@@ -24,6 +25,8 @@ import Ad from 'src/components/Ad';
 import Footer from 'src/components/Templates/Footer';
 
 // Styles et assets
+import '../../styles/index.sass';
+import './styles.css'
 
 class App extends React.Component {
   
@@ -38,8 +41,8 @@ class App extends React.Component {
   abortController = new AbortController();
 
 
-    getUserStatus = () => {axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/isConnected', {cancelToken: this.source.token})
-    //axios.get('http://127.0.0.1:8001/api/user/isConnected')
+    getUserStatus = () => {axios.get('http://127.0.0.1:8001/api/user/isConnected', {cancelToken: this.source.token})
+    //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/isConnected')
       
       .then(response => {
         
@@ -52,8 +55,8 @@ class App extends React.Component {
       }); 
     };
       
-    getUserInfo = () => {axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account', {cancelToken: this.source.token})
-      //axios.get('http://127.0.0.1:8001/api/user/account')
+    getUserInfo = () => {axios.get('http://127.0.0.1:8001/api/user/account', {cancelToken: this.source.token})
+      //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account')
         
         .then(response => {
           const userdata = response.data[0];
@@ -81,7 +84,7 @@ class App extends React.Component {
     return (
       
       <div id="app">
-        
+        <div id="wrapper">
         <Header userStatus={ this.state.userStatus } />
 
           <Switch>
@@ -96,7 +99,7 @@ class App extends React.Component {
             <Route path="/annonces/:id" component={ Ad } />       
         
           </Switch>
-
+        </div>
         <Footer />
 
       </div>

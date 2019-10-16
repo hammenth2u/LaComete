@@ -1,0 +1,57 @@
+.ad {
+    width: 80%;    
+    border: .2em solid #00837d;
+    border-radius: .5em;
+    background-color: #eeeeee;
+    margin: 1.5em auto;
+    padding: 1.5em;
+}
+
+.first-section {
+    display: flex;
+}
+
+.imgwrapper {
+    width: 50%;   
+    overflow: hidden;
+
+}
+
+.fav-contact {
+    width: 30%;
+    margin: 0 auto;    
+}
+
+.fav-contact button {
+    color: #00837d;
+    border: .1em solid rgba(0, 34, 72, 1);
+    border-radius: .5em;
+    box-shadow: none;
+    background-color: white;
+    margin-bottom: 1em;
+}
+
+.fav-contact button:hover {
+    border: .1em solid #d49f15;
+    background-color: white;
+    color: #d49f15;
+}
+
+.fav-contact button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.fav-contact .contact-info {
+    text-align: center;
+}
+
+.fav-contact .contact-info a {
+    text-align: center;
+    text-decoration: none; 
+    margin-bottom: 1em;   
+}
+
+.fav-contact .contact-info a:hover {
+    color: #00837d;
+}

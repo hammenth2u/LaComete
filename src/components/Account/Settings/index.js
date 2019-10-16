@@ -21,7 +21,7 @@ const Settings = (props) => {
   } = props;
 
   const updateUserForm = userInfo.map(info =>
-        
+      
       <form className="settings-form" onSubmit={handleSubmit} key={info.id}>
       <h2>Modifier vos informations</h2>
 
@@ -134,17 +134,17 @@ const Settings = (props) => {
         {errors.currentpassword && touched.currentpassword && (<div className="invalid-feedback">{errors.currentpassword}</div>)}
       </div>
 
-      <button type="submit" className="btn btn-outline-primary" disabled={isSubmitting}>
-        {isSubmitting ? <span className="btn-span"><FontAwesomeIcon icon={faHourglassHalf} /></span> :  <span className="btn-span"><FontAwesomeIcon icon={faRocket} /></span>}
+      <button type="submit" className="account-btn" disabled={isSubmitting}>
+        {isSubmitting ? <span className="btn-span"><FontAwesomeIcon icon={faHourglassHalf} /></span> : <span className="btn-span"><FontAwesomeIcon icon={faRocket} /></span>}
       </button>
-
-    </form>
+      
+    </form>    
   )
   /**
    * FORMULAIRE
    */
   return (           
-    <div>
+    <div className="settingsdiv">
     { updateUserForm }
     </div>     
   );
@@ -202,7 +202,7 @@ export default withFormik({
    */
   handleSubmit: (values, { setSubmitting, resetForm }) => {
     setTimeout(() => {
-      axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/edit/account', {
+      axios.post('/api/user/edit/account', {
         firstname: values.firstname,
         lastname: values.lastname,
         username: values.username,
@@ -211,7 +211,7 @@ export default withFormik({
       })
       .then(function (response) {
         alert("Modifications enregistrée");
-        console.log('TEST POST : ', response);
+        console.log('TEST SETTINGS : ', response);
       })
       .catch(function (error) {
         alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux, veuillez recommencer ou choisir un autre moyen de contact");

@@ -9,59 +9,24 @@ form h2 {
     margin-bottom: 2em;
 }
 
+/******************************************************| FOOTER |******************************************************/
 
-/******************************************************| SIDEBAR |******************************************************/
 
-/* The side navigation menu */
-.sidebar {
-    margin: -3em 0;
-    padding: 0;
-    width: 15em;
-    background-color:rgba(0, 34, 72, 1);
-    position: fixed;
-    height: 100%;
-    font-family: 'Sue Ellen Francisco', sans-serif;
-    text-transform: uppercase;
-  }
+.deactivatebtn {    
+    border-radius: .5em;
+    border:none;
+    height: 2em;    
+    color:white; 
+    font-size: .8em;
+    font-family: 'Nanum Gothic', sans-serif;
+    margin-top: 1em;
+    background-color: transparent;
+}
 
-  /* Sidebar header */
-  .sidebar p {
-    display: block;
-    color: white;
-    padding: 1em;
-    text-decoration: none;
-    font-size: 1.2em;
-    background-color: #00837d;
-  }
-  
-  /* Sidebar links */
-  .sidebar a {
-    display: block;
-    color: white;
-    padding: 1em;
-    text-decoration: none;
-    font-size: 1.2em;
-  }
-  
-  /* Active/current link */
-  .sidebar a.active {
-    color: white;
-  }
-  
-  /* Links on mouse-over */
-  .sidebar a:hover:not(.active) {
-    background-color: #adefd3;
-    color: black;
-  }
-  
-  /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
-  div.content {
-    margin-left: 15em;
-    padding: .2em 1em;
-    height: 100%;
-  }
-  
-  
+.deactivatebtn:hover {    
+    background-color: #d49f15;
+    color:rgba(0, 34, 72, 1);
+}
 
 /******************************************************| HOME - IN PROGRESS |******************************************************/
 
@@ -73,6 +38,10 @@ form h2 {
 }
 
 /******************************************************| SETTINGS |******************************************************/
+
+.settingsdiv {
+    padding: 1rem;
+}
 
 .settings-form {
     margin: 3em auto;
@@ -87,7 +56,7 @@ form h2 {
     width: 50%;
 }
 
-.settings-form .form-group .invalide-feedback {
+.settings-form .form-group .invalid-feedback {
     color: #d93641;
 }
 
@@ -107,35 +76,6 @@ form h2 {
 .settings-form input:focus {
     border: .1em solid #d49f15;
     box-shadow: none;        
-}
-
-.settings-form button {
-    background-color: white;
-    border: none;
-    border-radius: .5em;
-    height: 3em;
-    width: 3em;
-    margin: 1em auto;
-}
-
-.settings-form button:hover {
-    background-color: white;   
-}
-
-.settings-form button .btn-span {
-    border: .1em solid #d49f15;
-    border-radius: .5em;
-    height: 2.5em;
-    width: 2.5em;
-    padding: 0.2em 0.4em;
-    color: #00837d;
-    margin-left: -0.4em;
-    margin-bottom: -0.25em;
-    font-size: 1.4em;
-}
-
-.settings-form button .btn-span:hover {
-    color: rgba(0, 34, 72, 1);
 }
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
@@ -186,6 +126,9 @@ form h2 {
   }*/
 
 /******************************************************| NEW AD FORM |******************************************************/
+.container {
+    padding: 1rem;
+}
 
 .ad-form .ad-radio-group {
     margin-bottom: 1em;
@@ -325,35 +268,6 @@ form h2 {
     box-shadow: none;        
 }
 
-.ad-form button {
-    background-color: white;
-    border: none;
-    border-radius: .5em;
-    height: 3em;
-    width: 3em;
-    margin: 1em auto;
-}
-
-.ad-form button:hover {
-    background-color: white;   
-}
-
-.ad-form button .btn-span {
-    border: .1em solid #d49f15;
-    border-radius: .5em;
-    height: 2.5em;
-    width: 2.5em;
-    padding: 0.2em 0.4em;
-    color: #00837d;
-    margin-left: -0.4em;
-    margin-bottom: -0.25em;
-    font-size: 1.4em;
-}
-
-.ad-form button .btn-span:hover {
-    color: rgba(0, 34, 72, 1);
-}
-
 .ad-form .locsearch__menu-list, .ad-form .catsearch__menu-list {
     border: none;
     border-radius: .5em;
@@ -364,11 +278,6 @@ form h2 {
 .ad-form .locsearch__menu-list:focus, .ad-form .catsearch__menu-list:focus {
     border: .1em solid #d49f15;
     box-shadow: none;        
-}
-
-.ad-form .catsearch, .ad-form .locsearch {
-    width: 70%;
-    margin: 1em auto;
 }
 
 .ad-form .catsearch__control, .ad-form .locsearch__control {
@@ -384,4 +293,143 @@ form h2 {
 
 .ad-form .css-1g48xl4-IndicatorsContainer {
     display: none;
+}
+
+/*****************************************************| BUTTON |*****************************************************/
+
+.account-btn {
+    background-color: white;
+    border: none;
+    border-radius: .5em;
+    height: 3em;
+    width: 3em;
+    margin: 1em auto;
+}
+
+.account-btn .btn-span {
+    border: .1em solid #d49f15;
+    border-radius: .5em;
+    height: 2.5em;
+    width: 2.5em;
+    padding: 0.2em 0.4em;
+    color: #00837d;
+    margin-left: -0.11em;
+    margin-bottom: -0.25em;
+    font-size: 1.4em;
+}
+
+.account-btn .btn-span:hover {
+    color: rgba(0, 34, 72, 1);
+}
+
+/*****************************************************| GRIDS |*****************************************************/
+
+/* Font */
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
+
+/* Design */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.accountgrid {
+  color: #272727;
+  font-family: 'Quicksand', serif;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0;
+  padding: 1rem;
+}
+
+.accountgrid .resultgrid {
+  max-width: 1200px;
+  margin: 0 2em 0 auto;
+}
+
+.accountgrid .resultgrid h1 {
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.accountgrid .resultgrid img {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.accountgrid .resultgrid .btn {
+  color: #ffffff;
+  padding: 0.8rem;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  font-weight: 400;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+}
+
+.accountgrid .resultgrid .btn:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.accountgrid .resultgrid .cards {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.accountgrid .cards_item {
+  display: flex;
+  padding: 1rem;
+}
+
+@media (min-width: 40rem) {
+  .cards_item {
+    width: 50%;
+  }
+}
+
+@media (min-width: 56rem) {
+  .cards_item {
+    width: 33.3333%;
+  }
+}
+
+.accountgrid .card {
+  background-color: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.accountgrid .card_content {
+  padding: 1rem;
+  background-color: #00837d;
+}
+
+.accountgrid .card_title {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  margin: 0px;
+}
+
+.accountgrid .card_text {
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;    
+  font-weight: 400;
 }

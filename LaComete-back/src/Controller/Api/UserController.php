@@ -19,6 +19,7 @@ use Symfony\Component\Serializer\NameConverter\MetadataAwareNameConverter;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -203,8 +204,8 @@ class UserController extends AbstractController
         
         mail($to, $obj, $msg.$msg2, $headers);
 
-        $response = new Response('success');
-        return $response;
+        //$response = new Response('success');
+        return new RedirectResponse($this->urlGenerator->generate('app_login'));
     }
 
     /**

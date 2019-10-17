@@ -24,6 +24,9 @@ font-family: 'Nanum Gothic', sans-serif;
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: 400;
     margin-left: .5em;
+    text-shadow: -1px 0px 14px #FFFFFF;
+    font-weight: 700;
+    font-size: 1.2em;
 }
 
 .subtitle {

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
+import history from '../../History';
 import './styles.css';
 
 const Forgotten = (props) => {
@@ -42,16 +43,6 @@ const Forgotten = (props) => {
   );
 }
 
-/*
-Header.propTypes = {
-  categories: PropTypes.arrayOf(
-    PropTypes.shape({
-      route: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired
-};
-*/
 
 
 export default withFormik({
@@ -74,16 +65,14 @@ export default withFormik({
         email: values.email,
       })
       .then(function (response) {
-        alert("Vous devriez recevoir un email rapidement");
-        console.log('TEST FORGOTTEN : ', response);
-        console.log(values.email);
+        alert("Vous devriez recevoir un email rapidement");                
       })
       .catch(function (error) {
-        alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux, veuillez recommencer ou choisir un autre moyen de contact");
-        console.log('ERROR FORGOTTEN : ', error);
+        alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux, veuillez recommencer ou nous contacter");        
       });
       setSubmitting(false);
       resetForm();
     }, 1000);
+    history.push("/")
   },
 })(Forgotten);

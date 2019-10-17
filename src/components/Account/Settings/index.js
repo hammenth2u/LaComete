@@ -211,12 +211,10 @@ export default withFormik({
         newpassword: values.newpassword
       })
       .then(function (response) {
-        alert("Modifications enregistrée");
-        console.log('TEST SETTINGS : ', response);
+        alert("Modifications enregistrée");        
       })
       .catch(function (error) {
-        alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux, veuillez recommencer ou choisir un autre moyen de contact");
-        console.log('ERROR POST : ', error);
+        alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux, veuillez recommencer ou choisir un autre moyen de contact");        
       });
       setSubmitting(false);
       resetForm();

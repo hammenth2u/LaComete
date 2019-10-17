@@ -6,7 +6,9 @@ import axios from 'axios';
 import Select from "react-select";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRocket, faHourglassHalf } from '@fortawesome/free-solid-svg-icons';
+import { withRouter } from 'react-router';
 
+import history from '../../History';
 /*
 class Thumb extends React.Component {
   state = {
@@ -95,15 +97,14 @@ class SubmitForm extends React.Component {
               //formData: formData,
             })
             .then(function (response) {
-              alert("Annonce postée");
-              console.log('TEST NEW AD : ', response);
+              alert("Annonce postée");              
             })
             .catch(function (error) {
-              alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux, veuillez recommencer ou nous contacter");
-              console.log('ERROR POST : ', error);
+              alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux, veuillez recommencer ou nous contacter");              
             });
             setSubmitting(false);
             resetForm();
+            this.props.history.push('/mon-compte/mes-annonces')
           }} 
           
           validationSchema={Yup.object().shape({
@@ -316,4 +317,4 @@ class SubmitForm extends React.Component {
   }
 };
 
-export default SubmitForm;
+export default withRouter(SubmitForm);

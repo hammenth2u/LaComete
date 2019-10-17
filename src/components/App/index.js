@@ -46,11 +46,8 @@ class App extends React.Component {
       .then(response => {
         
         this.setState({ userStatus: response.data[0] });
-        console.log('STATE : ', this.state.userStatus);              
       })      
       .catch(error => {
-
-        console.log('ERROR : ', error);
       }); 
     };
       
@@ -61,12 +58,10 @@ class App extends React.Component {
           const userdata = response.data[0];
           const usermail = userdata.email;                
           this.setState({ userMail: usermail });
-          console.log('STATE USER INFO: ', this.state.userMail);
         })
         
         .catch(error => {
 
-          console.log('DATA ERROR : ', error);
         });
     };
 

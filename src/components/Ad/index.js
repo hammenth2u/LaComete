@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { resetWarningCache } from 'prop-types';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faEnvelope, faAt, faPhone, faUser, faMapMarkerAlt, faPencilRuler,  } from '@fortawesome/free-solid-svg-icons';
@@ -146,21 +146,20 @@ class Ad extends React.Component {
 
   handleSubmit = (evt) => {
     const adId = this.state.singleAd.id;
-    console.log('ADID : ', adId)
     evt.preventDefault();
     axios.post('/api/comment/new', {
     //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/comment/new', {
         comment: this.state.commentContent,
         adId: adId                
       })
-      .then((response) => {
-        console.log('COMMENT SUCCESS : ', response);
+      .then((response) => {        
         this.setState({comments: response.data});
-        console.log('newstate : ', this.state.comments)
+        this.commentInput.value = "";
       })
       .catch(error => {
           console.log('COMMENT ERROR : ', error);
-      }); 
+      });
+     
   };  
 
   /* FORMULAIRE CONTACT */
@@ -176,7 +175,6 @@ class Ad extends React.Component {
 
   handleSend = (evt) => {
     const email = this.state.singleAd.email;
-    console.log('AD USER MAIL : ', email)
     evt.preventDefault();    
     axios.post('/api/contact/another/user', {
     //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/contact/another/user', {
@@ -187,12 +185,12 @@ class Ad extends React.Component {
       })
       .then(function (response) {
         alert('Votre message a été envoyé');
-        console.log('CONTACT TEST : ', response);
       })
 
       .catch(error => {
-          console.log('CONTACT ERROR : ', error);
-      });   
+        alert('Une pluie de météorite perturbe les réseaux, veuillez recommencer.');
+      });
+
   };  
 
   /*  CONTACT COLLAPSE */
@@ -302,6 +300,7 @@ class Ad extends React.Component {
                         <form className="ad-contact-form"> 
                           <div className="ad-form-group">
                             <input
+                              ref={(obj) => this.commentInput= obj}
                               name="contactobject"
                               type="text"
                               placeholder="Objet"
@@ -313,6 +312,7 @@ class Ad extends React.Component {
                           </div>             
                           <div className="form-group">
                             <textarea
+                              ref={(msg) => this.commentInput= msg}
                               name="contact"
                               rows="4"
                               placeholder="Message"
@@ -343,6 +343,7 @@ class Ad extends React.Component {
           <h4>Commentaires : </h4>
           <div className="commentgroup">
             <textarea
+              ref={(ref) => this.commentInput= ref}
               name="comment"
               placeholder="Commentaire..."
               row="3"

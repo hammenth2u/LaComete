@@ -28,11 +28,8 @@ class ResultList extends React.Component {
           onSubmit={(values, {setSubmitting, resetForm}) => {
             
             const typeValue = values.type 
-            console.log(' 1 : ',typeValue)
             const locValue = values.location.value
-            console.log(' 2 : ',locValue)
             const catValue = values.category.value
-            console.log(' 3 : ',catValue)
 
             axios.post('/api/results/annonces/search', {  
             //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/results/annonces/search' , {
@@ -41,7 +38,7 @@ class ResultList extends React.Component {
               category: catValue
             })
             .then(response => {
-              console.log('TEST RESULT : ', response.data);
+              
               const searchResult = response.data;
               this.setState({ searchData: searchResult });
               this.props.history.push({
@@ -51,7 +48,6 @@ class ResultList extends React.Component {
             })
             .catch(function (error) {
               alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux.");
-              console.log('ERROR POST : ', error);
             });
             setSubmitting(false);
             resetForm();

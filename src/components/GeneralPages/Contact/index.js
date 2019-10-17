@@ -112,14 +112,11 @@ export default withFormik({
       })
       .then(function (response) {
         alert("Message Envoyé");
-        console.log('MSG TEST : ', response);
-        console.log(values.email);
-        console.log(values.object);
-        console.log(values.message);
+        
       })
       .catch(function (error) {
         alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux, veuillez recommencer ou choisir un autre moyen de contact");
-        console.log('ERROR POST : ', error);
+        
       });
       setSubmitting(false);
       resetForm();

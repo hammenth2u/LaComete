@@ -24,7 +24,6 @@ class ResultApp extends React.Component {
 
   componentDidMount() {
     const test = this.props.location.state;
-    console.log('test history : ', test)
     this.setState({ homeSearchRes: test })
   }
 
@@ -55,11 +54,8 @@ class ResultApp extends React.Component {
           onSubmit={(values, {setSubmitting, resetForm}) => {
             
             const typeValue = values.type 
-            console.log(' 1 : ',typeValue)
             const locValue = values.location.value
-            console.log(' 2 : ',locValue)
             const catValue = values.category.value
-            console.log(' 3 : ',catValue)
 
             axios.post('/api/results/annonces/search', {  
             //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/results/annonces/search' , {
@@ -68,13 +64,11 @@ class ResultApp extends React.Component {
               category: catValue
             })
             .then(response => {
-              console.log('TEST RESULT : ', response.data);
               const searchResult = response.data;
               this.setState({ homeSearchRes: searchResult });                             
             })
             .catch(function (error) {
               alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux.");
-              console.log('ERROR POST : ', error);
             });
             setSubmitting(false);
             resetForm();
@@ -168,10 +162,6 @@ class ResultApp extends React.Component {
     )
   };
 }
-
-ResultApp.propTypes = {
-  /** Titre de l'application React */
-};
 
 /**
  * Export

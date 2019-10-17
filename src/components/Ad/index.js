@@ -20,6 +20,7 @@ class Ad extends React.Component {
     contactOpen: false,
     phoneOpen: false,
     atOpen: false,
+    starColor: ''
   }
 
   componentDidMount(){    
@@ -69,9 +70,13 @@ class Ad extends React.Component {
     
       .then(response => {
 
-        const isFavorite = response.data['isFavorite'];
-        this.setState({ isFavorite: response.data['isFavorite']})
-        console.log('ISFAV : ', isFavorite);           
+        this.setState({ isFavorite: response.data['isFavorite']}) 
+        
+        if(this.state.isFavorite == true) {
+          this.setState({starColor: '#d49f15'})
+        } else {
+          this.setState({starColor: 'white'}) 
+        }
       })
 
       .catch(error => {
@@ -96,16 +101,14 @@ class Ad extends React.Component {
 
     .catch(error => {
         console.log('COMMENTS ERROR : ', error);
-    });  
+    });      
   }; 
 
   /* LIKE/UNLIKE UNE ANNONCE */
   favoriteAd = () => {
 
     const currentAdId = this.state.singleAd.id;
-    console.log('TEST : ', currentAdId);
     const isfav = this.state.isFavorite;
-    console.log('TEST2 : ', isfav);
 
     if(this.state.isFavorite == false) {
     
@@ -121,6 +124,7 @@ class Ad extends React.Component {
       .catch(error => {
           console.log('FAV ERROR : ', error);
       }); 
+    this.setState({starColor: '#d49f15'}) 
 
     } else {
       
@@ -135,9 +139,10 @@ class Ad extends React.Component {
 
       .catch(error => {
           console.log('UNFAV ERROR : ', error);
-      });   
+      });  
+      this.setState({starColor: 'white'}) 
     }
-  }
+  } 
 
   /* FORMULAIRE COMMENTAIRE */
   handleChange = (evt) => {
@@ -260,7 +265,7 @@ class Ad extends React.Component {
               <div className="fav-contact">
                 <section>  
                   
-                  <Button onClick={ this.favoriteAd } aria-controls="example-collapse-text" aria-expanded={this.state.contactOpen} >
+                  <Button onClick={ this.favoriteAd } style={{ color: this.state.starColor }} aria-controls="example-collapse-text" aria-expanded={this.state.contactOpen} >
                     <FontAwesomeIcon icon={faStar} />
                   </Button>              
                   

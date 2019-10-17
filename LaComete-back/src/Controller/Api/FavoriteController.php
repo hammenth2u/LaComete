@@ -29,7 +29,7 @@ class FavoriteController extends AbstractController
         
         if($this->getUser() != null) {
             $user = $this->getUser();
-            //dump($user->getId());exit;
+        
             $userId = $user->getId();
             
             $favorites = $this->getDoctrine()->getRepository(Favorite::class)->findByUser($userId);
@@ -40,6 +40,9 @@ class FavoriteController extends AbstractController
                 $formatted [] = [
                 'idFavorite' => $favorite->getId(),
                 'titleAnnonce' => $favorite->getAnnonce()->getTitle(),
+                'locationAnnonce' => $favorite->getAnnonce()->getLocation(),
+                'pictureAnnonce' => $favorite->getAnnonce()->getPicture(),
+                'categoryAnnonce' =>$favorite->getAnnonce()->getCategory()->getName(),
                 'idAnnonce' => $favorite->getAnnonce()->getId(),
                 ];
             }
@@ -47,7 +50,7 @@ class FavoriteController extends AbstractController
             return new JsonResponse($formatted);
         }
         else {
-            return null;
+            return new Response('pas d\'annonces en fav');
         }
     }
 

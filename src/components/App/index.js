@@ -23,6 +23,7 @@ import AccountContainer from 'src/components/Account/AccountApp/';
 import ResultContainer from 'src/components/Results/ResultApp';
 import Ad from 'src/components/Ad';
 import Footer from 'src/components/Templates/Footer';
+import ErrorPage from 'src/components/Templates/ErrorPage';
 
 // Styles et assets
 import '../../styles/index.sass';
@@ -89,9 +90,9 @@ class App extends React.Component {
             <Route exact path="/contact" render={(routeProps) => ( <Contact {...routeProps} userStatus={this.state.userStatus} userMail={this.state.userMail} />)}/>
             <Route exact path="/motdepasseoublie" render={(routeProps) => ( <Forgotten {...routeProps} userMail={this.state.userMail} />)}/>
             <Route path="/mon-compte" component={ AccountContainer }  />
-            <Route path="/recherche/liste/" component={ ResultContainer } />             
+            <Route exact path="/recherche/liste/" component={ ResultContainer } />             
             <Route path="/annonces/:id" component={ Ad } />       
-        
+            <Route component={ ErrorPage } />
           </Switch>
         </div>
         <Footer />

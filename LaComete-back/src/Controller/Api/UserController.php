@@ -240,6 +240,6 @@ class UserController extends AbstractController
 
         mail($to, $obj, $msg, $headers);
 
-        return $this->redirectToRoute('app_logout');
+        return new Response('Votre compte est désactivé');
     }
 }

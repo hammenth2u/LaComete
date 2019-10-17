@@ -4,7 +4,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -88,16 +88,14 @@ class AccountApp extends React.Component {
     }
 
     deleteAccount = (evt) => {
-        evt.preventDefault();
+        
         axios.get('/api/block/account')
         //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/delete')
 
         .then(response => {
-
-            console.log('DELETE : ', response);
+            this.props.history.push('/');            
         })
-        .catch(error => {
-    
+        .catch(error => {    
             console.log('DELETE ERROR : ', error);
         });
     }
@@ -129,7 +127,7 @@ class AccountApp extends React.Component {
                         <a href="/mon-compte/mes-favoris">Mes Favoris</a>
                         <a href="/mon-compte/nouvelle-annonce">Créer une annonce</a>
                         <a href="/mon-compte/parametres">Paramètres</a>
-                        <button className="deactivatebtn" onClick={this.handleClick}><FontAwesomeIcon icon={ faTimes } /> Désactiver mon compte</button>                                        
+                        <button type="submit" className="deactivatebtn" onClick={this.deleteAccount}><FontAwesomeIcon icon={ faTimes } /> Désactiver mon compte</button>                                        
                     </aside>
 
                     <section className="account-container">
@@ -173,4 +171,4 @@ const connectionStrategies = connect(
 const AccountContainer = connectionStrategies(AccountApp);
 
 // Étape 3 : on exporte le composant connecté qui a été généré
-export default AccountContainer;
+export default withRouter(AccountContainer);

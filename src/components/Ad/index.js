@@ -108,7 +108,6 @@ class Ad extends React.Component {
   favoriteAd = () => {
 
     const currentAdId = this.state.singleAd.id;
-    const isfav = this.state.isFavorite;
 
     if(this.state.isFavorite == false) {
     
@@ -117,15 +116,15 @@ class Ad extends React.Component {
         currentAdId: currentAdId,
         isFavorite: true        
       })
-      .then(function(response) {
+      .then(function(response) {         
         console.log('FAVED : ', response);
       })
 
       .catch(error => {
           console.log('FAV ERROR : ', error);
       }); 
-    this.setState({starColor: '#d49f15'}) 
-
+    this.setState({starColor: '#d49f15'})     
+    this.setState({isFavorite: true});
     } else {
       
       axios.post('/api/favorite/new', {
@@ -140,7 +139,8 @@ class Ad extends React.Component {
       .catch(error => {
           console.log('UNFAV ERROR : ', error);
       });  
-      this.setState({starColor: 'white'}) 
+      this.setState({starColor: 'white'});
+      this.setState({isFavorite: false});
     }
   } 
 

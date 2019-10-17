@@ -210,18 +210,35 @@ class UserController extends AbstractController
     /**
      * @Route("/block/account", name="bock_account")
      */
-    public function deleteAccount() 
+    public function blockAccount() 
     {
         header('Access-Control-Allow-Origin: *'); 
         header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
         header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
         
         $user = $this->getUser();
-        $user->setStatus(false);
+        $user->setStatus(0);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
+
+        $userFirstname = $user->getFirstname();
+
+
+        $to = $user->getEmail();
+        $obj = 'Désactivation de votre compte - LaComete';
+        $msg = "Bonjour $userFirstname,"."\r\n"."\r\n"."Nous vous informons que votre compte a bien été désactivé."."\r\n"."\r\n"."Amicalement,"."\r\n"."L'équipe LaComete.";
+
+
+        $headers = array(
+            'From' => 'Support-LaComete',
+            'Reply-To' => 'lacometetitan@gmail.com',
+            'X-Mailer' => 'PHP/' . phpversion(),
+            'Content-type'=> 'text/html; charset= utf8',
+        );
+
+        mail($to, $obj, $msg, $headers);
 
         return $this->redirectToRoute('app_logout');
     }

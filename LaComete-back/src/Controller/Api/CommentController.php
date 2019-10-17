@@ -83,7 +83,7 @@ class CommentController extends AbstractController
         foreach ($comments as $comment) 
         {
             $createdAt= $comment->getCreatedAt()->getTimestamp();
-            $createdAt = date('d-M-Y à H:i',$createdAt);
+            $createdAt = date('d-M-Y',$createdAt);
 
             $formatted [] = [
                'idComment' => $comment->getId(),

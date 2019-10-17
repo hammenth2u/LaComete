@@ -407,6 +407,7 @@ form h2 {
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: transparent;
+  margin-bottom: 0;
 }
 
 .accountgrid .resultgrid .btn:hover {
@@ -427,11 +428,12 @@ form h2 {
 }
 
 .accountgrid .card {
-  background-color: white;
+  background-color: #00837d;
   border-radius: 0.25rem;
   box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   overflow: hidden;
 }
 

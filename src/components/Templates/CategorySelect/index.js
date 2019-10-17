@@ -2,16 +2,26 @@ import React from 'react';
 import Select from "react-select";
 
 const options = [
-    { name: "bricolage", label: "bricolage", value: "1"},
-    { name: "education", label: "education", value: "2" },
-    { name: "jardinage", label: "jardinage", value: "3" },
-    { name: "musique", label: "musique", value: "4" },
-    { name: "sport", label: "sport", value: "5" },
-    { name: "technologie", label: "technologie",value: "6" },
-    { name: "theatre", label: "theatre", value: "7" },
-    { name: "travaux", label: "travaux", value: "8" },
-    { name: "divers", label: "divers", value: "9" }
-  ];
+    { name: "animaux", label: "Animaux", value: "1"},
+    { name: "art", label: "Art", value: "2" },
+    { name: "bricolage", label: "Bricolage", value: "3" },
+    { name: "cinema", label: "Cinéma", value: "4" },
+    { name: "communaute", label: "Communauté", value: "5" },
+    { name: "education", label: "Education",value: "6" },
+    { name: "geek", label: "Geek", value: "7" },
+    { name: "humanitaire", label: "Humanitaire", value: "8" },
+    { name: "immobilier", label: "Immobilier", value: "9" },
+    { name: "jardinage", label: "Jardinage", value: "10" },
+    { name: "mode", label: "Mode", value: "11" },
+    { name: "musique", label: "Musique", value: "12" },
+    { name: "photographie", label: "Photographie", value: "13" },
+    { name: "sport", label: "Sport", value: "14" },
+    { name: "technologie", label: "Technologie", value: "15" },
+    { name: "theatre", label: "Théatre", value: "16" },
+    { name: "travaux", label: "Travaux", value: "17" },
+    { name: "voyage", label: "Voyage", value: "18" },
+    { name: "divers", label: "Divers", value: "19" }    
+  ]; 
   
 class CategorySelect extends React.Component {
     handleChange = value => {

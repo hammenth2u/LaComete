@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -210,7 +211,7 @@ class UserController extends AbstractController
     /**
      * @Route("/block/account", name="bock_account")
      */
-    public function blockAccount() 
+    public function blockAccount(Request $request) 
     {
         header('Access-Control-Allow-Origin: *'); 
         header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
@@ -239,6 +240,10 @@ class UserController extends AbstractController
         );
 
         mail($to, $obj, $msg, $headers);
+
+        $session = $this->get('session');
+        $session = new Session();
+        $session->invalidate();
 
         return new Response('Votre compte est désactivé');
     }

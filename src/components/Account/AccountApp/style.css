@@ -410,6 +410,17 @@ form h2 {
   margin-bottom: 0;
 }
 
+a .btn {
+    color: #ffffff;
+    font-size: 14px;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: none;
+  }
+
 .accountgrid .resultgrid .btn:hover {
   background-color: rgba(255, 255, 255, 0.12);
 }

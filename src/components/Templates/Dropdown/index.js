@@ -33,13 +33,13 @@ export default class Navdrop extends React.Component {
 
   render() {
     return (
-      <Dropdown className="d-inline-block" onMouseOver={this.onMouseEnter} onMouseLeave={this.onMouseLeave} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+      <Dropdown className="d-inline-block flex-column flex-sm-row" onMouseOver={this.onMouseEnter} onMouseLeave={this.onMouseLeave} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
       
-        <DropdownToggle caret style={{backgroundColor: '#002248', border: 'none'}}>
+        <DropdownToggle caret style={{backgroundColor: '#002248', border: 'none'}} >
           <span className="accounticon"><FontAwesomeIcon icon={faUserAstronaut} /> Mon Compte</span>
         </DropdownToggle>
     
-        <DropdownMenu className="dropmenu" >         
+        <DropdownMenu className="dropmenu">         
         <DropdownItem href="/mon-compte/mes-annonces">Mes Annonces</DropdownItem>
         <DropdownItem href="/mon-compte/mes-favoris">Mes Favoris</DropdownItem>
         <DropdownItem href="/mon-compte/nouvelle-annonce">Nouvelle Annonce</DropdownItem>

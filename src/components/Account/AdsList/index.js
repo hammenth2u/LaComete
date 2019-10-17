@@ -16,7 +16,7 @@ const MyAds = ({ userAds }) => {
         <h3 className="card_title">{ userAd.title }</h3>
         <p className="card_text">{ userAd.category }</p>
         <p className="card_text"><FontAwesomeIcon icon={faMapMarkerAlt} /> { userAd.city }</p>
-        <button className="btn card_btn"><Link to={`/annonces/${userAd.id}`}>Voir</Link></button>
+        <a href={'/annonces/'+ userAd.id}><button className="btn card_btn">Voir</button></a>
         </div>
       </div>
     </li>

@@ -31,7 +31,7 @@ class AccountApp extends React.Component {
 
     
     componentDidMount(){
-    axios.get('/api/user/isConnected')
+    /*axios.get('/api/user/isConnected')
     //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/isConnected')
     
         .then(response => {
@@ -43,7 +43,7 @@ class AccountApp extends React.Component {
         .catch(error => {
 
             console.log('STATUS ERROR : ', error);
-        }); 
+        }); */
 
     axios.get('/api/user/account')
     //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account')
@@ -93,7 +93,8 @@ class AccountApp extends React.Component {
         //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/delete')
 
         .then(response => {
-            this.props.history.push('/');            
+            this.props.history.push('/');       
+            
         })
         .catch(error => {    
             console.log('DELETE ERROR : ', error);
@@ -108,7 +109,7 @@ class AccountApp extends React.Component {
 
         return (
             <div className="account-base">
-            {this.state.userStatus == "<" ? (
+            {this.props.userStatus == "<" ? (
                 <div>
                     <h1>Vous n'avez pas encore rejoint le pays des rêves</h1>
                     <h2>Veuillez prendre place sur la comète en suivant l'un des liens ci-dessous</h2>

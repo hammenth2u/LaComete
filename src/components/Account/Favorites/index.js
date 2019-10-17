@@ -16,7 +16,7 @@ const Favorites = ({ userFavs }) => {
         <h3 className="card_title">{ userFav.titleAnnonce }</h3>
         <p className="card_text">{ userFav.categoryAnnonce }</p>
         <p className="card_text"><FontAwesomeIcon icon={faMapMarkerAlt} /> { userFav.locationAnnonce }</p>
-        <button className="btn card_btn"><Link to={`/annonces/${userFav.idAnnonce}`}>Voir</Link></button>
+        <a href={'/annonces/' + userFav.idAnnonce}><button className="btn card_btn">Voir</button></a>
         </div>
       </div>
     </li>

@@ -209,10 +209,14 @@ img {
   background: transparent;
 }
 
-.btn a {
+a .btn {
   color: #ffffff;
   font-size: 14px;
   text-transform: uppercase;
+  text-decoration: none;
+}
+
+a:hover {
   text-decoration: none;
 }
 

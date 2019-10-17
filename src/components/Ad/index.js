@@ -6,6 +6,7 @@ import { faStar, faEnvelope, faAt, faPhone, faUser, faMapMarkerAlt, faPencilRule
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 
+
 import './styles.css';
 
 class Ad extends React.Component {
@@ -20,7 +21,7 @@ class Ad extends React.Component {
     contactOpen: false,
     phoneOpen: false,
     atOpen: false,
-    starColor: ''
+    starColor: '',
   }
 
   componentDidMount(){    
@@ -189,7 +190,8 @@ class Ad extends React.Component {
         email: email        
       })
       .then(function (response) {
-        alert('Votre message a été envoyé');
+        //alert('Votre message a été envoyé');
+        this.setState({modalshow: true})
       })
 
       .catch(error => {
@@ -299,7 +301,7 @@ class Ad extends React.Component {
                     <div>
                       <Button onClick={this.toggleContact} aria-controls="example-collapse-text" aria-expanded={this.state.contactOpen} >
                         <FontAwesomeIcon icon={faEnvelope} />
-                      </Button>
+                      </Button>                     
                       <Collapse in={this.state.contactOpen}>                
                           
                         <form className="ad-contact-form"> 

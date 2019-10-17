@@ -39,7 +39,7 @@ class ResultApp extends React.Component {
         <h3 className="card_title">{ homeRes.title }</h3>
         <p className="card_text">{ homeRes.category }</p>
         <p className="card_text"><FontAwesomeIcon icon={faMapMarkerAlt} /> { homeRes.location }</p>
-        <button className="btn card_btn"><Link to={`/annonces/${homeRes.id}`}>Voir</Link></button>
+        <a href={'/annonces/'+ homeRes.id}><button className="btn card_btn">Voir</button></a>
         </div>
       </div>
     </li>

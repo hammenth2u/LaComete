@@ -47,6 +47,7 @@ class App extends React.Component {
       .then(response => {
         
         this.setState({ userStatus: response.data[0] });
+        console.log('APP STATUS : ', this.state.userStatus)
       })      
       .catch(error => {
       }); 
@@ -83,7 +84,7 @@ class App extends React.Component {
         <Header userStatus={ this.state.userStatus } />
 
           <Switch>
-            <Route exact path="/" component={ HomeContainer } />
+            <Route exact path="/" render={(routeProps) => ( <HomeContainer {...routeProps} userStatus={this.state.userStatus} />)}/>
             <Route exact path="/a-propos" component={ About } />
             <Route exact path="/mentions-legales" component={ Legal } />
             <Route exact path="/cdu" component={ TermsOfUse } />

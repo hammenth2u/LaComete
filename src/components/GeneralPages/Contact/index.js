@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { withFormik } from 'formik';
@@ -7,6 +7,8 @@ import * as Yup from 'yup';
 import './styles.css';
 
 const Contact = (props) => {
+  const [modalShow, setModalShow] = React.useState(false);
+  
   const {
     values,
     touched,

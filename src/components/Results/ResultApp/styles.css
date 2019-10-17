@@ -225,7 +225,6 @@ img {
   flex-wrap: wrap;
   list-style: none;
   margin: 0;
-  padding: 0;
 }
 
 .cards_item {
@@ -235,7 +234,7 @@ img {
 }
 
 .card {
-  background-color: white;
+  background-color: #00837d;
   border-radius: 0.25rem;
   box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
   display: flex;

@@ -338,9 +338,11 @@ class Ad extends React.Component {
             )}            
             </div>
             <h4>Description : </h4>
+            <section className="maintext">
             <p>{ this.state.singleAd.description }</p>
             <h4>Recherche : </h4>
             <p>{ this.state.singleAd.need }</p>
+            </section>
           </article> 
         </section>
           

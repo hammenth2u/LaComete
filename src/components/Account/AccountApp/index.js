@@ -89,7 +89,7 @@ class AccountApp extends React.Component {
 
     deleteAccount = (evt) => {
         evt.preventDefault();
-        axios.get('/api/user/delete')
+        axios.get('/api/block/account')
         //axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/delete')
 
         .then(response => {

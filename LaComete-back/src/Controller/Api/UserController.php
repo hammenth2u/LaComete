@@ -208,7 +208,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/delete", name="delete_account")
+     * @Route("/block/account", name="bock_account")
      */
     public function deleteAccount() 
     {
@@ -222,6 +222,7 @@ class UserController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
-        return new Response('Votre compte a été désactivé');
+
+        return $this->redirectToRoute('app_logout');
     }
 }

@@ -85,7 +85,7 @@ class ResultList extends React.Component {
                   checked={values.type === "rêve"}
                   onChange={() => setFieldValue("type", "rêve")}
                 />
-                Rêve
+                Je cherche un rêve auquel participer
               </label>
               <label>
                 <input
@@ -96,7 +96,7 @@ class ResultList extends React.Component {
                   checked={values.type === "profil"}
                   onChange={() => setFieldValue("type", "profil")}
                 />
-                Profil
+                Je cherche des talents pour contribuer au mien
               </label>
             </div>
 
@@ -131,8 +131,6 @@ class ResultList extends React.Component {
           )
         }} 
       />      
-      <p className="subtitle">Parcours le site à la recherche du rêve que tu pourras aider à bâtir </p>
-      <p className="subtitledeux">ou des personnes qui pourront t'aider à réaliser le tien.</p>
     </div>
     )
   }

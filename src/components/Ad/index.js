@@ -347,7 +347,8 @@ class Ad extends React.Component {
             </section>
           </article> 
         </section>
-          
+        {this.state.userStatus == "<" ? (
+          '' ) : ( 
         <form>              
           <h4>Commentaires : </h4>
           <div className="commentgroup">
@@ -366,6 +367,7 @@ class Ad extends React.Component {
           </div>          
           
         </form> 
+          )}
         <section className="comments">          
           <div>
             

@@ -10,6 +10,7 @@ const Intro = () => {
     <div className="introduction">
     <div className="halfmoon"></div>
       <section className="introtext">
+        <p>Test de nouveau repo</p>
         <p>Vous avez un rêve fou ou un savoir-faire à exploiter?</p>
         <p>Venez proposer votre projet ou en chercher un auquel contribuer</p>
         <p>Et ensemble, faites vos plans sur notre comète !</p>

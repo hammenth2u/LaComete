@@ -1,3 +1,6 @@
+/**
+ * IMPORTS
+ */
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookSquare, faTwitterSquare, faLinkedin } from '@fortawesome/free-brands-svg-icons';
@@ -33,4 +36,7 @@ const Footer = () => {
   )
 };
 
+/**
+ * EXPORT
+ */
 export default Footer;

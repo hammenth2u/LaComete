@@ -1,10 +1,19 @@
+/**
+ * IMPORTS
+ */
 import React from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
+/**
+ * LOCAL IMPORTS
+ */
 import history from '../../History';
+
+/**
+ * STYLES
+ */
 import './styles.css';
 
 const Forgotten = (props) => {
@@ -15,8 +24,7 @@ const Forgotten = (props) => {
     isSubmitting,
     handleChange,
     handleBlur,
-    handleSubmit,
-    userMail
+    handleSubmit
   } = props;
 
   return(
@@ -43,8 +51,6 @@ const Forgotten = (props) => {
   );
 }
 
-
-
 export default withFormik({
   mapPropsToValues: (props) => { 
     return {
@@ -60,7 +66,6 @@ export default withFormik({
   handleSubmit: (values, { setSubmitting, resetForm }) => {
     setTimeout(() => {
       
-      //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/password/new', {
       axios.post('/api/password/new', {
         email: values.email,
       })

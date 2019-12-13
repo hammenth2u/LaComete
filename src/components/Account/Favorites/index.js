@@ -1,9 +1,13 @@
+/**
+ * IMPORTS
+ */
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
-import { Col } from 'react-bootstrap'
 
+/**
+ * STYLES
+ */
 import '../AccountApp/style.css';
 
 const Favorites = ({ userFavs }) => {
@@ -34,4 +38,7 @@ const Favorites = ({ userFavs }) => {
   );
 };
 
+/**
+ * EXPORT
+ */
 export default Favorites;

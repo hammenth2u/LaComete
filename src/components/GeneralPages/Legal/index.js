@@ -1,5 +1,11 @@
+/**
+ * IMPORTS
+ */
 import React from 'react';
 
+/**
+ * STYLES
+ */
 import './styles.css';
 
 const Legal = () => {
@@ -40,4 +46,7 @@ const Legal = () => {
   );
 };
 
+/**
+ * EXPORT
+ */
 export default Legal;

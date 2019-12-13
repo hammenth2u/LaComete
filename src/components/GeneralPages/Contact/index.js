@@ -1,13 +1,17 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+/**
+ * IMPORTS
+ */
+import Reactw from 'react';
 import axios from 'axios';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
+/**
+ * STYLES
+ */
 import './styles.css';
 
-const Contact = (props) => {
-  const [modalShow, setModalShow] = React.useState(false);
+const Contact = (props) => {  
   
   const {
     values,
@@ -106,7 +110,6 @@ export default withFormik({
   handleSubmit: (values, { setSubmitting, resetForm }) => {
     setTimeout(() => {
 
-      //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/contact/post', {
       axios.post('/api/contact/post', {
         email: values.email,
         object: values.object,

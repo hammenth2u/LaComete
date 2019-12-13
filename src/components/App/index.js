@@ -1,17 +1,13 @@
 /**
- * Import
+ * IMPORTS
  */
 import React from 'react';
-import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
-
 /**
- * Local import
+ * IMPORTS DE COMPONENTS
  */
-
-// Composants enfants éventuels
 import Header from 'src/components/Templates/Header';
 import HomeContainer from 'src/components/HomePage/HomeApp';
 import About from 'src/components/GeneralPages/About';
@@ -21,11 +17,14 @@ import TermsOfUse from 'src/components/GeneralPages/TermsOfUse';
 import Forgotten from 'src/components/GeneralPages/ForgottenPassword';
 import AccountContainer from 'src/components/Account/AccountApp/';
 import ResultContainer from 'src/components/Results/ResultApp';
-import Ad from 'src/components/Ad';
+import Ad from 'src/components/Ads/Ad';
+import EditAd from 'src/components/Ads/EditAd';
 import Footer from 'src/components/Templates/Footer';
 import ErrorPage from 'src/components/Templates/ErrorPage';
 
-// Styles et assets
+/**
+ * STYLES
+ */
 import '../../styles/index.sass';
 import './styles.css'
 
@@ -33,6 +32,7 @@ class App extends React.Component {
   
   state = {
     userStatus: {},
+    userStatusError: false,
     userMail: '',
   }
   
@@ -40,9 +40,7 @@ class App extends React.Component {
   source = this.CancelToken.source();
 
   abortController = new AbortController();
-
-
-    //getUserStatus = () => {axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/isConnected'), {cancelToken: this.source.token}    
+    
     getUserStatus = () => {axios.get('/api/user/isConnected', {cancelToken: this.source.token}) 
       .then(response => {
         
@@ -51,9 +49,8 @@ class App extends React.Component {
       })      
       .catch(error => {
       }); 
-    };
-      
-    //getUserInfo = () => {axios.get('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/account', {cancelToken: this.source.token})     
+    };    
+
     getUserInfo = () => {axios.get('/api/user/account', {cancelToken: this.source.token})   
         
     .then(response => {
@@ -76,7 +73,8 @@ class App extends React.Component {
       this.source.cancel("Operation canceled by the user.");
     }
  
-  render () {       
+  render () {     
+         
     return (
       
       <div id="app">
@@ -92,7 +90,8 @@ class App extends React.Component {
             <Route exact path="/motdepasseoublie" render={(routeProps) => ( <Forgotten {...routeProps} userMail={this.state.userMail} />)}/>
             <Route path="/mon-compte" component={ AccountContainer }  />
             <Route exact path="/recherche/liste/" component={ ResultContainer } />             
-            <Route path="/annonces/:id" component={ Ad } />       
+            <Route exact path="/annonces/:id" component={ Ad } />       
+            <Route path="/annonces/:id/editer" component={ EditAd } />
             <Route component={ ErrorPage } />
           </Switch>
         </div>
@@ -104,30 +103,6 @@ class App extends React.Component {
 };
 
 /**
- * Export
+ * EXPORT
  */
-
-// Étape 1 : on définit des stratégies de connexion au store de l'app.
-const connectionStrategies = connect(
-  // 1er argument : stratégie de lecture (dans le state privé global)
-  (state, ownProps) => {
-    return {
-      
-    };
-  },
-
-  // 2d argument : stratégie d'écriture (dans le state privé global)
-  (dispatch, ownProps) => {
-    return {
-      handleChange: (event) => {
-        dispatch(updateInputValue(event.target.value));
-      },
-    };
-  },
-);
-
-// Étape 2 : on applique ces stratégies à un composant spécifique.
-const AppContainer = connectionStrategies(App);
-
-// Étape 3 : on exporte le composant connecté qui a été généré
-export default AppContainer;
+export default App;

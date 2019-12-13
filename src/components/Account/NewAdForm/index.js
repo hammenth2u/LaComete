@@ -1,62 +1,27 @@
+/**
+ * IMPORTS
+ */
 import React from 'react';
-import { render } from 'react-dom';
 import { Formik } from "formik";
 import * as Yup from 'yup';
 import axios from 'axios';
-import Select from "react-select";
+import { withRouter } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRocket, faHourglassHalf } from '@fortawesome/free-solid-svg-icons';
-import { withRouter } from 'react-router';
 
-import history from '../../History';
-/*
-class Thumb extends React.Component {
-  state = {
-    loading: false,
-    thumb: undefined,
-  };
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (!nextProps.file) { return; }
-
-    this.setState({ loading: true }, () => {
-      let reader = new FileReader();
-
-      reader.onloadend = () => {
-        this.setState({ loading: false, thumb: reader.result });
-      };
-
-      reader.readAsDataURL(nextProps.file);
-    });
-  }
-
-
-  render() {
-    const { file } = this.props;
-    const { loading, thumb } = this.state;
-
-    if (!file) { return null; }
-
-    if (loading) { return <p>loading...</p>; }
-
-    return (<img src={thumb}
-      alt={file.name}
-      className="img-thumbnail mt-2"
-      height={200}
-      width={200} />);
-  }
-}*/
-
+/**
+ * LOCAL IMPORTS
+ */
 import LocationSelect from 'src/components/Templates/LocationSelect';
 import CategorySelect from 'src/components/Templates/CategorySelect';
 
 class SubmitForm extends React.Component {
+
   render() {
     return (
       <div className="container">
         <Formik 
-          initialValues={{ 
-            //file: null,
+          initialValues={{
             type: '',
             title: '',
             location: '',
@@ -66,24 +31,10 @@ class SubmitForm extends React.Component {
             phone: '',
             website: '',
             category: '',
-            //formData: '',
           }}
 
           onSubmit={(values, {setSubmitting, resetForm}) => {
 
-            /*console.log('IMAGE : ', values.file);
-
-            const formData = new FormData();
-            formData.append(
-              'file',
-              values.file,
-              values.file.name,
-            )
-            for (var value of formData.values()) {
-              console.log(value);
-            }*/
-
-            //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/annonce/new', {
               axios.post('/api/annonce/new', {
               type: values.type,
               title: values.title,
@@ -94,7 +45,6 @@ class SubmitForm extends React.Component {
               phone: values.phone,
               website: values.website,
               category: values.category.value,
-              //formData: formData,
             })
             .then(function (response) {
               alert("Annonce postée");              
@@ -108,8 +58,6 @@ class SubmitForm extends React.Component {
           }} 
           
           validationSchema={Yup.object().shape({
-           // file: Yup.mixed()
-          //  .required("Veuillez choisir un type"),
             type: Yup.string()
               .required("Cette section est obligatoire"),
             location: Yup.string().ensure().required("Cette section est obligatoire"),
@@ -242,13 +190,7 @@ class SubmitForm extends React.Component {
                   />
                   {errors.need && touched.need && (<div className="invalid-feedback">{errors.need}</div>)}
                 </div>
-                {/*<div className="form-group">
-                  <label htmlFor="file">Ajouter une image</label>
-                  <input id="file" name="file" type="file" onChange={(event) => {
-                    setFieldValue("file", event.currentTarget.files[0]);
-                  }} className="form-control" />
-                  <Thumb file={values.file} />
-                </div>*/}
+             
                 <div className="contact-head">
                 <label className="contact-group">Mes moyens de contact</label>
                 <small className="contact-group form-text text-muted">
@@ -317,4 +259,7 @@ class SubmitForm extends React.Component {
   }
 };
 
+/**
+ * EXPORT
+ */
 export default withRouter(SubmitForm);

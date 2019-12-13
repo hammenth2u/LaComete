@@ -1,12 +1,12 @@
+/**
+ * IMPORTS
+ */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRocket, faHourglassHalf } from '@fortawesome/free-solid-svg-icons';
-
-//import './styles.sass';
 
 const Settings = (props) => {
   const {
@@ -140,6 +140,7 @@ const Settings = (props) => {
       
     </form>    
   )
+  
   /**
    * FORMULAIRE
    */
@@ -202,7 +203,6 @@ export default withFormik({
    */
   handleSubmit: (values, { setSubmitting, resetForm }) => {
     setTimeout(() => {
-      //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/user/edit/account', {
         axios.post('/api/user/edit/account', {
         firstname: values.firstname,
         lastname: values.lastname,

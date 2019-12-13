@@ -1,7 +1,13 @@
+/**
+ * IMPORTS
+ */
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 
+/**
+ * STYLES
+ */
 import './styles.css';
 
 const ErrorPage = () => {
@@ -18,4 +24,7 @@ const ErrorPage = () => {
     )
 }
 
+/**
+ * EXPORT
+ */
 export default ErrorPage;

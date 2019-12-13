@@ -1,3 +1,6 @@
+/**
+ * IMPORTS
+ */
 import React from 'react';
 import Select from "react-select";
 
@@ -106,13 +109,11 @@ const locationOptions = [
   ];
 
   class LocationSelect extends React.Component {
-    handleChange = value => {
-      // this is going to call setFieldValue and manually update values.topcis
+    handleChange = value => {      
       this.props.onChange("location", value);
     };
   
-    handleBlur = () => {
-      // this is going to call setFieldTouched and manually update touched.topcis
+    handleBlur = () => {      
       this.props.onBlur("location", true);
     };
   
@@ -136,5 +137,8 @@ const locationOptions = [
       );
     }
   }
-      
+
+/**
+* EXPORT
+*/
 export default LocationSelect;

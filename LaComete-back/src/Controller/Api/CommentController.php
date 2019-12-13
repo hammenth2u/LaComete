@@ -127,4 +127,35 @@ class CommentController extends AbstractController
 
         return new JsonResponse($formatted);
     }
+
+    /**
+     * @Route("/update/comment", name="update_comment")
+     */
+    public function UpdateComment(Request $request)
+    {
+        // permet d'acceder aux differentes methodes
+        header('Access-Control-Allow-Origin: *'); 
+        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
+        header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+         // on récupère l'utilisateur connecté 
+        $user = $this->getUser();
+         // on récupère l'id de l'alerte associé au commentaire à modifier
+       // $advertId = $request->request->get('advertId');
+         // on récupère l'id du commentaire à modifier
+        $commentId = $request->request->get('commentId');
+         // on retrouve l'object commentaire associé à l'id du commentaire
+        $comment = $this->getDoctrine()->getRepository(Comment::class)->find($commentId);
+         // on vérifie qu'on reçoit le text du commentaire si oui en remplace dans la bdd
+        if($request->request->get('content') !== '')
+        {
+            $content = $request->request->get('content');
+            $comment->setContent($content);
+        }
+         // on envoie dans la bdd 
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($comment);
+        $em->flush();
+         // on peut informer que le commentaire est bien modifié !
+        return new Response('commentaire modifié', Response::HTTP_CREATED);
+    }
 }

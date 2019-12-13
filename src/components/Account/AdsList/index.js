@@ -1,8 +1,13 @@
+/**
+ * IMPORTS
+ */
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
+/**
+ * STYLES
+ */
 import '../AccountApp/style.css';
 
 const MyAds = ({ userAds }) => {
@@ -34,16 +39,7 @@ const MyAds = ({ userAds }) => {
   );
 };
 
+/**
+ * EXPORT
+ */
 export default MyAds;
-
-<div class="card-grid">
-  <div class="card-wrap">
-    <div class="card">
-      <img src="http://placehold.it/500x500" class="card-img"/>
-      <div>
-        <h4>This is an example</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at efficitur nisl. </p>
-      </div>
-    </div>
-  </div>
-</div>

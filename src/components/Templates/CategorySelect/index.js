@@ -1,3 +1,6 @@
+/**
+ * IMPORTS
+ */
 import React from 'react';
 import Select from "react-select";
 
@@ -24,34 +27,37 @@ const options = [
   ]; 
   
 class CategorySelect extends React.Component {
-    handleChange = value => {
-      // this is going to call setFieldValue and manually update values.topcis
+    
+  handleChange = value => {      
       this.props.onChange("category", value);
     };
   
-    handleBlur = () => {
-      // this is going to call setFieldTouched and manually update touched.topcis
-      this.props.onBlur("category", true);
-    };
+  handleBlur = () => {      
+    this.props.onBlur("category", true);
+  };
   
-    render() {
-      return (
-        <div className="catsearch">
-          <Select
-            placeholder="Catégorie"
-            classNamePrefix="catsearch"            
-            options={options}
-            onChange={this.handleChange}
-            onBlur={this.handleBlur}
-            value={this.props.value}
-          />
-          {!!this.props.error && this.props.touched && (
-            <div>
-              {this.props.error}
-            </div>
-          )}
-        </div>
-      );
-    }
-  }  
+  render() {
+    return (
+      <div className="catsearch">
+        <Select
+          placeholder="Catégorie"
+          classNamePrefix="catsearch"            
+          options={options}
+          onChange={this.handleChange}
+          onBlur={this.handleBlur}
+          value={this.props.value}
+        />
+        {!!this.props.error && this.props.touched && (
+          <div>
+            {this.props.error}
+          </div>
+        )}
+      </div>
+    );
+  }
+}  
+
+/**
+ * EXPORT
+ */
 export default CategorySelect;

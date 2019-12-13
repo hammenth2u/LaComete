@@ -1,10 +1,19 @@
+/**
+ * IMPORTS
+ */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { Col } from 'react-bootstrap';
 
+/**
+ * LOCAL IMPORTS
+ */
 import Navdrop from '../Dropdown'
+
+/**
+ * STYLES
+ */
 import './header.css';
 
 const Header = ({ userStatus }) => {
@@ -43,11 +52,5 @@ const Header = ({ userStatus }) => {
     
   );
 };
-
-/*
-Header.propTypes = {
-  
-      userStatus: PropTypes.string.isRequired
-};*/
 
 export default Header;

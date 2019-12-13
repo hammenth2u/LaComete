@@ -1,13 +1,17 @@
+/**
+ * IMPORTS
+ */
 import React from 'react';
-import { render } from 'react-dom';
 import { Formik } from "formik";
 import * as Yup from 'yup';
 import axios from 'axios';
-import Select from "react-select";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRocket } from '@fortawesome/free-solid-svg-icons';
 import { withRouter } from "react-router";
 
+/**
+ * LOCAL IMPORTS
+ */
 import LocationSelect from 'src/components/Templates/LocationSelect';
 import CategorySelect from 'src/components/Templates/CategorySelect'; 
 
@@ -18,7 +22,6 @@ class ResultList extends React.Component {
     searchData: [],
   }
   
-
   render() {
     return (
       <div className="container">      
@@ -32,7 +35,6 @@ class ResultList extends React.Component {
             const catValue = values.category.value
 
             axios.post('/api/results/annonces/search', {  
-            //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/results/annonces/search' , {
               type: typeValue,        
               location: locValue,        
               category: catValue
@@ -66,7 +68,6 @@ class ResultList extends React.Component {
             touched,
             errors,
             isSubmitting,
-            handleChange,
             setFieldTouched,
             setFieldValue,
             handleSubmit
@@ -136,4 +137,7 @@ class ResultList extends React.Component {
   }
 };
 
+/**
+ * EXPORT
+ */
 export default withRouter(ResultList);

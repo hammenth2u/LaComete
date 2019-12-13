@@ -1,20 +1,25 @@
 /**
  * Import
  */
+/**
+ * IMPORTS
+ */
 import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Formik } from "formik";
 import * as Yup from 'yup';
 import axios from 'axios';
-import Select from "react-select";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faRocket } from '@fortawesome/free-solid-svg-icons';
 
+/**
+ * LOCAL IMPORTS
+ */
 import LocationSelect from 'src/components/Templates/LocationSelect';
 import CategorySelect from 'src/components/Templates/CategorySelect';
 
-// Styles et assets
+/**
+ * STYLES
+ */
 import './styles.css';
 
 class ResultApp extends React.Component {
@@ -58,7 +63,6 @@ class ResultApp extends React.Component {
             const catValue = values.category.value
 
             axios.post('/api/results/annonces/search', {  
-            //axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/results/annonces/search' , {
               type: typeValue,        
               location: locValue,        
               category: catValue
@@ -164,31 +168,6 @@ class ResultApp extends React.Component {
 }
 
 /**
- * Export
+ * EXPORT
  */
-
-// Étape 1 : on définit des stratégies de connexion au store de l'app.
-const connectionStrategies = connect(
-  // 1er argument : stratégie de lecture (dans le state privé global)
-  (state, ownProps) => {
-    return {
-      title: ownProps.title,
-      greeting: state.greetingMessage
-    };
-  },
-
-  // 2d argument : stratégie d'écriture (dans le state privé global)
-  (dispatch, ownProps) => {
-    return {
-      handleChange: (event) => {
-        dispatch(updateInputValue(event.target.value));
-      }
-    };
-  },
-);
-
-// Étape 2 : on applique ces stratégies à un composant spécifique.
-const ResultContainer = connectionStrategies(ResultApp);
-
-// Étape 3 : on exporte le composant connecté qui a été généré
-export default ResultContainer;
+export default ResultApp;

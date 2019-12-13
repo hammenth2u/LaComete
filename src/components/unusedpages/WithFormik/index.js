@@ -36,7 +36,7 @@ export const EnhancedForm = withFormik({
     const catData = values.category.value;
     
     setTimeout(() => {
-      axios.post('http://ec2-3-84-230-242.compute-1.amazonaws.com/api/results/annonces/search', {
+      axios.post('/api/results/annonces/search', {
         type: values.type,        
         location: values.location.value,        
         category: values.category.value

@@ -147,38 +147,6 @@ class AnnonceController extends AbstractController
             $annonce->setWebsite($website);
         }
 
-        // if($request->request->get('formData')){
-        //     $formData = $request->request->get('formData');
-        // }
-
-
-        // if (isset($_FILES['formData'])) {
-        //     $formData  = $_FILES['formData'];
-        
-        //     $tmpFilePath      = $formData['tmp_name'];
-        //     $fileType         = $formData['type'];
-        //     $fileOriginalName = $formData['name'];
-        
-        //     //	uploaded file is moved to upload directory
-        //     $imageContent = @file_get_contents($tmpFilePath);
-
-        //     $filmenameToStore = $annonceId . '.' . $file->getClientOriginalExtension();
-        //     $movedFile = $file->move($this->targetFolderPath, $filmenameToStore);
-        //     // $movedFile est un objet de la classe File qui représente le nouveau fichier créé et déplacé après l'upload
-        //     // On utilise sa méthode ->getPathname() pour obtenir le chemin relatif du fichier et le retourner
-
-        // }
-
-        // { name: "bricolage", label: "bricolage", value: "1"},
-        // { name: "education", label: "éducation", value: "2" },
-        // { name: "jardinage", label: "jardinage", value: "3" },
-        // { name: "musique", label: "musique", value: "4" },
-        // { name: "sport", label: "sport", value: "5" },
-        // { name: "technologie", label: "technologie",value: "6" },
-        // { name: "theatre", label: "cinéma/théatre", value: "7" },
-        // { name: "travaux", label: "travaux", value: "8" },
-        // { name: "divers", label: "divers", value: "9" }
-
 
         $category = $this->getDoctrine()->getRepository(Category::class)->find($cat);
 
@@ -239,11 +207,7 @@ class AnnonceController extends AbstractController
         $em->persist($annonce);
         $em->flush();
 
-        // $imagePath = $fileUploadManager->upload($formData, $annonce->getId());
-        // $annonce->setImage($imagePath);
-        // $em->flush();
-
-        $response = new Response('success');
+       $response = new Response('success');
         return $response;
     }
 
@@ -283,6 +247,40 @@ class AnnonceController extends AbstractController
         
         return new JsonResponse($formatted);
     }
+
+    /**
+     * @Route("/update/add", name="update_add")
+     */
+    public function UpdateAdd(Request $request)
+    {
+        // permet d'acceder aux differentes methodes
+        header('Access-Control-Allow-Origin: *'); 
+        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
+        header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+         // on récupère l'utilisateur connecté 
+        $user = $this->getUser();
+         // on récupère l'id de l'annonce à modifier
+        $annonceId = $request->request->get('annonceId');
+         // on retrouve l'object annonce associé à l'id
+        $annonce = $this->getDoctrine()->getRepository(Annonce::class)->find($annonceId);
+         // on vérifie qu'on reçoit le text de l'annonce si oui en remplace dans la bdd
+        if($request->request->get('title') !== '')
+        {
+            $title = $request->request->get('title');
+            $annonce->setTitle($title);
+        }
+         if($request->request->get('description') !== '')
+        {
+            $description = $request->request->get('description');
+            $annonce->setDescription($description);
+        }
+         // on envoie dans la bdd 
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($annonce);
+        $em->flush();
+         // on peut informer que l'annonce est bien modifié !
+        return new Response('annonce modifié', Response::HTTP_CREATED);
+    }    
 
 ###############################################################################################################################
 ####################################################  NE PAS TOUCHER ##########################################################

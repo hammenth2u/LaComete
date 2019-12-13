@@ -1,5 +1,11 @@
+/**
+ * IMPORTS
+ */
 import React from 'react';
 
+/**
+ * STYLES
+ */
 import './styles.css';
 
 const TermsOfUse = () => {
@@ -67,4 +73,7 @@ const TermsOfUse = () => {
   );
 };
 
+/**
+ * EXPORT
+ */
 export default TermsOfUse;

@@ -4,7 +4,7 @@
 import React from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faEnvelope, faAt, faPhone, faUser, faMapMarkerAlt, faPencilRuler,  } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faEnvelope, faAt, faPhone, faUser, faMapMarkerAlt, faPencilRuler, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 
@@ -276,7 +276,12 @@ class Ad extends React.Component {
             <div className="basicinfo">
             <p><FontAwesomeIcon icon={faUser} /> { this.state.singleAd.user }</p>
             <p><FontAwesomeIcon icon={faMapMarkerAlt} /> { this.state.singleAd.city }</p>
-            <p><FontAwesomeIcon icon={faPencilRuler} /> { this.state.singleAd.category }</p>
+            <p><FontAwesomeIcon icon={faPencilRuler} /> { this.state.singleAd.category }</p>            
+            {/*{this.state.singleAd.updatedAt != null ? (
+              <p><FontAwesomeIcon icon={faCalendar} /> { this.state.singleAd.updatedAt } (modifiée)</p> 
+              ) : ( 
+              <p><FontAwesomeIcon icon={faCalendar} /> { this.state.singleAd.createdAt }</p> 
+              )}  */}
             </div>
             </div>
             {this.state.userStatus == "<" ? (
@@ -362,10 +367,10 @@ class Ad extends React.Component {
             </section>
           </article> 
         </section>
+        <h4>Commentaires : </h4>
         {this.state.userStatus == "<" ? (
-          '' ) : ( 
-        <form>              
-          <h4>Commentaires : </h4>
+          <small>(Vous devez être connecté pour commenter les annonces)</small> ) : ( 
+        <form>                        
           <div className="commentgroup">
             <textarea
               ref={(ref) => this.commentInput= ref}

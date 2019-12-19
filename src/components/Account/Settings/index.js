@@ -72,7 +72,6 @@ const Settings = (props) => {
         />
         {errors.username && touched.username && (<div className="invalid-feedback">{errors.username}</div>)}
       </div>
-
       <div className="form-group">
         <label>Adresse email</label>
         <input
@@ -88,7 +87,6 @@ const Settings = (props) => {
         />
         {errors.email && touched.email && (<div className="invalid-feedback">{errors.email}</div>)}
       </div>
-
       <div className="form-group">
         <label>Nouveau mot de passe</label>
         <input
@@ -103,7 +101,6 @@ const Settings = (props) => {
         />
         {errors.newpassword && touched.newpassword && (<div className="invalid-feedback">{errors.newpassword}</div>)}
       </div>
-
       <div className="form-group">
         <label>Confirmation du nouveau mot de passe</label>
         <input
@@ -118,7 +115,6 @@ const Settings = (props) => {
         />
         {errors.passwordconfirm && touched.passwordconfirm && (<div className="invalid-feedback">{errors.passwordconfirm}</div>)}
       </div>
-
       <div className="form-group">
         <label>Mot de passe actuel</label>
         <input
@@ -133,7 +129,6 @@ const Settings = (props) => {
         />
         {errors.currentpassword && touched.currentpassword && (<div className="invalid-feedback">{errors.currentpassword}</div>)}
       </div>
-
       <button type="submit" className="account-btn" disabled={isSubmitting}>
         {isSubmitting ? <span className="btn-span"><FontAwesomeIcon icon={faHourglassHalf} /></span> : <span className="btn-span"><FontAwesomeIcon icon={faRocket} /></span>}
       </button>
@@ -150,7 +145,6 @@ const Settings = (props) => {
     </div>     
   );
 }
-
 /**
  * List of props from form
  */
@@ -166,7 +160,6 @@ export default withFormik({
     currentpassword: '',
     }
   },
-
   /**
    * VALIDATION SCHEMA
    */
@@ -184,17 +177,14 @@ export default withFormik({
       .email("Veuillez entrer une adresse email valide"),                      
     newpassword: Yup.string()
       .min(8, "Votre mot de passe doit faire au minimum 8 caractères")
-      .max(25, "Votre mot de passe doit faire au maximum 25 caractères"),  
+      .max(25, "Votre mot de passe doit faire au maximum 25 caractères"),
     passwordconfirm: Yup.string()       
       .min(8, "La confirmation et le mot de passe sont différents")
-      .max(25, "La confirmation et le mot de passe sont différents"),       
-      /*
-        .oneOf([Yup.ref('newpassword'), null], 'La confirmation et le mot de passe sont différents') :
-      schema.oneOf([Yup.ref('newpassword'), null], 'La confirmation et le mot de passe sont différents') 
-    }),*/
-    currentpassword: Yup.string()
-    .required("Vous devez entrer votre mot de passe actuel")
-    /*.notOneOf([Yup.ref('newpassword'), null], 'Votre nouveau mot de passe doit être différent de l\'ancien')*/, 
+      .max(25, "La confirmation et le mot de passe sont différents")    
+      .oneOf([Yup.ref('newpassword'), null], 'La confirmation et le mot de passe sont différents'),
+    currentpassword: Yup.string()    
+    
+    .required("Vous devez entrer votre mot de passe actuel"), 
   }),
 
 

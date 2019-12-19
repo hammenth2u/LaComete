@@ -18,7 +18,6 @@ import CategorySelect from 'src/components/Templates/CategorySelect';
 class ResultList extends React.Component {
 
   state = {
-
     searchData: [],
   }
   
@@ -58,7 +57,7 @@ class ResultList extends React.Component {
           
           validationSchema={Yup.object().shape({
             
-            type: Yup.string().required("Veuillez séléctionner un type"),
+            type: Yup.string().required("Veuillez sélectionner un type"),
             location: Yup.string().ensure(),
             category: Yup.string().ensure(),
             

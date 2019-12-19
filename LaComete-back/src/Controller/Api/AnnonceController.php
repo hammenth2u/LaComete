@@ -228,6 +228,9 @@ class AnnonceController extends AbstractController
         $createdAt= $annonce->getCreatedAt()->getTimestamp();
         $createdAt = date('d-M-Y à H:i',$createdAt);
 
+        //$updatedAt= $annonce->getUpdatedAt()->getTimestamp();
+        //$updatedAt = date('d-M-Y à H:i',$updatedAt);
+
         $formatted = [];
             $formatted [] = [
                'id' => $annonce->getId(),
@@ -243,6 +246,7 @@ class AnnonceController extends AbstractController
                'phone' => $annonce->getPhone(),
                'picture' => $annonce->getPicture(),
                'createdAt' => $createdAt,
+               //'updatedAt' => $updatedAt,
             ];
         
         return new JsonResponse($formatted);
@@ -269,10 +273,30 @@ class AnnonceController extends AbstractController
             $title = $request->request->get('title');
             $annonce->setTitle($title);
         }
-         if($request->request->get('description') !== '')
+        if($request->request->get('description') !== '')
         {
             $description = $request->request->get('description');
             $annonce->setDescription($description);
+        }
+        if($request->request->get('need') !== '')
+        {
+            $need = $request->request->get('need');
+            $annonce->setNeed($need);
+        }        
+        if($request->request->get('phone') !== 'phone')
+        {
+            $phone = $request->request->get('phone');
+            $annonce->setPhone($phone);
+        }
+        if($request->request->get('email') !== 'email')
+        {
+            $email = $request->request->get('email');
+            $annonce->setEmail($email);
+        }
+        if($request->request->get('website') !== 'website')
+        {
+            $website = $request->request->get('website');
+            $annonce->setWebsite($website);
         }
          // on envoie dans la bdd 
         $em = $this->getDoctrine()->getManager();

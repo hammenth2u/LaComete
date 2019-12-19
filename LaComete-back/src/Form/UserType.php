@@ -31,7 +31,7 @@ class UserType extends AbstractType
                     'placeholder' => 'E-MAIL']
             ])
             ->add('username', TextType::class, array ( 'attr'=> [
-                                                        'placeholder' => 'PSEUDO']))
+                                                        'placeholder' => 'NOM D\'UTILISATEUR']))
 
             ->add('password', PasswordType::class,[ 
                 'required' => true,

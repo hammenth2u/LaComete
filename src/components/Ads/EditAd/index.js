@@ -12,8 +12,6 @@ import { faRocket, faHourglassHalf } from '@fortawesome/free-solid-svg-icons';
 /**
  * LOCAL IMPORTS
  */
-import LocationSelect from 'src/components/Templates/LocationSelect';
-import CategorySelect from 'src/components/Templates/CategorySelect';
 
 class EditAd extends React.Component {
 
@@ -51,13 +49,11 @@ class EditAd extends React.Component {
           enableReinitialize={true}
           initialValues={{
             title: this.state.singleAd.title,
-            location: this.state.singleAd.city,
             description: this.state.singleAd.description,
             need: this.state.singleAd.need,
             email: this.state.singleAd.email,
             phone: this.state.singleAd.phone,
             website: this.state.singleAd.website,
-            category: this.state.singleAd.category,
           }}
 
           onSubmit={(values, {setSubmitting, resetForm}) => {
@@ -65,13 +61,11 @@ class EditAd extends React.Component {
               axios.post('/api/update/add', {
               annonceId: this.state.singleAd.id,
               title: values.title,
-              //location: values.location.value,
               description: values.description,
-              //need: values.need,
-              //email: values.email,
-              //phone: values.phone,
-              //website: values.website,
-              //category: values.category.value,
+              need: values.need,
+              email: values.email,
+              phone: values.phone,
+              website: values.website,
             })
             .then(function (response) {
               alert("Modification(s) postée(s)");              
@@ -86,8 +80,6 @@ class EditAd extends React.Component {
           
           validationSchema={Yup.object().shape({
             type: Yup.string(),              
-            location: Yup.string().ensure(),
-            category: Yup.string().ensure(),
             title: Yup.string()              
               .min(3, "Le titre doit faire au minimum 3 caractères")
               .max(150, "Le titre doit faire au maximum 150 caractères"),
@@ -98,11 +90,11 @@ class EditAd extends React.Component {
               .min(25, "La recherche doit faire au minimum 25 caractères")
               .max(1500, "La recherche doit faire au maximum 500 caractères"),
             phone: Yup.string()
-              .matches(/(\+\d+(\s|-))?0\d(\s|-)?(\d{2}(\s|-)?){4}/,"Veuillez entrer un numéro de téléphone valide"),
+              .matches(/(\+\d+(\s|-))?0\d(\s|-)?(\d{2}(\s|-)?){4}/,"Veuillez entrer un numéro de téléphone valide").nullable(),
             email: Yup.string()
-              .email("Veuillez entrer une adresse email valide"),              
+              .email("Veuillez entrer une adresse email valide").nullable(),              
             website: Yup.string()
-              .url("Veuillez entrer une url valide")
+              .url("Veuillez entrer une url valide").nullable()
           })}
           render={({ 
             values,
@@ -110,8 +102,6 @@ class EditAd extends React.Component {
             errors,
             isSubmitting,
             handleChange,
-            setFieldTouched,
-            setFieldValue,
             handleBlur,
             handleSubmit
            }) => {
@@ -128,35 +118,11 @@ class EditAd extends React.Component {
                     className={`form-control ${errors.title &&
                       touched.title &&
                       "is-invalid"}`}
-                    value={values.title}                    
+                    value={values.title || ''}                    
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
                   {errors.title && touched.title && (<div className="invalid-feedback">{errors.title}</div>)}
-                </div>
-
-                <div className="form-group">
-                    <label>Catégorie</label>
-                    <CategorySelect                    
-                    classNamePrefix="catsearch"                    
-                    value={values.category}
-                    onChange={setFieldValue}
-                    onBlur={setFieldTouched}
-                    error={errors.category}
-                    touched={touched.category}
-                    />        
-                </div>
-
-                <div className="form-group">
-                    <label>Lieu</label>
-                    <LocationSelect                    
-                    classNamePrefix="locsearch"                    
-                    value={values.location}
-                    onChange={setFieldValue}
-                    onBlur={setFieldTouched}
-                    error={errors.location}
-                    touched={touched.location}
-                    />        
                 </div>
 
                 <div className="form-group">
@@ -167,7 +133,7 @@ class EditAd extends React.Component {
                     className={`form-control ${errors.description &&
                       touched.description &&
                       "is-invalid"}`}                    
-                    value={values.description}
+                    value={values.description || ''}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -182,7 +148,7 @@ class EditAd extends React.Component {
                     className={`form-control ${errors.need &&
                       touched.need &&
                       "is-invalid"}`}                    
-                    value={values.need}
+                    value={values.need || ''}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -204,7 +170,7 @@ class EditAd extends React.Component {
                     className={`form-control ${errors.phone &&
                       touched.phone &&
                       "is-invalid"}`}
-                    value={values.phone}
+                    value={values.phone || ''}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -219,7 +185,7 @@ class EditAd extends React.Component {
                     className={`form-control ${errors.email &&
                       touched.email &&
                       "is-invalid"}`}
-                    value={values.email}
+                    value={values.email || ''}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -237,7 +203,7 @@ class EditAd extends React.Component {
                     className={`form-control ${errors.website &&
                       touched.website &&
                       "is-invalid"}`}
-                    value={values.website}
+                    value={values.website || ''}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />

@@ -273,7 +273,7 @@ class Annonce
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updatedAt;
+        return $this->$updatedAt;
     }
 
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self

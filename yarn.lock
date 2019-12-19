@@ -7382,6 +7382,11 @@ react-dom@*:
     prop-types "^15.6.2"
     scheduler "^0.15.0"
 
+react-easy-edit@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/react-easy-edit/-/react-easy-edit-1.8.0.tgz#90fb1cb23f98a9227c93104ce17062e6b228f9f4"
+  integrity sha512-T9anJAsP5JTzSKKvFAPYxCOeqWPxaxtoKRAwDLS2rsUe3SrZLHAHawF1WVlOJdrsvuW4yYmvN7xe7H0UC65AyQ==
+
 react-easy-swipe@^0.0.16:
   version "0.0.16"
   resolved "https://registry.yarnpkg.com/react-easy-swipe/-/react-easy-swipe-0.0.16.tgz#5a3d949a8f975d05be92a818254315d1318a81ea"

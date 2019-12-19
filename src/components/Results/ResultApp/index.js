@@ -28,8 +28,7 @@ class ResultApp extends React.Component {
   }
 
   componentDidMount() {
-    const test = this.props.location.state;
-    this.setState({ homeSearchRes: test })
+    this.setState({ homeSearchRes: this.props.location.state })
   }
 
   render() {
@@ -54,9 +53,14 @@ class ResultApp extends React.Component {
       <div id="wrapper">    
       <div className="searchpage">      
         <Formik 
-          initialValues={{ type: '', location:'', category:'' }}
+          enableReinitialize={true}
+          initialValues={{ 
+            type: this.state.homeSearchRes.type, 
+            location: this.state.homeSearchRes.location, 
+            category: this.state.homeSearchRes.category 
+          }}
         
-          onSubmit={(values, {setSubmitting, resetForm}) => {
+          onSubmit={(values, {setSubmitting}) => {
             
             const typeValue = values.type 
             const locValue = values.location.value
@@ -75,7 +79,6 @@ class ResultApp extends React.Component {
               alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux.");
             });
             setSubmitting(false);
-            resetForm();
 
           }} 
           

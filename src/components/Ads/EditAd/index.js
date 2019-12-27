@@ -57,7 +57,7 @@ class EditAd extends React.Component {
           }}
 
           onSubmit={(values, {setSubmitting, resetForm}) => {
-
+            setTimeout(() => {
               axios.post('/api/update/add', {
               annonceId: this.state.singleAd.id,
               title: values.title,
@@ -66,16 +66,17 @@ class EditAd extends React.Component {
               email: values.email,
               phone: values.phone,
               website: values.website,
-            })
-            .then(function (response) {
-              alert("Modification(s) postée(s)");              
-            })
-            .catch(function (error) {
-              alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux, veuillez recommencer ou nous contacter");              
-            });
-            setSubmitting(false);
-            resetForm();
-            this.props.history.push('/annonces/'+ this.state.singleAd.id)
+              })
+              .then(function (response) {
+                alert("Modification(s) postée(s)");              
+              })
+              .catch(function (error) {
+                alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux, veuillez recommencer ou nous contacter");              
+              });
+              setSubmitting(false);
+              resetForm();
+              this.props.history.push('/annonces/'+ this.state.singleAd.id)
+            }, 1000);
           }} 
           
           validationSchema={Yup.object().shape({

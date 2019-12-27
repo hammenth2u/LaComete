@@ -81,7 +81,7 @@ body {
 }
 
 .link-password:hover {
-    color: #adefd3;
+    color: black;
     text-decoration: none;
 }
 
@@ -104,7 +104,7 @@ body {
 }
 
 .logout-style:hover{
-    color: #adefd3;
+    color: black;
     text-decoration: none;
 }
 

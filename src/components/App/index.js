@@ -36,11 +36,12 @@ class App extends React.Component {
     userMail: '',
   }
   
+  // HELPS CANCELLING API CALLS WHEN UNNECESSARY
   CancelToken = axios.CancelToken;
   source = this.CancelToken.source();
-
   abortController = new AbortController();
     
+    // IS USER LOGGED IN?
     getUserStatus = () => {axios.get('/api/user/isConnected', {cancelToken: this.source.token}) 
       .then(response => {
         
@@ -51,6 +52,7 @@ class App extends React.Component {
       }); 
     };    
 
+    // GET USER INFO
     getUserInfo = () => {axios.get('/api/user/account', {cancelToken: this.source.token})   
         
     .then(response => {
@@ -64,11 +66,13 @@ class App extends React.Component {
         });
     };
 
+    // EXECUTE API CALL ON PAGE LOAD
     componentDidMount(){
       this.getUserStatus();
       this.getUserInfo();     
     }
 
+    // CANCEL API CALLS 
     componentWillUnmount() {
       this.source.cancel("Operation canceled by the user.");
     }
@@ -89,7 +93,7 @@ class App extends React.Component {
             <Route exact path="/contact" render={(routeProps) => ( <Contact {...routeProps} userStatus={this.state.userStatus} userMail={this.state.userMail} />)}/>
             <Route exact path="/motdepasseoublie" render={(routeProps) => ( <Forgotten {...routeProps} userMail={this.state.userMail} />)}/>
             <Route path="/mon-compte" component={ AccountContainer }  />
-            <Route exact path="/recherche/liste/" component={ ResultContainer } />             
+            <Route path="/recherche/liste/" component={ ResultContainer } />             
             <Route exact path="/annonces/:id" component={ Ad } />       
             <Route path="/annonces/:id/editer" component={ EditAd } />
             <Route component={ ErrorPage } />

@@ -57,9 +57,9 @@ class ResultList extends React.Component {
           
           validationSchema={Yup.object().shape({
             
-            type: Yup.string().required("Veuillez sélectionner un type"),
-            location: Yup.string().ensure(),
-            category: Yup.string().ensure(),
+            type: Yup.string().required("Vous devez sélectionner une option"),
+            location: Yup.string(),
+            category: Yup.string(),
             
           })}
           render={({ 
@@ -76,7 +76,7 @@ class ResultList extends React.Component {
             <form onSubmit={handleSubmit} className="searchform">
              
             <div className="radio-group">
-                <label>
+              <label>
                 <input
                   type="radio"
                   className="option-input radio"
@@ -85,7 +85,7 @@ class ResultList extends React.Component {
                   checked={values.type === "rêve"}
                   onChange={() => setFieldValue("type", "rêve")}
                 />
-                Je cherche un rêve auquel participer
+                Projet
               </label>
               <label>
                 <input
@@ -96,8 +96,9 @@ class ResultList extends React.Component {
                   checked={values.type === "profil"}
                   onChange={() => setFieldValue("type", "profil")}
                 />
-                Je cherche des talents pour contribuer au mien
+                Profil
               </label>
+              {errors.type && touched.type && (<div className="invalid-radio">{errors.type}</div>)}
             </div>
 
             <div className="form-group">

@@ -15,13 +15,13 @@ const TermsOfUse = () => {
         
     <h1>Conditions d’utilisation :</h1>
     
-    <p>Ce site (<a href="http://ec2-3-84-230-242.compute-1.amazonaws.com/">www.LaComete.fr</a>) est proposé en différents langages web (HTML, HTML5, Javascript, CSS, etc…) pour un meilleur confort d’utilisation et un graphisme plus agréable, nous vous recommandons de recourir à des navigateurs modernes comme Internet explorer, Safari, Firefox, Google Chrome, etc…</p>
+    <p>Ce site (<a href="http://127.0.0.1:8001">www.LaComete.fr</a>) est proposé en différents langages web (HTML, HTML5, Javascript, CSS, etc…) pour un meilleur confort d’utilisation et un graphisme plus agréable, nous vous recommandons de recourir à des navigateurs modernes comme Internet explorer, Safari, Firefox, Google Chrome, etc…</p>
     
     <p>L’agence web LaComete met en œuvre tous les moyens dont elle dispose, pour assurer une information fiable et une mise à jour fiable de ses sites internet. Toutefois, des erreurs ou omissions peuvent survenir. L’internaute devra donc s’assurer de l’exactitude des informations auprès de , et signaler toutes modifications du site qu’il jugerait utile. n’est en aucun cas responsable de l’utilisation faite de ces informations, et de tout préjudice direct ou indirect pouvant en découler.</p>
     
     <h2>Cookies :</h2>
     
-    <p>Le site <a href="http://ec2-3-84-230-242.compute-1.amazonaws.com/">www.LaComete.fr</a> peut-être amené à vous demander l’acceptation des cookies pour des besoins de statistiques et d’affichage. Un cookies est une information déposée sur votre disque dur par le serveur du site que vous visitez. Il contient plusieurs données qui sont stockées sur votre ordinateur dans un simple fichier texte auquel un serveur accède pour lire et enregistrer des informations . Certaines parties de ce site ne peuvent être fonctionnelles sans l’acceptation de cookies.</p>
+    <p>Le site <a href="http://127.0.0.1:8001">www.LaComete.fr</a> peut-être amené à vous demander l’acceptation des cookies pour des besoins de statistiques et d’affichage. Un cookies est une information déposée sur votre disque dur par le serveur du site que vous visitez. Il contient plusieurs données qui sont stockées sur votre ordinateur dans un simple fichier texte auquel un serveur accède pour lire et enregistrer des informations . Certaines parties de ce site ne peuvent être fonctionnelles sans l’acceptation de cookies.</p>
     
     <h2>Liens hypertextes :</h2><p>Les sites internet de peuvent offrir des liens vers d’autres sites internet ou d’autres ressources disponibles sur Internet. SARL LaComete ne dispose d’aucun moyen pour contrôler les sites en connexion avec ses sites internet. ne répond pas de la disponibilité de tels sites et sources externes, ni ne la garantit. Elle ne peut être tenue pour responsable de tout dommage, de quelque nature que ce soit, résultant du contenu de ces sites ou sources externes, et notamment des informations, produits ou services qu’ils proposent, ou de tout usage qui peut être fait de ces éléments. Les risques liés à cette utilisation incombent pleinement à l’internaute, qui doit se conformer à leurs conditions d’utilisation.
     
@@ -31,9 +31,9 @@ const TermsOfUse = () => {
     
     <h2>Services fournis :</h2>
     
-    <p>L’ensemble des activités de la société ainsi que ses informations sont présentés sur notre site <a href="http://ec2-3-84-230-242.compute-1.amazonaws.com/">www.LaComete.fr</a>.
+    <p>L’ensemble des activités de la société ainsi que ses informations sont présentés sur notre site <a href="http://127.0.0.1:8001">www.LaComete.fr</a>.
     
-    SARL LaComete s’efforce de fournir sur le site <a href="http://ec2-3-84-230-242.compute-1.amazonaws.com/">www.LaComete.fr</a> des informations aussi précises que possible. les renseignements figurant sur le site <a href="http://ec2-3-84-230-242.compute-1.amazonaws.com/">www.LaComete.fr</a> ne sont pas exhaustifs et les photos non contractuelles. Ils sont donnés sous réserve de modifications ayant été apportées depuis leur mise en ligne. Par ailleurs, tous les informations indiquées sur le site <a href="http://ec2-3-84-230-242.compute-1.amazonaws.com/">www.LaComete.fr</a> sont données à titre indicatif, et sont susceptibles de changer ou d’évoluer sans préavis</p>
+    SARL LaComete s’efforce de fournir sur le site <a href="http://127.0.0.1:8001">www.LaComete.fr</a> des informations aussi précises que possible. les renseignements figurant sur le site <a href="http://127.0.0.1:8001">www.LaComete.fr</a> ne sont pas exhaustifs et les photos non contractuelles. Ils sont donnés sous réserve de modifications ayant été apportées depuis leur mise en ligne. Par ailleurs, tous les informations indiquées sur le site <a href="http://127.0.0.1:8001">www.LaComete.fr</a> sont données à titre indicatif, et sont susceptibles de changer ou d’évoluer sans préavis</p>
     
     <h2>Limitation contractuelles sur les données :</h2>
     
@@ -45,7 +45,7 @@ const TermsOfUse = () => {
     
     <h2>Propriété intellectuelle :</h2>
     
-    <p>Tout le contenu du présent site <a href="http://ec2-3-84-230-242.compute-1.amazonaws.com/">www.LaComete.fr</a>, incluant, de façon non limitative, les graphismes, images, textes, vidéos, animations, sons, logos, gifs et icônes ainsi que leur mise en forme sont la propriété exclusive de la société à l’exception des marques, logos ou contenus appartenant à d’autres sociétés partenaires ou auteurs.
+    <p>Tout le contenu du présent site <a href="http://127.0.0.1:8001">www.LaComete.fr</a>, incluant, de façon non limitative, les graphismes, images, textes, vidéos, animations, sons, logos, gifs et icônes ainsi que leur mise en forme sont la propriété exclusive de la société à l’exception des marques, logos ou contenus appartenant à d’autres sociétés partenaires ou auteurs.
     
     Toute reproduction, distribution, modification, adaptation, retransmission ou publication, même partielle, de ces différents éléments est strictement interdite sans l’accord exprès par écrit de SARL LaComete. Cette représentation ou reproduction, par quelque procédé que ce soit, constitue une contrefaçon sanctionnée par les articles L.666-2 et suivants du Code de la propriété intellectuelle. Le non-respect de cette interdiction constitue une contrefaçon pouvant engager la responsabilité civile et pénale du contrefacteur. En outre, les propriétaires des Contenus copiés pourraient intenter une action en justice à votre encontre.</p>
     
@@ -55,11 +55,11 @@ const TermsOfUse = () => {
     
     <h2>Litiges :</h2>
     
-    <p>Les présentes conditions du site <a href="http://ec2-3-84-230-242.compute-1.amazonaws.com/">www.LaComete.fr</a> sont régies par les lois Titanesque et toute contestation ou litiges qui pourraient naître de l’interprétation ou de l’exécution de celles-ci seront de la compétence exclusive des tribunaux dont dépend le siège social de la société. La langue de référence, pour le règlement de contentieux éventuels, est le français.</p>
+    <p>Les présentes conditions du site <a href="http://127.0.0.1:8001">www.LaComete.fr</a> sont régies par les lois Titanesque et toute contestation ou litiges qui pourraient naître de l’interprétation ou de l’exécution de celles-ci seront de la compétence exclusive des tribunaux dont dépend le siège social de la société. La langue de référence, pour le règlement de contentieux éventuels, est le français.</p>
     
     <h2>Données personnelles :</h2>
     
-    <p>De manière générale, vous n’êtes pas tenu de nous communiquer vos données personnelles lorsque vous visitez notre site Internet <a href="http://ec2-3-84-230-242.compute-1.amazonaws.com/">www.LaComete.fr</a>.
+    <p>De manière générale, vous n’êtes pas tenu de nous communiquer vos données personnelles lorsque vous visitez notre site Internet <a href="http://127.0.0.1:8001">www.LaComete.fr</a>.
     
     Cependant, ce principe comporte certaines exceptions. En effet, pour certains services proposés par notre site, vous pouvez être amenés à nous communiquer certaines données telles que : votre nom, votre fonction, le nom de votre société, votre adresse électronique, et votre numéro de téléphone. Tel est le cas lorsque vous remplissez le formulaire qui vous est proposé en ligne, dans la rubrique « contact ».
     

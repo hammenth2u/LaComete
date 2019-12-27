@@ -1,7 +1,4 @@
 /**
- * Import
- */
-/**
  * IMPORTS
  */
 import React from 'react';
@@ -27,12 +24,14 @@ class ResultApp extends React.Component {
     homeSearchRes: []
   }
 
+  // GETS SEARCH PARAMETERS FROM HOME PAGE
   componentDidMount() {
     this.setState({ homeSearchRes: this.props.location.state })
   }
 
   render() {
     
+    // RESULT CARD
     const homeResultData = this.state.homeSearchRes.map(homeRes=>
     <li className="cards_item" key={ homeRes.id }>
       <div className="card">
@@ -54,26 +53,21 @@ class ResultApp extends React.Component {
       <div className="searchpage">      
         <Formik 
           enableReinitialize={true}
-          initialValues={{ 
-            type: this.state.homeSearchRes.type, 
-            location: this.state.homeSearchRes.location, 
-            category: this.state.homeSearchRes.category 
-          }}
+          initialValues={{ type: '', location: '', category: ''}}
         
           onSubmit={(values, {setSubmitting}) => {
             
-            const typeValue = values.type 
-            const locValue = values.location.value
-            const catValue = values.category.value
+            const typeValue = values.type; 
+            const locValue = values.location.value;
+            const catValue = values.category.value;
 
-            axios.post('/api/results/annonces/search', {  
+            axios.post('/api/results/annonces/search', {                
               type: typeValue,        
               location: locValue,        
               category: catValue
             })
             .then(response => {
-              const searchResult = response.data;
-              this.setState({ homeSearchRes: searchResult });                             
+              this.setState({ homeSearchRes: response.data });                 
             })
             .catch(function (error) {
               alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux.");
@@ -84,7 +78,7 @@ class ResultApp extends React.Component {
           
           validationSchema={Yup.object().shape({
             
-            type: Yup.string().required("Veuillez sélectionner un type"),
+            type: Yup.string().required("Vous devez sélectionner une option"),
             location: Yup.string().ensure(),
             category: Yup.string().ensure(),
             
@@ -102,6 +96,7 @@ class ResultApp extends React.Component {
           return(                    
             <form onSubmit={handleSubmit} className="searchform">
             
+            {/* TYPE RADIO */}            
             <div className="radio-group">
               <label>
                 <input
@@ -125,8 +120,10 @@ class ResultApp extends React.Component {
                 />
                 Profil
               </label>
+              {errors.type && touched.type && (<div className="invalid-radio">{errors.type}</div>)}
             </div>
 
+            {/* CATEGORY SELECT */}            
             <div className="form-group">
               <CategorySelect
               placeholder="Catégorie"
@@ -139,6 +136,7 @@ class ResultApp extends React.Component {
               />        
             </div>
 
+            {/* LOCATION SELECT */}            
             <div className="form-group">
               <LocationSelect
               classNamePrefix="locsearch"
@@ -150,6 +148,7 @@ class ResultApp extends React.Component {
               />        
             </div>            
             
+            {/* SUBMIT BUTTON */}            
             <div className="form-group">
               <button type="submit" className="btn" disabled={isSubmitting}>
               {isSubmitting ? 'Patienter' : <FontAwesomeIcon icon={faRocket} />}
@@ -161,9 +160,15 @@ class ResultApp extends React.Component {
       />
       </div>       
       <div className="resultgrid-search">  
+
+      {/* CONDITIONAL DISPLAY IF EMPTY SEARCH RESULTS */}
+      {this.state.homeSearchRes.length == 0 ? 
+        (<p className="empty-results">Nous sommes désolés, il n'y a aucune annonce en ligne correspondant à votre recherche</p>) 
+        : (
         <ul className="cards">     
           {homeResultData}
         </ul>
+        )}
       </div>
     </div>
     )

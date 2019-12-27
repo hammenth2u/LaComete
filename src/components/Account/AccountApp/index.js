@@ -29,48 +29,66 @@ class AccountApp extends React.Component {
         userFav: [] 
     }
 
-    
-    componentDidMount(){
+    // HELPS CANCELLING API CALLS WHEN UNNECESSARY
+    CancelToken = axios.CancelToken; 
+    source = this.CancelToken.source();
+    abortController = new AbortController();
 
-      axios.get('/api/user/account')
+    // IS USER LOGGED IN?
+    getUserStatus = () => {axios.get('/api/user/isConnected', {cancelToken: this.source.token}) 
+      .then(response => {
+        
+        this.setState({ userStatus: response.data[0] });
+        console.log('APP STATUS : ', this.state.userStatus)
+      })      
+      .catch(error => {
+      }); 
+    };    
+
+      // GET USER INFO
+      getUserInfo = () => {axios.get('/api/user/account')
     
         .then(response => {
 
             this.setState({ currentUser: response.data });
-            console.log('STATE USER INFO: ', this.state.currentUser);
-        })
-        
+        })        
         .catch(error => {
-
             console.log('DATA ERROR : ', error);
-        }); 
+        });
+      }; 
 
-      axios.get('/api/list/user/annonces/')    
+      // GET CURRENT USER'S ADS
+      getUserAds = () => {axios.get('/api/list/user/annonces/')    
     
         .then(response => {
 
             this.setState({ userAds: response.data });
-            console.log('STATE USER ADS: ', this.state.userAds);
         })
-
-        .catch(error => {
-    
+        .catch(error => {    
             console.log('ADS ERROR : ', error);
         });
+      };
         
-      axios.get('/api/list/favorites')    
+      // GET CURRENT USER'S FAVORITES
+      getUserFavs = () => {axios.get('/api/list/favorites')    
     
         .then(response => {
 
             this.setState({ userFav: response.data });
-            console.log('STATE USER FAV: ', this.state.userFav);
         })
-        .catch(error => {
-    
+        .catch(error => {    
             console.log('FAV ERROR : ', error);
         });
+      };
+    
+    componentDidMount(){
+        this.getUserStatus();
+        this.getUserInfo();
+        this.getUserAds();
+        this.getUserFavs();
     }
 
+    // DEACTIVATE USER
     deleteAccount = (evt) => {
         
         axios.get('/api/block/account')
@@ -86,6 +104,7 @@ class AccountApp extends React.Component {
       
     render () {
 
+        // DISPLAY USERNAME ON TOP OF SIDEBAR
         const greeting = this.state.currentUser.map(info =>
             <p className="active" key={ info.id }>Bienvenue { info.username }</p>                
         )

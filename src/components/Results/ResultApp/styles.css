@@ -184,6 +184,7 @@
 .resultgrid-search {
   width: 75%;
   margin: 0 auto;
+  min-height: 50vh;
 }
 
 h1 {
@@ -271,4 +272,12 @@ a:hover {
   line-height: 1.5;
   margin-bottom: 1.25rem;    
   font-weight: 400;
+}
+
+/********************** EMPTY RESULTS *************************/
+
+.empty-results {
+  text-align: center;
+  font-size: 2em;
+  margin-top: 3em;
 }

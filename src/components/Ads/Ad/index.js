@@ -39,16 +39,12 @@ class Ad extends React.Component {
     
     .then(response => {
 
-      const singleAd = response.data;
-      console.log('ONE AD : ', singleAd);
-
-      this.setState({ singleAd: response.data[0] });
-      console.log('ONE AD STATE: ', this.state.singleAd);           
+      this.setState({ singleAd: response.data[0] });         
     })
 
     .catch(error => {
 
-        console.log('ADS ERROR : ', error);
+        alert('Cette annonce semble ne pas exister');
     });   
 
     /* USER STATUS */
@@ -56,17 +52,11 @@ class Ad extends React.Component {
       
       .then(response => {
         
-        this.setState({ userStatus: response.data[0] });
-        console.log('STATE : ', this.state.userStatus);                
-      })      
-      .catch(error => {
-
-        console.log('ERROR : ', error);
-    }); 
+        this.setState({ userStatus: response.data[0] });             
+      }); 
     
     /* SHOW FAVORITE STATUS IS USER IS CONNECTED */          
     const currentAdPath = window.location.pathname;
-    console.log('TEST ID : ', currentAdPath);
     axios.post('/api/isFavorite', {    
       currentAdPath: currentAdPath,
     })
@@ -83,7 +73,7 @@ class Ad extends React.Component {
       })
 
       .catch(error => {
-          console.log('ISFAV ERROR : ', error);
+          alert('Nos favoris semblent avoir un problème, nous nous excusons pour la gêne occasionnée');
       }); 
       
     /* CONNECTED USER'S NAME */
@@ -92,14 +82,7 @@ class Ad extends React.Component {
         .then(response => {
 
             this.setState({ userName: response.data[0].username });
-            console.log('USERNAME: ', response.data[0].username);
-        })
-        
-        .catch(error => {
-
-            console.log('DATA ERROR : ', error);
         }); 
-
             
     /* COMMENTS LIST */
     const currentPath = window.location.pathname;
@@ -109,15 +92,7 @@ class Ad extends React.Component {
 
     .then(response => {
 
-      const comments = response.data;
-      console.log('COMMENTS : ', comments);  
-      this.setState({ comments: response.data})
-      console.log('COMMENTS STATE : ', this.state.comments);  
-               
-    })
-
-    .catch(error => {
-        console.log('COMMENTS ERROR : ', error);
+      this.setState({ comments: response.data})               
     });      
   }; 
 
@@ -131,29 +106,15 @@ class Ad extends React.Component {
       axios.post('/api/favorite/new', {
         currentAdId: currentAdId,
         isFavorite: true        
-      })
-      .then(function(response) {         
-        console.log('FAVED : ', response);
-      })
-
-      .catch(error => {
-          console.log('FAV ERROR : ', error);
-      }); 
-    this.setState({starColor: '#d49f15'})     
-    this.setState({isFavorite: true});
+      })        
+      this.setState({starColor: '#d49f15'})     
+      this.setState({isFavorite: true});
     } else {
       
       axios.post('/api/favorite/new', {      
         currentAdId: currentAdId,
         isFavorite: false        
-      })
-      .then(function (response) {
-        console.log('UNFAVED : ', response);
-      })
-
-      .catch(error => {
-          console.log('UNFAV ERROR : ', error);
-      });  
+      })       
       this.setState({starColor: 'white'});
       this.setState({isFavorite: false});
     }
@@ -174,9 +135,6 @@ class Ad extends React.Component {
       .then((response) => {        
         this.setState({comments: response.data});
         this.commentInput.value = "";
-      })
-      .catch(error => {
-          console.log('COMMENT ERROR : ', error);
       });
      
   };  
@@ -202,13 +160,13 @@ class Ad extends React.Component {
         email: email        
       })
       .then(function (response) {
-        //alert('Votre message a été envoyé');
-        this.setState({modalshow: true})
+        alert('Votre message a été envoyé');      
       })
-
       .catch(error => {
         alert('Une pluie de météorite perturbe les réseaux, veuillez recommencer.');
       });
+    this.contactObj.value = "";          
+    this.contactCont.value = "";
 
   };  
 
@@ -243,69 +201,71 @@ class Ad extends React.Component {
 
   render () {     
     
+    // DISPLAY COMMENT
     const commentsList = this.state.comments;
-    const userName = this.state.userName;
-      const list = commentsList.map(function(comment){
-        return (
-          <div className="comment" key={comment.idComment}>
-            <div className="commentmeta">
-              <small className="comment-author">{comment.userComment}, le {comment.dateComment}</small>
-              {userName == comment.userComment ? (
-                <button className="edit-comment"><small>éditer le commentaire</small></button>         
-                ) : ( '' )}  
-            </div>   
-            <p className="comment-content">{comment.contentComment}</p>              
-          </div>
-        );
-      })
+    const list = commentsList.map(function(comment){
+      return (
+        <div className="comment" key={comment.idComment}>
+          <div className="commentmeta">
+            <small className="comment-author">{comment.userComment}, le {comment.dateComment}</small>             
+          </div>   
+          <p className="comment-content">{comment.contentComment}</p>              
+        </div>
+      );
+    })
 
     return (
+      // DISPLAY AD 
       <div className="ad">             
         <section>
           <article>  
             <h3 className="soloadtitle">{ this.state.singleAd.title }</h3>
+
+            {/* CONDITIONAL DISPLAY FOR EDIT LINK */}
             {this.state.userName == this.state.singleAd.user ? (
-              <a href={'/annonces/'+ this.state.singleAd.id +'/editer'}><button className="edit-ad">éditer l'annonce</button></a>
+              <a href={'/annonces/'+ this.state.singleAd.id +'/editer'}><button className="edit-ad">Modifier l'annonce</button></a>
               ) : ( '' )}              
             <div className="first-section">
-            <div className="spaceone">
-            <div className="imgwrapper">
-            <img className="adpic" src={ this.state.singleAd.picture } />
-            </div>
+              <div className="spaceone">
+                <div className="imgwrapper">
+                  <img className="adpic" src={ this.state.singleAd.picture } />
+                </div>
 
-            <div className="basicinfo">
-            <p><FontAwesomeIcon icon={faUser} /> { this.state.singleAd.user }</p>
-            <p><FontAwesomeIcon icon={faMapMarkerAlt} /> { this.state.singleAd.city }</p>
-            <p><FontAwesomeIcon icon={faPencilRuler} /> { this.state.singleAd.category }</p>            
-            {/*{this.state.singleAd.updatedAt != null ? (
-              <p><FontAwesomeIcon icon={faCalendar} /> { this.state.singleAd.updatedAt } (modifiée)</p> 
-              ) : ( 
-              <p><FontAwesomeIcon icon={faCalendar} /> { this.state.singleAd.createdAt }</p> 
-              )}  */}
-            </div>
-            </div>
+                <div className="basicinfo">
+                  <p><FontAwesomeIcon icon={faUser} /> { this.state.singleAd.user }</p>
+                  <p><FontAwesomeIcon icon={faMapMarkerAlt} /> { this.state.singleAd.city }</p>
+                  <p><FontAwesomeIcon icon={faPencilRuler} /> { this.state.singleAd.category }</p>            
+                  <p><FontAwesomeIcon icon={faCalendar} /> { this.state.singleAd.createdAt }</p> 
+                </div>
+              </div>
+
+            {/* CONDITIONAL DISPLAY FOR FAV + CONTACT BUTTONS */}            
+
             {this.state.userStatus == "<" ? (
               '' ) : (
               <div className="fav-contact">
                 <section>  
                   
+                  {/* FAVORITE BUTTON */}
                   <Button onClick={ this.favoriteAd } style={{ color: this.state.starColor }} aria-controls="example-collapse-text" aria-expanded={this.state.contactOpen} >
                     <FontAwesomeIcon icon={faStar} />
                   </Button>              
                   
+                  {/* PHONE BUTTON IF PHONE # PROVIDED */}
                   {this.state.singleAd.phone != null ? (
-                  <div>
-                    <Button onClick={this.togglePhone} aria-controls="example-collapse-text" aria-expanded={this.state.phoneOpen} >
-                      <FontAwesomeIcon icon={faPhone} />
-                    </Button>
-                    <Collapse in={this.state.phoneOpen}>
-                      <div className="contact-info">
-                        <p>{this.state.singleAd.phone}</p>
-                      </div>
-                    </Collapse> 
-                  </div>             
+                    <div>
+                      <Button onClick={this.togglePhone} aria-controls="example-collapse-text" aria-expanded={this.state.phoneOpen} >
+                        <FontAwesomeIcon icon={faPhone} />
+                      </Button>
+                      <Collapse in={this.state.phoneOpen}>
+                        <div className="contact-info">
+                          <p>{this.state.singleAd.phone}</p>
+                        </div>
+                      </Collapse> 
+                    </div>             
                   ) : ('')}
                   
+                  {/* WEBSiTE BUTTON IF WEBSITE PROVIDED */}
                   {this.state.singleAd.website != null ? (
                     <div>
                       <Button onClick={this.toggleAt} aria-controls="example-collapse-text" aria-expanded={this.state.atOpen} >
@@ -317,8 +277,9 @@ class Ad extends React.Component {
                         </div>
                       </Collapse>
                     </div> 
-                    ) : ('')}
+                  ) : ('')}
     
+                  {/* EMAIL BUTTON + FORM IF EMAIL PROVIDED */}
                   {this.state.singleAd.email != null ? (
                     <div>
                       <Button onClick={this.toggleContact} aria-controls="example-collapse-text" aria-expanded={this.state.contactOpen} >
@@ -329,7 +290,7 @@ class Ad extends React.Component {
                         <form className="ad-contact-form"> 
                           <div className="ad-form-group">
                             <input
-                              ref={(obj) => this.commentInput= obj}
+                              ref={obj => this.contactObj= obj}
                               name="contactobject"
                               type="text"
                               placeholder="Objet"
@@ -340,7 +301,7 @@ class Ad extends React.Component {
                           </div>             
                           <div className="form-group">
                             <textarea
-                              ref={(msg) => this.commentInput= msg}
+                              ref={cont => this.contactCont= cont}
                               name="contact"
                               rows="4"
                               placeholder="Message"
@@ -368,8 +329,11 @@ class Ad extends React.Component {
           </article> 
         </section>
         <h4>Commentaires : </h4>
+
+        {/* CONDITIONNAL DISPLAY OF COMMENT INPUT */}
         {this.state.userStatus == "<" ? (
-          <small>(Vous devez être connecté pour commenter les annonces)</small> ) : ( 
+          <small>(Vous devez être connecté pour commenter les annonces)</small> 
+        ) : ( 
         <form>                        
           <div className="commentgroup">
             <textarea

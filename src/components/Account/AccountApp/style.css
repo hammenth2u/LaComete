@@ -270,8 +270,9 @@ form h2 {
     width: 70%;
 }
 
-.ad-form .invalid-feedback {
+.ad-form .invalid-radio {
     color: #d93641;
+    font-size: .8em;
 }
 
 .ad-form .form-group .is-invalid {

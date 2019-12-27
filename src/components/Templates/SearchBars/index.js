@@ -2,9 +2,6 @@
  * IMPORTS
  */
 import React from 'react';
-import { Formik } from "formik";
-import * as Yup from 'yup';
-import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRocket } from '@fortawesome/free-solid-svg-icons';
 /**
@@ -13,41 +10,10 @@ import { faRocket } from '@fortawesome/free-solid-svg-icons';
 import LocationSelect from 'src/components/Templates/LocationSelect';
 import CategorySelect from 'src/components/Templates/CategorySelect';
 
-class SearchBars extends React.Component {
+const SearchBars = () => {
 
-    state = {
-  
-      searchParam: [],
-    }
-
-    componentDidMount() {
-        this.setState({ searchParam: this.props })
-      }
-    
-    render() {
       return (
-        <Formik 
-            initialValues={{ type: '', location:'', category:'' }}             
-            
-            validationSchema={Yup.object().shape({
-            
-            type: Yup.string().required("Veuillez sélectionner un type"),
-            location: Yup.string().ensure(),
-            category: Yup.string().ensure(),
-            
-            })}
-            render={({ 
-            values,
-            touched,
-            errors,
-            isSubmitting,
-            setFieldTouched,
-            setFieldValue,
-            handleSubmit
-            }) => {
-
-            return(                    
-            <form onSubmit={handleSubmit} className="searchform">
+        <form onSubmit={handleSubmit} className="searchform">
             
             <div className="radio-group">
                 <label>
@@ -72,6 +38,7 @@ class SearchBars extends React.Component {
                 />
                 Profil
                 </label>
+                {errors.type && touched.type && (<div className="invalid-radio">{errors.type}</div>)}
             </div>
 
             <div className="form-group">
@@ -102,11 +69,8 @@ class SearchBars extends React.Component {
                 {isSubmitting ? 'Patienter' : <FontAwesomeIcon icon={faRocket} />}
                 </button>
             </div>
-            </form>
-            )
-        }} 
-        />
-    )}
+        </form>
+    )
 }
 
 export default SearchBars;

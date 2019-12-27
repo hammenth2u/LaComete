@@ -33,9 +33,8 @@ class SubmitForm extends React.Component {
             category: '',
           }}
 
-          onSubmit={(values, {setSubmitting, resetForm}) => {
-
-              axios.post('/api/annonce/new', {
+          onSubmit={(values, {setSubmitting, resetForm, setTimeout}) => {
+             axios.post('/api/annonce/new', {
               type: values.type,
               title: values.title,
               location: values.location.value,
@@ -45,16 +44,15 @@ class SubmitForm extends React.Component {
               phone: values.phone,
               website: values.website,
               category: values.category.value,
-            })
-            .then(function (response) {
-              alert("Annonce postée");              
-            })
-            .catch(function (error) {
-              alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux, veuillez recommencer ou nous contacter");              
-            });
-            setSubmitting(false);
-            resetForm();
-            this.props.history.push('/mon-compte/mes-annonces')
+              })
+              .then(function (response) {
+                alert("Annonce postée");              
+              })
+              .catch(function (error) {
+                alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux, veuillez recommencer ou nous contacter");              
+              });
+              setSubmitting(false);
+              resetForm();            
           }} 
           
           validationSchema={Yup.object().shape({
@@ -97,29 +95,30 @@ class SubmitForm extends React.Component {
               <form className="ad-form" onSubmit={handleSubmit}>
                 <h2>Poster une nouvelle annonce</h2>
                 <label>Je souhaite partager mon :</label>
-                <div className="ad-radio-group">
+                <div className="ad-radio-group" id="radioGroup">
                     <label>
-                    <input
-                      className="option-input radio"
-                      type="radio"
-                      name="type"
-                      value="rêve"
-                      checked={values.type === "rêve"}
-                      onChange={() => setFieldValue("type", "rêve")}
-                    />
-                    Rêve
+                      <input
+                        className="option-input radio" 
+                        type="radio"
+                        name="type"
+                        value="rêve"
+                        checked={values.type === "rêve"}
+                        onChange={() => setFieldValue("type", "rêve")}
+                      />
+                      Rêve
                   </label>
                   <label>
-                    <input
-                      className="option-input radio"
-                      type="radio"
-                      name="type"
-                      value="profil"
-                      checked={values.type === "profil"}
-                      onChange={() => setFieldValue("type", "profil")}
-                    />
-                    Profil
-                  </label>
+                      <input
+                        className="option-input radio"
+                        type="radio"
+                        name="type"
+                        value="profil"
+                        checked={values.type === "profil"}
+                        onChange={() => setFieldValue("type", "profil")}
+                      />
+                      Profil
+                  </label>      
+                  {errors.type && touched.type && (<div className="invalid-radio">{errors.type}</div>)}            
                 </div>
 
                 <div className="form-group">
@@ -127,14 +126,12 @@ class SubmitForm extends React.Component {
                   <input
                     name="title"
                     type="text"
-                    className={`form-control ${errors.title &&
-                      touched.title &&
-                      "is-invalid"}`}
+                    className={`form-control ${errors.title && touched.title && "is-invalid"}`}
                     value={values.title}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  {errors.title && touched.title && (<div className="invalid-feedback">{errors.title}</div>)}
+                  {errors.title && touched.title && (<div className="invalid-radio">{errors.title}</div>)}
                 </div>
 
                 <div className="form-group">
@@ -144,9 +141,9 @@ class SubmitForm extends React.Component {
                     value={values.category}
                     onChange={setFieldValue}
                     onBlur={setFieldTouched}
-                    error={errors.category}
                     touched={touched.category}
                     />        
+                    {errors.category && touched.category && (<div className="invalid-radio">{errors.category}</div>)}
                 </div>
 
                 <div className="form-group">
@@ -156,9 +153,9 @@ class SubmitForm extends React.Component {
                     value={values.location}
                     onChange={setFieldValue}
                     onBlur={setFieldTouched}
-                    error={errors.location}
                     touched={touched.location}
                     />        
+                    {errors.location && touched.location && (<div className="invalid-radio">{errors.location}</div>)}
                 </div>
 
                 <div className="form-group">
@@ -166,14 +163,12 @@ class SubmitForm extends React.Component {
                   <textarea
                     name="description"
                     type="text"
-                    className={`form-control ${errors.description &&
-                      touched.description &&
-                      "is-invalid"}`}
+                    className={`form-control ${errors.description && touched.description && "is-invalid"}`}
                     value={values.description}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  {errors.description && touched.description && (<div className="invalid-feedback">{errors.description}</div>)}
+                  {errors.description && touched.description && (<div className="invalid-radio">{errors.description}</div>)}
                 </div>
 
                 <div className="form-group">
@@ -181,36 +176,31 @@ class SubmitForm extends React.Component {
                   <textarea
                     name="need"
                     type="text"
-                    className={`form-control ${errors.need &&
-                      touched.need &&
-                      "is-invalid"}`}
+                    className={`form-control ${errors.need && touched.need && "is-invalid"}`}
                     value={values.need}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  {errors.need && touched.need && (<div className="invalid-feedback">{errors.need}</div>)}
+                  {errors.need && touched.need && (<div className="invalid-radio">{errors.need}</div>)}
                 </div>
              
                 <div className="contact-head">
-                <label className="contact-group">Mes moyens de contact</label>
-                <small className="contact-group form-text text-muted">
-                  Les champs suivants ne sont pas obligatoires, nous vous recommandons
-                  cependant d'en remplir au moins un.
-                </small>
+                  <label className="contact-group">Mes moyens de contact</label>
+                  <small className="contact-group form-text text-muted">
+                    Les champs suivants ne sont pas obligatoires, nous vous recommandons cependant d'en remplir au moins un.
+                  </small>
                 </div>
                 <div className="contact-group form-groupe">
                   <label>Téléphone</label>
                   <input
                     name="phone"
                     type="text"
-                    className={`form-control ${errors.phone &&
-                      touched.phone &&
-                      "is-invalid"}`}
+                    className={`form-control ${errors.phone && touched.phone && "is-invalid"}`}
                     value={values.phone}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  {errors.phone && touched.phone && (<div className="invalid-feedback">{errors.phone}</div>)}                  
+                  {errors.phone && touched.phone && (<div className="invalid-radio">{errors.phone}</div>)}                  
                 </div>
 
                 <div className="contact-group form-groupe">
@@ -218,14 +208,12 @@ class SubmitForm extends React.Component {
                   <input
                     name="email"
                     type="text"
-                    className={`form-control ${errors.email &&
-                      touched.email &&
-                      "is-invalid"}`}
+                    className={`form-control ${errors.email && touched.email && "is-invalid"}`}
                     value={values.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  {errors.email && touched.email && (<div className="invalid-feedback">{errors.email}</div>)}                  
+                  {errors.email && touched.email && (<div className="invalid-radio">{errors.email}</div>)}                  
                 </div>
                 
                 <div className="contact-group form-groupe">
@@ -236,14 +224,12 @@ class SubmitForm extends React.Component {
                     name="website"
                     type="text"
                     placeholder="http://..."
-                    className={`form-control ${errors.website &&
-                      touched.website &&
-                      "is-invalid"}`}
+                    className={`form-control ${errors.website && touched.website && "is-invalid"}`}
                     value={values.website}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  {errors.website && touched.website && (<div className="invalid-feedback">{errors.website}</div>)}                  
+                  {errors.website && touched.website && (<div className="invalid-radio">{errors.website}</div>)}                  
                 </div>
                 
                 <button type="submit" className="account-btn" disabled={isSubmitting}>

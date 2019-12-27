@@ -191,7 +191,7 @@ export default withFormik({
   /**
    * SUBMIT + AXIOS 
    */
-  handleSubmit: (values, { setSubmitting, resetForm }) => {
+  handleSubmit: (values, { setSubmitting, resetForm, setTimeout }) => {
     setTimeout(() => {
         axios.post('/api/user/edit/account', {
         firstname: values.firstname,

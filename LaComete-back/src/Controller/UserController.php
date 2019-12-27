@@ -67,7 +67,7 @@ class UserController extends AbstractController
 
             $to = $user->getEmail();
             $obj = 'Confirmation Inscription LaComete';
-            $msg = "Bonjour $userFirstname,"."\r\n"."\r\n"."Nous vous informons que votre inscription a bien été prise en compte."."\r\n"."Pour vous connecter cliquez sur le lien suivant :"."\r\n". "http://ec2-3-84-230-242.compute-1.amazonaws.com/connexion"."\r\n"."\r\n"."Amicalement,"."\r\n"."L'équipe LaComete.";
+            $msg = "Bonjour $userFirstname,"."\r\n"."\r\n"."Nous vous informons que votre inscription a bien été prise en compte."."\r\n"."Pour vous connecter cliquez sur le lien suivant :"."\r\n". "http://127.0.0.1:8001/connexion"."\r\n"."\r\n"."Amicalement,"."\r\n"."L'équipe de La Comete.";
 
 
             $headers = array(

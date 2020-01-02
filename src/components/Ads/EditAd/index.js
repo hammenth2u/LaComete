@@ -28,17 +28,8 @@ class EditAd extends React.Component {
         })
         
         .then(response => {
-    
-          const singleAd = response.data;
-          console.log('EDIT ONE AD : ', singleAd);
-    
-          this.setState({ singleAd: response.data[0] });
-          console.log('EDIT ONE AD STATE: ', this.state.singleAd);           
-        })
-    
-        .catch(error => {
-    
-            console.log('EDIT ADS ERROR : ', error);
+            
+          this.setState({ singleAd: response.data[0] });   
         });   
     }
 
@@ -67,10 +58,10 @@ class EditAd extends React.Component {
               phone: values.phone,
               website: values.website,
               })
-              .then(function (response) {
+              .then(function () {
                 alert("Modification(s) postée(s)");              
               })
-              .catch(function (error) {
+              .catch(function () {
                 alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux, veuillez recommencer ou nous contacter");              
               });
               setSubmitting(false);

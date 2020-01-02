@@ -200,10 +200,10 @@ export default withFormik({
         email: values.email,
         newpassword: values.newpassword
       })
-      .then(function (response) {
+      .then(function () {
         alert("Modifications enregistrée");        
       })
-      .catch(function (error) {
+      .catch(function () {
         alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux, veuillez recommencer ou choisir un autre moyen de contact");        
       });
       setSubmitting(false);

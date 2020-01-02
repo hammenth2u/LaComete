@@ -182,7 +182,7 @@ class AnnonceController extends AbstractController
             $image = 'https://i.ibb.co/5jtdwGj/photo-1477233534935-f5e6fe7c1159.jpg';
         }elseif($category->getName() == 'Sport'){
             $image = 'https://i.ibb.co/mXQB2zx/photo-1558365849-6ebd8b0454b2.jpg';
-        }elseif($category->getName() == 'Immbobilier'){
+        }elseif($category->getName() == 'Immobilier'){
             $image = 'https://i.ibb.co/0j7fBwZ/immobilier.jpg';
         }elseif($category->getName() == 'Geek'){
             $image = 'https://i.ibb.co/pvDHr0G/photo-1514302240736-b1fee5985889.jpg';

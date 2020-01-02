@@ -37,32 +37,25 @@ class App extends React.Component {
   }
   
   // HELPS CANCELLING API CALLS WHEN UNNECESSARY
-  CancelToken = axios.CancelToken;
-  source = this.CancelToken.source();
-  abortController = new AbortController();
+  //CancelToken = axios.CancelToken;
+  //source = this.CancelToken.source();
+  //abortController = new AbortController();
     
     // IS USER LOGGED IN?
-    getUserStatus = () => {axios.get('/api/user/isConnected', {cancelToken: this.source.token}) 
+    getUserStatus = () => {axios.get('/api/user/isConnected'/*, {cancelToken: this.source.token}*/) 
       .then(response => {
         
         this.setState({ userStatus: response.data[0] });
-        console.log('APP STATUS : ', this.state.userStatus)
-      })      
-      .catch(error => {
       }); 
     };    
 
     // GET USER INFO
-    getUserInfo = () => {axios.get('/api/user/account', {cancelToken: this.source.token})   
+    getUserInfo = () => {axios.get('/api/user/account'/*, {cancelToken: this.source.token}*/)   
         
     .then(response => {
           const userdata = response.data[0];
           const usermail = userdata.email;                
           this.setState({ userMail: usermail });
-        })
-        
-        .catch(error => {
-
         });
     };
 
@@ -73,9 +66,9 @@ class App extends React.Component {
     }
 
     // CANCEL API CALLS 
-    componentWillUnmount() {
-      this.source.cancel("Operation canceled by the user.");
-    }
+    //componentWillUnmount() {
+    //  this.source.cancel("Operation canceled by the user.");
+    //}
  
   render () {     
          
@@ -91,11 +84,11 @@ class App extends React.Component {
             <Route exact path="/mentions-legales" component={ Legal } />
             <Route exact path="/cdu" component={ TermsOfUse } />
             <Route exact path="/contact" render={(routeProps) => ( <Contact {...routeProps} userStatus={this.state.userStatus} userMail={this.state.userMail} />)}/>
-            <Route exact path="/motdepasseoublie" render={(routeProps) => ( <Forgotten {...routeProps} userMail={this.state.userMail} />)}/>
+            <Route exact path="/motdepasseoublie" component={ Legal }/>
             <Route path="/mon-compte" component={ AccountContainer }  />
-            <Route path="/recherche/liste/" component={ ResultContainer } />             
+            <Route exact path="/recherche/liste/" component={ ResultContainer } />             
             <Route exact path="/annonces/:id" component={ Ad } />       
-            <Route path="/annonces/:id/editer" component={ EditAd } />
+            <Route exact path="/annonces/:id/editer" component={ EditAd } />
             <Route component={ ErrorPage } />
           </Switch>
         </div>

@@ -53,7 +53,10 @@ class ResultApp extends React.Component {
       <div className="searchpage">      
         <Formik 
           enableReinitialize={true}
-          initialValues={{ type: '', location: '', category: ''}}
+          initialValues={{ 
+            type: '', 
+            location: '', 
+            category: ''}}
         
           onSubmit={(values, {setSubmitting}) => {
             
@@ -69,7 +72,7 @@ class ResultApp extends React.Component {
             .then(response => {
               this.setState({ homeSearchRes: response.data });                 
             })
-            .catch(function (error) {
+            .catch(function () {
               alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux.");
             });
             setSubmitting(false);
@@ -79,8 +82,8 @@ class ResultApp extends React.Component {
           validationSchema={Yup.object().shape({
             
             type: Yup.string().required("Vous devez sélectionner une option"),
-            location: Yup.string().ensure(),
-            category: Yup.string().ensure(),
+            location: Yup.string(),
+            category: Yup.string(),
             
           })}
           render={({ 
@@ -88,7 +91,7 @@ class ResultApp extends React.Component {
             touched,
             errors,
             isSubmitting,
-            setFieldTouched,
+            handleBlur,
             setFieldValue,
             handleSubmit
           }) => {
@@ -130,7 +133,7 @@ class ResultApp extends React.Component {
               classNamePrefix="catsearch"
               value={values.category}
               onChange={setFieldValue}
-              onBlur={setFieldTouched}
+              onBlur={handleBlur}
               error={errors.category}
               touched={touched.category}
               />        
@@ -142,7 +145,7 @@ class ResultApp extends React.Component {
               classNamePrefix="locsearch"
               value={values.location}
               onChange={setFieldValue}
-              onBlur={setFieldTouched}
+              onBlur={handleBlur}
               error={errors.location}
               touched={touched.location}
               />        

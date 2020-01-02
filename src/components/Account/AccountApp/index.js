@@ -30,18 +30,15 @@ class AccountApp extends React.Component {
     }
 
     // HELPS CANCELLING API CALLS WHEN UNNECESSARY
-    CancelToken = axios.CancelToken; 
-    source = this.CancelToken.source();
-    abortController = new AbortController();
+    //CancelToken = axios.CancelToken; 
+    //source = this.CancelToken.source();
+    //abortController = new AbortController();
 
     // IS USER LOGGED IN?
-    getUserStatus = () => {axios.get('/api/user/isConnected', {cancelToken: this.source.token}) 
+    getUserStatus = () => {axios.get('/api/user/isConnected', /*{cancelToken: this.source.token}*/) 
       .then(response => {
         
         this.setState({ userStatus: response.data[0] });
-        console.log('APP STATUS : ', this.state.userStatus)
-      })      
-      .catch(error => {
       }); 
     };    
 
@@ -51,9 +48,6 @@ class AccountApp extends React.Component {
         .then(response => {
 
             this.setState({ currentUser: response.data });
-        })        
-        .catch(error => {
-            console.log('DATA ERROR : ', error);
         });
       }; 
 
@@ -63,9 +57,6 @@ class AccountApp extends React.Component {
         .then(response => {
 
             this.setState({ userAds: response.data });
-        })
-        .catch(error => {    
-            console.log('ADS ERROR : ', error);
         });
       };
         
@@ -75,9 +66,6 @@ class AccountApp extends React.Component {
         .then(response => {
 
             this.setState({ userFav: response.data });
-        })
-        .catch(error => {    
-            console.log('FAV ERROR : ', error);
         });
       };
     
@@ -89,16 +77,11 @@ class AccountApp extends React.Component {
     }
 
     // DEACTIVATE USER
-    deleteAccount = (evt) => {
-        
+    deleteAccount = () => {        
         axios.get('/api/block/account')
 
         .then(response => {
-            this.props.history.push('/');       
-            
-        })
-        .catch(error => {    
-            console.log('DELETE ERROR : ', error);
+            this.props.history.push('/');                   
         });
     }
       

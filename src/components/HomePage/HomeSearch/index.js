@@ -47,7 +47,7 @@ class ResultList extends React.Component {
                 state: this.state.searchData
               });      
             })
-            .catch(function (error) {
+            .catch(function () {
               alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux.");
             });
             setSubmitting(false);
@@ -67,9 +67,9 @@ class ResultList extends React.Component {
             touched,
             errors,
             isSubmitting,
-            setFieldTouched,
             setFieldValue,
-            handleSubmit
+            handleSubmit,
+            handleBlur
            }) => {
 
           return(        
@@ -106,7 +106,7 @@ class ResultList extends React.Component {
                 classNamePrefix="catsearch"
                 value={values.category}
                 onChange={setFieldValue}
-                onBlur={setFieldTouched}
+                onBlur={handleBlur}
                 error={errors.category}
                 touched={touched.category}
                 />        
@@ -117,7 +117,7 @@ class ResultList extends React.Component {
                 classNamePrefix="locsearch"
                 value={values.location}
                 onChange={setFieldValue}
-                onBlur={setFieldTouched}
+                onBlur={handleBlur}
                 error={errors.location}
                 touched={touched.location}
                 />        

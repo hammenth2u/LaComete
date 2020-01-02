@@ -42,7 +42,7 @@ class Ad extends React.Component {
       this.setState({ singleAd: response.data[0] });         
     })
 
-    .catch(error => {
+    .catch(function() {
 
         alert('Cette annonce semble ne pas exister');
     });   
@@ -70,10 +70,6 @@ class Ad extends React.Component {
         } else {
           this.setState({starColor: 'white'}) 
         }
-      })
-
-      .catch(error => {
-          alert('Nos favoris semblent avoir un problème, nous nous excusons pour la gêne occasionnée');
       }); 
       
     /* CONNECTED USER'S NAME */
@@ -159,10 +155,10 @@ class Ad extends React.Component {
         contactContent: this.state.contactContent,
         email: email        
       })
-      .then(function (response) {
+      .then(function () {
         alert('Votre message a été envoyé');      
       })
-      .catch(error => {
+      .catch(function() {
         alert('Une pluie de météorite perturbe les réseaux, veuillez recommencer.');
       });
     this.contactObj.value = "";          

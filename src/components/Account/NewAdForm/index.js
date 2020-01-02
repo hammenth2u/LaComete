@@ -45,10 +45,10 @@ class SubmitForm extends React.Component {
               website: values.website,
               category: values.category.value,
               })
-              .then(function (response) {
+              .then(function () {
                 alert("Annonce postée");              
               })
-              .catch(function (error) {
+              .catch(function () {
                 alert("Nous sommes désolé.e.s, une pluie de météorites perturbe les réseaux, veuillez recommencer ou nous contacter");              
               });
               setSubmitting(false);
@@ -58,8 +58,8 @@ class SubmitForm extends React.Component {
           validationSchema={Yup.object().shape({
             type: Yup.string()
               .required("Cette section est obligatoire"),
-            location: Yup.string().ensure().required("Cette section est obligatoire"),
-            category: Yup.string().ensure().required("Cette section est obligatoire"),
+            location: Yup.string().required("Cette section est obligatoire"),
+            category: Yup.string().required("Cette section est obligatoire"),
             title: Yup.string()
               .required("Cette section est obligatoire")
               .min(3, "Le titre doit faire au minimum 3 caractères")
@@ -85,7 +85,6 @@ class SubmitForm extends React.Component {
             errors,
             isSubmitting,
             handleChange,
-            setFieldTouched,
             setFieldValue,
             handleBlur,
             handleSubmit
@@ -140,7 +139,7 @@ class SubmitForm extends React.Component {
                     classNamePrefix="catsearch"
                     value={values.category}
                     onChange={setFieldValue}
-                    onBlur={setFieldTouched}
+                    onBlur={handleBlur}
                     touched={touched.category}
                     />        
                     {errors.category && touched.category && (<div className="invalid-radio">{errors.category}</div>)}
@@ -152,7 +151,7 @@ class SubmitForm extends React.Component {
                     classNamePrefix="locsearch"
                     value={values.location}
                     onChange={setFieldValue}
-                    onBlur={setFieldTouched}
+                    onBlur={handleBlur}
                     touched={touched.location}
                     />        
                     {errors.location && touched.location && (<div className="invalid-radio">{errors.location}</div>)}

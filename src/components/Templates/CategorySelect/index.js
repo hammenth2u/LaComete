@@ -28,6 +28,10 @@ const options = [
   
 class CategorySelect extends React.Component {
     
+  state = {
+    isClearable: true,
+  };
+
   handleChange = value => {      
       this.props.onChange("category", value);
     };
@@ -37,12 +41,18 @@ class CategorySelect extends React.Component {
   };
   
   render() {
+
+    const {
+      isClearable,
+    } = this.state;
+
     return (
       <div className="catsearch">
         <Select
           placeholder="Catégorie"
           classNamePrefix="catsearch"            
           options={options}
+          isClearable={isClearable}
           onChange={this.handleChange}
           onBlur={this.handleBlur}
           value={this.props.value}

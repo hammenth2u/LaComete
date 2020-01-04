@@ -35,7 +35,7 @@ class EditAd extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <main className="container">
         <Formik 
           enableReinitialize={true}
           initialValues={{
@@ -98,7 +98,6 @@ class EditAd extends React.Component {
             handleSubmit
            }) => {
             return (
-              <div className="formdiv">
               <form className="ad-form" onSubmit={handleSubmit}>
                 <h2>Editer mon annonce</h2>               
 
@@ -148,11 +147,11 @@ class EditAd extends React.Component {
                 </div>
              
                 <div className="contact-head">
-                <label className="contact-group">Mes moyens de contact</label>
-                <small className="contact-group form-text text-muted">
-                  Les champs suivants ne sont pas obligatoires, nous vous recommandons
-                  cependant d'en remplir au moins un.
-                </small>
+                  <label className="contact-group">Mes moyens de contact</label>
+                  <small className="contact-group form-text text-muted">
+                    Les champs suivants ne sont pas obligatoires, nous vous recommandons
+                    cependant d'en remplir au moins un.
+                  </small>
                 </div>
                 <div className="contact-group form-groupe">
                   <label>Téléphone</label>
@@ -207,10 +206,9 @@ class EditAd extends React.Component {
                 </button>
 
               </form>
-              </div>
             );
           }} />
-      </div>
+      </main>
     );
   }
 };

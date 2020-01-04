@@ -16,15 +16,13 @@ import './styles.css';
 
 const HomeApp = () => (
   
-  <div id="homepage">
-
+  <main id="homepage">
     <section className="homesearch">      
       <HomeSearch />      
     </section>    
 
-    <Intro />
-    
-  </div>
+    <Intro />    
+  </main>
 );
 
 

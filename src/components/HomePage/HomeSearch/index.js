@@ -73,35 +73,34 @@ class ResultList extends React.Component {
            }) => {
 
           return(        
-            <form onSubmit={handleSubmit} className="searchform">
-             
-            <div className="radio-group">
-              <label>
-                <input
-                  type="radio"
-                  className="option-input radio"
-                  name="type"
-                  value="rêve"
-                  checked={values.type === "rêve"}
-                  onChange={() => setFieldValue("type", "rêve")}
-                />
-                Projet
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  className="option-input radio"
-                  name="type"
-                  value="profil"
-                  checked={values.type === "profil"}
-                  onChange={() => setFieldValue("type", "profil")}
-                />
-                Profil
-              </label>
-              {errors.type && touched.type && (<div className="invalid-radio">{errors.type}</div>)}
-            </div>
+            <form onSubmit={handleSubmit} className="searchform">             
+              <div className="radio-group">
+                <label>
+                  <input
+                    type="radio"
+                    className="option-input radio"
+                    name="type"
+                    value="rêve"
+                    checked={values.type === "rêve"}
+                    onChange={() => setFieldValue("type", "rêve")}
+                  />
+                  Projet
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    className="option-input radio"
+                    name="type"
+                    value="profil"
+                    checked={values.type === "profil"}
+                    onChange={() => setFieldValue("type", "profil")}
+                  />
+                  Profil
+                </label>
+                {errors.type && touched.type && (<div className="invalid-radio">{errors.type}</div>)}
+              </div>
 
-            <div className="form-group">
+              <div className="form-group">
                 <CategorySelect                
                 classNamePrefix="catsearch"
                 value={values.category}
@@ -110,9 +109,9 @@ class ResultList extends React.Component {
                 error={errors.category}
                 touched={touched.category}
                 />        
-            </div>
+              </div>
 
-            <div className="form-group">
+              <div className="form-group">
                 <LocationSelect
                 classNamePrefix="locsearch"
                 value={values.location}
@@ -121,13 +120,11 @@ class ResultList extends React.Component {
                 error={errors.location}
                 touched={touched.location}
                 />        
-            </div>            
+              </div>            
             
-            <div className="form-group">
               <button type="submit" className="homebtn" disabled={isSubmitting}>
-              {isSubmitting ? 'Patienter' : <FontAwesomeIcon icon={faRocket} />}
+                {isSubmitting ? 'Patienter' : <FontAwesomeIcon icon={faRocket} />}
               </button>
-            </div>
             </form>
           )
         }} 

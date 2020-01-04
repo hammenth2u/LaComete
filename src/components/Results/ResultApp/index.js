@@ -49,8 +49,7 @@ class ResultApp extends React.Component {
   )
 
     return (
-      <div id="wrapper">    
-      <div className="searchpage">      
+      <main className="searchpage">      
         <Formik 
           enableReinitialize={true}
           initialValues={{ 
@@ -99,70 +98,70 @@ class ResultApp extends React.Component {
           return(                    
             <form onSubmit={handleSubmit} className="searchform">
             
-            {/* TYPE RADIO */}            
-            <div className="radio-group">
-              <label>
-                <input
-                  type="radio"
-                  className="option-input radio"
-                  name="type"
-                  value="rêve"
-                  checked={values.type === "rêve"}
-                  onChange={() => setFieldValue("type", "rêve")}
-                />
-                Rêve
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  className="option-input radio"
-                  name="type"
-                  value="profil"
-                  checked={values.type === "profil"}
-                  onChange={() => setFieldValue("type", "profil")}
-                />
-                Profil
-              </label>
-              {errors.type && touched.type && (<div className="invalid-radio">{errors.type}</div>)}
-            </div>
+              {/* TYPE RADIO */}            
+              <div className="radio-group">
+                <label>
+                  <input
+                    type="radio"
+                    className="option-input radio"
+                    name="type"
+                    value="rêve"
+                    checked={values.type === "rêve"}
+                    onChange={() => setFieldValue("type", "rêve")}
+                  />
+                  Rêve
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    className="option-input radio"
+                    name="type"
+                    value="profil"
+                    checked={values.type === "profil"}
+                    onChange={() => setFieldValue("type", "profil")}
+                  />
+                  Profil
+                </label>
+                {errors.type && touched.type && (<div className="invalid-radio">{errors.type}</div>)}
+              </div>
 
-            {/* CATEGORY SELECT */}            
-            <div className="form-group">
-              <CategorySelect
-              placeholder="Catégorie"
-              classNamePrefix="catsearch"
-              value={values.category}
-              onChange={setFieldValue}
-              onBlur={handleBlur}
-              error={errors.category}
-              touched={touched.category}
-              />        
-            </div>
+              {/* CATEGORY SELECT */}            
+              <div className="form-group">
+                <CategorySelect
+                placeholder="Catégorie"
+                classNamePrefix="catsearch"
+                value={values.category}
+                onChange={setFieldValue}
+                onBlur={handleBlur}
+                error={errors.category}
+                touched={touched.category}
+                />        
+              </div>
 
-            {/* LOCATION SELECT */}            
-            <div className="form-group">
-              <LocationSelect
-              classNamePrefix="locsearch"
-              value={values.location}
-              onChange={setFieldValue}
-              onBlur={handleBlur}
-              error={errors.location}
-              touched={touched.location}
-              />        
-            </div>            
-            
-            {/* SUBMIT BUTTON */}            
-            <div className="form-group">
-              <button type="submit" className="btn" disabled={isSubmitting}>
-              {isSubmitting ? 'Patienter' : <FontAwesomeIcon icon={faRocket} />}
-              </button>
-            </div>
+              {/* LOCATION SELECT */}            
+              <div className="form-group">
+                <LocationSelect
+                classNamePrefix="locsearch"
+                value={values.location}
+                onChange={setFieldValue}
+                onBlur={handleBlur}
+                error={errors.location}
+                touched={touched.location}
+                />        
+              </div>            
+              
+              {/* SUBMIT BUTTON */}            
+              <div className="form-group">
+                <button type="submit" className="btn" disabled={isSubmitting}>
+                {isSubmitting ? 'Patienter' : <FontAwesomeIcon icon={faRocket} />}
+                </button>
+              </div>
             </form>
           )
         }} 
-      />
-      </div>       
-      <div className="resultgrid-search">  
+      />  
+
+      <section className="resultgrid-search">  
 
       {/* CONDITIONAL DISPLAY IF EMPTY SEARCH RESULTS */}
       {this.state.homeSearchRes.length == 0 ? 
@@ -171,9 +170,9 @@ class ResultApp extends React.Component {
         <ul className="cards">     
           {homeResultData}
         </ul>
-        )}
-      </div>
-    </div>
+        )}      
+      </section>
+    </main>     
     )
   };
 }

@@ -11,7 +11,7 @@ const Footer = () => {
 
   return (
     
-    <div className="website-footer">
+    <footer className="website-footer">
 
       <ul className="pages">
           <li><a href="/a-propos">A Propos</a></li>   
@@ -20,10 +20,10 @@ const Footer = () => {
           <li><a href="/mentions-legales">Mentions Légales</a></li>        
       </ul>
      
-      <div className="middle">
+      <section className="middle">
         <FontAwesomeIcon icon={faFacebookSquare} className="social"/> - <FontAwesomeIcon icon={faTwitterSquare} className="social"/> - <FontAwesomeIcon icon={faLinkedin} className="social"className="social"/>
         <p className="copyright">La Comète - O'Clock © {year}</p>       
-      </div>
+      </section>
      
       <ul className="info">          
         <li>lacomete@oclock.io</li>
@@ -32,7 +32,7 @@ const Footer = () => {
         <li>tout droit jusqu'au matin</li>  
       </ul>
     
-  </div>
+    </footer>
   )
 };
 

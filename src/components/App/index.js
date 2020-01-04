@@ -37,12 +37,12 @@ class App extends React.Component {
   }
   
   // HELPS CANCELLING API CALLS WHEN UNNECESSARY
-  //CancelToken = axios.CancelToken;
-  //source = this.CancelToken.source();
-  //abortController = new AbortController();
+  CancelToken = axios.CancelToken;
+  source = this.CancelToken.source();
+  abortController = new AbortController();
     
     // IS USER LOGGED IN?
-    getUserStatus = () => {axios.get('/api/user/isConnected'/*, {cancelToken: this.source.token}*/) 
+    getUserStatus = () => {axios.get('/api/user/isConnected', {cancelToken: this.source.token}) 
       .then(response => {
         
         this.setState({ userStatus: response.data[0] });
@@ -50,7 +50,7 @@ class App extends React.Component {
     };    
 
     // GET USER INFO
-    getUserInfo = () => {axios.get('/api/user/account'/*, {cancelToken: this.source.token}*/)   
+    getUserInfo = () => {axios.get('/api/user/account', {cancelToken: this.source.token})   
         
     .then(response => {
           const userdata = response.data[0];
@@ -66,16 +66,15 @@ class App extends React.Component {
     }
 
     // CANCEL API CALLS 
-    //componentWillUnmount() {
-    //  this.source.cancel("Operation canceled by the user.");
-    //}
+    componentWillUnmount() {
+      this.source.cancel("...");
+    }
  
   render () {     
          
     return (
       
-      <div id="app">
-        <div id="wrapper">
+      <div id="wrapper">
         <Header userStatus={ this.state.userStatus } />
 
           <Switch>
@@ -84,16 +83,15 @@ class App extends React.Component {
             <Route exact path="/mentions-legales" component={ Legal } />
             <Route exact path="/cdu" component={ TermsOfUse } />
             <Route exact path="/contact" render={(routeProps) => ( <Contact {...routeProps} userStatus={this.state.userStatus} userMail={this.state.userMail} />)}/>
-            <Route exact path="/motdepasseoublie" component={ Legal }/>
+            <Route exact path="/motdepasseoublie" component={ Forgotten }/>
             <Route path="/mon-compte" component={ AccountContainer }  />
             <Route exact path="/recherche/liste/" component={ ResultContainer } />             
             <Route exact path="/annonces/:id" component={ Ad } />       
             <Route exact path="/annonces/:id/editer" component={ EditAd } />
             <Route component={ ErrorPage } />
           </Switch>
-        </div>
+        
         <Footer />
-
       </div>
     )
   }

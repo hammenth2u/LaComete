@@ -44,7 +44,7 @@ class Ad extends React.Component {
 
     .catch(function() {
 
-        alert('Cette annonce semble ne pas exister');
+        alert('Cette annonce ne semble pas exister');
     });   
 
     /* USER STATUS */
@@ -201,137 +201,124 @@ class Ad extends React.Component {
     const commentsList = this.state.comments;
     const list = commentsList.map(function(comment){
       return (
-        <div className="comment" key={comment.idComment}>
+        <section className="comment" key={comment.idComment}>
           <div className="commentmeta">
             <small className="comment-author">{comment.userComment}, le {comment.dateComment}</small>             
           </div>   
           <p className="comment-content">{comment.contentComment}</p>              
-        </div>
+        </section>
       );
     })
 
     return (
       // DISPLAY AD 
-      <div className="ad">             
+      <main className="ad">             
         <section>
-          <article>  
-            <h3 className="soloadtitle">{ this.state.singleAd.title }</h3>
+          <h3 className="soloadtitle">{ this.state.singleAd.title }</h3>
 
-            {/* CONDITIONAL DISPLAY FOR EDIT LINK */}
-            {this.state.userName == this.state.singleAd.user ? (
-              <a href={'/annonces/'+ this.state.singleAd.id +'/editer'}><button className="edit-ad">Modifier l'annonce</button></a>
-              ) : ( '' )}              
-            <div className="first-section">
-              <div className="spaceone">
-                <div className="imgwrapper">
-                  <img className="adpic" src={ this.state.singleAd.picture } />
-                </div>
-
-                <div className="basicinfo">
-                  <p><FontAwesomeIcon icon={faUser} /> { this.state.singleAd.user }</p>
-                  <p><FontAwesomeIcon icon={faMapMarkerAlt} /> { this.state.singleAd.city }</p>
-                  <p><FontAwesomeIcon icon={faPencilRuler} /> { this.state.singleAd.category }</p>            
-                  <p><FontAwesomeIcon icon={faCalendar} /> { this.state.singleAd.createdAt }</p> 
-                </div>
+          {/* CONDITIONAL DISPLAY FOR EDIT LINK */}
+          {this.state.userName == this.state.singleAd.user ? (
+            <a href={'/annonces/'+ this.state.singleAd.id +'/editer'}><button className="edit-ad">Modifier l'annonce</button></a>
+            ) : ( '' )}              
+          <div className="first-section">
+            <div className="spaceone">
+              <div className="imgwrapper">
+                <img className="adpic" src={ this.state.singleAd.picture } />
               </div>
 
-            {/* CONDITIONAL DISPLAY FOR FAV + CONTACT BUTTONS */}            
-
-            {this.state.userStatus == "<" ? (
-              '' ) : (
-              <div className="fav-contact">
-                <section>  
-                  
-                  {/* FAVORITE BUTTON */}
-                  <Button onClick={ this.favoriteAd } style={{ color: this.state.starColor }} aria-controls="example-collapse-text" aria-expanded={this.state.contactOpen} >
-                    <FontAwesomeIcon icon={faStar} />
-                  </Button>              
-                  
-                  {/* PHONE BUTTON IF PHONE # PROVIDED */}
-                  {this.state.singleAd.phone != null ? (
-                    <div>
-                      <Button onClick={this.togglePhone} aria-controls="example-collapse-text" aria-expanded={this.state.phoneOpen} >
-                        <FontAwesomeIcon icon={faPhone} />
-                      </Button>
-                      <Collapse in={this.state.phoneOpen}>
-                        <div className="contact-info">
-                          <p>{this.state.singleAd.phone}</p>
-                        </div>
-                      </Collapse> 
-                    </div>             
-                  ) : ('')}
-                  
-                  {/* WEBSiTE BUTTON IF WEBSITE PROVIDED */}
-                  {this.state.singleAd.website != null ? (
-                    <div>
-                      <Button onClick={this.toggleAt} aria-controls="example-collapse-text" aria-expanded={this.state.atOpen} >
-                        <FontAwesomeIcon icon={faAt} />
-                      </Button>       
-                      <Collapse in={this.state.atOpen}>
-                        <div className="contact-info">
-                          <a>{this.state.singleAd.website}</a>
-                        </div>
-                      </Collapse>
-                    </div> 
-                  ) : ('')}
-    
-                  {/* EMAIL BUTTON + FORM IF EMAIL PROVIDED */}
-                  {this.state.singleAd.email != null ? (
-                    <div>
-                      <Button onClick={this.toggleContact} aria-controls="example-collapse-text" aria-expanded={this.state.contactOpen} >
-                        <FontAwesomeIcon icon={faEnvelope} />
-                      </Button>                     
-                      <Collapse in={this.state.contactOpen}>                
-                          
-                        <form className="ad-contact-form"> 
-                          <div className="ad-form-group">
-                            <input
-                              ref={obj => this.contactObj= obj}
-                              name="contactobject"
-                              type="text"
-                              placeholder="Objet"
-                              className="contactinput"
-                              value={this.contactObject}
-                              onChange={this.handleChangeContactObject}
-                            />                  
-                          </div>             
-                          <div className="form-group">
-                            <textarea
-                              ref={cont => this.contactCont= cont}
-                              name="contact"
-                              rows="4"
-                              placeholder="Message"
-                              className="contactinput-msg"
-                              value={this.contactContent}
-                              onChange={this.handleChangeContact}
-                            />                  
-                          </div>          
-                        <button type="submit" className="adcontact btn-outline-primary" onClick={this.handleSend}>envoyer</button>    
-                        </form> 
-                          
-                      </Collapse>
-                    </div>
-                  ) : ('')}                  
-                </section>                     
-            </div>          
-            )}            
+              <ul className="basicinfo">
+                <li><FontAwesomeIcon icon={faUser} /> { this.state.singleAd.user }</li>
+                <li><FontAwesomeIcon icon={faMapMarkerAlt} /> { this.state.singleAd.city }</li>
+                <li><FontAwesomeIcon icon={faPencilRuler} /> { this.state.singleAd.category }</li>            
+                <li><FontAwesomeIcon icon={faCalendar} /> { this.state.singleAd.createdAt }</li> 
+              </ul>
             </div>
-            <h4>Description : </h4>
-            <section className="maintext">
-              <p>{ this.state.singleAd.description }</p>
-              <h4>Recherche : </h4>
-              <p>{ this.state.singleAd.need }</p>
-            </section>
-          </article> 
+
+          {/* CONDITIONAL DISPLAY FOR FAV + CONTACT BUTTONS */}            
+
+          {this.state.userStatus == "<" ? (
+            '' ) : (
+            <aside className="fav-contact">
+              {/* FAVORITE BUTTON */}
+                <Button onClick={ this.favoriteAd } style={{ color: this.state.starColor }} aria-controls="example-collapse-text" aria-expanded={this.state.contactOpen} >
+                  <FontAwesomeIcon icon={faStar} />
+                </Button>              
+                
+                {/* PHONE BUTTON IF PHONE # PROVIDED */}
+                {this.state.singleAd.phone != null ? (
+                  <div>
+                    <Button onClick={this.togglePhone} aria-controls="example-collapse-text" aria-expanded={this.state.phoneOpen} >
+                      <FontAwesomeIcon icon={faPhone} />
+                    </Button>
+                    <Collapse in={this.state.phoneOpen}>
+                        <p className="contact-info">{this.state.singleAd.phone}</p>
+                    </Collapse> 
+                  </div>             
+                ) : ('')}
+                
+                {/* WEBSiTE BUTTON IF WEBSITE PROVIDED */}
+                {this.state.singleAd.website != null ? (
+                  <div>
+                    <Button onClick={this.toggleAt} aria-controls="example-collapse-text" aria-expanded={this.state.atOpen} >
+                      <FontAwesomeIcon icon={faAt} />
+                    </Button>       
+                    <Collapse in={this.state.atOpen}>
+                        <a className="contact-info">{this.state.singleAd.website}</a>
+                    </Collapse>
+                  </div> 
+                ) : ('')}
+  
+                {/* EMAIL BUTTON + FORM IF EMAIL PROVIDED */}
+                {this.state.singleAd.email != null ? (
+                  <div>
+                    <Button onClick={this.toggleContact} aria-controls="example-collapse-text" aria-expanded={this.state.contactOpen} >
+                      <FontAwesomeIcon icon={faEnvelope} />
+                    </Button>                     
+                    <Collapse in={this.state.contactOpen}>                
+                        
+                      <form className="ad-contact-form"> 
+                        <input
+                          ref={obj => this.contactObj= obj}
+                          name="contactobject"
+                          type="text"
+                          placeholder="Objet"
+                          className="contactinput"
+                          value={this.contactObject}
+                          onChange={this.handleChangeContactObject}
+                        />                  
+                        <textarea
+                          ref={cont => this.contactCont= cont}
+                          name="contact"
+                          rows="4"
+                          placeholder="Message"
+                          className="contactinput-msg"
+                          value={this.contactContent}
+                          onChange={this.handleChangeContact}
+                        />                  
+                        <button type="submit" className="adcontact btn-outline-primary" onClick={this.handleSend}>envoyer</button>    
+                      </form> 
+                        
+                    </Collapse>
+                  </div>
+                ) : ('')}                   
+            </aside>          
+          )}            
+          </div>
+
+          <h4>Description : </h4>
+          <p className="maintext">{ this.state.singleAd.description }</p>
+          
+          <h4>Recherche : </h4>
+          <p>{ this.state.singleAd.need }</p>
         </section>
+
         <h4>Commentaires : </h4>
 
         {/* CONDITIONNAL DISPLAY OF COMMENT INPUT */}
         {this.state.userStatus == "<" ? (
           <small>(Vous devez être connecté pour commenter les annonces)</small> 
         ) : ( 
-        <form>                        
-          <div className="commentgroup">
+        <form className="commentgroup">                        
             <textarea
               ref={(ref) => this.commentInput= ref}
               name="comment"
@@ -343,14 +330,12 @@ class Ad extends React.Component {
               onChange={this.handleChange}
             /> 
             <button type="submit" className="comment-btn" onClick={this.handleSubmit}>envoyer</button>                   
-          </div>          
-          
         </form> 
           )}        
           <section className="comment-section">                       
               {list}
           </section>                    
-      </div>
+      </main>
     )
   }
 }

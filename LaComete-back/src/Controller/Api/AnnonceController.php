@@ -92,11 +92,10 @@ class AnnonceController extends AbstractController
                 $formatted [] = [
                 'id' => $annonce->getId(),
                 'title' => $annonce->getTitle(),
-                'description' => $annonce->getDescription(),
+                'category' => $annonce->getCategory()->getName(),
                 'city' => $annonce->getLocation(),
                 'type' => $annonce->getType(),
-                'picture' => $annonce->getPicture(),
-                'createdAt' => $createdAt,
+                'picture' => $annonce->getPicture(),                
                 ];
             }
             

@@ -8,12 +8,14 @@
 
 .searchpage form {
   border-bottom: 1px solid #cdcdcd;    
+  text-align: center;
 } 
 
 /********************** RADIOS *************************/
 
 .searchpage .radio-group {  
   width: 70%;
+  margin-top: 2em;
 }
 
 .searchpage .radio-group label {
@@ -143,13 +145,12 @@
 
 /********************** BUTTON *************************/
 
-.searchpage .btn {
+.searchform .btn {
   background-color: white;
   border: none;
   border-radius: .5em;
   height: 3em;
-  width: 3em;
-  margin: 0 auto;    
+  width: 3em;  
 }
 
 .searchpage .btn svg {
@@ -199,7 +200,7 @@ img {
   vertical-align: middle;
 }
 
-.btn {
+.resultgrid-search .btn {
   padding: 0.8rem;
   border-radius: 4px;
   font-weight: 400;
@@ -210,18 +211,18 @@ img {
   background: transparent;
 }
 
-a .btn {
+.resultgrid-search a .btn {
   color: #ffffff;
   font-size: 14px;
   text-transform: uppercase;
   text-decoration: none;
 }
 
-a:hover {
+.resultgrid-search a:hover {
   text-decoration: none;
 }
 
-.btn:hover {
+.resultgrid-search .btn:hover {
   background-color: rgba(255, 255, 255, 0.12);
 }
 
